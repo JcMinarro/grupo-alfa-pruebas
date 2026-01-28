@@ -1,0 +1,232 @@
+:root {
+  --color-primary: #FFAA00;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-bg-light: #F9F9F9;
+  --color-text-main: #1A1A1A;
+  --font-main: 'Jost', sans-serif;
+  --font-brand: 'Archeologicaps Regular', sans-serif; /* Fallback if not available */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-white);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.text-gold {
+  color: var(--color-primary);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  z-index: 1000;
+  padding: 15px 0;
+  transition: padding 0.3s;
+}
+
+.site-header.scrolled {
+  padding: 10px 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  transition: height 0.3s;
+}
+
+.site-header.scrolled .logo img {
+  height: 40px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-menu a {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-menu a:hover {
+  color: var(--color-primary);
+}
+
+/* Hero Section */
+.hero {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-light); 
+  position: relative;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content h2 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 40px;
+}
+
+/* Steps Section */
+.steps-section {
+  padding: 80px 0;
+  background: var(--color-white);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.step-item img {
+  height: 60px;
+  margin: 0 auto 20px;
+}
+
+.step-item h3 {
+  font-size: 1.5rem;
+}
+
+/* Services Section */
+.section-title {
+  text-align: left;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  border-left: 5px solid var(--color-primary);
+  padding-left: 20px;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.service-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.service-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.service-item:nth-child(even) {
+  direction: rtl; /* Flip order for even items */
+}
+
+.service-item:nth-child(even) .service-content {
+  direction: ltr;
+}
+
+/* Footer */
+.site-footer {
+  background: #1d1e20;
+  color: white;
+  padding: 60px 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.footer-logo img {
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
+
+/* Utilities */
+.btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-black);
+  padding: 12px 30px;
+  font-weight: 500;
+  border-radius: 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 170, 0, 0.3);
+}
