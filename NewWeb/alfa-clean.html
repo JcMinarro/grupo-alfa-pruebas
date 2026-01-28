@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfa Clean | Grupo Alfa</title>
+    <link rel="icon" type="image/png" href="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./src/clean.css" />
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #000;
+        }
+
+        .site-header {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body class="clean-page">
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa" />
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#proyectos">Proyectos</a></li>
+                    <li><a href="index.html#promotores">Promotores</a></li>
+                    <li><a href="index.html#inversores">Inversores</a></li>
+                    <li><a href="index.html#alfa-hunters">Alfa Hunters</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="clean-content-box fade-in">
+            <div class="clean-logo-section">
+                <img src="/public/assets/logo-grupo-alfa-YKbEjky3lKIe0BKP.png" alt="Grupo Alfa White Logo" />
+            </div>
+
+            <div class="clean-text-section">
+                <h1>Servicio de Limpieza <span>Alfa Clean</span></h1>
+
+                <div class="clean-services-grid">
+                    <div class="clean-service-item">
+                        <img src="/public/assets/edificio-YX4x1WW477Irx3p5.png" alt="Comunidades" />
+                        <p>Comunidades de propietarios</p>
+                    </div>
+                    <div class="clean-service-item">
+                        <img src="/public/assets/buscar-casa-YanJ6aBZVKc969wa.png" alt="Viviendas" />
+                        <p>Viviendas particulares</p>
+                    </div>
+                    <div class="clean-service-item">
+                        <img src="/public/assets/flecha-abajo-AzGN41EZW0T39oZP.png" alt="Vacacionales"
+                            style="transform: rotate(-90deg);" />
+                        <p>Alojamientos vacacionales</p>
+                    </div>
+                </div>
+
+                <div class="clean-description">
+                    <p>Limpieza profesional para comunidades de propietarios, viviendas particulares y alojamientos
+                        vacacionales. Preparación completa del inmueble, reposición de consumibles, control de daños y
+                        check-in listo.</p>
+                </div>
+
+                <a href="index.html#servicios" class="clean-volver">Volver</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer"
+        style="background: url('/public/assets/photo-1707903244219-8ed71537554d3d83.jpg') no-repeat center center/cover; position: relative; padding: 100px 0;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);"></div>
+        <div class="container footer-content" style="position: relative; z-index: 1;">
+            <div class="footer-logo">
+                <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png"
+                    style="filter: brightness(0) invert(1);" alt="Grupo Alfa Footer" />
+                <p style="margin-top: 20px; opacity: 0.7; color: #fff;">
+                    C/ Conde del Valle de San Juan, 1<br>
+                    30004, Murcia
+                </p>
+            </div>
+            <div class="footer-links" style="color: #fff;">
+                <h4>CONTACTO</h4>
+                <p><a href="mailto:info@grupoalfa.net">info@grupoalfa.net</a></p>
+                <p><a href="mailto:luciomerlini@grupoalfa.net">luciomerlini@grupoalfa.net</a></p>
+                <p><a href="mailto:joseantonio@grupoalfa.net">joseantonio@grupoalfa.net</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
