@@ -10,26 +10,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./src/promoters.css" />
+    <link rel="stylesheet" href="/src/promoters.css" />
 </head>
 
 <body class="promoter-page">
     <!-- Header -->
-    <header class="site-header" id="header" style="background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <header class="site-header" id="header">
         <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="/public/assets/logo-grupo-alfa-horizontal-montado-negro-m6Lk9lywM3H4k3lk.png"
-                    alt="Grupo Alfa" />
+            <a href="/" class="logo">
+                <img src="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" alt="Grupo Alfa" />
             </a>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html#inicio" style="color: #000;">INICIO</a></li>
-                    <li><a href="index.html#proyectos" style="color: #000;">PROYECTOS</a></li>
-                    <li><a href="index.html#promotores" style="color: #000;">PROMOTORES</a></li>
-                    <li><a href="index.html#inversores" style="color: #000;">INVERSORES</a></li>
-                    <li><a href="alfa-hunters.html" style="color: #000;">ALFA HUNTERS</a></li>
-                    <li><a href="index.html#contacto" style="color: #000;">CONTACTO</a></li>
+                    <li><a href="/">INICIO</a></li>
+                    <li><a href="/proyectos">PROYECTOS</a></li>
+                    <li><a href="/promotores">PROMOTORES</a></li>
+                    <li><a href="/inversores">INVERSORES</a></li>
+                    <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
+                    <li><a href="/contacto">CONTACTO</a></li>
                 </ul>
+                <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
             </nav>
         </div>
     </header>
@@ -49,16 +49,16 @@
 
             <div class="services-list">
                 <div class="service-item">
-                    <h3>Tienes una Casa Antigua y quieres Alquilarla.</h3>
+                    <h3>Tienes una Casa Antigua y quieres Alquilarla</h3>
                 </div>
                 <div class="service-item">
-                    <h3>Tienes un Bajo y quieres Convertirlo en Viviendas.</h3>
+                    <h3>Tienes un Bajo y quieres Convertirlo en Viviendas</h3>
                 </div>
                 <div class="service-item">
-                    <h3>Quieres hacer Flipping: Compra, Reforma, Venta.</h3>
+                    <h3>Quieres hacer Flipping: Compra, Reforma, Venta</h3>
                 </div>
                 <div class="service-item">
-                    <h3>Deseas montar un Alojamiento Turístico.</h3>
+                    <h3>Deseas montar un Alojamiento Turístico</h3>
                 </div>
             </div>
         </section>
@@ -67,7 +67,7 @@
             <div class="container" style="text-align: center;">
                 <h2>Nosotros analizamos la viabilidad, diseñamos el plan de acción y, si nos interesa, financiamos tu
                     proyecto y lo ejecutamos contigo.</h2>
-                <a href="index.html#contacto" class="btn-promoter">Presentar mi Idea</a>
+                <a href="/#contacto" class="btn-promoter">Presentar mi Idea</a>
             </div>
         </section>
     </main>
@@ -103,19 +103,6 @@
     </footer>
 
     <script type="module" src="/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
 </body>
 
 </html>

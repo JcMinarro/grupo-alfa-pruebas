@@ -12,24 +12,24 @@
         href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./src/hunters.css" />
+    <link rel="stylesheet" href="/src/hunters.css" />
 </head>
 
 <body class="hunters-page">
     <!-- Header -->
-    <header class="site-header" id="header" style="background-color: #fff;">
+    <header class="site-header" id="header">
         <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa" />
+            <a href="/" class="logo">
+                <img src="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" alt="Grupo Alfa" />
             </a>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html#inicio">INICIO</a></li>
-                    <li><a href="index.html#proyectos">PROYECTOS</a></li>
-                    <li><a href="index.html#promotores">PROMOTORES</a></li>
-                    <li><a href="index.html#inversores">INVERSORES</a></li>
-                    <li><a href="alfa-hunters.html" class="active">ALFA HUNTERS</a></li>
-                    <li><a href="index.html#contacto">CONTACTO</a></li>
+                    <li><a href="/">INICIO</a></li>
+                    <li><a href="/proyectos">PROYECTOS</a></li>
+                    <li><a href="/promotores">PROMOTORES</a></li>
+                    <li><a href="/inversores">INVERSORES</a></li>
+                    <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
+                    <li><a href="/contacto">CONTACTO</a></li>
                 </ul>
                 <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
             </nav>
@@ -158,25 +158,6 @@
     </footer>
 
     <script type="module" src="/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                menuToggle.classList.toggle('active');
-            });
-
-            // Close menu when clicking a link
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

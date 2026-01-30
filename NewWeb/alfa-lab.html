@@ -11,29 +11,29 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Krona+One&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./src/lab.css" />
+    <link rel="stylesheet" href="/src/lab.css" />
 </head>
 
 <body class="lab-page">
     <!-- Header -->
-    <header class="site-header" id="header" style="background: rgba(0,0,0,0.9);">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/mp8qDEy2Q3treMXb/logo-grupo-alfa-horizontal-montado-blanco-lhGvXrpDul9kdik1.png"
-                    alt="Grupo Alfa" style="filter: brightness(1);" />
-            </a>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html#inicio">INICIO</a></li>
-                    <li><a href="index.html#proyectos">PROYECTOS</a></li>
-                    <li><a href="index.html#promotores">PROMOTORES</a></li>
-                    <li><a href="index.html#inversores">INVERSORES</a></li>
-                    <li><a href="alfa-hunters.html">ALFA HUNTERS</a></li>
-                    <li><a href="index.html#contacto">CONTACTO</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+          <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <img src="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" alt="Grupo Alfa" />
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/">INICIO</a></li>
+          <li><a href="/proyectos">PROYECTOS</a></li>
+          <li><a href="/promotores">PROMOTORES</a></li>
+          <li><a href="/inversores">INVERSORES</a></li>
+          <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
+          <li><a href="/contacto">CONTACTO</a></li>
+        </ul>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+      </nav>
+    </div>
+  </header>
 
     <main class="lab-container">
         <div class="lab-logos fade-in">
@@ -76,7 +76,7 @@
                 <p>Transformamos activos difíciles en oportunidades reales, al más puro estilo Grupo Alfa.</p>
             </div>
 
-            <a href="index.html#servicios" class="btn-volver">VOLVER</a>
+            <a href="/#servicios" class="btn-volver">VOLVER</a>
         </section>
     </main>
 
@@ -107,35 +107,9 @@
         </div>
     </footer>
 
-    <script type="module" src="/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const header = document.getElementById('header');
-
-            const handleScroll = () => {
-                if (window.scrollY > 50) {
-                    header.style.background = "rgba(0,0,0,1)";
-                    header.classList.add('scrolled');
-                } else {
-                    header.style.background = "rgba(0,0,0,0.9)";
-                    header.classList.remove('scrolled');
-                }
-            };
-
-            window.addEventListener('scroll', handleScroll);
-            handleScroll(); // Initial check
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
+    
+    
+  <script type="module" src="/main.js"></script>
 </body>
 
 </html>

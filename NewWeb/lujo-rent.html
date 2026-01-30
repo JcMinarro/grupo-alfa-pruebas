@@ -10,30 +10,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./src/lujo.css" />
+    <link rel="stylesheet" href="/src/lujo.css" />
 </head>
 
 <body class="lujo-page">
     <!-- Header -->
-    <header class="site-header" id="header"
-        style="background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: absolute; width:100%; z-index: 100;">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="/public/assets/logo-grupo-alfa-horizontal-montado-negro-m6Lk9lywM3H4k3lk.png" alt="Grupo Alfa"
-                    style="filter: invert(1);" />
-            </a>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html#inicio" style="color: #fff;">INICIO</a></li>
-                    <li><a href="index.html#proyectos" style="color: #fff;">PROYECTOS</a></li>
-                    <li><a href="index.html#promotores" style="color: #fff;">PROMOTORES</a></li>
-                    <li><a href="index.html#inversores" style="color: #fff;">INVERSORES</a></li>
-                    <li><a href="alfa-hunters.html" style="color: #fff;">ALFA HUNTERS</a></li>
-                    <li><a href="index.html#contacto" style="color: #fff;">CONTACTO</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+          <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <img src="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" alt="Grupo Alfa" />
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/">INICIO</a></li>
+          <li><a href="/proyectos">PROYECTOS</a></li>
+          <li><a href="/promotores">PROMOTORES</a></li>
+          <li><a href="/inversores">INVERSORES</a></li>
+          <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
+          <li><a href="/contacto">CONTACTO</a></li>
+        </ul>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+      </nav>
+    </div>
+  </header>
 
     <main>
         <section class="lujo-hero fade-in">
@@ -96,7 +95,7 @@
 
         <section class="cta-section">
             <h2 style="color: #fff; margin-bottom: 30px;">¿Tienes un inmueble?</h2>
-            <a href="index.html#contacto" class="btn-luxury">Solicitar Gestión</a>
+            <a href="/#contacto" class="btn-luxury">Solicitar Gestión</a>
         </section>
     </main>
 
@@ -129,20 +128,9 @@
         </div>
     </footer>
 
-    <script type="module" src="/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
+    
+    
+  <script type="module" src="/main.js"></script>
 </body>
 
 </html>

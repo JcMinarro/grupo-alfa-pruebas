@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./src/clean.css" />
+    <link rel="stylesheet" href="/src/clean.css" />
     <style>
         body {
             font-family: 'DM Sans', sans-serif;
@@ -27,23 +27,24 @@
 
 <body class="clean-page">
     <!-- Header -->
-    <header class="site-header" id="header">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa" />
-            </a>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html#inicio">Inicio</a></li>
-                    <li><a href="index.html#proyectos">Proyectos</a></li>
-                    <li><a href="index.html#promotores">Promotores</a></li>
-                    <li><a href="index.html#inversores">Inversores</a></li>
-                    <li><a href="index.html#alfa-hunters">Alfa Hunters</a></li>
-                    <li><a href="index.html#contacto">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+          <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <img src="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" alt="Grupo Alfa" />
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/">INICIO</a></li>
+          <li><a href="/proyectos">PROYECTOS</a></li>
+          <li><a href="/promotores">PROMOTORES</a></li>
+          <li><a href="/inversores">INVERSORES</a></li>
+          <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
+          <li><a href="/contacto">CONTACTO</a></li>
+        </ul>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+      </nav>
+    </div>
+  </header>
 
     <main class="container">
         <div class="clean-content-box fade-in">
@@ -76,7 +77,7 @@
                         check-in listo.</p>
                 </div>
 
-                <a href="index.html#servicios" class="clean-volver">Volver</a>
+                <a href="/#servicios" class="clean-volver">Volver</a>
             </div>
         </div>
     </main>
@@ -102,20 +103,9 @@
         </div>
     </footer>
 
-    <script type="module" src="/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
+    
+    
+  <script type="module" src="/main.js"></script>
 </body>
 
 </html>

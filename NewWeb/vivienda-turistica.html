@@ -10,29 +10,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./src/tourism.css" />
+    <link rel="stylesheet" href="/src/tourism.css" />
 </head>
 
 <body class="tourism-page">
     <!-- Header -->
-    <header class="site-header" id="header" style="background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="/public/assets/logo-grupo-alfa-horizontal-montado-negro-m6Lk9lywM3H4k3lk.png"
-                    alt="Grupo Alfa" />
-            </a>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html#inicio" style="color: #000;">INICIO</a></li>
-                    <li><a href="index.html#proyectos" style="color: #000;">PROYECTOS</a></li>
-                    <li><a href="index.html#promotores" style="color: #000;">PROMOTORES</a></li>
-                    <li><a href="index.html#inversores" style="color: #000;">INVERSORES</a></li>
-                    <li><a href="alfa-hunters.html" style="color: #000;">ALFA HUNTERS</a></li>
-                    <li><a href="index.html#contacto" style="color: #000;">CONTACTO</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+          <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <img src="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" alt="Grupo Alfa" />
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/">INICIO</a></li>
+          <li><a href="/proyectos">PROYECTOS</a></li>
+          <li><a href="/promotores">PROMOTORES</a></li>
+          <li><a href="/inversores">INVERSORES</a></li>
+          <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
+          <li><a href="/contacto">CONTACTO</a></li>
+        </ul>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+      </nav>
+    </div>
+  </header>
 
     <main>
         <section class="hero-tourism fade-in">
@@ -75,7 +75,7 @@
                 <h2>¿Tienes un Proyecto en mente?</h2>
                 <p>En Grupo Alfa analizamos cada oportunidad de inversión. Si tienes un inmueble con potencial para ser
                     transformado en vivienda turística, nosotros te ayudamos a financiarlo y gestionarlo.</p>
-                <a href="index.html#contacto" class="btn-tourism">Tengo un Proyecto</a>
+                <a href="/#contacto" class="btn-tourism">Tengo un Proyecto</a>
             </div>
         </section>
     </main>
@@ -110,20 +110,9 @@
         </div>
     </footer>
 
-    <script type="module" src="/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
+    
+    
+  <script type="module" src="/main.js"></script>
 </body>
 
 </html>
