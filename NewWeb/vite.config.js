@@ -25,7 +25,7 @@ export default defineConfig({
     server: {
         // Handle clean URLs in dev mode: /proyectos -> /proyectos.html
         proxy: {
-            '^/(?![\\w-]+\\.\\w+$|@vite|@fs|src|public|node_modules).*$': {
+            '^/(?!.*\\.\\w+$|@vite|@fs|src|public|assets|node_modules).*$': {
                 target: 'http://localhost:5173',
                 rewrite: (path) => {
                     const cleanPath = path.split('?')[0].split('#')[0];

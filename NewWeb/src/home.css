@@ -2,21 +2,229 @@
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/assets/photo-1521780171415-783b1cb576e73d83.jpg') no-repeat center center/cover;
-    color: #fff;
+    height: 100vh;
+    min-height: 600px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/hero-bg.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     position: relative;
+    padding-top: 0;
 }
 
-.hero h1,
-.hero h2,
-.hero h3,
-.hero p {
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.4) 100%);
 }
 
-.hero .logo-text {
-    color: #fff;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-logo {
+    width: 300px;
+    margin: 0 auto 20px;
+    filter: brightness(0) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    opacity: 0;
+    transform: translateY(100px);
+    animation: slideUpFade 1.5s ease-out forwards 0.5s;
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    font-weight: 500;
+    color: #000 !important;
+    /* Force black */
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(100px);
+    animation: slideUpFade 1.5s ease-out forwards 0.5s;
+}
+
+.scroll-down {
+    margin-top: 100px;
+    animation: bounce 2s infinite;
+}
+
+.scroll-down img {
+    width: 30px;
+    filter: invert(1);
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Common Section Titles */
+.section-main-title {
+    font-size: 2.2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.section-secondary-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.section-context {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Steps Section */
+.steps-section {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
+.step-icon {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+.step-item:hover .step-icon {
+    border-color: var(--color-primary);
+    transform: translateY(-5px);
+}
+
+.step-icon img {
+    height: 40px;
+    width: auto;
+}
+
+.step-item h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Process Flow */
+.process-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    gap: 40px;
+}
+
+.flow-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.flow-item p {
+    font-size: 1.1rem;
+}
+
+.flow-item p span {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.arrow-right {
+    width: 20px;
+    transform: rotate(-90deg);
+    opacity: 0.3;
+}
+
+.flow-icon {
+    width: 50px;
+    height: 50px;
+    background: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flow-icon img {
+    width: 25px;
+    filter: invert(1);
+}
+
+/* Libertad Financiera Section */
+.libertad-section {
+    padding: 100px 0;
+    background-color: #fff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.section-logo {
+    width: 150px;
+    margin: 40px auto;
+}
+
+.rentability {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.rentability span {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.description {
+    color: #666;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.scroll-down-dark {
+    margin-top: 40px;
+    animation: bounce 2s infinite;
+}
+
+.scroll-down-dark img {
+    width: 20px;
+    opacity: 0.3;
 }
 
 /* Projects Section */
@@ -155,7 +363,7 @@
     position: relative;
     padding: 100px 0;
     color: #fff;
-    background: url('/public/assets/hunters/hero-poster.jpg') no-repeat center center/cover;
+    background: url('/assets/hunters/hero-poster.jpg') no-repeat center center/cover;
     text-align: center;
 }
 
@@ -174,53 +382,269 @@
     z-index: 1;
 }
 
-/* Submarcas Section */
-.submarcas-section {
-    padding: 100px 0;
-    background-color: #f9f9f9;
-}
-
-.submarcas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.submarca-item {
-    display: block;
-    /* Make the whole area clickable */
-    background: #fff;
-    padding: 40px;
-    border: 1px solid #eee;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-}
-
-.submarca-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.submarca-item h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.submarca-item p {
-    font-size: 0.9rem;
-    color: #666;
-}
-
 .hunters-content h2 {
     font-size: 3rem;
     margin-bottom: 20px;
     color: #fff;
 }
 
+/* Quote Section */
+.quote-section {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
+.quote-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    line-height: 1.4;
+}
+
+.bedroom-image {
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.bedroom-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Services Section */
+.services-section {
+    padding: 0;
+    background-color: #fff;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-row {
+    padding: 60px 0;
+}
+
+.service-row:nth-child(even) {
+    background-color: #f2f2f2;
+    /* Light grey backdrop for alternate rows */
+}
+
+.service-row:nth-child(odd) {
+    background-color: #fff;
+}
+
+.service-row .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Enhance centering */
+}
+
+.service-row:nth-child(even) .container {
+    flex-direction: row-reverse;
+}
+
+.service-text {
+    flex: 1;
+}
+
+.service-text h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    background-color: var(--color-primary);
+    display: inline-block;
+    padding: 5px 15px;
+    color: #000;
+}
+
+.service-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.service-icon-large {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.service-icon-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0);
+    /* Make icons black */
+}
+
+/* Submarcas Section */
+.submarcas-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.submarcas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.submarca-tag {
+    background-color: #000;
+    padding: 15px 30px;
+    color: #fff;
+    font-family: var(--font-brand);
+    /* Ensure font is defined or fallback */
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    /* Sharp edges/minimalist */
+    clip-path: none;
+    /* Removed the complex clip-path */
+}
+
+.submarca-tag:hover {
+    background-color: #333;
+    transform: translateY(-3px);
+    color: #f9da78;
+    /* Highlight color */
+}
+
+/* Office Section */
+.office-section {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
+.office-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+}
+
+.contact-details {
+    margin: 30px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.contact-details p {
+    margin-bottom: 15px;
+}
+
+.office-map {
+    margin-top: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 400px;
+    /* Fixed height for map */
+    width: 100%;
+    background: #eee;
+}
+
+.office-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.map-placeholder img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(0.5);
+    transition: filter 0.3s ease;
+}
+
+.map-placeholder:hover img {
+    filter: grayscale(0);
+}
+
+.contact-form-container {
+    background-color: #f9f9f9;
+    padding: 60px;
+    border-radius: 4px;
+}
+
+.contact-form {
+    margin-top: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+}
+
+.contact-logo-small {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.contact-logo-small img {
+    width: 120px;
+    margin: 0 auto;
+}
+
 /* Responsive */
+@media (max-width: 992px) {
+    .office-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .contact-form-container {
+        padding: 40px;
+    }
+}
+
 @media (max-width: 768px) {
     .promoters-content {
         grid-template-columns: 1fr;
@@ -228,5 +652,23 @@
 
     .hunters-content h2 {
         font-size: 2rem;
+    }
+
+    .section-main-title,
+    .section-secondary-title {
+        font-size: 1.8rem;
+    }
+
+    .process-flow {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .arrow-right {
+        transform: rotate(0);
+    }
+
+    .submarca-pill {
+        width: 100%;
     }
 }

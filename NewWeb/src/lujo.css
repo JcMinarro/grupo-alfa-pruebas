@@ -19,7 +19,7 @@ body.lujo-page {
 .lujo-hero {
     height: 60vh;
     min-height: 400px;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/public/assets/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg');
     /* Luxury placeholder */
     background-size: cover;
     background-position: center;

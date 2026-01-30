@@ -22,7 +22,7 @@ body.rooms-page {
     min-height: 500px;
     background-size: cover;
     background-position: center;
-    background-image: url('/public/assets/photo-1616046229478-9901c5536a456111.jpg');
+    background-image: url('/assets/photo-1616046229478-9901c5536a456111.jpg');
     display: flex;
     align-items: flex-end;
 }
