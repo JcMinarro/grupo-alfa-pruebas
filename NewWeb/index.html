@@ -1,136 +1,358 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grupo Alfa | Inversión Inmobiliaria rentable y segura</title>
-    <link rel="icon" type="image/png" href="/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="site-header" id="header">
-      <div class="container nav-container">
-        <a href="#" class="logo">
-          <img src="/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa" />
-        </a>
-        <nav>
-          <ul class="nav-menu">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#promotores">Promotores</a></li>
-            <li><a href="#inversores">Inversores</a></li>
-            <li><a href="#alfa-hunters">Alfa Hunters</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo Alfa | Inversión Inmobiliaria rentable y segura</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./src/home.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa" />
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="proyectos.html">PROYECTOS</a></li>
+          <li><a href="promotores.html">PROMOTORES</a></li>
+          <li><a href="inversores.html">INVERSORES</a></li>
+          <li><a href="alfa-hunters.html">ALFA HUNTERS</a></li>
+          <li><a href="contacto.html">CONTACTO</a></li>
+        </ul>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+      <div class="container">
+        <div class="hero-content fade-in">
+          <h1 class="logo-text">GRUPO ALFA</h1>
+          <h2>INVERSIÓN INTELIGENTE</h2>
+          <h3>CONSTRUYE TU LIBERTAD FINANCIERA</h3>
+          <p class="fade-in">Transformamos inmuebles en fuentes de ingresos 100% pasivos.</p>
+          <a href="contacto.html" class="btn" style="margin-top: 20px;">EMPILAZA AHORA</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Props (Steps) -->
+    <section class="steps-section">
+      <div class="container">
+        <h2 class="text-center fade-in" style="margin-bottom: 60px;">NUESTRO PROCESO</h2>
+        <div class="steps-grid">
+          <div class="step-item fade-in">
+            <img src="/public/assets/lupa-AE0r2VjNOpI4LRQ7.png" alt="Localizamos" />
+            <h3>Localizamos</h3>
+          </div>
+          <div class="step-item fade-in">
+            <img src="/public/assets/mrtillo-AR032ZKJrRh87JyG.png" alt="Reformamos" />
+            <h3>Reformamos</h3>
+          </div>
+          <div class="step-item fade-in">
+            <img src="/public/assets/gestion-A3Q7anMajGcEW1Lx.png" alt="Gestionamos" />
+            <h3>Gestionamos</h3>
+          </div>
+          <div class="step-item fade-in">
+            <img src="/public/assets/euros-YD0w8Okj99HLq6az.png" alt="Rentabilizamos" />
+            <h3>Rentabilizamos</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section (What we do) -->
+    <section id="servicios" class="container" style="padding: 80px 20px;">
+      <div class="section-title text-center" style="border: none;">
+        <h2>QUÉ HACEMOS</h2>
+        <p style="color: #666; font-size: 1.1rem; margin-top: 10px;">Soluciones integrales para el sector inmobiliario
+        </p>
+      </div>
+
+      <div class="services-list">
+        <!-- Item 1 -->
+        <div class="service-item fade-in">
+          <div class="service-content">
+            <h3 class="text-gold">PERSONAL SHOPPER INMOBILIARIO</h3>
+            <p>Te ayudamos a encontrar propiedades con gran potencial, al mejor precio y adaptadas a tu presupuesto.
+              Analizamos cada oportunidad para maximizar tu rentabilidad.</p>
+          </div>
+          <div class="service-image">
+            <img src="/public/assets/buscar-casa-YanJ6aBZVKc969wa.png" alt="Personal Shopper"
+              style="max-height: 300px; margin: 0 auto;">
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="service-item fade-in">
+          <div class="service-content">
+            <h3 class="text-gold">REFORMA Y RESTAURACIÓN</h3>
+            <p>Somos especialistas en transformar casas antiguas y pisos deteriorados en auténticas joyas. Nuestro
+              equipo de arquitectos y reformistas se encarga de todo.</p>
+            <a href="alfa-lab.html" class="btn-text"
+              style="color: var(--color-primary); font-weight: bold; margin-top: 10px; display: inline-block;">CONOCE
+              ALFA LAB &rarr;</a>
+          </div>
+          <div class="service-image">
+            <img src="/public/assets/reformar-casa-dWxOeVbwercekoGJ.png" alt="Reformas"
+              style="max-height: 300px; margin: 0 auto;">
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="service-item fade-in">
+          <div class="service-content">
+            <h3 class="text-gold">BROKER HIPOTECARIO</h3>
+            <p>Trabajamos con las principales entidades para conseguirte las mejores condiciones de financiación.
+              Negociamos por ti para que tú solo tengas que firmar.</p>
+          </div>
+          <div class="service-image">
+            <img src="/public/assets/casa-AR032qQw99I1yKM5.png" alt="Hipoteca"
+              style="max-height: 300px; margin: 0 auto;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="proyectos" class="projects-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 style="font-size: 2.5rem; margin-bottom: 10px;">PROYECTOS DESTACADOS</h2>
+          <p style="color: #666; margin-bottom: 40px;">ANTES Y DESPUÉS DE UNA BUENA DECISIÓN</p>
+        </div>
+
+        <div class="projects-grid fade-in">
+          <!-- Project 1 -->
+          <a href="local-comercial.html" class="project-card">
+            <div class="project-image">
+              <img
+                src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg"
+                alt="Local Comercial">
+            </div>
+            <div class="project-info">
+              <p class="project-location">MURCIA</p>
+              <h3>Local Comercial convertido en Estudios</h3>
+              <span class="btn-text">Ver Proyecto &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Project 2 -->
+          <a href="alquiler-por-habitaciones.html" class="project-card">
+            <div class="project-image">
+              <img
+                src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/whatsapp-image-2024-05-18-at-13.38.32-AVPzE9Rk7yubx6Wj.jpeg"
+                alt="Alquiler Habitaciones">
+            </div>
+            <div class="project-info">
+              <p class="project-location">MADRID</p>
+              <h3>Vivienda para Alquiler por Habitaciones</h3>
+              <span class="btn-text">Ver Proyecto &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Project 3 -->
+          <a href="flip-house.html" class="project-card">
+            <div class="project-image">
+              <img
+                src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/img_7618-mnl75e4zL9c1nMyJ.jpg"
+                alt="Flip House">
+            </div>
+            <div class="project-info">
+              <p class="project-location">MURCIA</p>
+              <h3>Flip House en zona urbana consolidada</h3>
+              <span class="btn-text">Ver Proyecto &rarr;</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="text-center" style="margin-top: 50px;">
+          <a href="proyectos.html" class="btn">VER TODOS LOS PROYECTOS</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promoters Section -->
+    <section id="promotores" class="promoters-section">
+      <div class="container promoters-content">
+        <div class="promoters-text fade-in">
+          <h2 style="font-size: 2.5rem; margin-bottom: 20px;">PROMOTORES</h2>
+          <h3 style="color: var(--color-primary); margin-bottom: 20px;">TU PROYECTO PUEDE SER EL PRÓXIMO ALFA</h3>
+          <p>Si tienes una propiedad o una idea para desarrollar, restaurar o transformar, nosotros somos tu socio
+            ideal.</p>
+          <ul>
+            <li>Tienes una Casa Antigua y quieres Alquilarla.</li>
+            <li>Tienes un Bajo y quieres Convertirlo en Viviendas.</li>
+            <li>Quieres hacer Flipping: Compra, Reforma, Venta.</li>
+            <li>Deseas montar un Alojamiento Turístico.</li>
           </ul>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <!-- Hero Section -->
-      <section id="inicio" class="hero">
-        <div class="container">
-          <div class="hero-content fade-in">
-            <h1 class="logo-text">GRUPO ALFA</h1>
-            <h2>INVERSIÓN INTELIGENTE</h2>
-            <h3>CONSTRUYE TU LIBERTAD FINANCIERA</h3>
-            <p class="fade-in">Transformamos inmuebles en fuentes de ingresos 100% pasivos.</p>
-          </div>
+          <a href="promotores.html" class="btn">MÁS INFORMACIÓN</a>
         </div>
-      </section>
-
-      <!-- Value Props (Steps) -->
-      <section class="steps-section">
-        <div class="container">
-          <h2 class="text-center fade-in" style="margin-bottom: 60px;">NUESTRO PROCESO</h2>
-          <div class="steps-grid">
-            <div class="step-item fade-in">
-              <img src="/assets/lupa-AE0r2VjNOpI4LRQ7.png" alt="Localizamos" />
-              <h3>Localizamos</h3>
-            </div>
-            <div class="step-item fade-in">
-              <img src="/assets/mrtillo-AR032ZKJrRh87JyG.png" alt="Reformamos" />
-              <h3>Reformamos</h3>
-            </div>
-            <div class="step-item fade-in">
-              <img src="/assets/gestion-A3Q7anMajGcEW1Lx.png" alt="Gestionamos" />
-              <h3>Gestionamos</h3>
-            </div>
-            <div class="step-item fade-in">
-              <img src="/assets/euros-YD0w8Okj99HLq6az.png" alt="Rentabilizamos" />
-              <h3>Rentabilizamos</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Services Detail -->
-      <section id="servicios" class="container" style="padding: 80px 20px;">
-        <div class="services-list">
-          <!-- Item 1 -->
-          <div class="service-item fade-in">
-            <div class="service-content">
-              <h3 class="text-gold">PERSONAL SHOPPER INMOBILIARIO</h3>
-              <p>Te ayudamos a encontrar propiedades con gran potencial, al mejor precio y adaptadas a tu presupuesto. Analizamos cada oportunidad para maximizar tu rentabilidad.</p>
-            </div>
-            <div class="service-image">
-              <img src="/assets/buscar-casa-YanJ6aBZVKc969wa.png" alt="Personal Shopper" style="max-height: 300px; margin: 0 auto;">
-            </div>
-          </div>
-
-          <!-- Item 2 -->
-          <div class="service-item fade-in">
-            <div class="service-content">
-              <h3 class="text-gold">REFORMA Y RESTAURACIÓN</h3>
-              <p>Somos especialistas en transformar casas antiguas y pisos deteriorados en auténticas joyas. Nuestro equipo de arquitectos y reformistas se encarga de todo.</p>
-            </div>
-            <div class="service-image">
-              <img src="/assets/reformar-casa-dWxOeVbwercekoGJ.png" alt="Reformas" style="max-height: 300px; margin: 0 auto;">
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="service-item fade-in">
-            <div class="service-content">
-              <h3 class="text-gold">BROKER HIPOTECARIO</h3>
-              <p>Trabajamos con las principales entidades para conseguirte las mejores condiciones de financiación. Negociamos por ti para que tú solo tengas que firmar.</p>
-            </div>
-            <div class="service-image">
-              <img src="/assets/casa-AR032qQw99I1yKM5.png" alt="Hipoteca" style="max-height: 300px; margin: 0 auto;">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA / Contact -->
-      <section id="contacto" class="container text-center fade-in" style="padding: 100px 20px;">
-        <h2>¿Listo para empezar?</h2>
-        <p style="margin: 20px 0 40px;">Contáctanos y descubre cómo poner tu dinero a trabajar.</p>
-        <a href="mailto:info@grupoalfa.net" class="btn">CONTINUAR</a>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-content">
-        <div class="footer-logo">
-          <img src="/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa Footer" />
-          <p style="margin-top: 20px; opacity: 0.7;">
-            C/ Conde del Valle de San Juan, 1<br>
-            30004, Murcia
-          </p>
-        </div>
-        <div class="footer-links">
-          <h4>Contacto</h4>
-          <p><a href="mailto:info@grupoalfa.net">info@grupoalfa.net</a></p>
-          <p>+34 600 000 000</p>
+        <div class="promoters-image fade-in">
+          <img src="/public/assets/edificio-YX4x1WW477Irx3p5.png" alt="Promotores"
+            style="border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
         </div>
       </div>
-    </footer>
+    </section>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+    <!-- Inversores Section -->
+    <section id="inversores" class="inversores-section">
+      <div class="container text-center fade-in">
+        <h2>INVERSORES</h2>
+        <p style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 40px;">TU DINERO, TRABAJANDO SIN
+          DESCANSO</p>
+
+        <div class="inversores-grid">
+          <div class="invest-item">
+            <h3>01</h3>
+            <p>ASESORÍA PERSONALIZADA</p>
+          </div>
+          <div class="invest-item">
+            <h3>02</h3>
+            <p>OFERTA DE INMUEBLES</p>
+          </div>
+          <div class="invest-item">
+            <h3>03</h3>
+            <p>FINANCIACIÓN</p>
+          </div>
+          <div class="invest-item">
+            <h3>04</h3>
+            <p>REFORMA LLAVE EN MANO</p>
+          </div>
+          <div class="invest-item">
+            <h3>05</h3>
+            <p>RENTABILIDAD INMEDIATA</p>
+          </div>
+          <div class="invest-item">
+            <h3>06</h3>
+            <p>GESTIÓN INTEGRAL</p>
+          </div>
+        </div>
+
+        <a href="inversores.html" class="btn"
+          style="background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary);">DESCUBRE
+          CÓMO</a>
+      </div>
+    </section>
+
+    <!-- Alfa Hunters Section -->
+    <section id="alfa-hunters" class="hunters-section">
+      <div class="hunters-overlay"></div>
+      <div class="container hunters-content fade-in">
+        <h2>ALFA HUNTERS</h2>
+        <p style="font-size: 1.5rem; margin-bottom: 30px;">ÚNETE NUESTRO EQUIPO Y CRECE CON NOSOTROS</p>
+        <a href="alfa-hunters.html" class="btn">SABER MÁS</a>
+      </div>
+    </section>
+
+    <!-- Submarcas Section -->
+    <section id="submarcas" class="submarcas-section fade-in">
+      <div class="container text-center">
+        <h2 style="margin-bottom: 40px;">SUBMARCAS DE GRUPO ALFA</h2>
+        <div class="submarcas-grid">
+          <a href="alfa-clean.html" class="submarca-item">
+            <h3>ALFA CLEAN</h3>
+            <p>Limpieza y mantenimiento integral</p>
+          </a>
+          <a href="rey-subastos.html" class="submarca-item">
+            <h3>REY SUBASTOS</h3>
+            <p>Localización de activos en subasta</p>
+          </a>
+          <a href="lujo-rent.html" class="submarca-item">
+            <h3>LUJO RENT</h3>
+            <p>Alquiler de vehículos de alta gama</p>
+          </a>
+          <a href="alfa-hunters.html" class="submarca-item">
+            <h3>ALFA HUNTERS</h3>
+            <p>Equipo comercial de alto rendimiento</p>
+          </a>
+          <a href="flip-art.html" class="submarca-item">
+            <h3>FLIP ART</h3>
+            <p>Arte y decoración para espacios únicos</p>
+          </a>
+          <a href="seguros.html" class="submarca-item">
+            <h3>SEGUROS</h3>
+            <p>Protección especializada para inmuebles</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Contact -->
+    <section id="contacto" class="container text-center fade-in" style="padding: 100px 20px;">
+      <h2>¿Listo para empezar?</h2>
+      <p style="margin: 20px 0 40px;">Contáctanos y descubre cómo poner tu dinero a trabajar.</p>
+      <a href="contacto.html" class="btn">CONTACTAR</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa Footer" />
+        <p style="margin-top: 20px; opacity: 0.7;">
+          C/ Conde del Valle de San Juan, 1<br>
+          30004, Murcia
+        </p>
+      </div>
+      <div class="footer-links">
+        <h4>Contacto</h4>
+        <p><a href="mailto:info@grupoalfa.net">info@grupoalfa.net</a></p>
+        <p>+34 600 000 000</p>
+      </div>
+      <div class="footer-links">
+        <h4>Síguenos</h4>
+        <div style="display: flex; gap: 15px;">
+          <a href="#">IG</a>
+          <a href="#">LI</a>
+          <a href="#">X</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile Menu
+      const menuToggle = document.querySelector('.mobile-menu-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+
+      if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+          menuToggle.classList.toggle('active');
+        });
+      }
+
+      // Intersection Observer for Animation
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+
 </html>

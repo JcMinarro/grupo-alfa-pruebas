@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALFA HUNTERS | Grupo Alfa</title>
+    <link rel="icon" type="image/png" href="/public/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./src/hunters.css" />
+</head>
+
+<body class="hunters-page">
+    <!-- Header -->
+    <header class="site-header" id="header" style="background-color: #fff;">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png" alt="Grupo Alfa" />
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#inicio">INICIO</a></li>
+                    <li><a href="index.html#proyectos">PROYECTOS</a></li>
+                    <li><a href="index.html#promotores">PROMOTORES</a></li>
+                    <li><a href="index.html#inversores">INVERSORES</a></li>
+                    <li><a href="alfa-hunters.html" class="active">ALFA HUNTERS</a></li>
+                    <li><a href="index.html#contacto">CONTACTO</a></li>
+                </ul>
+                <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hunters-hero">
+            <video autoplay muted loop playsinline poster="/public/assets/hunters/hero-poster.jpg" class="hero-video">
+                <source src="/public/assets/hunters/hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content fade-in">
+                <h1>ALFA HUNTERS</h1>
+            </div>
+        </section>
+
+        <!-- Team Expansion Section -->
+        <section class="team-expansion container">
+            <h2 class="fade-in">ESTAMOS AMPLIANDO EL <span class="highlight">EQUIPO</span> DE <br><span
+                    class="highlight">ALFA HUNTERS</span></h2>
+            <div class="benefits-grid">
+                <div class="benefit-item fade-in">
+                    <h3>FLEXIBILIDAD HORARIA</h3>
+                    <p>Gestiona tu propio tiempo y trabaja a tu ritmo para conciliar tu vida personal y profesional.</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <h3>EQUIPO DE RESPALDO</h3>
+                    <p>Contamos con profesionales experimentados que te apoyarán en cada paso de tu formación.</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <h3>COMISIONES ATRACTIVAS</h3>
+                    <p>Ofrecemos uno de los sistemas de comisiones más competitivos del sector inmobiliario.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- detailed Benefits Section -->
+        <section class="container" style="padding: 80px 20px;">
+            <h2 class="text-center fade-in" style="margin-bottom: 50px;">¿QUIERES SER UN ALFA HUNTER?</h2>
+            <div class="steps-grid">
+                <div class="step-item fade-in">
+                    <h3>Trabaja Cómodamente</h3>
+                    <p>Puedes teletrabajar desde casa o desde cualquier lugar con conexión a internet.</p>
+                </div>
+                <div class="step-item fade-in">
+                    <h3>Formación Gratuita</h3>
+                    <p>Te enseñamos todo lo que necesitas para empezar, desde cero y sin costes.</p>
+                </div>
+                <div class="step-item fade-in">
+                    <h3>Horarios Flexibles</h3>
+                    <p>Organiza tu jornada de trabajo como mejor te convenga.</p>
+                </div>
+                <div class="step-item fade-in">
+                    <h3>Posibilidad de Crecimiento</h3>
+                    <p>Si demuestras actitud y resultados, puedes ascender rápido dentro de la organización.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="form-section">
+            <div class="container">
+                <div class="form-container fade-in">
+                    <h2>Apúntate ahora y da el primer paso</h2>
+                    <p class="text-center" style="margin-bottom: 30px;">Solo necesitamos tus datos para ponernos en
+                        contacto contigo.</p>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono de contacto</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Tu teléfono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">¿Dónde vives?</label>
+                            <input type="text" id="location" name="location" placeholder="Ciudad, Provincia" required>
+                        </div>
+                        <div class="form-group">
+                            <label>¿Tienes experiencia en ventas?</label>
+                            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
+                                <label style="font-weight: 400;"><input type="radio" name="experience" value="2+"> Más
+                                    de 2 años</label>
+                                <label style="font-weight: 400;"><input type="radio" name="experience" value="<2"> Menos
+                                    de 2 años</label>
+                                <label style="font-weight: 400;"><input type="radio" name="experience" value="none"> Sin
+                                    experiencia</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">ENVIAR</button>
+                    </form>
+                    <p style="font-size: 0.8rem; margin-top: 20px; color: #666; text-align: center;">
+                        Al enviar tu información aceptas que te contactemos para una entrevista informativa. Tus datos
+                        serán tratados con confidencialidad según nuestra <a href="#"
+                            style="color: var(--accent-color);">Política de Privacidad</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" style="background: #1d1e20; color: #fff; padding: 60px 0;">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="/public/assets/logo-grupo-alfa-horizontal-negro-A0xjZ3p5p7TZrR4K.png"
+                    style="filter: brightness(0) invert(1);" alt="Grupo Alfa Footer" />
+                <p style="margin-top: 20px; opacity: 0.7;">
+                    C/ Conde del Valle de San Juan, 1<br>
+                    30004, Murcia
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>CONTACTO</h4>
+                <p><a href="mailto:info@grupoalfa.net" style="color: #fff;">info@grupoalfa.net</a></p>
+                <p><a href="mailto:luciomerlini@grupoalfa.net" style="color: #fff;">luciomerlini@grupoalfa.net</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

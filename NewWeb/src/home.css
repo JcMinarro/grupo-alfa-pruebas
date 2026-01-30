@@ -1,0 +1,232 @@
+/* Homepage specific styles */
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/assets/photo-1521780171415-783b1cb576e73d83.jpg') no-repeat center center/cover;
+    color: #fff;
+    position: relative;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero p {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero .logo-text {
+    color: #fff;
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 100px 0;
+    background-color: #f9f9f9;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-image {
+    height: 250px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-info {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-location {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.project-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.btn-text {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* Promoters Section */
+.promoters-section {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
+.promoters-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.promoters-text ul {
+    margin: 30px 0;
+}
+
+.promoters-text li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.promoters-text li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+/* Inversores Section */
+.inversores-section {
+    padding: 100px 0;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.inversores-section h2,
+.inversores-section p {
+    color: #fff;
+}
+
+.inversores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+    text-align: center;
+}
+
+.invest-item h3 {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Alfa Hunters Section */
+.hunters-section {
+    position: relative;
+    padding: 100px 0;
+    color: #fff;
+    background: url('/public/assets/hunters/hero-poster.jpg') no-repeat center center/cover;
+    text-align: center;
+}
+
+.hunters-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hunters-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Submarcas Section */
+.submarcas-section {
+    padding: 100px 0;
+    background-color: #f9f9f9;
+}
+
+.submarcas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.submarca-item {
+    display: block;
+    /* Make the whole area clickable */
+    background: #fff;
+    padding: 40px;
+    border: 1px solid #eee;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.submarca-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.submarca-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.submarca-item p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.hunters-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .promoters-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hunters-content h2 {
+        font-size: 2rem;
+    }
+}

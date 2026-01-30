@@ -1,0 +1,146 @@
+:root {
+    --lujo-bg: #0a0a0a;
+    --lujo-text: #f0f0f0;
+    --lujo-accent: #d4af37;
+    /* Gold */
+    --lujo-secondary: #222;
+    --font-heading: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+body.lujo-page {
+    background-color: var(--lujo-bg);
+    color: var(--lujo-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+}
+
+.lujo-hero {
+    height: 60vh;
+    min-height: 400px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg');
+    /* Luxury placeholder */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+}
+
+.lujo-hero h1 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin: 0;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.lujo-hero h1 span {
+    font-weight: 700;
+    color: var(--lujo-accent);
+}
+
+.lujo-hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-top: 20px;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
+
+.services-section {
+    padding: 80px 5%;
+    background-color: var(--lujo-bg);
+}
+
+.section-title {
+    font-size: 2rem;
+    color: var(--lujo-accent);
+    margin-bottom: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.service-card {
+    background: var(--lujo-secondary);
+    padding: 40px;
+    border: 1px solid #333;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--lujo-accent);
+}
+
+.service-card h3 {
+    color: #fff;
+    margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.service-card p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 60px;
+    border-top: 1px solid #333;
+    padding-top: 60px;
+}
+
+.feature-item {
+    text-align: center;
+}
+
+.feature-item span {
+    display: block;
+    color: var(--lujo-accent);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    color: #ccc;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 80px 20px;
+    background: #111;
+}
+
+.btn-luxury {
+    display: inline-block;
+    padding: 15px 40px;
+    background: transparent;
+    border: 1px solid var(--lujo-accent);
+    color: var(--lujo-accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-luxury:hover {
+    background: var(--lujo-accent);
+    color: #000;
+}

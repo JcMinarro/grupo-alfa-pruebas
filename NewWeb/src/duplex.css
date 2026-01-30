@@ -1,0 +1,245 @@
+/* Duplex Turistico Page Styles */
+
+/* Base & Intro */
+.duplex-page {
+    background-color: #fff;
+    color: #1a1a1a;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.duplex-intro {
+    padding: 80px 0 40px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.duplex-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-title {
+    font-family: var(--font-primary);
+    font-size: 40px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.page-location {
+    font-family: var(--font-secondary);
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.highlight {
+    color: var(--color-highlight);
+}
+
+/* Grid Layout */
+.duplex-content {
+    padding: 40px 0;
+}
+
+.duplex-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+}
+
+@media (min-width: 900px) {
+    .duplex-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Columns */
+.duplex-col-1,
+.duplex-col-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.duplex-image-main img,
+.duplex-image-secondary img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    /* Optional slight rounding */
+}
+
+/* Details Section */
+.duplex-details p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Financial Block */
+.financial-block {
+    margin-bottom: 20px;
+}
+
+.financial-block h3 {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.financial-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 18px;
+    /* Slightly smaller for table data if needed, or keeping it uniform */
+}
+
+.financial-labels p,
+.financial-values p {
+    margin-bottom: 10px;
+}
+
+.financial-values {
+    text-align: right;
+    font-weight: 500;
+}
+
+.financial-labels .total,
+.financial-values .total {
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+/* Summary Box */
+.duplex-summary {
+    padding: 60px 0 100px;
+    text-align: center;
+}
+
+.summary-box {
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.summary-box h3 {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.summary-text {
+    font-size: 18px;
+}
+
+/* CTA Section */
+.cta-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-section h3 {
+    font-family: var(--font-secondary);
+    /* Or primary? Original had "Queremos conocerlo" as h6 */
+    font-size: 42px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.cta-desc {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: var(--color-highlight);
+}
+
+.cta-note {
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 14px 76px;
+    background-color: var(--color-highlight);
+    color: #fff;
+    /* Start white? Hover changes? Original: bg yellow, text dark? */
+    /* Original button: bg: rgb(255, 170, 0), text: rgb(43, 44, 50). Hover: bg: rgb(18, 19, 25), text: white */
+    color: rgb(43, 44, 50);
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: var(--font-secondary);
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #121319;
+    color: #fff;
+}
+
+/* Footer specific overrides if any */
+.site-footer {
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Polish */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 24px;
+    }
+
+    .page-location {
+        font-size: 16px;
+    }
+
+    .cta-section h3 {
+        font-size: 24px;
+    }
+
+    .cta-desc,
+    .cta-note {
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        padding: 14px 40px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .financial-grid {
+        font-size: 16px;
+        /* Ensure tables fit on mobile */
+    }
+}
