@@ -21,7 +21,7 @@ body.rey-page {
 .rey-hero {
     height: 60vh;
     min-height: 400px;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/architecture-building-city-urban-construction-sky-W41K0WnM90sL0DkP.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/public/assets/architecture-building-city-urban-construction-sky-W41K0WnM90sL0DkP.jpg');
     /* Authoritative building image placeholder */
     background-size: cover;
     background-position: center;

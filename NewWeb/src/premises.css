@@ -22,7 +22,7 @@ body.premises-page {
     min-height: 500px;
     background-size: cover;
     background-position: center;
-    background-image: url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg');
+    background-image: url('/public/assets/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg');
     /* Premises specific */
     display: flex;
     align-items: flex-end;

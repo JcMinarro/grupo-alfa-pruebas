@@ -22,7 +22,7 @@ body.flip-house-page {
     min-height: 500px;
     background-size: cover;
     background-position: center;
-    background-image: url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=984,fit=crop,q=95/mp8qDEy2Q3treMXb/dali-1-YyvP19Nl11h2Xn83.jpg');
+    background-image: url('/public/assets/dali-1-YyvP19Nl11h2Xn83.jpg');
     /* Placeholder/Reused */
     display: flex;
     align-items: flex-end;
