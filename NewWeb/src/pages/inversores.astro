@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Inversores | Grupo Alfa"
+    bodyClass="investor-page"
+    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/investor.css" />
+
+    <section class="hero-investor fade-in">
+        <div class="container">
+            <h1>INVERSORES</h1>
+            <p class="hero-subtitle">TU DINERO, TRABAJANDO SIN DESCANSO</p>
+        </div>
+    </section>
+
+    <section class="process-section fade-in">
+        <div class="investor-container">
+            <h2>Paso a paso de una inversión con Grupo Alfa</h2>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <span class="process-number">01</span>
+                    <h3>ASESORÍA GRATUITA PARA ENTENDER TU PERFIL</h3>
+                    <p>
+                        Analizamos tus objetivos financieros y tolerancia al
+                        riesgo.
+                    </p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">02</span>
+                    <h3>OFERTA DE INMUEBLES Y ESTRATEGIA</h3>
+                    <p>Seleccionamos las mejores oportunidades del mercado.</p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">03</span>
+                    <h3>TE AYUDAMOS CON LA FINANCIACIÓN</h3>
+                    <p>
+                        Buscamos las mejores condiciones hipotecarias para ti.
+                    </p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">04</span>
+                    <h3>HACEMOS REFORMA, INTERIORISMO Y HOMESTAGING</h3>
+                    <p>
+                        Maximizamos el valor del activo antes de
+                        comercializarlo.
+                    </p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">05</span>
+                    <h3>ACTIVAMOS LA RENTABILIDAD: ALQUILER O VENTA</h3>
+                    <p>
+                        Ejecutamos la estrategia definida para generar ingresos.
+                    </p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">06</span>
+                    <h3>GESTIÓN COMPLETA, TÚ DISFRUTAS DEL INGRESO</h3>
+                    <p>Nos encargamos de todo el día a día de tu inversión.</p>
+                </div>
+            </div>
+
+            <a href="/#contacto" class="btn-investor">SOLICITÁLA</a>
+        </div>
+    </section>
+
+    <section class="tips-section fade-in">
+        <div class="investor-container">
+            <h2 style="color: #fff;">TIPS PARA INVERSORES</h2>
+            <p style="color: #aaa;">TE LO EXPLICAMOS TODO</p>
+
+            <div class="tips-list">
+                <div class="tip-item">
+                    <h4>CÓMO DETECTAR UNA BUENA ZONA</h4>
+                    <p style="color: #ccc;">
+                        Claves para identificar áreas con alto potencial de
+                        revalorización.
+                    </p>
+                </div>
+                <div class="tip-item">
+                    <h4>COMPARATIVA ENTRE TIPOS DE ALQUILER</h4>
+                    <p style="color: #ccc;">
+                        Rentabilidad y gestión: Turístico vs. Tradicional vs.
+                        Temporal.
+                    </p>
+                </div>
+                <div class="tip-item">
+                    <h4>RENTABILIDAD VS RIESGO</h4>
+                    <p style="color: #ccc;">
+                        Cómo equilibrar tu cartera para maximizar retornos
+                        seguros.
+                    </p>
+                </div>
+                <div class="tip-item">
+                    <h4>SUBASTAS, CESIONES DE DEUDA, FLIPPING...</h4>
+                    <p style="color: #ccc;">
+                        Estrategias avanzadas para inversores experimentados.
+                    </p>
+                </div>
+            </div>
+
+            <a
+                href="/#contacto"
+                class="btn-investor"
+                style="background: #fff; color: #000;">CONTACTO</a
+            >
+        </div>
+    </section>
+</BaseLayout>

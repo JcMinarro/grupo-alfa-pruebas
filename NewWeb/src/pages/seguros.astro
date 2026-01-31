@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Seguros | Grupo Alfa"
+    bodyClass="seguros-page"
+    footerStyle="background: url('/assets/photo-1707903244219-8ed71537554d3d83.jpg') no-repeat center center/cover; position: relative; padding: 100px 0;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/seguros.css" />
+    <style slot="head">
+        body {
+            font-family: "DM Sans", sans-serif;
+            background-color: #000;
+        }
+
+        .site-header {
+            background-color: #fff;
+        }
+    </style>
+
+    <main class="seguros-main">
+        <div class="container">
+            <div class="seguros-grid fade-in">
+                <!-- Left Column -->
+                <div class="seguros-col-left">
+                    <div class="seguros-logo-wrapper">
+                        <img
+                            src="/assets/logo-grupo-alfa-horizontal-montado-blanco-lhGvXrpDul9kdik1.png"
+                            alt="Grupo Alfa Seguros"
+                            class="seguros-logo-desktop"
+                        />
+                        <img
+                            src="/assets/logo-grupo-alfa-texto-blanco-e3qvGVvZFnhF9AGz.png"
+                            alt="Grupo Alfa Seguros"
+                            class="seguros-logo-mobile"
+                        />
+                    </div>
+
+                    <div class="seguros-image-1">
+                        <img
+                            src="/assets/6-xagwOQuvpmdAZmfW.png"
+                            alt="Seguros Familia"
+                        />
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="seguros-col-right">
+                    <div class="seguros-image-2">
+                        <img
+                            src="/assets/7-ucrml6fvi2VS6Vcd.png"
+                            alt="Seguros Protección"
+                        />
+                    </div>
+
+                    <div class="seguros-image-3">
+                        <img
+                            src="/assets/8-2TH51lWR8ULK9DcB.png"
+                            alt="Seguros Hogar"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="seguros-back-container fade-in">
+                <a href="/#submarcas" class="seguros-btn-back">Volver</a>
+            </div>
+        </div>
+    </main>
+</BaseLayout>

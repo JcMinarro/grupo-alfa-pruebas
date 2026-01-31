@@ -1,0 +1,51 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/style.css";
+
+const {
+    title = "Grupo Alfa | Inversión Inmobiliaria rentable y segura",
+    bodyClass = "",
+    footerStyle = "",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <!-- Favicon -->
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/logo-grupo-alfa-cabeza-negra-mv02n2ZjzOc5pE3k.png"
+        />
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <slot name="head" />
+        <ViewTransitions />
+        <script src="../scripts/main.js"></script>
+    </head>
+    <body class={bodyClass}>
+        <Header />
+
+        <main>
+            <slot />
+        </main>
+
+        <Footer customStyle={footerStyle} />
+    </body>
+</html>

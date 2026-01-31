@@ -1,0 +1,199 @@
+---
+import ProjectLayout from "../layouts/ProjectLayout.astro";
+---
+
+<ProjectLayout
+    title="Dúplex Turístico | Grupo Alfa"
+    bodyClass="duplex-page"
+    footerStyle="background: url('/assets/photo-1707903244219-8ed71537554d3d83.jpg') no-repeat center center/cover; position: relative; padding: 100px 0;"
+>
+    <link
+        slot="head"
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Krona+One&family=Jost:wght@300;400;500;700&display=swap"
+    />
+    <link slot="head" rel="stylesheet" href="/src/styles/duplex.css" />
+    <style slot="head">
+        :root {
+            --font-primary: "Krona One", sans-serif;
+            --font-secondary: "Jost", sans-serif;
+            --color-text: #1a1a1a;
+            --color-highlight: #ffaa00;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            color: var(--color-text);
+            background-color: #fff;
+        }
+    </style>
+
+    <!-- Intro Section -->
+    <section class="duplex-intro fade-in">
+        <div class="container">
+            <h1 class="page-title">
+                Piso con buhardilla convertido en <span class="highlight"
+                    >Dúplex Turístico</span
+                >
+            </h1>
+            <h2 class="page-location">Murcia</h2>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <section class="duplex-content">
+        <div class="container">
+            <div class="duplex-grid">
+                <!-- Column 1: Main Image & Details -->
+                <div class="duplex-col-1 fade-in">
+                    <div class="duplex-image-main">
+                        <img
+                            src="/assets/generated-image-august-29-2025---7_30pm-YZ9E5J31p8HJN5kG.jpg"
+                            alt="Dúplex Turístico Salón"
+                        />
+                    </div>
+                    <div class="duplex-details">
+                        <p>
+                            <span class="highlight">Tipo de activo:</span> Piso +
+                            Buhardilla
+                        </p>
+                        <p>
+                            <span class="highlight">Ubicación:</span> Centro Histórico
+                            de Murcia
+                        </p>
+                        <p>
+                            <span class="highlight">Superficie:</span> Piso: 70 m²
+                            + Buhardilla: 30 m²
+                        </p>
+                        <p>
+                            <span class="highlight">Estrategia:</span> Dúplex Turístico
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Column 2: Financials & More Images -->
+                <div class="duplex-col-2 fade-in">
+                    <!-- Project Financials Block -->
+                    <div class="financial-block">
+                        <h3><em>Proyecto</em></h3>
+                        <div class="financial-grid">
+                            <div class="financial-labels">
+                                <p>Compra del Inmueble</p>
+                                <p>Reforma Integral</p>
+                                <p>Licencias y Arquitecto</p>
+                                <p>Amueblamiento Turístico</p>
+                                <p>Costes Imprevistos y Cierre</p>
+                                <p class="highlight total">Inversión Total</p>
+                            </div>
+                            <div class="financial-values">
+                                <p>85.000 €</p>
+                                <p>50.000 €</p>
+                                <p>8.000 €</p>
+                                <p>12.000 €</p>
+                                <p>5.000 €</p>
+                                <p class="total">160.000 €</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Image 2 -->
+                    <div class="duplex-image-secondary">
+                        <img
+                            src="/assets/generated-image-august-29-2025---7_33pm-mnl4ea1GPxUxXMDX.jpg"
+                            alt="Dúplex Turístico Habitación"
+                        />
+                    </div>
+
+                    <!-- Rentabilidad Venta -->
+                    <div class="financial-block">
+                        <h3><em>Rentabilidad por venta</em></h3>
+                        <p>
+                            <span class="highlight"
+                                >Precio Venta (Activo Turístico):</span
+                            > 210.000 €
+                        </p>
+                        <p>
+                            <span class="highlight"
+                                >Beneficio Neto estimado:</span
+                            > 50.000 €
+                        </p>
+                        <p>
+                            <span class="highlight">ROI Neto por Venta:</span> 41,25
+                            %
+                        </p>
+                    </div>
+
+                    <!-- Content Image 3 -->
+                    <div class="duplex-image-secondary">
+                        <img
+                            src="/assets/generated-image-august-29-2025---7_35pm-m7VDLnWl4vUyPNkJ.jpg"
+                            alt="Dúplex Turístico Cocina"
+                        />
+                    </div>
+
+                    <!-- Rentabilidad Alquiler -->
+                    <div class="financial-block">
+                        <h3><em>Rentabilidad por alquiler</em></h3>
+                        <p>
+                            <span class="highlight">Ocupación Media:</span> 22 noches/mes
+                            (115€/noche)
+                        </p>
+                        <p>
+                            <span class="highlight"
+                                >Ingresos Anuales Brutos:</span
+                            > 30.360 €
+                        </p>
+                        <p>
+                            <span class="highlight">Gastos Operativos:</span> 9.108
+                            € (30%)
+                        </p>
+                        <p>
+                            <span class="highlight">Ingresos Netos:</span> 21.252
+                            €
+                        </p>
+                        <p>
+                            <span class="highlight">ROI Neto por Alquiler:</span
+                            > 13,28 %
+                        </p>
+                    </div>
+
+                    <!-- Content Image 4 -->
+                    <div class="duplex-image-secondary">
+                        <img
+                            src="/assets/generated-image-august-29-2025---7_37pm-mjE4yrjRGGIyz5qo.jpg"
+                            alt="Dúplex Turístico Baño"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary & CTA -->
+    <section class="duplex-summary fade-in">
+        <div class="container">
+            <div class="summary-box">
+                <h3>Resumen Ejecutivo</h3>
+                <p class="summary-text">
+                    Ideal para alquiler turístico en casco histórico. Activo
+                    único por configuración tipo dúplex. Alta rentabilidad y
+                    potencial de revalorización.
+                </p>
+            </div>
+
+            <div class="cta-section">
+                <h3>¿Tienes un Proyecto en mente?</h3>
+                <p class="cta-desc">
+                    Queremos conocerlo. Lo analizamos y, si encaja con nuestros
+                    estándares, lo financiamos.
+                </p>
+                <p class="cta-note">
+                    Déjanos un formulario y nos pondremos en contacto contigo lo
+                    antes posible.
+                </p>
+                <a href="/contacto" class="btn btn-primary">Tengo un Proyecto</a
+                >
+            </div>
+        </div>
+    </section>
+</ProjectLayout>

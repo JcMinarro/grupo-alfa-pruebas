@@ -1,0 +1,181 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Proyectos | Grupo Alfa"
+    bodyClass="portfolio-page"
+    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/portfolio.css" />
+
+    <section class="hero-portfolio fade-in">
+        <div class="container">
+            <h1>PROYECTOS</h1>
+            <p class="hero-subtitle">ANTES Y DESPUÉS DE UNA BUENA DECISIÓN</p>
+            <p>
+                Descubre cómo transformamos oportunidades en realidades
+                rentables.
+            </p>
+        </div>
+    </section>
+
+    <section class="portfolio-container">
+        <div class="portfolio-grid fade-in">
+            <!-- Project 1 -->
+            <a href="/local-comercial" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+                        alt="Local Comercial convertido en Estudios"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">MURCIA</p>
+                        <h3>Local Comercial convertido en Estudios</h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="/alquiler-por-habitaciones" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=80"
+                        alt="Vivienda para Alquiler por Habitaciones"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">MADRID</p>
+                        <h3>Vivienda para Alquiler por Habitaciones</h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 3 -->
+            <a href="/mini-estudios" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
+                        alt="Vivienda convertida en 3 Mini-estudios"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">GRANADA</p>
+                        <h3>
+                            Vivienda mal distribuida convertida en 3
+                            Mini-estudios
+                        </h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 4 -->
+            <a href="/flip-house" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=800&q=80"
+                        alt="Flip House"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">MURCIA</p>
+                        <h3>Flip House en zona urbana consolidada</h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 5 -->
+            <a href="/vivienda-turistica" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1521780171415-783b1cb576e7?auto=format&fit=crop&w=800&q=80"
+                        alt="Vivienda Turística"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">ÁGUILAS, MURCIA</p>
+                        <h3>
+                            Vivienda Antigua transformada en Vivienda Turística
+                        </h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 6 -->
+            <a href="/division-apartamentos" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+                        alt="Piso dividido en 2 Apartamentos"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">VALENCIA</p>
+                        <h3>Piso dividido en 2 Apartamentos</h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 7 -->
+            <a href="/chalet-dividido" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=80"
+                        alt="Chalet dividido en 2 Viviendas"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">ALICANTE</p>
+                        <h3>Chalet dividido en 2 Viviendas</h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+
+            <!-- Project 8 -->
+            <a href="/duplex-turistico" class="project-card">
+                <div class="project-image-container">
+                    <img
+                        src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
+                        alt="Dúplex Turístico"
+                    />
+                </div>
+                <div class="project-info">
+                    <div>
+                        <p class="project-location">MURCIA</p>
+                        <h3>
+                            Piso con buhardilla convertido en dúplex turístico
+                        </h3>
+                    </div>
+                    <span class="btn-view-project">Ver más</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="cta-portfolio fade-in">
+        <div class="container">
+            <h2>¿Tienes un Proyecto en mente?</h2>
+            <p>
+                Queremos conocerlo. Lo analizamos y, si encaja con nuestros
+                estándares, lo financiamos.
+            </p>
+            <a href="/#contacto" class="btn-portfolio-main">Tengo un Proyecto</a
+            >
+        </div>
+    </section>
+</BaseLayout>

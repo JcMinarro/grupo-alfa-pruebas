@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Alfa Clean | Grupo Alfa"
+    bodyClass="clean-page"
+    footerStyle="background: url('/assets/photo-1707903244219-8ed71537554d3d83.jpg') no-repeat center center/cover; position: relative; padding: 100px 0;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/clean.css" />
+    <style slot="head">
+        body {
+            font-family: "DM Sans", sans-serif;
+            background-color: #000;
+        }
+
+        .site-header {
+            background-color: #fff;
+        }
+    </style>
+
+    <main class="container">
+        <div class="clean-content-box fade-in">
+            <div class="clean-logo-section">
+                <img
+                    src="/assets/logo-grupo-alfa-YKbEjky3lKIe0BKP.png"
+                    alt="Grupo Alfa White Logo"
+                />
+            </div>
+
+            <div class="clean-text-section">
+                <h1>Servicio de Limpieza <span>Alfa Clean</span></h1>
+
+                <div class="clean-services-grid">
+                    <div class="clean-service-item">
+                        <img
+                            src="/assets/edificio-YX4x1WW477Irx3p5.png"
+                            alt="Comunidades"
+                        />
+                        <p>Comunidades de propietarios</p>
+                    </div>
+                    <div class="clean-service-item">
+                        <img
+                            src="/assets/buscar-casa-YanJ6aBZVKc969wa.png"
+                            alt="Viviendas"
+                        />
+                        <p>Viviendas particulares</p>
+                    </div>
+                    <div class="clean-service-item">
+                        <img
+                            src="/assets/flecha-abajo-AzGN41EZW0T39oZP.png"
+                            alt="Vacacionales"
+                            style="transform: rotate(-90deg);"
+                        />
+                        <p>Alojamientos vacacionales</p>
+                    </div>
+                </div>
+
+                <div class="clean-description">
+                    <p>
+                        Limpieza profesional para comunidades de propietarios,
+                        viviendas particulares y alojamientos vacacionales.
+                        Preparación completa del inmueble, reposición de
+                        consumibles, control de daños y check-in listo.
+                    </p>
+                </div>
+
+                <a href="/#servicios" class="clean-volver">Volver</a>
+            </div>
+        </div>
+    </main>
+</BaseLayout>

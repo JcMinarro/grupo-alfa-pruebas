@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="ALFA LAB | Grupo Alfa"
+    bodyClass="lab-page"
+    footerStyle="background: #1d1e20; color: #fff; padding: 60px 0;"
+>
+    <link
+        slot="head"
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Krona+One&display=swap"
+    />
+    <link slot="head" rel="stylesheet" href="/src/styles/lab.css" />
+
+    <main class="lab-container">
+        <div class="lab-logos fade-in">
+            <img
+                src="/assets/logo-grupo-alfa-YKbEjky3lKIe0BKP.png"
+                alt="Grupo Alfa White"
+            />
+            <img
+                src="/assets/logo-grupo-alfa-horizontal-montado-blanco-lhGvXrpDul9kdik1.png"
+                alt="Grupo Alfa Horizontal"
+            />
+        </div>
+
+        <section class="lab-content fade-in">
+            <h1>ALFA LAB</h1>
+
+            <div class="lab-description">
+                <p>
+                    <strong
+                        >Alfa Lab es el estudio inteligente de transformación
+                        inmobiliaria de Grupo Alfa.</strong
+                    > Nos specializamos en convertir activos complejos —como locales,
+                    naves industriales, bajos comerciales, viviendas antiguas o propiedades
+                    con rentabilidad limitada— en proyectos ejecutables, altamente
+                    rentables y listos para ser introducidos en el mercado con éxito.
+                </p>
+                <p>
+                    En un plazo de 48 a 72 horas, entregamos un completo <strong
+                        >Proyecto Alfa Lab</strong
+                    >, un documento profesional y detallado que abarca todos los
+                    aspectos clave para la optimización de su propiedad. Este
+                    proyecto incluye:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Estudio técnico del activo:</strong> Análisis exhaustivo
+                        de la situación legal, urbanística y constructiva del inmueble.
+                    </li>
+                    <li>
+                        <strong
+                            >Viabilidad económica para venta y alquiler:</strong
+                        > Proyecciones financieras detalladas para maximizar el retorno
+                        de la inversión.
+                    </li>
+                    <li>
+                        <strong
+                            >Propuesta de reforma con presupuesto estimado:</strong
+                        > Un plan de transformación claro y transparente, con desglose
+                        de costes.
+                    </li>
+                    <li>
+                        <strong>Diseño y renders con IA:</strong> Visualizaciones
+                        realistas del potencial del inmueble tras la reforma.
+                    </li>
+                    <li>
+                        <strong
+                            >Predicción de rentabilidad y plan de explotación:</strong
+                        > Estrategias concretas para generar ingresos y optimizar
+                        la gestión del activo.
+                    </li>
+                    <li>
+                        <strong>Estrategia de comercialización:</strong> Plan de marketing
+                        y ventas para posicionar el inmueble en el mercado adecuado.
+                    </li>
+                </ul>
+                <p>
+                    Alfa Lab unifica el análisis inmobiliario, la planificación
+                    de obra, el diseño de interiorismo, la estrategia de
+                    explotación del activo y la optimización financiera, todo en
+                    un único servicio integrado. Es una herramienta
+                    indispensable, diseñada específicamente para propietarios,
+                    agencias inmobiliarias e inversores que requieren tomar
+                    decisiones rápidas, claras y, sobre todo, rentables.
+                </p>
+                <p>
+                    Transformamos activos difíciles en oportunidades reales, al
+                    más puro estilo Grupo Alfa.
+                </p>
+            </div>
+
+            <a href="/#servicios" class="btn-volver">VOLVER</a>
+        </section>
+    </main>
+</BaseLayout>

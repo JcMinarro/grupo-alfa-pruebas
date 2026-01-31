@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Rey SuBastos | Grupo Alfa"
+    bodyClass="rey-page"
+    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/rey.css" />
+
+    <section class="rey-hero fade-in">
+        <h1>REY <span>SUBASTOS</span></h1>
+        <p>
+            Especialistas en la identificación y adquisición de activos en
+            subasta.
+        </p>
+    </section>
+
+    <section class="expertise-section fade-in">
+        <div class="section-heading">
+            <h2>Gestión Integral de Subastas</h2>
+            <p>
+                Ofrecemos un servicio "End to End": desde la localización de la
+                oportunidad hasta la entrega física y legal del inmueble,
+                garantizando la máxima seguridad jurídica y rentabilidad.
+            </p>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-card">
+                <div class="process-icon">📍</div>
+                <h3>Localización de Activos</h3>
+                <p>
+                    Monitorizamos diariamente subastas públicas y privadas para
+                    identificar las mejores oportunidades de inversión
+                    inmobiliaria antes que el mercado.
+                </p>
+            </div>
+            <div class="process-card">
+                <div class="process-icon">⚖️</div>
+                <h3>Análisis Multidisciplinar</h3>
+                <p>
+                    Realizamos un exhaustivo análisis jurídico, económico y
+                    técnico de cada expediente para blindar la operación y
+                    eliminar riesgos ocultos.
+                </p>
+            </div>
+            <div class="process-card">
+                <div class="process-icon">🤝</div>
+                <h3>Acompañamiento</h3>
+                <p>
+                    Gestionamos todo el proceso de licitación y adjudicación,
+                    representándote en la subasta con una estrategia ganadora
+                    predefinida.
+                </p>
+            </div>
+            <div class="process-card">
+                <div class="process-icon">🔑</div>
+                <h3>Entrega Segura</h3>
+                <p>
+                    Nos encargamos de todos los trámites pos-subasta,
+                    inscripciones registrales y toma de posesión, hasta
+                    entregarte las llaves.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="security-banner fade-in">
+        <div class="security-content">
+            <h2>Seguridad Total</h2>
+            <p>
+                Nuestra metodología elimina la incertidumbre de las subastas. No
+                pujamos si el análisis no es 100% favorable.
+            </p>
+        </div>
+        <a href="/#contacto" class="btn-rey">Consultar Ahora</a>
+    </section>
+</BaseLayout>

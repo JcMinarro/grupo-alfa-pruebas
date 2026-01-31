@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Lujo Rent | Grupo Alfa"
+    bodyClass="lujo-page"
+    footerStyle="border-top: 1px solid #333; background: #000;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/lujo.css" />
+
+    <section class="lujo-hero fade-in">
+        <h1>LUJO <span>RENT</span></h1>
+        <p>GESTIÓN INTEGRAL DEL ALQUILER</p>
+    </section>
+
+    <section class="services-section fade-in">
+        <h2 class="section-title">Nuestros Servicios</h2>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Alquiler Vacacional</h3>
+                <p>
+                    Gestión completa para estancias cortas, maximizando la
+                    ocupación y los ingresos mediante plataformas turísticas de
+                    primer nivel.
+                </p>
+            </div>
+            <div class="service-card">
+                <h3>Alquiler por Habitaciones</h3>
+                <p>
+                    Optimización de rentabilidad mediante el modelo de alquiler
+                    por habitaciones, ideal para coliving y estudiantes.
+                </p>
+            </div>
+            <div class="service-card">
+                <h3>Alquiler Tradicional</h3>
+                <p>
+                    Gestión segura y estable para arrendamientos de larga
+                    duración, garantizando tranquilidad y cobro puntual.
+                </p>
+            </div>
+        </div>
+
+        <div class="features-list">
+            <div class="feature-item">
+                <span>★</span>
+                <p>Mantenimiento</p>
+            </div>
+            <div class="feature-item">
+                <span>📅</span>
+                <p>Reservas</p>
+            </div>
+            <div class="feature-item">
+                <span>✨</span>
+                <p>Limpieza</p>
+            </div>
+            <div class="feature-item">
+                <span>€</span>
+                <p>Cobros</p>
+            </div>
+            <div class="feature-item">
+                <span>📈</span>
+                <p>Optimización</p>
+            </div>
+            <div class="feature-item">
+                <span>👥</span>
+                <p>Atención Inquilino</p>
+            </div>
+            <div class="feature-item">
+                <span>🏠</span>
+                <p>Control Estado</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="color: #fff; margin-bottom: 30px;">¿Tienes un inmueble?</h2>
+        <a href="/#contacto" class="btn-luxury">Solicitar Gestión</a>
+    </section>
+</BaseLayout>

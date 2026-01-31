@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Promotores | Grupo Alfa"
+    bodyClass="promoter-page"
+    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/promoters.css" />
+
+    <section class="hero-promoter fade-in">
+        <div class="promoter-container">
+            <h1>PROMOTORES</h1>
+            <p class="hero-subtitle">TU PROYECTO PUEDE SER EL PRÓXIMO ALFA</p>
+            <p class="promoter-intro">
+                Si tienes una propiedad o una idea para desarrollar, restaurar o
+                transformar, cuéntanosla.
+            </p>
+        </div>
+    </section>
+
+    <section class="promoter-container fade-in">
+        <h2 style="font-size: 2rem; margin-bottom: 40px; text-align: center;">
+            Podemos ayudarte si:
+        </h2>
+
+        <div class="services-list">
+            <div class="service-item">
+                <h3>Tienes una Casa Antigua y quieres Alquilarla</h3>
+            </div>
+            <div class="service-item">
+                <h3>Tienes un Bajo y quieres Convertirlo en Viviendas</h3>
+            </div>
+            <div class="service-item">
+                <h3>Quieres hacer Flipping: Compra, Reforma, Venta</h3>
+            </div>
+            <div class="service-item">
+                <h3>Deseas montar un Alojamiento Turístico</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="value-prop fade-in">
+        <div class="container" style="text-align: center;">
+            <h2>
+                Nosotros analizamos la viabilidad, diseñamos el plan de acción
+                y, si nos interesa, financiamos tu proyecto y lo ejecutamos
+                contigo.
+            </h2>
+            <a href="/#contacto" class="btn-promoter">Presentar mi Idea</a>
+        </div>
+    </section>
+</BaseLayout>

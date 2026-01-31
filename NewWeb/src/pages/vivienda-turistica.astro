@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Vivienda Turística | Grupo Alfa"
+    bodyClass="tourism-page"
+    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
+>
+    <link slot="head" rel="stylesheet" href="/src/styles/tourism.css" />
+
+    <section class="hero-tourism fade-in">
+        <div class="container">
+            <h1>
+                Vivienda Antigua transformada en <span>Vivienda Turística</span>
+            </h1>
+            <p class="hero-location">Águilas, Murcia</p>
+        </div>
+    </section>
+
+    <section class="tourism-container">
+        <div class="showcase-grid fade-in">
+            <div class="showcase-item">
+                <span class="label-before">ANTES</span>
+                <img
+                    src="/assets/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg"
+                    alt="Habitación Antigua"
+                />
+            </div>
+            <div class="showcase-item">
+                <span class="label-after">DESPUÉS</span>
+                <img
+                    src="/assets/whatsapp-image-2024-05-18-at-13.38.32-AVPzE9Rk7yubx6Wj.jpeg"
+                    alt="Habitación Turística"
+                />
+            </div>
+        </div>
+
+        <div class="investment-text fade-in">
+            <p>
+                Las viviendas turísticas representan una de las inversiones más
+                rentables y líquidas en el sector inmobiliario actual,
+                especialmente en zonas costeras con alta demanda vacacional. El
+                éxito reside en una transformación estratégica que combine
+                diseño, funcionalidad y una gestión profesional.
+            </p>
+        </div>
+    </section>
+
+    <section class="branding-section fade-in">
+        <div class="container">
+            <img
+                src="/assets/logo-grupo-alfa-horizontal-montado-negro-m6Lk9lywM3H4k3lk.png"
+                alt="Grupo Alfa Branding"
+            />
+        </div>
+    </section>
+
+    <section class="cta-section fade-in">
+        <div class="container">
+            <h2>¿Tienes un Proyecto en mente?</h2>
+            <p>
+                En Grupo Alfa analizamos cada oportunidad de inversión. Si
+                tienes un inmueble con potencial para ser transformado en
+                vivienda turística, nosotros te ayudamos a financiarlo y
+                gestionarlo.
+            </p>
+            <a href="/#contacto" class="btn-tourism">Tengo un Proyecto</a>
+        </div>
+    </section>
+</BaseLayout>
