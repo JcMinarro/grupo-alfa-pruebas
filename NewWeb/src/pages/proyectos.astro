@@ -1,17 +1,24 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<ProjectLayout title="Proyectos | Grupo Alfa" bodyClass="portfolio-page">
+<ProjectLayout
+    title={`Proyectos | ${t("brand.name")}`}
+    bodyClass="portfolio-page"
+>
     <Hero
-        title="PROYECTOS"
-        subtitle="ANTES Y DESPUÉS DE UNA BUENA DECISIÓN"
+        title={t("projects.hero.title")}
+        subtitle={t("projects.hero.subtitle")}
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
         height="50vh"
     >
         <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 20px;">
-            Descubre cómo transformamos oportunidades en realidades rentables.
+            {t("projects.hero.description")}
         </p>
     </Hero>
 
@@ -22,15 +29,17 @@ import Hero from "../components/Hero.astro";
                 <div class="project-image-container">
                     <img
                         src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                        alt="Local Comercial"
+                        alt={t("projects.project1.title")}
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">MURCIA</p>
-                        <h3>Local Comercial convertido en Estudios</h3>
+                        <h3>{t("projects.project1.title")}</h3>
                     </div>
-                    <span class="btn-view-project">Ver más</span>
+                    <span class="btn-view-project"
+                        >{t("projects.viewMore")}</span
+                    >
                 </div>
             </a>
 
@@ -39,15 +48,17 @@ import Hero from "../components/Hero.astro";
                 <div class="project-image-container">
                     <img
                         src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                        alt="Habitaciones"
+                        alt={t("projects.project2.title")}
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">MADRID</p>
-                        <h3>Alquiler por Habitaciones</h3>
+                        <h3>{t("projects.project2.title")}</h3>
                     </div>
-                    <span class="btn-view-project">Ver más</span>
+                    <span class="btn-view-project"
+                        >{t("projects.viewMore")}</span
+                    >
                 </div>
             </a>
 
@@ -56,15 +67,17 @@ import Hero from "../components/Hero.astro";
                 <div class="project-image-container">
                     <img
                         src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                        alt="Vivienda Turística"
+                        alt={t("projects.project5.title")}
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">ÁGUILAS, MURCIA</p>
-                        <h3>Transformación Turística</h3>
+                        <h3>{t("projects.project5.title")}</h3>
                     </div>
-                    <span class="btn-view-project">Ver más</span>
+                    <span class="btn-view-project"
+                        >{t("projects.viewMore")}</span
+                    >
                 </div>
             </a>
 
@@ -73,15 +86,17 @@ import Hero from "../components/Hero.astro";
                 <div class="project-image-container">
                     <img
                         src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                        alt="Chalet"
+                        alt={t("projects.project7.title")}
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">ALICANTE</p>
-                        <h3>Chalet dividido en 2 Viviendas</h3>
+                        <h3>{t("projects.project7.title")}</h3>
                     </div>
-                    <span class="btn-view-project">Ver más</span>
+                    <span class="btn-view-project"
+                        >{t("projects.viewMore")}</span
+                    >
                 </div>
             </a>
 
@@ -90,15 +105,17 @@ import Hero from "../components/Hero.astro";
                 <div class="project-image-container">
                     <img
                         src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                        alt="Dúplex"
+                        alt={t("projects.project8.title")}
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">MURCIA</p>
-                        <h3>Piso con buhardilla (Dúplex)</h3>
+                        <h3>{t("projects.project8.title")}</h3>
                     </div>
-                    <span class="btn-view-project">Ver más</span>
+                    <span class="btn-view-project"
+                        >{t("projects.viewMore")}</span
+                    >
                 </div>
             </a>
         </div>
@@ -109,15 +126,15 @@ import Hero from "../components/Hero.astro";
         style="background: var(--component-bg); padding: 80px 0; text-align: center;"
     >
         <div class="container">
-            <h2>¿Tienes un Proyecto en mente?</h2>
+            <h2>{t("projects.cta.title")}</h2>
             <p style="margin-bottom: 30px;">
-                Queremos conocerlo. Lo analizamos y lo financiamos.
+                {t("projects.cta.description")}
             </p>
             <a
                 href="/#contacto"
                 class="btn-primary"
                 style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
-                >Tengo un Proyecto</a
+                >{t("projects.cta.button")}</a
             >
         </div>
     </section>

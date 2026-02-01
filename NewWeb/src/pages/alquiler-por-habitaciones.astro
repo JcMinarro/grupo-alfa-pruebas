@@ -1,38 +1,54 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectDetails from "../components/project/ProjectDetails.astro";
 import ProjectFinancials from "../components/project/ProjectFinancials.astro";
 import ProjectROI from "../components/project/ProjectROI.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <ProjectLayout
-    title="Alquiler por Habitaciones | Grupo Alfa"
+    title={`Alquiler por Habitaciones | ${t("brand.name")}`}
     bodyClass="rooms-page"
 >
     <Hero
-        title="Vivienda para Alquiler por Habitaciones"
+        title={t("projects.rooms.title")}
         location="MADRID"
         backgroundImage="/assets/photo-1616046229478-9901c5536a456111.jpg"
         height="50vh"
     />
 
     <section class="project-details container fade-in">
-        <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
+        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
 
-        <h2>Detalles del Proyecto</h2>
+        <h2>{t("projects.details.title")}</h2>
         <ProjectDetails
-            type="Piso amplio (110 m²)"
-            location="Madrid, zona universitaria"
-            distribution="5 Habitaciones + 2 Baños"
+            type={t("projects.rooms.details.type")}
+            location={t("projects.rooms.details.location")}
+            distribution={t("projects.rooms.details.distribution")}
         />
 
         <ProjectFinancials
             costs={[
-                { concept: "Compra del Inmueble", amount: "195.000 €" },
-                { concept: "Reforma Integral", amount: "45.000 €" },
-                { concept: "Licencias y Arquitecto", amount: "10.000 €" },
-                { concept: "Amueblamiento Básico", amount: "10.000 €" },
+                {
+                    concept: t("projects.common.costs.compra"),
+                    amount: "195.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.reforma"),
+                    amount: "45.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.licencias"),
+                    amount: "10.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.muebles"),
+                    amount: "10.000 €",
+                },
             ]}
             total="260.000 €"
         />
@@ -52,11 +68,9 @@ import ProjectROI from "../components/project/ProjectROI.astro";
         />
 
         <div class="executive-summary">
-            <h3>Resumen Ejecutivo</h3>
+            <h3>{t("projects.executiveSummary")}</h3>
             <p>
-                Modelo excelente de rentabilidad intensiva. Rentabilidad muy
-                alta en alquiler y atractiva reventa como activo en explotación.
-                En zonas universitarias es una apuesta sólida.
+                {t("projects.rooms.summary")}
             </p>
         </div>
 
@@ -65,7 +79,7 @@ import ProjectROI from "../components/project/ProjectROI.astro";
                 href="/#contacto"
                 class="btn-primary"
                 style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
-                >ME INTERESA ESTE MODELO</a
+                >{t("projects.interested")}</a
             >
         </div>
     </section>

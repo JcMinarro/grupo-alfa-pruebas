@@ -1,28 +1,35 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectDetails from "../components/project/ProjectDetails.astro";
 import ProjectFinancials from "../components/project/ProjectFinancials.astro";
 import ProjectROI from "../components/project/ProjectROI.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<ProjectLayout title="Dúplex Turístico | Grupo Alfa" bodyClass="duplex-page">
+<ProjectLayout
+    title={`Dúplex Turístico | ${t("brand.name")}`}
+    bodyClass="duplex-page"
+>
     <Hero
-        title="Dúplex Turístico en Centro Histórico"
+        title={t("projects.duplex.title")}
         location="CENTRO DE MURCIA"
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
         height="50vh"
     />
 
     <section class="project-details container fade-in">
-        <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
+        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
 
-        <h2>Detalles del Proyecto</h2>
+        <h2>{t("projects.details.title")}</h2>
         <ProjectDetails
-            type="Piso con Buhardilla"
-            location="Casco Antiguo, Murcia"
+            type={t("projects.duplex.details.type")}
+            location={t("projects.duplex.details.location")}
             surface="100 m² (70 + 30)"
-            distribution="Dúplex Turístico"
+            distribution={t("projects.duplex.details.distribution")}
         />
 
         <div
@@ -31,23 +38,38 @@ import ProjectROI from "../components/project/ProjectROI.astro";
         >
             <img
                 src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                alt="Interior 1"
+                alt={t("projects.duplex.image1.alt")}
                 style="width: 100%; border-radius: 8px;"
             />
             <img
                 src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                alt="Interior 2"
+                alt={t("projects.duplex.image2.alt")}
                 style="width: 100%; border-radius: 8px;"
             />
         </div>
 
         <ProjectFinancials
             costs={[
-                { concept: "Compra del Inmueble", amount: "85.000 €" },
-                { concept: "Reforma Integral", amount: "50.000 €" },
-                { concept: "Licencias y Arquitecto", amount: "8.000 €" },
-                { concept: "Amueblamiento Turístico", amount: "12.000 €" },
-                { concept: "Costes Imprevistos y Cierre", amount: "5.000 €" },
+                {
+                    concept: t("projects.common.costs.compra"),
+                    amount: "85.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.reforma"),
+                    amount: "50.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.licencias"),
+                    amount: "8.000 €",
+                },
+                {
+                    concept: t("projects.duplex.costs.muebles"),
+                    amount: "12.000 €",
+                },
+                {
+                    concept: t("projects.chalet.costs.imprevistos"),
+                    amount: "5.000 €",
+                },
             ]}
             total="160.000 €"
         />
@@ -60,19 +82,16 @@ import ProjectROI from "../components/project/ProjectROI.astro";
                 roi: "41,25 %",
             }}
             rentData={{
-                monthly: "115 € / noche (media)",
-                annual: "21.252 € (neta est.)",
+                monthly: t("projects.duplex.roi.rent.monthly"),
+                annual: t("projects.duplex.roi.rent.annual"),
                 roi: "13,28 %",
             }}
         />
 
         <div class="executive-summary">
-            <h3>Resumen Ejecutivo</h3>
+            <h3>{t("projects.executiveSummary")}</h3>
             <p>
-                Ideal para alquiler turístico en casco histórico. Activo único
-                por configuración tipo dúplex. Alta rentabilidad tanto en
-                explotación como en potencial de revalorización por ubicación
-                Premium.
+                {t("projects.duplex.summary")}
             </p>
         </div>
 
@@ -81,7 +100,7 @@ import ProjectROI from "../components/project/ProjectROI.astro";
                 href="/#contacto"
                 class="btn-primary"
                 style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
-                >ME INTERESA ESTE MODELO</a
+                >{t("projects.interested")}</a
             >
         </div>
     </section>

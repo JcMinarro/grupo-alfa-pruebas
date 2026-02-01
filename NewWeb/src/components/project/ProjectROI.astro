@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
 interface SaleData {
     price: string;
     profit: string;
@@ -21,8 +23,11 @@ interface Props {
     class?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
-    title = "Rentabilidad",
+    title = t("projects.division.roi.title"),
     strategy = "both",
     saleData,
     rentData,
@@ -36,19 +41,19 @@ const {
         {
             (strategy === "sale" || strategy === "both") && saleData && (
                 <div class="info-card">
-                    <h3>Rentabilidad por Venta</h3>
+                    <h3>{t("projects.division.roi.sale.label")}</h3>
                     <div class="roi-stats">
                         <div class="stat">
-                            <span>PRECIO DE VENTA</span>
+                            <span>{t("projects.common.roi.sale.price")}</span>
                             <strong>{saleData.price}</strong>
                         </div>
                         <div class="stat">
-                            <span>PLUSVALÍA ESTIMADA</span>
+                            <span>{t("projects.common.roi.sale.profit")}</span>
                             <strong>{saleData.profit}</strong>
                         </div>
                     </div>
                     <div class="roi-highlight">
-                        <span>RENTABILIDAD</span>
+                        <span>{t("projects.common.roi.label")}</span>
                         <strong>{saleData.roi}</strong>
                     </div>
                 </div>
@@ -58,19 +63,19 @@ const {
         {
             (strategy === "rent" || strategy === "both") && rentData && (
                 <div class="info-card">
-                    <h3>Rentabilidad por Alquiler</h3>
+                    <h3>{t("projects.division.roi.rent.label")}</h3>
                     <div class="roi-stats">
                         <div class="stat">
-                            <span>MENSUAL BRUTO</span>
+                            <span>{t("projects.common.roi.rent.monthly")}</span>
                             <strong>{rentData.monthly}</strong>
                         </div>
                         <div class="stat">
-                            <span>ANUAL BRUTO</span>
+                            <span>{t("projects.common.roi.rent.annual")}</span>
                             <strong>{rentData.annual}</strong>
                         </div>
                     </div>
                     <div class="roi-highlight">
-                        <span>RENTABILIDAD</span>
+                        <span>{t("projects.common.roi.label")}</span>
                         <strong>{rentData.roi}</strong>
                     </div>
                 </div>

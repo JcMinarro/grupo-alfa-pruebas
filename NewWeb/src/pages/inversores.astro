@@ -1,14 +1,21 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
 import InfoGrid from "../components/InfoGrid.astro";
 import GridItem from "../components/GridItem.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<ProjectLayout title="Inversores | Grupo Alfa" bodyClass="investor-page">
+<ProjectLayout
+    title={`Inversores | ${t("brand.name")}`}
+    bodyClass="investor-page"
+>
     <Hero
-        title="INVERSORES"
-        subtitle="TU DINERO, TRABAJANDO SIN DESCANSO"
+        title={t("inversores.hero.title")}
+        subtitle={t("inversores.hero.subtitle")}
         backgroundImage="/assets/photo-1707903244219-8ed71537554d3d83.jpg"
         height="50vh"
     />
@@ -18,44 +25,46 @@ import GridItem from "../components/GridItem.astro";
             class="section-title"
             style="margin-bottom: 60px; text-align: center;"
         >
-            Paso a paso de una inversión con Grupo Alfa
+            {t("inversores.steps.title")}
         </h2>
 
         <InfoGrid columns={3}>
             <GridItem
-                title="ASESORÍA GRATUITA"
-                description="Analizamos tus objetivos financieros y tolerancia al riesgo."
+                title={t("inversores.step1.title")}
+                description={t("inversores.step1.description")}
                 number="01"
             />
             <GridItem
-                title="OFERTA DE INMUEBLES"
-                description="Seleccionamos las mejores oportunidades del mercado."
+                title={t("inversores.step2.title")}
+                description={t("inversores.step2.description")}
                 number="02"
             />
             <GridItem
-                title="FINANCIACIÓN"
-                description="Buscamos las mejores condiciones hipotecarias para ti."
+                title={t("inversores.step3.title")}
+                description={t("inversores.step3.description")}
                 number="03"
             />
             <GridItem
-                title="REFORMA E INTERIORISMO"
-                description="Maximizamos el valor del activo antes de comercializarlo."
+                title={t("inversores.step4.title")}
+                description={t("inversores.step4.description")}
                 number="04"
             />
             <GridItem
-                title="RENTABILIDAD ACTIVA"
-                description="Ejecutamos la estrategia definida para generar ingresos."
+                title={t("inversores.step5.title")}
+                description={t("inversores.step5.description")}
                 number="05"
             />
             <GridItem
-                title="GESTIÓN PASIVA"
-                description="Gestión integral para que tu inversión sea 100% pasiva."
+                title={t("inversores.step6.title")}
+                description={t("inversores.step6.description")}
                 number="06"
             />
         </InfoGrid>
 
         <div style="text-align: center; margin-top: 80px;">
-            <a href="/contacto" class="btn-primary">QUIERO EMPEZAR A INVERTIR</a>
+            <a href="/contacto" class="btn-primary"
+                >{t("inversores.cta.button")}</a
+            >
         </div>
     </section>
 </ProjectLayout>

@@ -1,76 +1,89 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <ProjectLayout
-    title="Flip House | Grupo Alfa"
+    title={`Flip House | ${t("brand.name")}`}
     bodyClass="flip-house-page"
     footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
 >
     <section class="project-hero">
         <div class="hero-content fade-in">
             <p class="hero-location">MURCIA</p>
-            <h1>Flip House Urbano</h1>
+            <h1>{t("projects.fliphouse.title")}</h1>
         </div>
     </section>
 
     <section class="project-details fade-in">
-        <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
+        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
 
         <div class="detail-section" style="margin-top: 40px;">
-            <h2>Detalles del Proyecto</h2>
+            <h2>{t("projects.details.title")}</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h4>Tipo de activo</h4>
-                    <p>Piso para reforma (2ª planta)</p>
+                    <h4>{t("projects.common.details.type")}</h4>
+                    <p>{t("projects.fliphouse.details.type")}</p>
                 </div>
                 <div class="info-card">
-                    <h4>Ubicación</h4>
-                    <p>Murcia Centro</p>
+                    <h4>{t("projects.common.details.location")}</h4>
+                    <p>{t("projects.fliphouse.details.location")}</p>
                 </div>
                 <div class="info-card">
-                    <h4>Superficie</h4>
+                    <h4>{t("projects.common.details.surface")}</h4>
                     <p>90 m²</p>
                 </div>
                 <div class="info-card">
-                    <h4>Estrategia</h4>
-                    <p>Reforma integral para reventa (Flip)</p>
+                    <h4>
+                        {t("projects.common.details.strategy") || "Estrategia"}
+                    </h4>
+                    <p>{t("projects.fliphouse.details.strategy")}</p>
                 </div>
             </div>
         </div>
 
         <div class="detail-section">
-            <h2>Costes del Proyecto</h2>
+            <h2>{t("projects.division.costs.title")}</h2>
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Concepto</th>
-                        <th>Importe</th>
+                        <th>{t("contact.form.message") || "Concepto"}</th>
+                        <th>{t("projects.costs.total") || "Importe"}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Compra del Inmueble</td>
+                        <td>{t("projects.common.costs.compra")}</td>
                         <td>105.000 €</td>
                     </tr>
                     <tr>
-                        <td>Reforma Integral</td>
+                        <td>{t("projects.common.costs.reforma")}</td>
                         <td>30.000 €</td>
                     </tr>
                     <tr>
-                        <td>Licencias y Arquitecto</td>
+                        <td>{t("projects.common.costs.licencias")}</td>
                         <td>5.000 €</td>
                     </tr>
                     <tr>
-                        <td>Amueblamiento Básico</td>
+                        <td>{t("projects.common.costs.muebles")}</td>
                         <td>5.000 €</td>
                     </tr>
                     <tr>
-                        <td>Costes Imprevistos y Cierre</td>
+                        <td>{t("projects.chalet.costs.imprevistos")}</td>
                         <td>5.000 €</td>
                     </tr>
                     <tr>
-                        <td><strong>Inversión Total</strong></td>
+                        <td
+                            ><strong
+                                >{
+                                    t("projects.costs.total") ||
+                                        "Inversión Total"
+                                }</strong
+                            ></td
+                        >
                         <td><strong>150.000 €</strong></td>
                     </tr>
                 </tbody>
@@ -78,7 +91,7 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
         </div>
 
         <div class="detail-section">
-            <h2>Rentabilidad</h2>
+            <h2>{t("projects.division.roi.title")}</h2>
             <div
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;"
             >
@@ -88,7 +101,7 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
                     style="background: #fff; border: 1px solid #eee;"
                 >
                     <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        Por Venta
+                        {t("projects.division.roi.sale.label")}
                     </h3>
                     <ul
                         style="list-style: none; padding: 0; margin-bottom: 20px;"
@@ -96,20 +109,22 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
                         <li
                             style="margin-bottom: 10px; display: flex; justify-content: space-between;"
                         >
-                            <span>Precio Venta Tras Reforma</span>
+                            <span>{t("projects.fliphouse.roi.sale.price")}</span
+                            >
                             <strong>210.000 €</strong>
                         </li>
                         <li
                             style="margin-bottom: 10px; display: flex; justify-content: space-between;"
                         >
-                            <span>Beneficio Neto est.</span>
+                            <span>{t("projects.division.roi.sale.profit")}</span
+                            >
                             <strong>60.000 €</strong>
                         </li>
                     </ul>
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px;"
                     >
-                        <span>ROI Neto:</span>
+                        <span>{t("projects.division.roi.net")}</span>
                         <span class="roi-badge highlight">40,00 %</span>
                     </div>
                 </div>
@@ -120,25 +135,21 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
                     style="background: #fff; border: 1px solid #eee; opacity: 0.6;"
                 >
                     <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        Por Alquiler
+                        {t("projects.division.roi.rent.label")}
                     </h3>
                     <p
                         style="font-style: italic; color: #666; margin-bottom: 20px;"
                     >
-                        Este modelo no está optimizado para alquiler. La
-                        rentabilidad por alquiler tradicional es baja comparada
-                        con el potencial de reventa.
+                        {t("projects.fliphouse.roi.rent.description")}
                     </p>
                 </div>
             </div>
         </div>
 
         <div class="executive-summary">
-            <h3>Resumen Ejecutivo</h3>
+            <h3>{t("projects.executiveSummary")}</h3>
             <p>
-                Proyecto orientado a revalorización. La vivienda se reforma
-                íntegramente para su venta en corto plazo. Ideal para inversores
-                centrados en operaciones tipo flip.
+                {t("projects.fliphouse.summary")}
             </p>
         </div>
 
@@ -147,7 +158,7 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
                 href="/#contacto"
                 class="btn-primary"
                 style="background-color: var(--flip-accent); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
-                >ME INTERESA ESTE MODELO</a
+                >{t("projects.interested")}</a
             >
         </div>
     </section>

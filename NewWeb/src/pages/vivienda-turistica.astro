@@ -1,28 +1,35 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectDetails from "../components/project/ProjectDetails.astro";
 import ProjectFinancials from "../components/project/ProjectFinancials.astro";
 import ProjectROI from "../components/project/ProjectROI.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<ProjectLayout title="Vivienda Turística | Grupo Alfa" bodyClass="tourism-page">
+<ProjectLayout
+    title={`Vivienda Turística | ${t("brand.name")}`}
+    bodyClass="tourism-page"
+>
     <Hero
-        title="Vivienda Antigua transformada en Vivienda Turística"
+        title={t("projects.tourism.title")}
         location="ÁGUILAS, MURCIA"
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
         height="50vh"
     />
 
     <section class="project-details container fade-in">
-        <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
+        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
 
-        <h2>Detalles del Proyecto</h2>
+        <h2>{t("projects.details.title")}</h2>
         <ProjectDetails
-            type="Vivienda Unifamiliar"
-            location="Costa de Águilas, Murcia"
+            type={t("projects.tourism.details.type")}
+            location={t("projects.tourism.details.location")}
             surface="85 m²"
-            distribution="2 Dormitorios + Solárium"
+            distribution={t("projects.tourism.details.distribution")}
         />
 
         <div
@@ -30,18 +37,22 @@ import ProjectROI from "../components/project/ProjectROI.astro";
             style="margin: 40px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"
         >
             <div class="image-item">
-                <p style="font-weight: 700; margin-bottom: 10px;">ANTES</p>
+                <p style="font-weight: 700; margin-bottom: 10px;">
+                    {t("projects.tourism.images.before")}
+                </p>
                 <img
                     src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                    alt="Antes"
+                    alt={t("projects.tourism.images.before")}
                     style="width: 100%; border-radius: 8px;"
                 />
             </div>
             <div class="image-item">
-                <p style="font-weight: 700; margin-bottom: 10px;">DESPUÉS</p>
+                <p style="font-weight: 700; margin-bottom: 10px;">
+                    {t("projects.tourism.images.after")}
+                </p>
                 <img
                     src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                    alt="Después"
+                    alt={t("projects.tourism.images.after")}
                     style="width: 100%; border-radius: 8px;"
                 />
             </div>
@@ -49,9 +60,18 @@ import ProjectROI from "../components/project/ProjectROI.astro";
 
         <ProjectFinancials
             costs={[
-                { concept: "Compra del Inmueble", amount: "115.000 €" },
-                { concept: "Reforma y Equipamiento", amount: "35.000 €" },
-                { concept: "Licencias y Gestión", amount: "8.000 €" },
+                {
+                    concept: t("projects.common.costs.compra"),
+                    amount: "115.000 €",
+                },
+                {
+                    concept: t("projects.tourism.costs.reforma"),
+                    amount: "35.000 €",
+                },
+                {
+                    concept: t("projects.tourism.costs.licencias"),
+                    amount: "8.000 €",
+                },
             ]}
             total="158.000 €"
         />
@@ -59,19 +79,16 @@ import ProjectROI from "../components/project/ProjectROI.astro";
         <ProjectROI
             strategy="rent"
             rentData={{
-                monthly: "110 € / noche (media)",
-                annual: "24.500 € (neta est.)",
+                monthly: t("projects.tourism.roi.rent.monthly"),
+                annual: t("projects.tourism.roi.rent.annual"),
                 roi: "15,50 %",
             }}
         />
 
         <div class="executive-summary">
-            <h3>Resumen Ejecutivo</h3>
+            <h3>{t("projects.executiveSummary")}</h3>
             <p>
-                Las viviendas turísticas representan una de las inversiones más
-                rentables y líquidas en el sector inmobiliario actual. En zonas
-                costeras como Águilas, la demanda es constante y la rentabilidad
-                neta supera con creces el alquiler tradicional.
+                {t("projects.tourism.summary")}
             </p>
         </div>
 
@@ -80,7 +97,7 @@ import ProjectROI from "../components/project/ProjectROI.astro";
                 href="/#contacto"
                 class="btn-primary"
                 style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
-                >ME INTERESA ESTE MODELO</a
+                >{t("projects.interested")}</a
             >
         </div>
     </section>

@@ -1,65 +1,58 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <BaseLayout
-    title="Rey SuBastos | Grupo Alfa"
+    title={`Rey SuBastos | ${t("brand.name")}`}
     bodyClass="rey-page"
     footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
 >
     <section class="rey-hero fade-in">
         <h1>REY <span>SUBASTOS</span></h1>
         <p>
-            Especialistas en la identificación y adquisición de activos en
-            subasta.
+            {t("reysubastos.subtitle")}
         </p>
     </section>
 
     <section class="expertise-section fade-in">
         <div class="section-heading">
-            <h2>Gestión Integral de Subastas</h2>
+            <h2>{t("reysubastos.expertise.title")}</h2>
             <p>
-                Ofrecemos un servicio "End to End": desde la localización de la
-                oportunidad hasta la entrega física y legal del inmueble,
-                garantizando la máxima seguridad jurídica y rentabilidad.
+                {t("reysubastos.expertise.desc")}
             </p>
         </div>
 
         <div class="process-grid">
             <div class="process-card">
                 <div class="process-icon">📍</div>
-                <h3>Localización de Activos</h3>
+                <h3>{t("reysubastos.process.step1.title")}</h3>
                 <p>
-                    Monitorizamos diariamente subastas públicas y privadas para
-                    identificar las mejores oportunidades de inversión
-                    inmobiliaria antes que el mercado.
+                    {t("reysubastos.process.step1.desc")}
                 </p>
             </div>
             <div class="process-card">
                 <div class="process-icon">⚖️</div>
-                <h3>Análisis Multidisciplinar</h3>
+                <h3>{t("reysubastos.process.step2.title")}</h3>
                 <p>
-                    Realizamos un exhaustivo análisis jurídico, económico y
-                    técnico de cada expediente para blindar la operación y
-                    eliminar riesgos ocultos.
+                    {t("reysubastos.process.step2.desc")}
                 </p>
             </div>
             <div class="process-card">
                 <div class="process-icon">🤝</div>
-                <h3>Acompañamiento</h3>
+                <h3>{t("reysubastos.process.step3.title")}</h3>
                 <p>
-                    Gestionamos todo el proceso de licitación y adjudicación,
-                    representándote en la subasta con una estrategia ganadora
-                    predefinida.
+                    {t("reysubastos.process.step3.desc")}
                 </p>
             </div>
             <div class="process-card">
                 <div class="process-icon">🔑</div>
-                <h3>Entrega Segura</h3>
+                <h3>{t("reysubastos.process.step4.title")}</h3>
                 <p>
-                    Nos encargamos de todos los trámites pos-subasta,
-                    inscripciones registrales y toma de posesión, hasta
-                    entregarte las llaves.
+                    {t("reysubastos.process.step4.desc")}
                 </p>
             </div>
         </div>
@@ -67,12 +60,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <section class="security-banner fade-in">
         <div class="security-content">
-            <h2>Seguridad Total</h2>
+            <h2>{t("reysubastos.security.title")}</h2>
             <p>
-                Nuestra metodología elimina la incertidumbre de las subastas. No
-                pujamos si el análisis no es 100% favorable.
+                {t("reysubastos.security.desc")}
             </p>
         </div>
-        <a href="/#contacto" class="btn-rey">Consultar Ahora</a>
+        <a href="/#contacto" class="btn-rey"
+            >{t("reysubastos.security.button")}</a
+        >
     </section>
 </BaseLayout>

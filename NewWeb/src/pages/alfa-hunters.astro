@@ -1,11 +1,18 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import InfoGrid from "../components/InfoGrid.astro";
 import GridItem from "../components/GridItem.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="ALFA HUNTERS | Grupo Alfa" bodyClass="hunters-page">
+<BaseLayout
+    title={`ALFA HUNTERS | ${t("brand.name")}`}
+    bodyClass="hunters-page"
+>
     <Hero
         title="ALFA HUNTERS"
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
@@ -16,25 +23,28 @@ import GridItem from "../components/GridItem.astro";
     />
     <section
         class="team-expansion container fade-in"
-        style="padding: 100px 0; text-align:
-center;"
+        style="padding: 100px 0; text-align: center;"
     >
         <h2 style="margin-bottom: 60px;">
-            ESTAMOS AMPLIANDO EL <span class="highlight">EQUIPO</span> DE <br
-            /><span class="highlight">ALFA HUNTERS</span>
+            {t("hunters.team.title.prefix")}
+            <span class="highlight">{t("hunters.team.title.team")}</span>
+            {t("hunters.team.title.of")}
+            <br /><span class="highlight"
+                >{t("hunters.team.title.hunters")}</span
+            >
         </h2>
         <InfoGrid columns={3}>
             <GridItem
-                title="FLEXIBILIDAD HORARIA"
-                description="Gestiona tu propio tiempo y trabaja a tu ritmo para alcanzar tus objetivos."
+                title={t("hunters.benefits.flexibility.title")}
+                description={t("hunters.benefits.flexibility.desc")}
             />
             <GridItem
-                title="SISTEMA DE ÉXITO"
-                description="Formación continua y soporte técnico para asegurar tus cierres."
+                title={t("hunters.benefits.success.title")}
+                description={t("hunters.benefits.success.desc")}
             />
             <GridItem
-                title="ALTAS COMISIONES"
-                description="El plan de retribución más competitivo del mercado inmobiliario."
+                title={t("hunters.benefits.commissions.title")}
+                description={t("hunters.benefits.commissions.desc")}
             />
         </InfoGrid>
     </section>
@@ -42,34 +52,29 @@ center;"
 Benefits Section -->
     <section class="container" style="padding: 80px 20px;">
         <h2 class="text-center fade-in" style="margin-bottom: 50px;">
-            ¿QUIERES SER UN ALFA HUNTER?
+            {t("hunters.cta.title")}
         </h2>
         <div class="steps-grid">
             <div class="step-item fade-in">
-                <h3>Trabaja Cómodamente</h3>
+                <h3>{t("hunters.cta.work.title")}</h3>
                 <p>
-                    Puedes teletrabajar desde casa o desde cualquier lugar con
-                    conexión a internet.
+                    {t("hunters.cta.work.desc")}
                 </p>
-            </div>
-            <div class="step-item
-fade-in">
-                <h3>Formación Gratuita</h3>
-                <p>
-                    Te enseñamos todo lo que necesitas para empezar, desde cero
-                    y sin costes.
-                </p>
-            </div>
-            <div class="step-item
-fade-in">
-                <h3>Horarios Flexibles</h3>
-                <p>Organiza tu jornada de trabajo como mejor te convenga.</p>
             </div>
             <div class="step-item fade-in">
-                <h3>Posibilidad de Crecimiento</h3>
+                <h3>{t("hunters.cta.training.title")}</h3>
                 <p>
-                    Si demuestras actitud y resultados, puedes ascender rápido
-                    dentro de la organización.
+                    {t("hunters.cta.training.desc")}
+                </p>
+            </div>
+            <div class="step-item fade-in">
+                <h3>{t("hunters.cta.hours.title")}</h3>
+                <p>{t("hunters.cta.hours.desc")}</p>
+            </div>
+            <div class="step-item fade-in">
+                <h3>{t("hunters.cta.growth.title")}</h3>
+                <p>
+                    {t("hunters.cta.growth.desc")}
                 </p>
             </div>
         </div>
@@ -78,64 +83,65 @@ fade-in">
     <section class="form-section">
         <div class="container">
             <div class="form-container fade-in">
-                <h2>Apúntate ahora y da el primer paso</h2>
+                <h2>{t("hunters.form.title")}</h2>
                 <p class="text-center" style="margin-bottom: 30px;">
-                    Solo necesitamos tus datos para ponernos en contacto
-                    contigo.
+                    {t("hunters.form.subtitle")}
                 </p>
                 <form action="#" method="POST">
                     <div class="form-group">
-                        <label for="name">Nombre Completo</label>
+                        <label for="name">{t("hunters.form.name")}</label>
                         <input
                             type="text"
                             id="name"
                             name="name"
-                            placeholder="Tu nombre"
+                            placeholder={t("hunters.form.name")}
                             required
                         />
                     </div>
                     <div class="form-group">
-                        <label for="phone">Teléfono de contacto</label>
+                        <label for="phone">{t("hunters.form.phone")}</label>
                         <input
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder="Tu teléfono"
+                            placeholder={t("hunters.form.phone")}
                             required
                         />
                     </div>
                     <div class="form-group">
-                        <label for="email">Correo electrónico</label>
+                        <label for="email">{t("hunters.form.email")}</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
-                            placeholder="tu@email.com"
+                            placeholder={t("contact.form.email.placeholder")}
                             required
                         />
                     </div>
                     <div class="form-group">
-                        <label for="location">¿Dónde vives?</label>
+                        <label for="location"
+                            >{t("hunters.form.location")}</label
+                        >
                         <input
                             type="text"
                             id="location"
                             name="location"
-                            placeholder="Ciudad, Provincia"
+                            placeholder={t("hunters.form.location.placeholder")}
                             required
                         />
                     </div>
                     <div class="form-group">
-                        <label>¿Tienes experiencia en ventas?</label>
+                        <label>{t("hunters.form.experience.label")}</label>
                         <div
-                            style="display: flex; gap: 20px; flex-wrap: wrap;
-margin-top: 10px;"
+                            style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;"
                         >
                             <label style="font-weight: 400;"
                                 ><input
                                     type="radio"
                                     name="experience"
                                     value="2+"
-                                /> Más de 2 años</label
+                                />
+                                {t("hunters.form.experience.more2")}</label
                             >
                             <label style="font-weight: 400;"
                                 ><input
@@ -143,30 +149,26 @@ margin-top: 10px;"
                                     name="experience"
                                     value="<2"
                                 />
-                                Menos de 2 años</label
+                                {t("hunters.form.experience.less2")}</label
                             >
                             <label style="font-weight: 400;"
                                 ><input
                                     type="radio"
                                     name="experience"
                                     value="none"
-                                /> Sin experiencia</label
+                                />
+                                {t("hunters.form.experience.none")}</label
                             >
                         </div>
                     </div>
-                    <button type="submit" class="btn-submit">ENVIAR</button>
+                    <button type="submit" class="btn-submit"
+                        >{t("contact.form.submit")}</button
+                    >
                 </form>
                 <p
-                    style="font-size:
-0.8rem; margin-top: 20px; color: #666; text-align: center;"
+                    style="font-size: 0.8rem; margin-top: 20px; color: #666; text-align: center;"
                 >
-                    Al enviar tu información aceptas que te contactemos para una
-                    entrevista informativa. Tus datos serán tratados con
-                    confidencialidad según nuestra <a
-                        href="#"
-                        style="color: var(--accent-color);"
-                        >Política de Privacidad</a
-                    >.
+                    {t("hunters.form.privacy")}
                 </p>
             </div>
         </div>

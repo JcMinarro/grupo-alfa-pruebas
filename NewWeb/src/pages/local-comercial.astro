@@ -1,45 +1,54 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectDetails from "../components/project/ProjectDetails.astro";
 import InfoGrid from "../components/InfoGrid.astro";
 import GridItem from "../components/GridItem.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<ProjectLayout title="Local Comercial | Grupo Alfa" bodyClass="premises-page">
+<ProjectLayout
+    title={`Local Comercial | ${t("brand.name")}`}
+    bodyClass="premises-page"
+>
     <Hero
-        title="Local Comercial convertido en Estudios"
+        title={t("projects.local.title")}
         location="MURCIA"
         backgroundImage="/assets/photo-1616046229478-9901c5536a456111.jpg"
         height="50vh"
     />
 
     <section class="project-details container fade-in">
-        <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
+        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
 
-        <h2>Detalles del Proyecto</h2>
+        <h2>{t("projects.details.title")}</h2>
         <ProjectDetails
-            type="Bajo Comercial"
-            location="Zona Urbana de Murcia"
+            type={t("projects.local.details.type")}
+            location={t("projects.local.details.location")}
             surface="120 m²"
-            distribution="3 Estudios de 40 m²"
+            distribution={t("projects.local.details.distribution")}
         />
 
-        <h2 style="margin-top: 60px;">Transformación Eficiente</h2>
+        <h2 style="margin-top: 60px;">
+            {t("projects.local.transformation.title")}
+        </h2>
         <InfoGrid columns={3}>
             <GridItem
-                title="ESTUDIO DE VIABILIDAD"
-                description="Análisis técnico y normativo para el cambio de uso."
+                title={t("projects.local.transformation.step1.title")}
+                description={t("projects.local.transformation.step1.desc")}
                 number="01"
             />
             <GridItem
-                title="DISEÑO OPTIMIZADO"
-                description="Máximo aprovechamiento del espacio para confort."
+                title={t("projects.local.transformation.step2.title")}
+                description={t("projects.local.transformation.step2.desc")}
                 number="02"
             />
             <GridItem
-                title="EJECUCIÓN INTEGRAL"
-                description="Obra llave en mano con acabados de alta calidad."
+                title={t("projects.local.transformation.step3.title")}
+                description={t("projects.local.transformation.step3.desc")}
                 number="03"
             />
         </InfoGrid>

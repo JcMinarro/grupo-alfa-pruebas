@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
 interface Props {
     location?: string;
     type?: string;
@@ -14,13 +16,16 @@ const {
     distribution,
     class: className = "",
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div class={`project-details-grid ${className}`}>
     {
         type && (
             <div class="detail-card">
-                <h4>Tipo de activo</h4>
+                <h4>{t("projects.common.details.type")}</h4>
                 <p>{type}</p>
             </div>
         )
@@ -28,7 +33,7 @@ const {
     {
         location && (
             <div class="detail-card">
-                <h4>Ubicación</h4>
+                <h4>{t("projects.common.details.location")}</h4>
                 <p>{location}</p>
             </div>
         )
@@ -36,7 +41,7 @@ const {
     {
         surface && (
             <div class="detail-card">
-                <h4>Superficie</h4>
+                <h4>{t("projects.common.details.surface")}</h4>
                 <p>{surface}</p>
             </div>
         )
@@ -44,7 +49,7 @@ const {
     {
         distribution && (
             <div class="detail-card">
-                <h4>Distribución</h4>
+                <h4>{t("projects.common.details.distribution")}</h4>
                 <p>{distribution}</p>
             </div>
         )

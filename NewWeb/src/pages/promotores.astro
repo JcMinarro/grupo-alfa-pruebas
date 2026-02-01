@@ -1,12 +1,16 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Promotores | Grupo Alfa" bodyClass="promoter-page">
+<BaseLayout title={`Promotores | ${t("brand.name")}`} bodyClass="promoter-page">
     <Hero
-        title="PROMOTORES"
-        subtitle="TU PROYECTO PUEDE SER EL PRÓXIMO ALFA"
+        title={t("promotores.hero.title")}
+        subtitle={t("promotores.hero.subtitle")}
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
         height="50vh"
     >
@@ -14,28 +18,27 @@ import Hero from "../components/Hero.astro";
             class="promoter-intro"
             style="margin-top: 20px; font-size: 1.1rem; opacity: 0.9;"
         >
-            Si tienes una propiedad o una idea para desarrollar, restaurar o
-            transformar, cuéntanosla.
+            {t("promotores.hero.description")}
         </p>
     </Hero>
 
     <section class="promoter-container fade-in">
         <h2 style="font-size: 2rem; margin-bottom: 40px; text-align: center;">
-            Podemos ayudarte si:
+            {t("promotores.intro.title")}
         </h2>
 
         <div class="promoter-services-list">
             <div class="service-item">
-                <h3>Tienes una Casa Antigua y quieres Alquilarla</h3>
+                <h3>{t("promotores.service1")}</h3>
             </div>
             <div class="service-item">
-                <h3>Tienes un Bajo y quieres Convertirlo en Viviendas</h3>
+                <h3>{t("promotores.service2")}</h3>
             </div>
             <div class="service-item">
-                <h3>Quieres hacer Flipping: Compra, Reforma, Venta</h3>
+                <h3>{t("promotores.service3")}</h3>
             </div>
             <div class="service-item">
-                <h3>Deseas montar un Alojamiento Turístico</h3>
+                <h3>{t("promotores.service4")}</h3>
             </div>
         </div>
     </section>
@@ -43,11 +46,11 @@ import Hero from "../components/Hero.astro";
     <section class="value-prop fade-in">
         <div class="container" style="text-align: center;">
             <h2>
-                Nosotros analizamos la viabilidad, diseñamos el plan de acción
-                y, si nos interesa, financiamos tu proyecto y lo ejecutamos
-                contigo.
+                {t("promotores.cta.text")}
             </h2>
-            <a href="/#contacto" class="btn-promoter">Presentar mi Idea</a>
+            <a href="/#contacto" class="btn-promoter"
+                >{t("promotores.cta.button")}</a
+            >
         </div>
     </section>
 </BaseLayout>

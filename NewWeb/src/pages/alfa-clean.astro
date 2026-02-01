@@ -1,8 +1,12 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Alfa Clean | Grupo Alfa" bodyClass="clean-page">
+<BaseLayout title={`Alfa Clean | ${t("brand.name")}`} bodyClass="clean-page">
     <style slot="head">
         body {
             font-family: "DM Sans", sans-serif;
@@ -22,49 +26,50 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             >
                 <img
                     src="/assets/logo-alfa-wolf.png"
-                    alt="Grupo Alfa White Logo"
+                    alt={t("clean.logo.white.alt")}
                     style="height: 60px; filter: brightness(0) invert(1);"
                 />
             </div>
 
             <div class="clean-text-section">
-                <h1>Servicio de Limpieza <span>Alfa Clean</span></h1>
+                <h1>
+                    {t("clean.title.prefix")}
+                    <span>{t("clean.title.name")}</span>
+                </h1>
 
                 <div class="clean-services-grid">
                     <div class="clean-service-item">
                         <img
                             src="/assets/edificio-YX4x1WW477Irx3p5.png"
-                            alt="Comunidades"
+                            alt={t("clean.service.communities")}
                         />
-                        <p>Comunidades de propietarios</p>
+                        <p>{t("clean.service.communities")}</p>
                     </div>
                     <div class="clean-service-item">
                         <img
                             src="/assets/buscar-casa-YanJ6aBZVKc969wa.png"
-                            alt="Viviendas"
+                            alt={t("clean.service.private")}
                         />
-                        <p>Viviendas particulares</p>
+                        <p>{t("clean.service.private")}</p>
                     </div>
                     <div class="clean-service-item">
                         <img
                             src="/assets/flecha-abajo-AzGN41EZW0T39oZP.png"
-                            alt="Vacacionales"
+                            alt={t("clean.service.vacation")}
                             style="transform: rotate(-90deg);"
                         />
-                        <p>Alojamientos vacacionales</p>
+                        <p>{t("clean.service.vacation")}</p>
                     </div>
                 </div>
 
                 <div class="clean-description">
                     <p>
-                        Limpieza profesional para comunidades de propietarios,
-                        viviendas particulares y alojamientos vacacionales.
-                        Preparación completa del inmueble, reposición de
-                        consumibles, control de daños y check-in listo.
+                        {t("clean.description")}
                     </p>
                 </div>
 
-                <a href="/#servicios" class="clean-volver">Volver</a>
+                <a href="/#servicios" class="clean-volver">{t("common.back")}</a
+                >
             </div>
         </div>
     </main>

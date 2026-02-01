@@ -1,11 +1,15 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ServiceList from "../components/ServiceList.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Hero from "../components/Hero.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Grupo Alfa | Inversión Inmobiliaria rentable y segura">
+<BaseLayout title={t("meta.title")}>
     <!-- Hero Section -->
     <Hero
         id="inicio"
@@ -15,17 +19,17 @@ import Hero from "../components/Hero.astro";
     >
         <img
             src="/assets/logo-alfa-black-text.png"
-            alt="Logo"
+            alt={t("home.hero.logo.alt")}
             class="section-logo"
             style="width: 250px; margin-bottom: 2rem;"
         />
         <img
             src="/assets/logo-alfa-wolf.png"
-            alt="Grupo Alfa"
+            alt={t("home.hero.bg.alt")}
             class="hero-logo"
             style="width: 500px; margin-bottom: 1rem;"
         />
-        <h2 class="hero-subtitle">INVERSIÓN INTELIGENTE</h2>
+        <h2 class="hero-subtitle">{t("hero.title")}</h2>
     </Hero>
 
     <!-- Value Props (Steps) -->
@@ -33,12 +37,12 @@ import Hero from "../components/Hero.astro";
         <div class="container">
             <div class="text-center fade-in" style="margin-bottom: 60px;">
                 <h2 class="section-main-title">
-                    CONVIERTE TU DINERO EN UN ACTIVO
+                    {t("home.steps.title.main")}
                 </h2>
                 <h2 class="section-secondary-title text-primary">
-                    TOTALMENTE PASIVO
+                    {t("home.steps.title.secondary")}
                 </h2>
-                <p class="section-context">En <strong>GRUPO ALFA</strong></p>
+                <p class="section-context">{t("home.steps.context")}</p>
             </div>
 
             <div class="steps-grid">
@@ -46,58 +50,61 @@ import Hero from "../components/Hero.astro";
                     <div class="step-icon">
                         <img
                             src="/assets/lupa-AE0r2VjNOpI4LRQ7.png"
-                            alt="Localizamos"
+                            alt={t("home.steps.localizamos")}
                         />
                     </div>
-                    <h3>Localizamos</h3>
+                    <h3>{t("home.steps.localizamos")}</h3>
                 </div>
                 <div class="step-item fade-in">
                     <div class="step-icon">
                         <img
                             src="/assets/gestion-A3Q7anMajGcEW1Lx.png"
-                            alt="Gestionamos"
+                            alt={t("home.steps.gestionamos")}
                         />
                     </div>
-                    <h3>Gestionamos</h3>
+                    <h3>{t("home.steps.gestionamos")}</h3>
                 </div>
                 <div class="step-item fade-in">
                     <div class="step-icon">
                         <img
                             src="/assets/mrtillo-AR032ZKJrRh87JyG.png"
-                            alt="Reformamos"
+                            alt={t("home.steps.reformamos")}
                         />
                     </div>
-                    <h3>Reformamos</h3>
+                    <h3>{t("home.steps.reformamos")}</h3>
                 </div>
                 <div class="step-item fade-in">
                     <div class="step-icon">
                         <img
                             src="/assets/euros-YD0w8Okj99HLq6az.png"
-                            alt="Rentabilizamos"
+                            alt={t("home.steps.rentabilizamos")}
                         />
                     </div>
-                    <h3>Rentabilizamos</h3>
+                    <h3>{t("home.steps.rentabilizamos")}</h3>
                 </div>
             </div>
 
             <div class="process-flow fade-in">
                 <div class="flow-item">
-                    <p>Y podemos <span>Financiar</span></p>
+                    <p>{t("home.steps.financiar")}</p>
                 </div>
 
                 <div class="arrow-triangle-down"></div>
 
                 <div class="flow-item">
-                    <p>Tu Inversión Inmobiliaria</p>
+                    <p>{t("home.steps.inversion")}</p>
                 </div>
 
                 <div class="arrow-triangle-down"></div>
 
                 <div class="flow-item">
                     <div class="flow-icon">
-                        <img src="/assets/casa-icon.png" alt="Casa" />
+                        <img
+                            src="/assets/casa-icon.png"
+                            alt={t("home.steps.house.alt")}
+                        />
                     </div>
-                    <p>Y tú solo <span>Cobras</span></p>
+                    <p>{t("home.steps.cobras")}</p>
                 </div>
             </div>
         </div>
@@ -106,24 +113,21 @@ import Hero from "../components/Hero.astro";
     <!-- Libertad Financiera Section -->
     <section class="libertad-section">
         <div class="container text-center">
-            <h2 class="section-main-title">CONSTRUYE TU</h2>
+            <h2 class="section-main-title">{t("home.libertad.title.main")}</h2>
             <h2 class="section-secondary-title text-primary">
-                LIBERTAD FINANCIERA
+                {t("home.libertad.title.secondary")}
             </h2>
             <img
                 src="/assets/logo-alfa-wolf.png"
-                alt="Logo"
+                alt={t("home.hero.logo.alt")}
                 class="section-logo"
                 style="height: 60px; filter: brightness(0) invert(1);"
             />
             <p class="rentability">
-                Consigue rentabilidades de hasta el <span>20%</span> o más.
+                {t("home.libertad.rentability")}
             </p>
             <p class="description">
-                Haz que tu dinero genere ingresos mientras disfrutas de tu
-                tiempo libre.<br />
-                Empieza hoy a invertir en proyectos inmobiliarios con toda la libertad
-                financiera.
+                {t("home.libertad.description")}
             </p>
         </div>
     </section>
@@ -133,12 +137,11 @@ import Hero from "../components/Hero.astro";
         <div class="container text-center fade-in">
             <img
                 src="/assets/logo-alfa-black-text.png"
-                alt="Logo"
+                alt={t("home.hero.logo.alt")}
                 class="section-logo-small"
             />
             <p class="quote-text">
-                El socio ideal para transformar inmuebles en fuentes de ingresos
-                100% pasivos. Nos ocupamos de todo.
+                {t("home.quote.text")}
             </p>
             <div class="bedroom-image">
                 <img
@@ -153,7 +156,7 @@ import Hero from "../components/Hero.astro";
     <section id="servicios" class="services-section">
         <div class="text-center services-header">
             <h2 class="section-secondary-title text-black">
-                NUESTROS SERVICIOS
+                {t("home.services.title")}
             </h2>
         </div>
 
@@ -164,9 +167,9 @@ import Hero from "../components/Hero.astro";
             style="margin-top: 60px; padding-bottom: 80px; color: var(--color-text-dark);"
         >
             <p style="font-style: italic; margin-bottom: 20px;">
-                Te acompañamos en todos y cada uno de los pasos
+                {t("home.services.context")}
             </p>
-            <a href="/contacto" class="btn-primary">QUIERO MI PROYECTO</a>
+            <a href="/contacto" class="btn-primary">{t("home.services.cta")}</a>
         </div>
     </section>
 
@@ -174,14 +177,26 @@ import Hero from "../components/Hero.astro";
     <section id="submarcas" class="submarcas-section fade-in">
         <div class="container">
             <div class="submarcas-grid">
-                <a href="/flip-art" class="submarca-tag">FLIP ART</a>
-                <a href="/lujo-rent" class="submarca-tag">LUJO RENT</a>
-                <a href="/seguros" class="submarca-tag"
-                    >GRUPO ALFA<br />SEGUROS</a
+                <a href="/flip-art" class="submarca-tag"
+                    >{t("submarcas.flipArt")}</a
                 >
-                <a href="/alfa-clean" class="submarca-tag">ALFA CLEAN</a>
-                <a href="/rey-subastos" class="submarca-tag">Rey Subastos</a>
-                <a href="/alfa-lab" class="submarca-tag">ALFA LAB</a>
+                <a href="/lujo-rent" class="submarca-tag"
+                    >{t("submarcas.lujoRent")}</a
+                >
+                <a
+                    href="/seguros"
+                    class="submarca-tag"
+                    set:html={t("submarcas.seguros")}
+                />
+                <a href="/alfa-clean" class="submarca-tag"
+                    >{t("submarcas.alfaClean")}</a
+                >
+                <a href="/rey-subastos" class="submarca-tag"
+                    >{t("submarcas.reySubastos")}</a
+                >
+                <a href="/alfa-lab" class="submarca-tag"
+                    >{t("submarcas.alfaLab")}</a
+                >
             </div>
         </div>
     </section>
@@ -191,14 +206,15 @@ import Hero from "../components/Hero.astro";
         <div class="container">
             <div class="office-grid">
                 <div class="office-info fade-in">
-                    <h2 class="section-main-title">NUESTRA OFICINA</h2>
-                    <p>Encuéntranos en esta dirección.</p>
+                    <h2 class="section-main-title">{t("home.office.title")}</h2>
+                    <p>{t("home.office.description")}</p>
                     <div class="contact-details">
                         <p>
-                            C/ Conde del Valle de San Juan, 1<br />(Gran Vía
-                            Escultor Salzillo, 1)
+                            {t("home.office.address.line1")}<br />{
+                                t("home.office.address.line2")
+                            }
                         </p>
-                        <p>30004, Murcia</p>
+                        <p>{t("home.office.address.city")}</p>
                     </div>
                 </div>
                 <div class="office-map fade-in">
@@ -213,13 +229,17 @@ import Hero from "../components/Hero.astro";
             <div class="home-contact-section">
                 <div class="office-grid">
                     <div class="fade-in">
-                        <h2 class="section-main-title">Contáctanos</h2>
+                        <h2 class="section-main-title">
+                            {t("home.contact.title")}
+                        </h2>
                         <p>
-                            Responderemos encantados a<br />su consulta a la
-                            mayor brevedad posible.
+                            {t("home.contact.description")}
                         </p>
                         <div class="contact-intro-logo">
-                            <img src="/assets/logo-alfa-wolf.png" alt="Logo" />
+                            <img
+                                src="/assets/logo-alfa-wolf.png"
+                                alt={t("home.hero.logo.alt")}
+                            />
                         </div>
                     </div>
                     <div class="contact-form-home fade-in">

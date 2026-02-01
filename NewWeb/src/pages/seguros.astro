@@ -1,8 +1,12 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Seguros | Grupo Alfa" bodyClass="seguros-page">
+<BaseLayout title={`Seguros | ${t("brand.name")}`} bodyClass="seguros-page">
     <style slot="head">
         body {
             font-family: "DM Sans", sans-serif;
@@ -22,13 +26,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     <div class="seguros-logo-wrapper">
                         <img
                             src="/assets/logo-alfa-wolf.png"
-                            alt="Grupo Alfa Seguros"
+                            alt={t("brand.name")}
                             class="seguros-logo-desktop"
                             style="filter: brightness(0) invert(1);"
                         />
                         <img
                             src="/assets/logo-alfa-wolf.png"
-                            alt="Grupo Alfa Seguros"
+                            alt={t("brand.name")}
                             class="seguros-logo-mobile"
                             style="filter: brightness(0) invert(1);"
                         />
@@ -37,7 +41,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     <div class="seguros-image-1">
                         <img
                             src="/assets/6-xagwOQuvpmdAZmfW.png"
-                            alt="Seguros Familia"
+                            alt={t("seguros.family.alt")}
                         />
                     </div>
                 </div>
@@ -47,14 +51,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     <div class="seguros-image-2">
                         <img
                             src="/assets/7-ucrml6fvi2VS6Vcd.png"
-                            alt="Seguros Protección"
+                            alt={t("seguros.protection.alt")}
                         />
                     </div>
 
                     <div class="seguros-image-3">
                         <img
                             src="/assets/8-2TH51lWR8ULK9DcB.png"
-                            alt="Seguros Hogar"
+                            alt={t("seguros.home.alt")}
                         />
                     </div>
                 </div>
@@ -62,7 +66,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
             <!-- Back Button -->
             <div class="seguros-back-container fade-in">
-                <a href="/#submarcas" class="seguros-btn-back">Volver</a>
+                <a href="/#submarcas" class="seguros-btn-back"
+                    >{t("common.back")}</a
+                >
             </div>
         </div>
     </main>

@@ -1,5 +1,8 @@
 ---
-/* Footer Component - Standardized */
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="site-footer">
@@ -8,7 +11,7 @@
             <div class="footer-logo">
                 <img
                     src="/assets/logo-alfa-wolf.png"
-                    alt="Grupo Alfa Logo"
+                    alt={t("footer.logo.alt")}
                     class="logo-img"
                 />
             </div>
@@ -16,13 +19,13 @@
 
         <div class="footer-column contact-col">
             <h6 class="footer-heading">
-                <a href="/contacto">CONTACTO</a>
+                <a href="/contacto">{t("nav.contacto")}</a>
             </h6>
             <div class="footer-address">
                 <p>
-                    C/ Conde del Valle de San Juan, 1<br />
-                    (Gran Vía Escultor Salzillo, 1)<br />
-                    30004, Murcia
+                    {t("home.office.address.line1")}<br />
+                    {t("home.office.address.line2")}<br />
+                    {t("home.office.address.city")}
                 </p>
             </div>
         </div>

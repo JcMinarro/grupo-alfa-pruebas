@@ -1,41 +1,41 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <BaseLayout
-    title="Lujo Rent | Grupo Alfa"
+    title={`Lujo Rent | ${t("brand.name")}`}
     bodyClass="lujo-page"
     footerStyle="border-top: 1px solid #333; background: #000;"
 >
     <section class="lujo-hero fade-in">
         <h1>LUJO <span>RENT</span></h1>
-        <p>GESTIÓN INTEGRAL DEL ALQUILER</p>
+        <p>{t("lujorent.subtitle")}</p>
     </section>
 
     <section class="services-section fade-in">
-        <h2 class="section-title">Nuestros Servicios</h2>
+        <h2 class="section-title">{t("lujorent.services.title")}</h2>
 
         <div class="services-grid">
             <div class="service-card">
-                <h3>Alquiler Vacacional</h3>
+                <h3>{t("lujorent.services.vacation.title")}</h3>
                 <p>
-                    Gestión completa para estancias cortas, maximizando la
-                    ocupación y los ingresos mediante plataformas turísticas de
-                    primer nivel.
+                    {t("lujorent.services.vacation.desc")}
                 </p>
             </div>
             <div class="service-card">
-                <h3>Alquiler por Habitaciones</h3>
+                <h3>{t("lujorent.services.rooms.title")}</h3>
                 <p>
-                    Optimización de rentabilidad mediante el modelo de alquiler
-                    por habitaciones, ideal para coliving y estudiantes.
+                    {t("lujorent.services.rooms.desc")}
                 </p>
             </div>
             <div class="service-card">
-                <h3>Alquiler Tradicional</h3>
+                <h3>{t("lujorent.services.traditional.title")}</h3>
                 <p>
-                    Gestión segura y estable para arrendamientos de larga
-                    duración, garantizando tranquilidad y cobro puntual.
+                    {t("lujorent.services.traditional.desc")}
                 </p>
             </div>
         </div>
@@ -43,37 +43,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="features-list">
             <div class="feature-item">
                 <span>★</span>
-                <p>Mantenimiento</p>
+                <p>{t("lujorent.features.maintenance")}</p>
             </div>
             <div class="feature-item">
                 <span>📅</span>
-                <p>Reservas</p>
+                <p>{t("lujorent.features.reservations")}</p>
             </div>
             <div class="feature-item">
                 <span>✨</span>
-                <p>Limpieza</p>
+                <p>{t("lujorent.features.cleaning")}</p>
             </div>
             <div class="feature-item">
                 <span>€</span>
-                <p>Cobros</p>
+                <p>{t("lujorent.features.payments")}</p>
             </div>
             <div class="feature-item">
                 <span>📈</span>
-                <p>Optimización</p>
+                <p>{t("lujorent.features.optimization")}</p>
             </div>
             <div class="feature-item">
                 <span>👥</span>
-                <p>Atención Inquilino</p>
+                <p>{t("lujorent.features.attention")}</p>
             </div>
             <div class="feature-item">
                 <span>🏠</span>
-                <p>Control Estado</p>
+                <p>{t("lujorent.features.control")}</p>
             </div>
         </div>
     </section>
 
     <section class="cta-section">
-        <h2 style="color: #fff; margin-bottom: 30px;">¿Tienes un inmueble?</h2>
-        <a href="/#contacto" class="btn-luxury">Solicitar Gestión</a>
+        <h2 style="color: #fff; margin-bottom: 30px;">
+            {t("lujorent.cta.title")}
+        </h2>
+        <a href="/#contacto" class="btn-luxury">{t("lujorent.cta.button")}</a>
     </section>
 </BaseLayout>

@@ -1,9 +1,13 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <BaseLayout
-    title="Flip Art | Grupo Alfa"
+    title={`Flip Art | ${t("brand.name")}`}
     bodyClass="flip-art-page"
     footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
 >
@@ -13,17 +17,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <p
                 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; opacity: 0.8;"
             >
-                El arte de transformar espacios
+                {t("projects.flipart.subtitle")}
             </p>
         </div>
     </section>
 
     <section class="flip-content fade-in">
         <p class="flip-intro">
-            En Grupo Alfa, entendemos el "Flipping" no solo como una inversión,
-            sino como un arte.
-            <br /><strong>Flip Art</strong> es nuestra división dedicada a la excelencia
-            estética y funcional en cada reforma.
+            {t("projects.flipart.intro")}
         </p>
 
         <div class="art-grid">
@@ -31,24 +32,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 class="art-card"
                 style="background-image: url('/assets/projects/project1.jpg'); background-size: cover; color: transparent;"
             >
-                Diseño
+                {t("projects.flipart.grid.design")}
             </div>
             <div
                 class="art-card"
                 style="background-image: url('/assets/projects/project2.jpg'); background-size: cover; color: transparent;"
             >
-                Calidad
+                {t("projects.flipart.grid.quality")}
             </div>
             <div
                 class="art-card"
                 style="background-image: url('/assets/projects/project3.jpg'); background-size: cover; color: transparent;"
             >
-                Detalle
+                {t("projects.flipart.grid.detail")}
             </div>
         </div>
 
         <div style="margin-top: 60px;">
-            <a href="/#submarcas" class="btn-back">VOLVER</a>
+            <a href="/#submarcas" class="btn-back"
+                >{t("common.back").toUpperCase()}</a
+            >
         </div>
     </section>
 </BaseLayout>

@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const { activeNav = "inicio" } = Astro.props;
 ---
 
@@ -7,18 +12,18 @@ const { activeNav = "inicio" } = Astro.props;
     <a href="/" class="logo">
       <img
         src="/assets/logo-alfa-wolf.png"
-        alt="Grupo Alfa"
+        alt={t("brand.name")}
         style="height: 40px; filter: brightness(0) invert(1);"
       />
     </a>
     <nav>
       <ul class="nav-menu">
-        <li><a href="/">INICIO</a></li>
-        <li><a href="/proyectos">PROYECTOS</a></li>
-        <li><a href="/promotores">PROMOTORES</a></li>
-        <li><a href="/inversores">INVERSORES</a></li>
-        <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
-        <li><a href="/contacto">CONTACTO</a></li>
+        <li><a href="/">{t("nav.inicio")}</a></li>
+        <li><a href="/proyectos">{t("nav.proyectos")}</a></li>
+        <li><a href="/promotores">{t("nav.promotores")}</a></li>
+        <li><a href="/inversores">{t("nav.inversores")}</a></li>
+        <li><a href="/alfa-hunters">{t("nav.hunters")}</a></li>
+        <li><a href="/contacto">{t("nav.contacto")}</a></li>
       </ul>
       <div class="mobile-menu-toggle">
         <span></span><span></span><span></span>

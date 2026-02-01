@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
 interface Cost {
     concept: string;
     amount: string;
@@ -11,8 +13,11 @@ interface Props {
     class?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
-    title = "Costes del Proyecto",
+    title = t("projects.division.costs.title"),
     costs,
     total,
     class: className = "",
@@ -34,7 +39,7 @@ const {
             {
                 total && (
                     <tr class="total-row">
-                        <td>TOTAL PROYECTO</td>
+                        <td>{t("projects.costs.total")}</td>
                         <td class="amount">{total}</td>
                     </tr>
                 )

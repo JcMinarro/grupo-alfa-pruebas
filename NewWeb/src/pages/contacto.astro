@@ -1,30 +1,34 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ContactForm from "../components/ContactForm.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Contacto | Grupo Alfa" bodyClass="contact-page">
+<BaseLayout title={`Contacto | ${t("brand.name")}`} bodyClass="contact-page">
     <Hero
-        title="CONTÁCTANOS"
-        subtitle="Responderemos encantados a su consulta a la mayor brevedad posible."
+        title={t("contact.hero.title")}
+        subtitle={t("home.contact.description")}
         backgroundImage="/assets/whatsapp-image-2025-08-01-at-17.09.16-YbNJVMNBJQt0a97a.jpg"
         height="50vh"
     />
 
     <section class="contact-wrapper fade-in">
         <div class="contact-info">
-            <h2>NUESTRA OFICINA</h2>
+            <h2>{t("contact.info.title")}</h2>
 
             <div class="info-item">
-                <h3>Dirección</h3>
-                <p>C/ Conde del Valle de San Juan, 1</p>
-                <p>(Gran Vía Escultor Salzillo, 1)</p>
-                <p>30004, Murcia</p>
+                <h3>{t("contact.info.address.title")}</h3>
+                <p>{t("home.office.address.line1")}</p>
+                <p>{t("home.office.address.line2")}</p>
+                <p>{t("home.office.address.city")}</p>
             </div>
 
             <div class="info-item">
-                <h3>Email</h3>
+                <h3>{t("contact.info.email.title")}</h3>
                 <p>
                     <a
                         href="mailto:info@grupoalfa.net"
@@ -49,8 +53,8 @@ import ContactForm from "../components/ContactForm.astro";
             </div>
 
             <div class="info-item">
-                <h3>Horario</h3>
-                <p>Lunes - Viernes: 9:00 - 14:00 | 16:00 - 20:00</p>
+                <h3>{t("contact.info.schedule.title")}</h3>
+                <p>{t("contact.info.schedule.text")}</p>
             </div>
         </div>
 
