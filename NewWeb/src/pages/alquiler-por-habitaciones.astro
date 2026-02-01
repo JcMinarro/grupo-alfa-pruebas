@@ -1,156 +1,55 @@
 ---
 import ProjectLayout from "../layouts/ProjectLayout.astro";
+import Hero from "../components/Hero.astro";
+import ProjectDetails from "../components/project/ProjectDetails.astro";
+import ProjectFinancials from "../components/project/ProjectFinancials.astro";
+import ProjectROI from "../components/project/ProjectROI.astro";
 ---
 
 <ProjectLayout
     title="Alquiler por Habitaciones | Grupo Alfa"
     bodyClass="rooms-page"
-    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
 >
-    <link slot="head" rel="stylesheet" href="/src/styles/rooms.css" />
+    <Hero
+        title="Vivienda para Alquiler por Habitaciones"
+        location="MADRID"
+        backgroundImage="/assets/photo-1616046229478-9901c5536a456111.jpg"
+        height="50vh"
+    />
 
-    <section class="project-hero">
-        <div class="hero-content fade-in">
-            <p class="hero-location">MADRID</p>
-            <h1>Vivienda para Alquiler por Habitaciones</h1>
-        </div>
-    </section>
-
-    <section class="project-details fade-in">
+    <section class="project-details container fade-in">
         <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
 
-        <div class="detail-section" style="margin-top: 40px;">
-            <h2>Detalles del Proyecto</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h4>Tipo de activo</h4>
-                    <p>Piso amplio (110 m²)</p>
-                </div>
-                <div class="info-card">
-                    <h4>Ubicación</h4>
-                    <p>Madrid, zona universitaria</p>
-                </div>
-                <div class="info-card">
-                    <h4>Distribución</h4>
-                    <p>5 Habitaciones + 2 Baños</p>
-                </div>
-                <div class="info-card">
-                    <h4>Extras</h4>
-                    <p>Zonas Comunes</p>
-                </div>
-            </div>
-        </div>
+        <h2>Detalles del Proyecto</h2>
+        <ProjectDetails
+            type="Piso amplio (110 m²)"
+            location="Madrid, zona universitaria"
+            distribution="5 Habitaciones + 2 Baños"
+        />
 
-        <div class="detail-section">
-            <h2>Costes del Proyecto</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Concepto</th>
-                        <th>Importe</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Compra del Inmueble</td>
-                        <td>195.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Reforma Integral</td>
-                        <td>45.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Licencias y Arquitecto</td>
-                        <td>10.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Amueblamiento Básico</td>
-                        <td>10.000 €</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Inversión Total</strong></td>
-                        <td><strong>260.000 €</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <ProjectFinancials
+            costs={[
+                { concept: "Compra del Inmueble", amount: "195.000 €" },
+                { concept: "Reforma Integral", amount: "45.000 €" },
+                { concept: "Licencias y Arquitecto", amount: "10.000 €" },
+                { concept: "Amueblamiento Básico", amount: "10.000 €" },
+            ]}
+            total="260.000 €"
+        />
 
-        <div class="detail-section">
-            <h2>Rentabilidad</h2>
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;"
-            >
-                <!-- Rentabilidad por Venta -->
-                <div
-                    class="info-card"
-                    style="background: #fff; border: 1px solid #eee;"
-                >
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        Por Venta
-                    </h3>
-                    <ul
-                        style="list-style: none; padding: 0; margin-bottom: 20px;"
-                    >
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Venta Piso (Rentado)</span>
-                            <strong>345.000 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Beneficio Neto est.</span>
-                            <strong>85.000 €</strong>
-                        </li>
-                    </ul>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px;"
-                    >
-                        <span>ROI Neto:</span>
-                        <span class="roi-badge">32,69 %</span>
-                    </div>
-                </div>
-
-                <!-- Rentabilidad por Alquiler -->
-                <div
-                    class="info-card"
-                    style="background: #fff; border: 1px solid #eee;"
-                >
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        Por Alquiler
-                    </h3>
-                    <ul
-                        style="list-style: none; padding: 0; margin-bottom: 20px;"
-                    >
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Alquiler Mensual/hab.</span>
-                            <strong>750 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Ingresos Anuales</span>
-                            <strong>45.000 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between; color: #666;"
-                        >
-                            <span>Gastos Operativos (15%)</span>
-                            <span>-6.750 €</span>
-                        </li>
-                    </ul>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px;"
-                    >
-                        <span>ROI Neto:</span>
-                        <span class="roi-badge">14,71 %</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ProjectROI
+            strategy="both"
+            saleData={{
+                price: "345.000 € (Rentado)",
+                profit: "85.000 € (neto est.)",
+                roi: "32,69 %",
+            }}
+            rentData={{
+                monthly: "750 € (x hab)",
+                annual: "45.000 €",
+                roi: "14,71 %",
+            }}
+        />
 
         <div class="executive-summary">
             <h3>Resumen Ejecutivo</h3>
@@ -165,7 +64,7 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
             <a
                 href="/#contacto"
                 class="btn-primary"
-                style="background-color: var(--rooms-accent); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
                 >ME INTERESA ESTE MODELO</a
             >
         </div>

@@ -1,10 +1,15 @@
 ---
-const { activeNav = 'inicio' } = Astro.props;
+const { activeNav = "inicio" } = Astro.props;
 ---
+
 <header class="site-header" id="header">
   <div class="container nav-container">
     <a href="/" class="logo">
-      <img src="/assets/logo-alfa-horizontal.png" alt="Grupo Alfa" />
+      <img
+        src="/assets/logo-alfa-wolf.png"
+        alt="Grupo Alfa"
+        style="height: 40px; filter: brightness(0) invert(1);"
+      />
     </a>
     <nav>
       <ul class="nav-menu">
@@ -15,7 +20,9 @@ const { activeNav = 'inicio' } = Astro.props;
         <li><a href="/alfa-hunters">ALFA HUNTERS</a></li>
         <li><a href="/contacto">CONTACTO</a></li>
       </ul>
-      <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+      <div class="mobile-menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
     </nav>
   </div>
 </header>

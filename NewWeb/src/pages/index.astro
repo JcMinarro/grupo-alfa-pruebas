@@ -1,31 +1,32 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ServiceList from "../components/ServiceList.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <BaseLayout title="Grupo Alfa | Inversión Inmobiliaria rentable y segura">
-    <link slot="head" rel="stylesheet" href="/src/styles/home.css" />
-    <link slot="head" rel="stylesheet" href="/src/styles/footer.css" />
-
     <!-- Hero Section -->
-    <section id="inicio" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-container">
-            <div class="hero-content fade-in">
-                <img
-                    src="/assets/logo-alfa-black-text.png"
-                    alt="Logo"
-                    class="section-logo"
-                />
-                <img
-                    src="/assets/logo-alfa-wolf.png"
-                    alt="Grupo Alfa"
-                    class="hero-logo"
-                />
-                <h2 class="hero-subtitle">INVERSIÓN INTELIGENTE</h2>
-            </div>
-        </div>
-    </section>
+    <Hero
+        id="inicio"
+        backgroundImage="/assets/hero-bg.jpg"
+        overlayOpacity={0.4}
+        height="100vh"
+    >
+        <img
+            src="/assets/logo-alfa-black-text.png"
+            alt="Logo"
+            class="section-logo"
+            style="width: 250px; margin-bottom: 2rem;"
+        />
+        <img
+            src="/assets/logo-alfa-wolf.png"
+            alt="Grupo Alfa"
+            class="hero-logo"
+            style="width: 500px; margin-bottom: 1rem;"
+        />
+        <h2 class="hero-subtitle">INVERSIÓN INTELIGENTE</h2>
+    </Hero>
 
     <!-- Value Props (Steps) -->
     <section class="steps-section">
@@ -34,7 +35,9 @@ import ContactForm from "../components/ContactForm.astro";
                 <h2 class="section-main-title">
                     CONVIERTE TU DINERO EN UN ACTIVO
                 </h2>
-                <h2 class="section-secondary-title">TOTALMENTE PASIVO</h2>
+                <h2 class="section-secondary-title text-primary">
+                    TOTALMENTE PASIVO
+                </h2>
                 <p class="section-context">En <strong>GRUPO ALFA</strong></p>
             </div>
 
@@ -80,27 +83,20 @@ import ContactForm from "../components/ContactForm.astro";
             <div class="process-flow fade-in">
                 <div class="flow-item">
                     <p>Y podemos <span>Financiar</span></p>
-                    <img
-                        src="/assets/flecha-abajo-AzGN41EZW0T39oZP.png"
-                        class="arrow-right"
-                        alt="arrow"
-                    />
                 </div>
+
+                <div class="arrow-triangle-down"></div>
+
                 <div class="flow-item">
                     <p>Tu Inversión Inmobiliaria</p>
-                    <div class="flow-icon">
-                        <img
-                            src="/assets/casa-AR032qQw99I1yKM5.png"
-                            alt="Casa"
-                        />
-                    </div>
-                    <img
-                        src="/assets/flecha-abajo-AzGN41EZW0T39oZP.png"
-                        class="arrow-right"
-                        alt="arrow"
-                    />
                 </div>
+
+                <div class="arrow-triangle-down"></div>
+
                 <div class="flow-item">
+                    <div class="flow-icon">
+                        <img src="/assets/casa-icon.png" alt="Casa" />
+                    </div>
                     <p>Y tú solo <span>Cobras</span></p>
                 </div>
             </div>
@@ -111,14 +107,17 @@ import ContactForm from "../components/ContactForm.astro";
     <section class="libertad-section">
         <div class="container text-center">
             <h2 class="section-main-title">CONSTRUYE TU</h2>
-            <h2 class="section-secondary-title">LIBERTAD FINANCIERA</h2>
+            <h2 class="section-secondary-title text-primary">
+                LIBERTAD FINANCIERA
+            </h2>
             <img
-                src="/assets/logo-alfa-horizontal.png"
+                src="/assets/logo-alfa-wolf.png"
                 alt="Logo"
                 class="section-logo"
+                style="height: 60px; filter: brightness(0) invert(1);"
             />
             <p class="rentability">
-                Consigue rentabilidades de hasta el <span>10%</span> o más.
+                Consigue rentabilidades de hasta el <span>20%</span> o más.
             </p>
             <p class="description">
                 Haz que tu dinero genere ingresos mientras disfrutas de tu
@@ -135,8 +134,7 @@ import ContactForm from "../components/ContactForm.astro";
             <img
                 src="/assets/logo-alfa-black-text.png"
                 alt="Logo"
-                class="section-logo"
-                style="width: 150px; margin-bottom: 20px;"
+                class="section-logo-small"
             />
             <p class="quote-text">
                 El socio ideal para transformar inmuebles en fuentes de ingresos
@@ -153,123 +151,22 @@ import ContactForm from "../components/ContactForm.astro";
 
     <!-- Services Section -->
     <section id="servicios" class="services-section">
-        <div class="text-center" style="padding: 80px 0 20px;">
-            <h2 class="section-secondary-title" style="margin-bottom: 40px;">
+        <div class="text-center services-header">
+            <h2 class="section-secondary-title text-black">
                 NUESTROS SERVICIOS
             </h2>
         </div>
 
-        <div class="services-list">
-            <div class="service-row">
-                <div class="container">
-                    <div class="service-text">
-                        <h3>PERSONAL SHOPPER INMOBILIARIO</h3>
-                        <p>
-                            Te ayudamos a encontrar propiedades con gran
-                            potencial, al mejor precio y adaptadas a tu
-                            presupuesto (pago al contado, con financiación o
-                            alquiler con opción a compra, compra aplazada...)
-                        </p>
-                    </div>
-                    <div class="service-icon-large">
-                        <img
-                            src="/assets/lupa-AE0r2VjNOpI4LRQ7.png"
-                            alt="icon"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="service-row">
-                <div class="container">
-                    <div class="service-text">
-                        <h3>REFORMA Y RESTAURACIÓN INTEGRAL</h3>
-                        <p>
-                            Somos especialistas en transformar casas antiguas,
-                            pisos deteriorados y propiedades con historia en
-                            auténticas joyas del mercado. Nuestro equipo incluye
-                            arquitectos, técnicos y reformistas con años de
-                            experiencia.
-                        </p>
-                    </div>
-                    <div class="service-icon-large">
-                        <img
-                            src="/assets/mrtillo-AR032ZKJrRh87JyG.png"
-                            alt="icon"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="service-row">
-                <div class="container">
-                    <div class="service-text">
-                        <h3>BROKER HIPOTECARIO PERSONALIZADO</h3>
-                        <p>
-                            Trabajamos con las principales entidades financieras
-                            para conseguirte las mejores condiciones
-                            hipotecarias, tanto si eres particular como empresa.
-                            Nosotros negociamos por ti.
-                        </p>
-                    </div>
-                    <div class="service-icon-large">
-                        <img
-                            src="/assets/casa-AR032qQw99I1yKM5.png"
-                            alt="icon"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="service-row">
-                <div class="container">
-                    <div class="service-text">
-                        <h3>INTERIORISMO Y HOMESTAGING</h3>
-                        <p>
-                            Ponemos a punto el inmueble para que cause una
-                            primera impresión irresistible. Creamos ambientes
-                            donde tus futuros inquilinos o compradores se
-                            imaginan viviendo desde el primer segundo.
-                        </p>
-                    </div>
-                    <div class="service-icon-large">
-                        <img
-                            src="/assets/interiorismo-m6LbP1Zkv6HB177D.png"
-                            alt="icon"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="service-row">
-                <div class="container">
-                    <div class="service-text">
-                        <h3>GESTIÓN DE ALQUILER Y RENTABILIDAD</h3>
-                        <p>
-                            Maximizamos el rendimiento de tu inversión
-                            encargándonos de todo el proceso de alquiler. Desde
-                            la selección del inquilino hasta la gestión de
-                            cobros y mantenimiento.
-                        </p>
-                    </div>
-                    <div class="service-icon-large">
-                        <img
-                            src="/assets/llave-YX4x19levpIeRQRZ.png"
-                            alt="icon"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ServiceList />
 
         <div
             class="text-center"
-            style="margin-top: 60px; padding-bottom: 80px;"
+            style="margin-top: 60px; padding-bottom: 80px; color: var(--color-text-dark);"
         >
             <p style="font-style: italic; margin-bottom: 20px;">
                 Te acompañamos en todos y cada uno de los pasos
             </p>
-            <a href="/contacto" class="btn">QUIERO MI PROYECTO</a>
+            <a href="/contacto" class="btn-primary">QUIERO MI PROYECTO</a>
         </div>
     </section>
 
@@ -313,7 +210,7 @@ import ContactForm from "../components/ContactForm.astro";
                 </div>
             </div>
 
-            <div class="contact-section-home" style="margin-top: 80px;">
+            <div class="home-contact-section">
                 <div class="office-grid">
                     <div class="fade-in">
                         <h2 class="section-main-title">Contáctanos</h2>
@@ -321,16 +218,12 @@ import ContactForm from "../components/ContactForm.astro";
                             Responderemos encantados a<br />su consulta a la
                             mayor brevedad posible.
                         </p>
-                        <div style="margin-top: 40px;">
-                            <img
-                                src="/assets/logo-alfa-wolf.png"
-                                alt="Logo"
-                                style="width: 100px;"
-                            />
+                        <div class="contact-intro-logo">
+                            <img src="/assets/logo-alfa-wolf.png" alt="Logo" />
                         </div>
                     </div>
                     <div class="contact-form-home fade-in">
-                        <ContactForm />
+                        <ContactForm theme="light" />
                     </div>
                 </div>
             </div>

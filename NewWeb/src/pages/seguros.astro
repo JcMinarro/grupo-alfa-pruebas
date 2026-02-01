@@ -2,12 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-    title="Seguros | Grupo Alfa"
-    bodyClass="seguros-page"
-    footerStyle="background: url('/assets/photo-1707903244219-8ed71537554d3d83.jpg') no-repeat center center/cover; position: relative; padding: 100px 0;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/seguros.css" />
+<BaseLayout title="Seguros | Grupo Alfa" bodyClass="seguros-page">
     <style slot="head">
         body {
             font-family: "DM Sans", sans-serif;
@@ -26,14 +21,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <div class="seguros-col-left">
                     <div class="seguros-logo-wrapper">
                         <img
-                            src="/assets/logo-grupo-alfa-horizontal-montado-blanco-lhGvXrpDul9kdik1.png"
+                            src="/assets/logo-alfa-wolf.png"
                             alt="Grupo Alfa Seguros"
                             class="seguros-logo-desktop"
+                            style="filter: brightness(0) invert(1);"
                         />
                         <img
-                            src="/assets/logo-grupo-alfa-texto-blanco-e3qvGVvZFnhF9AGz.png"
+                            src="/assets/logo-alfa-wolf.png"
                             alt="Grupo Alfa Seguros"
                             class="seguros-logo-mobile"
+                            style="filter: brightness(0) invert(1);"
                         />
                     </div>
 

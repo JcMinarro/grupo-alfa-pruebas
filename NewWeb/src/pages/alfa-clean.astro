@@ -2,12 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-    title="Alfa Clean | Grupo Alfa"
-    bodyClass="clean-page"
-    footerStyle="background: url('/assets/photo-1707903244219-8ed71537554d3d83.jpg') no-repeat center center/cover; position: relative; padding: 100px 0;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/clean.css" />
+<BaseLayout title="Alfa Clean | Grupo Alfa" bodyClass="clean-page">
     <style slot="head">
         body {
             font-family: "DM Sans", sans-serif;
@@ -19,12 +14,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         }
     </style>
 
-    <main class="container">
+    <main class="container" style="padding: 80px 0;">
         <div class="clean-content-box fade-in">
-            <div class="clean-logo-section">
+            <div
+                class="clean-logo-section"
+                style="text-align: center; margin-bottom: 40px;"
+            >
                 <img
-                    src="/assets/logo-grupo-alfa-YKbEjky3lKIe0BKP.png"
+                    src="/assets/logo-alfa-wolf.png"
                     alt="Grupo Alfa White Logo"
+                    style="height: 60px; filter: brightness(0) invert(1);"
                 />
             </div>
 

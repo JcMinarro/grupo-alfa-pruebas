@@ -1,0 +1,52 @@
+---
+const services = [
+    {
+        title: "PERSONAL SHOPPER INMOBILIARIO",
+        description:
+            "Te ayudamos a encontrar propiedades con gran potencial, al mejor precio y adaptadas a tu presupuesto (pago al contado, con financiación o alquiler con opción a compra, compra aplazada...)",
+        icon: "/assets/lupa-AE0r2VjNOpI4LRQ7.png",
+    },
+    {
+        title: "REFORMA Y RESTAURACIÓN INTEGRAL",
+        description:
+            "Somos especialistas en transformar casas antiguas, pisos deteriorados y propiedades con historia en auténticas joyas del mercado. Nuestro equipo incluye arquitectos, técnicos y reformistas con años de experiencia.",
+        icon: "/assets/mrtillo-AR032ZKJrRh87JyG.png",
+    },
+    {
+        title: "BROKER HIPOTECARIO PERSONALIZADO",
+        description:
+            "Trabajamos con las principales entidades financieras para conseguirte las mejores condiciones hipotecarias, tanto si eres particular como empresa. Nosotros negociamos por ti.",
+        icon: "/assets/casa-AR032qQw99I1yKM5.png",
+    },
+    {
+        title: "INTERIORISMO Y HOMESTAGING",
+        description:
+            "Ponemos a punto el inmueble para que cause una primera impresión irresistible. Creamos ambientes donde tus futuros inquilinos o compradores se imaginan viviendo desde el primer segundo.",
+        icon: "/assets/interiorismo-m6LbP1Zkv6HB177D.png",
+    },
+    {
+        title: "GESTIÓN DE ALQUILER Y RENTABILIDAD",
+        description:
+            "Maximizamos el rendimiento de tu inversión encargándonos de todo el proceso de alquiler. Desde la selección del inquilino hasta la gestión de cobros y mantenimiento.",
+        icon: "/assets/llave-YX4x19levpIeRQRZ.png",
+    },
+];
+---
+
+<div class="services-list">
+    {
+        services.map((service) => (
+            <div class="service-row">
+                <div class="container">
+                    <div class="service-text">
+                        <h3>{service.title}</h3>
+                        <p>{service.description}</p>
+                    </div>
+                    <div class="service-icon-large">
+                        <img src={service.icon} alt="icon" />
+                    </div>
+                </div>
+            </div>
+        ))
+    }
+</div>

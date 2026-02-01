@@ -1,71 +1,87 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectLayout from "../layouts/ProjectLayout.astro";
+import Hero from "../components/Hero.astro";
+import ProjectDetails from "../components/project/ProjectDetails.astro";
+import ProjectFinancials from "../components/project/ProjectFinancials.astro";
+import ProjectROI from "../components/project/ProjectROI.astro";
 ---
 
-<BaseLayout
-    title="Vivienda Turística | Grupo Alfa"
-    bodyClass="tourism-page"
-    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/tourism.css" />
+<ProjectLayout title="Vivienda Turística | Grupo Alfa" bodyClass="tourism-page">
+    <Hero
+        title="Vivienda Antigua transformada en Vivienda Turística"
+        location="ÁGUILAS, MURCIA"
+        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+        height="50vh"
+    />
 
-    <section class="hero-tourism fade-in">
-        <div class="container">
-            <h1>
-                Vivienda Antigua transformada en <span>Vivienda Turística</span>
-            </h1>
-            <p class="hero-location">Águilas, Murcia</p>
-        </div>
-    </section>
+    <section class="project-details container fade-in">
+        <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
 
-    <section class="tourism-container">
-        <div class="showcase-grid fade-in">
-            <div class="showcase-item">
-                <span class="label-before">ANTES</span>
+        <h2>Detalles del Proyecto</h2>
+        <ProjectDetails
+            type="Vivienda Unifamiliar"
+            location="Costa de Águilas, Murcia"
+            surface="85 m²"
+            distribution="2 Dormitorios + Solárium"
+        />
+
+        <div
+            class="tourism-images"
+            style="margin: 40px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"
+        >
+            <div class="image-item">
+                <p style="font-weight: 700; margin-bottom: 10px;">ANTES</p>
                 <img
-                    src="/assets/whatsapp-image-2024-05-18-at-13.38.33-A85p4jG067Sz4B6b.jpeg"
-                    alt="Habitación Antigua"
+                    src="/assets/photo-1616046229478-9901c5536a456111.jpg"
+                    alt="Antes"
+                    style="width: 100%; border-radius: 8px;"
                 />
             </div>
-            <div class="showcase-item">
-                <span class="label-after">DESPUÉS</span>
+            <div class="image-item">
+                <p style="font-weight: 700; margin-bottom: 10px;">DESPUÉS</p>
                 <img
-                    src="/assets/whatsapp-image-2024-05-18-at-13.38.32-AVPzE9Rk7yubx6Wj.jpeg"
-                    alt="Habitación Turística"
+                    src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+                    alt="Después"
+                    style="width: 100%; border-radius: 8px;"
                 />
             </div>
         </div>
 
-        <div class="investment-text fade-in">
+        <ProjectFinancials
+            costs={[
+                { concept: "Compra del Inmueble", amount: "115.000 €" },
+                { concept: "Reforma y Equipamiento", amount: "35.000 €" },
+                { concept: "Licencias y Gestión", amount: "8.000 €" },
+            ]}
+            total="158.000 €"
+        />
+
+        <ProjectROI
+            strategy="rent"
+            rentData={{
+                monthly: "110 € / noche (media)",
+                annual: "24.500 € (neta est.)",
+                roi: "15,50 %",
+            }}
+        />
+
+        <div class="executive-summary">
+            <h3>Resumen Ejecutivo</h3>
             <p>
                 Las viviendas turísticas representan una de las inversiones más
-                rentables y líquidas en el sector inmobiliario actual,
-                especialmente en zonas costeras con alta demanda vacacional. El
-                éxito reside en una transformación estratégica que combine
-                diseño, funcionalidad y una gestión profesional.
+                rentables y líquidas en el sector inmobiliario actual. En zonas
+                costeras como Águilas, la demanda es constante y la rentabilidad
+                neta supera con creces el alquiler tradicional.
             </p>
         </div>
-    </section>
 
-    <section class="branding-section fade-in">
-        <div class="container">
-            <img
-                src="/assets/logo-grupo-alfa-horizontal-montado-negro-m6Lk9lywM3H4k3lk.png"
-                alt="Grupo Alfa Branding"
-            />
+        <div style="text-align: center; margin-top: 60px;">
+            <a
+                href="/#contacto"
+                class="btn-primary"
+                style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                >ME INTERESA ESTE MODELO</a
+            >
         </div>
     </section>
-
-    <section class="cta-section fade-in">
-        <div class="container">
-            <h2>¿Tienes un Proyecto en mente?</h2>
-            <p>
-                En Grupo Alfa analizamos cada oportunidad de inversión. Si
-                tienes un inmueble con potencial para ser transformado en
-                vivienda turística, nosotros te ayudamos a financiarlo y
-                gestionarlo.
-            </p>
-            <a href="/#contacto" class="btn-tourism">Tengo un Proyecto</a>
-        </div>
-    </section>
-</BaseLayout>
+</ProjectLayout>

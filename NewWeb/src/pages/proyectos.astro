@@ -1,33 +1,28 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectLayout from "../layouts/ProjectLayout.astro";
+import Hero from "../components/Hero.astro";
 ---
 
-<BaseLayout
-    title="Proyectos | Grupo Alfa"
-    bodyClass="portfolio-page"
-    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/portfolio.css" />
+<ProjectLayout title="Proyectos | Grupo Alfa" bodyClass="portfolio-page">
+    <Hero
+        title="PROYECTOS"
+        subtitle="ANTES Y DESPUÉS DE UNA BUENA DECISIÓN"
+        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+        height="50vh"
+    >
+        <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 20px;">
+            Descubre cómo transformamos oportunidades en realidades rentables.
+        </p>
+    </Hero>
 
-    <section class="hero-portfolio fade-in">
-        <div class="container">
-            <h1>PROYECTOS</h1>
-            <p class="hero-subtitle">ANTES Y DESPUÉS DE UNA BUENA DECISIÓN</p>
-            <p>
-                Descubre cómo transformamos oportunidades en realidades
-                rentables.
-            </p>
-        </div>
-    </section>
-
-    <section class="portfolio-container">
-        <div class="portfolio-grid fade-in">
+    <section class="portfolio-container project-details container">
+        <div class="projects-grid fade-in">
             <!-- Project 1 -->
             <a href="/local-comercial" class="project-card">
                 <div class="project-image-container">
                     <img
-                        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
-                        alt="Local Comercial convertido en Estudios"
+                        src="/assets/photo-1616046229478-9901c5536a456111.jpg"
+                        alt="Local Comercial"
                     />
                 </div>
                 <div class="project-info">
@@ -43,51 +38,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <a href="/alquiler-por-habitaciones" class="project-card">
                 <div class="project-image-container">
                     <img
-                        src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=80"
-                        alt="Vivienda para Alquiler por Habitaciones"
+                        src="/assets/photo-1616046229478-9901c5536a456111.jpg"
+                        alt="Habitaciones"
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">MADRID</p>
-                        <h3>Vivienda para Alquiler por Habitaciones</h3>
-                    </div>
-                    <span class="btn-view-project">Ver más</span>
-                </div>
-            </a>
-
-            <!-- Project 3 -->
-            <a href="/mini-estudios" class="project-card">
-                <div class="project-image-container">
-                    <img
-                        src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
-                        alt="Vivienda convertida en 3 Mini-estudios"
-                    />
-                </div>
-                <div class="project-info">
-                    <div>
-                        <p class="project-location">GRANADA</p>
-                        <h3>
-                            Vivienda mal distribuida convertida en 3
-                            Mini-estudios
-                        </h3>
-                    </div>
-                    <span class="btn-view-project">Ver más</span>
-                </div>
-            </a>
-
-            <!-- Project 4 -->
-            <a href="/flip-house" class="project-card">
-                <div class="project-image-container">
-                    <img
-                        src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=800&q=80"
-                        alt="Flip House"
-                    />
-                </div>
-                <div class="project-info">
-                    <div>
-                        <p class="project-location">MURCIA</p>
-                        <h3>Flip House en zona urbana consolidada</h3>
+                        <h3>Alquiler por Habitaciones</h3>
                     </div>
                     <span class="btn-view-project">Ver más</span>
                 </div>
@@ -97,33 +55,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <a href="/vivienda-turistica" class="project-card">
                 <div class="project-image-container">
                     <img
-                        src="https://images.unsplash.com/photo-1521780171415-783b1cb576e7?auto=format&fit=crop&w=800&q=80"
+                        src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
                         alt="Vivienda Turística"
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">ÁGUILAS, MURCIA</p>
-                        <h3>
-                            Vivienda Antigua transformada en Vivienda Turística
-                        </h3>
-                    </div>
-                    <span class="btn-view-project">Ver más</span>
-                </div>
-            </a>
-
-            <!-- Project 6 -->
-            <a href="/division-apartamentos" class="project-card">
-                <div class="project-image-container">
-                    <img
-                        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
-                        alt="Piso dividido en 2 Apartamentos"
-                    />
-                </div>
-                <div class="project-info">
-                    <div>
-                        <p class="project-location">VALENCIA</p>
-                        <h3>Piso dividido en 2 Apartamentos</h3>
+                        <h3>Transformación Turística</h3>
                     </div>
                     <span class="btn-view-project">Ver más</span>
                 </div>
@@ -133,8 +72,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <a href="/chalet-dividido" class="project-card">
                 <div class="project-image-container">
                     <img
-                        src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=80"
-                        alt="Chalet dividido en 2 Viviendas"
+                        src="/assets/photo-1616046229478-9901c5536a456111.jpg"
+                        alt="Chalet"
                     />
                 </div>
                 <div class="project-info">
@@ -150,16 +89,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <a href="/duplex-turistico" class="project-card">
                 <div class="project-image-container">
                     <img
-                        src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
-                        alt="Dúplex Turístico"
+                        src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+                        alt="Dúplex"
                     />
                 </div>
                 <div class="project-info">
                     <div>
                         <p class="project-location">MURCIA</p>
-                        <h3>
-                            Piso con buhardilla convertido en dúplex turístico
-                        </h3>
+                        <h3>Piso con buhardilla (Dúplex)</h3>
                     </div>
                     <span class="btn-view-project">Ver más</span>
                 </div>
@@ -167,15 +104,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
     </section>
 
-    <section class="cta-portfolio fade-in">
+    <section
+        class="cta-portfolio fade-in"
+        style="background: var(--component-bg); padding: 80px 0; text-align: center;"
+    >
         <div class="container">
             <h2>¿Tienes un Proyecto en mente?</h2>
-            <p>
-                Queremos conocerlo. Lo analizamos y, si encaja con nuestros
-                estándares, lo financiamos.
+            <p style="margin-bottom: 30px;">
+                Queremos conocerlo. Lo analizamos y lo financiamos.
             </p>
-            <a href="/#contacto" class="btn-portfolio-main">Tengo un Proyecto</a
+            <a
+                href="/#contacto"
+                class="btn-primary"
+                style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                >Tengo un Proyecto</a
             >
         </div>
     </section>
-</BaseLayout>
+</ProjectLayout>

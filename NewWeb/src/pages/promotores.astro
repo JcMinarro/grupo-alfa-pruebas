@@ -1,31 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
 ---
 
-<BaseLayout
-    title="Promotores | Grupo Alfa"
-    bodyClass="promoter-page"
-    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/promoters.css" />
-
-    <section class="hero-promoter fade-in">
-        <div class="promoter-container">
-            <h1>PROMOTORES</h1>
-            <p class="hero-subtitle">TU PROYECTO PUEDE SER EL PRÓXIMO ALFA</p>
-            <p class="promoter-intro">
-                Si tienes una propiedad o una idea para desarrollar, restaurar o
-                transformar, cuéntanosla.
-            </p>
-        </div>
-    </section>
+<BaseLayout title="Promotores | Grupo Alfa" bodyClass="promoter-page">
+    <Hero
+        title="PROMOTORES"
+        subtitle="TU PROYECTO PUEDE SER EL PRÓXIMO ALFA"
+        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+        height="50vh"
+    >
+        <p
+            class="promoter-intro"
+            style="margin-top: 20px; font-size: 1.1rem; opacity: 0.9;"
+        >
+            Si tienes una propiedad o una idea para desarrollar, restaurar o
+            transformar, cuéntanosla.
+        </p>
+    </Hero>
 
     <section class="promoter-container fade-in">
         <h2 style="font-size: 2rem; margin-bottom: 40px; text-align: center;">
             Podemos ayudarte si:
         </h2>
 
-        <div class="services-list">
+        <div class="promoter-services-list">
             <div class="service-item">
                 <h3>Tienes una Casa Antigua y quieres Alquilarla</h3>
             </div>

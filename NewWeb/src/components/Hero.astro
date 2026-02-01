@@ -1,0 +1,180 @@
+---
+interface Props {
+    title?: string;
+    subtitle?: string;
+    location?: string;
+    backgroundImage?: string;
+    backgroundVideo?: string;
+    videoPoster?: string;
+    overlayOpacity?: number;
+    height?: string;
+    class?: string;
+    id?: string;
+}
+
+const {
+    title,
+    subtitle,
+    location,
+    backgroundImage,
+    backgroundVideo,
+    videoPoster,
+    overlayOpacity = 0.5,
+    height = "60vh",
+    class: className = "",
+    id,
+} = Astro.props;
+---
+
+<section
+    id={id}
+    class={`base-hero ${className}`}
+    style={`--overlay-opacity: ${overlayOpacity}; --hero-height: ${height}; --bg-image: ${backgroundImage ? `url('${backgroundImage}')` : "none"};`}
+>
+    {
+        backgroundVideo && (
+            <video
+                autoplay
+                muted
+                loop
+                playsinline
+                poster={videoPoster}
+                class="hero-video"
+            >
+                <source src={backgroundVideo} type="video/mp4" />
+            </video>
+        )
+    }
+
+    {!backgroundVideo && backgroundImage && <div class="hero-bg-image" />}
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-container">
+        <div class="hero-content">
+            <div class="fade-in-content">
+                {location && <p class="hero-location">{location}</p>}
+                {title && <h1>{title}</h1>}
+                {subtitle && <h2 class="hero-subtitle">{subtitle}</h2>}
+                <slot />
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Trigger fade-in animations on page load and during view transitions
+    const animateHero = () => {
+        const fadeElements = document.querySelectorAll(".fade-in-content");
+        fadeElements.forEach((el) => {
+            // Remove visible class first in case it was already there (from a previous page)
+            el.classList.remove("visible");
+            setTimeout(() => {
+                el.classList.add("visible");
+            }, 100);
+        });
+    };
+
+    // Initial load
+    document.addEventListener("DOMContentLoaded", animateHero);
+    // On every page navigation (View Transitions)
+    document.addEventListener("astro:page-load", animateHero);
+</script>
+
+<style>
+    .base-hero {
+        position: relative;
+        min-height: var(--hero-height);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--color-text-light);
+        overflow: hidden;
+        background-color: var(--color-bg-dark);
+        padding: 80px 0;
+    }
+
+    .fade-in-content {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+            opacity 1s ease-out,
+            transform 1s ease-out;
+    }
+
+    .fade-in-content.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hero-video,
+    .hero-bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    .hero-bg-image {
+        background-image: var(--bg-image);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, var(--overlay-opacity));
+        z-index: 1;
+    }
+
+    .hero-container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-content {
+        max-width: 800px;
+    }
+
+    .hero-location {
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        opacity: 0.8;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 400;
+        letter-spacing: 4px;
+        opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+        .base-hero {
+            min-height: 400px;
+            padding: 60px 0;
+        }
+    }
+</style>

@@ -1,166 +1,54 @@
 ---
 import ProjectLayout from "../layouts/ProjectLayout.astro";
+import Hero from "../components/Hero.astro";
+import ProjectDetails from "../components/project/ProjectDetails.astro";
+import ProjectFinancials from "../components/project/ProjectFinancials.astro";
+import ProjectROI from "../components/project/ProjectROI.astro";
 ---
 
-<ProjectLayout
-    title="Chalet Dividido | Grupo Alfa"
-    bodyClass="chalet-page"
-    footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/chalet.css" />
+<ProjectLayout title="Chalet Dividido | Grupo Alfa" bodyClass="chalet-page">
+    <Hero
+        title="Chalet dividido en 2 Viviendas"
+        location="ALICANTE"
+        backgroundImage="/assets/whatsapp-image-2025-08-01-at-17.09.17-dWxOKaxe5VIGjv0Y.jpg"
+        height="50vh"
+    />
 
-    <section class="project-hero">
-        <div class="hero-content fade-in">
-            <p class="hero-location">ALICANTE</p>
-            <h1>Chalet dividido en 2 Viviendas</h1>
-        </div>
-    </section>
-
-    <section class="project-details fade-in">
+    <section class="project-details container fade-in">
         <a href="/proyectos" class="back-link">← Volver a Proyectos</a>
 
-        <div class="detail-section" style="margin-top: 40px;">
-            <h2>Detalles del Proyecto</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h4>Tipo de activo</h4>
-                    <p>Chalet</p>
-                </div>
-                <div class="info-card">
-                    <h4>Ubicación</h4>
-                    <p>Periferia Urbana de Alicante</p>
-                </div>
-                <div class="info-card">
-                    <h4>Superficie</h4>
-                    <p>140 m²</p>
-                </div>
-                <div class="info-card">
-                    <h4>Distribución</h4>
-                    <p>2 Viviendas Independientes</p>
-                </div>
-            </div>
-        </div>
+        <h2>Detalles del Proyecto</h2>
+        <ProjectDetails
+            type="Chalet"
+            location="Periferia Urbana de Alicante"
+            surface="140 m²"
+            distribution="2 Viviendas Independientes"
+        />
 
-        <div class="detail-section">
-            <h2>Costes del Proyecto</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Concepto</th>
-                        <th>Importe</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Compra del Inmueble</td>
-                        <td>140.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Reforma Integral</td>
-                        <td>55.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Licencias y Arquitecto</td>
-                        <td>15.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Amueblamiento Básico</td>
-                        <td>10.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Costes Imprevistos y Cierre</td>
-                        <td>10.000 €</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Inversión Total</strong></td>
-                        <td><strong>230.000 €</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <ProjectFinancials
+            costs={[
+                { concept: "Compra del Inmueble", amount: "140.000 €" },
+                { concept: "Reforma Integral", amount: "55.000 €" },
+                { concept: "Licencias y Arquitecto", amount: "15.000 €" },
+                { concept: "Amueblamiento Básico", amount: "10.000 €" },
+                { concept: "Costes Imprevistos y Cierre", amount: "10.000 €" },
+            ]}
+            total="230.000 €"
+        />
 
-        <div class="detail-section">
-            <h2>Rentabilidad</h2>
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;"
-            >
-                <!-- Rentabilidad por Venta -->
-                <div
-                    class="info-card"
-                    style="background: #fff; border: 1px solid #eee;"
-                >
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        Por Venta
-                    </h3>
-                    <ul
-                        style="list-style: none; padding: 0; margin-bottom: 20px;"
-                    >
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Precio Venta (x unidad)</span>
-                            <strong>155.000 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Beneficio Neto est.</span>
-                            <strong>80.000 €</strong>
-                        </li>
-                    </ul>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px;"
-                    >
-                        <span>ROI Neto:</span>
-                        <span class="roi-badge">34,78 %</span>
-                    </div>
-                </div>
-
-                <!-- Rentabilidad por Alquiler -->
-                <div
-                    class="info-card"
-                    style="background: #fff; border: 1px solid #eee;"
-                >
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        Por Alquiler
-                    </h3>
-                    <ul
-                        style="list-style: none; padding: 0; margin-bottom: 20px;"
-                    >
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Alquiler Mensual (x unidad)</span>
-                            <strong>850 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Ingresos Anuales</span>
-                            <strong>20.400 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between; color: #666;"
-                        >
-                            <span>Gastos Operativos (10%)</span>
-                            <span>-2.040 €</span>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>Ingresos Netos</span>
-                            <strong>18.360 €</strong>
-                        </li>
-                    </ul>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px;"
-                    >
-                        <span>ROI Neto:</span>
-                        <span class="roi-badge">7,98 %</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ProjectROI
+            strategy="both"
+            saleData={{
+                price: "155.000 € (x unidad)",
+                profit: "80.000 € (neto est.)",
+                roi: "34,78 %",
+            }}
+            rentData={{
+                monthly: "850 € (x unidad)",
+                annual: "20.400 €",
+                roi: "7,98 %",
+            }}
+        />
 
         <div class="executive-summary">
             <h3>Resumen Ejecutivo</h3>
@@ -175,7 +63,7 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
             <a
                 href="/#contacto"
                 class="btn-primary"
-                style="background-color: var(--chalet-accent); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
                 >ME INTERESA ESTE MODELO</a
             >
         </div>

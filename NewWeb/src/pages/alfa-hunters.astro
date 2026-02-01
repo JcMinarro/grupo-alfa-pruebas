@@ -1,64 +1,45 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import InfoGrid from "../components/InfoGrid.astro";
+import GridItem from "../components/GridItem.astro";
 ---
 
-<BaseLayout
-    title="ALFA HUNTERS | Grupo Alfa"
-    bodyClass="hunters-page"
-    footerStyle="background: #1d1e20; color: #fff; padding: 60px 0;"
->
-    <link slot="head" rel="stylesheet" href="/src/styles/hunters.css" />
-
-    <!-- Hero Section -->
-    <section class="hunters-hero">
-        <video
-            autoplay
-            muted
-            loop
-            playsinline
-            poster="/assets/hunters/hero-poster.jpg"
-            class="hero-video"
-        >
-            <source src="/assets/hunters/hero-video.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content fade-in">
-            <h1>ALFA HUNTERS</h1>
-        </div>
-    </section>
-
-    <!-- Team Expansion Section -->
-    <section class="team-expansion container">
-        <h2 class="fade-in">
+<BaseLayout title="ALFA HUNTERS | Grupo Alfa" bodyClass="hunters-page">
+    <Hero
+        title="ALFA HUNTERS"
+        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+        backgroundVideo="/assets/hunters/hero-video.mp4"
+        videoPoster="/assets/hunters/hero-poster.jpg"
+        height="50vh"
+        overlayOpacity={0.4}
+    />
+    <section
+        class="team-expansion container fade-in"
+        style="padding: 100px 0; text-align:
+center;"
+    >
+        <h2 style="margin-bottom: 60px;">
             ESTAMOS AMPLIANDO EL <span class="highlight">EQUIPO</span> DE <br
             /><span class="highlight">ALFA HUNTERS</span>
         </h2>
-        <div class="benefits-grid">
-            <div class="benefit-item fade-in">
-                <h3>FLEXIBILIDAD HORARIA</h3>
-                <p>
-                    Gestiona tu propio tiempo y trabaja a tu ritmo para
-                    conciliar tu vida personal y profesional.
-                </p>
-            </div>
-            <div class="benefit-item fade-in">
-                <h3>EQUIPO DE RESPALDO</h3>
-                <p>
-                    Contamos con profesionales experimentados que te apoyarán en
-                    cada paso de tu formación.
-                </p>
-            </div>
-            <div class="benefit-item fade-in">
-                <h3>COMISIONES ATRACTIVAS</h3>
-                <p>
-                    Ofrecemos uno de los sistemas de comisiones más competitivos
-                    del sector inmobiliario.
-                </p>
-            </div>
-        </div>
+        <InfoGrid columns={3}>
+            <GridItem
+                title="FLEXIBILIDAD HORARIA"
+                description="Gestiona tu propio tiempo y trabaja a tu ritmo para alcanzar tus objetivos."
+            />
+            <GridItem
+                title="SISTEMA DE ÉXITO"
+                description="Formación continua y soporte técnico para asegurar tus cierres."
+            />
+            <GridItem
+                title="ALTAS COMISIONES"
+                description="El plan de retribución más competitivo del mercado inmobiliario."
+            />
+        </InfoGrid>
     </section>
-
-    <!-- detailed Benefits Section -->
+    <!-- detailed
+Benefits Section -->
     <section class="container" style="padding: 80px 20px;">
         <h2 class="text-center fade-in" style="margin-bottom: 50px;">
             ¿QUIERES SER UN ALFA HUNTER?
@@ -71,14 +52,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     conexión a internet.
                 </p>
             </div>
-            <div class="step-item fade-in">
+            <div class="step-item
+fade-in">
                 <h3>Formación Gratuita</h3>
                 <p>
                     Te enseñamos todo lo que necesitas para empezar, desde cero
                     y sin costes.
                 </p>
             </div>
-            <div class="step-item fade-in">
+            <div class="step-item
+fade-in">
                 <h3>Horarios Flexibles</h3>
                 <p>Organiza tu jornada de trabajo como mejor te convenga.</p>
             </div>
@@ -91,7 +74,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </div>
         </div>
     </section>
-
     <!-- Form Section -->
     <section class="form-section">
         <div class="container">
@@ -145,7 +127,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     <div class="form-group">
                         <label>¿Tienes experiencia en ventas?</label>
                         <div
-                            style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;"
+                            style="display: flex; gap: 20px; flex-wrap: wrap;
+margin-top: 10px;"
                         >
                             <label style="font-weight: 400;"
                                 ><input
@@ -159,7 +142,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                     type="radio"
                                     name="experience"
                                     value="<2"
-                                /> Menos de 2 años</label
+                                />
+                                Menos de 2 años</label
                             >
                             <label style="font-weight: 400;"
                                 ><input
@@ -173,7 +157,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     <button type="submit" class="btn-submit">ENVIAR</button>
                 </form>
                 <p
-                    style="font-size: 0.8rem; margin-top: 20px; color: #666; text-align: center;"
+                    style="font-size:
+0.8rem; margin-top: 20px; color: #666; text-align: center;"
                 >
                     Al enviar tu información aceptas que te contactemos para una
                     entrevista informativa. Tus datos serán tratados con

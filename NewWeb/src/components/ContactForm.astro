@@ -1,17 +1,178 @@
-<form>
+---
+interface Props {
+    id?: string;
+    action?: string;
+    method?: string;
+    showPhone?: boolean;
+    showPrivacy?: boolean;
+    buttonText?: string;
+    theme?: "light" | "dark";
+}
+
+const {
+    id,
+    action = "#",
+    method = "POST",
+    showPhone = false,
+    showPrivacy = true,
+    buttonText = "ENVIAR",
+    theme = "dark",
+} = Astro.props;
+---
+
+<form
+    id={id}
+    action={action}
+    method={method}
+    class={`contact-form theme-${theme}`}
+>
     <div class="form-row">
         <div class="form-group">
-            <input type="text" placeholder="Nombre*" required />
+            <label for="name">Nombre *</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+            />
         </div>
-        <div class="form-group">
-            <input type="text" placeholder="Apellidos" />
-        </div>
+        {
+            showPhone && (
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        class="form-control"
+                    />
+                </div>
+            )
+        }
     </div>
+
     <div class="form-group">
-        <input type="email" placeholder="Correo Electrónico*" required />
+        <label for="email">Email *</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+        />
     </div>
+
     <div class="form-group">
-        <textarea placeholder="Comentario*" rows="4" required></textarea>
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" class="form-control" rows="4"
+        ></textarea>
     </div>
-    <button type="submit" class="btn-submit">ENVIAR</button>
+
+    {
+        showPrivacy && (
+            <div class="form-group privacy-group">
+                <input type="checkbox" id="privacy" name="privacy" required />
+                <label for="privacy">
+                    Acepto la <a href="/privacidad">política de privacidad</a> y
+                    el tratamiento de mis datos.
+                </label>
+            </div>
+        )
+    }
+
+    <button type="submit" class="btn-submit">{buttonText}</button>
 </form>
+
+<style>
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+
+    .form-control {
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--color-primary);
+    }
+
+    .theme-light .form-control {
+        background: #f8f9fa;
+        color: #333;
+        border-color: #ddd;
+    }
+
+    .theme-light .form-control:focus {
+        border-color: var(--color-primary);
+    }
+
+    .privacy-group {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .privacy-group input {
+        margin-top: 5px;
+    }
+
+    .privacy-group label {
+        font-size: 0.85rem;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+
+    .btn-submit {
+        padding: 15px 30px;
+        background-color: var(--color-primary);
+        color: #000;
+        border: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+            transform 0.2s,
+            background-color 0.2s;
+        margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+        background-color: #ffc400;
+        transform: translateY(-2px);
+    }
+</style>
