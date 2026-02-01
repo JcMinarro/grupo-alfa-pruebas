@@ -24,69 +24,38 @@ const {
 } = Astro.props;
 ---
 
-<div class={`project-financials ${className}`}>
-    <h2>{title}</h2>
-    <table class="data-table">
+<div class={`mb-15 ${className}`}>
+    <h2
+        class="text-[1.5rem] mb-[25px] uppercase border-l-4 border-primary pl-[15px] text-[var(--component-text)]"
+    >
+        {title}
+    </h2>
+    <table class="w-full border-collapse bg-[var(--component-bg)]">
         <tbody>
             {
                 costs.map((cost) => (
                     <tr>
-                        <td>{cost.concept}</td>
-                        <td class="amount">{cost.amount}</td>
+                        <td class="p-[15px_20px] border border-[var(--component-border)] text-base text-[var(--component-text)]">
+                            {cost.concept}
+                        </td>
+                        <td class="p-[15px_20px] border border-[var(--component-border)] text-base text-[var(--component-text)] font-bold text-right text-primary">
+                            {cost.amount}
+                        </td>
                     </tr>
                 ))
             }
             {
                 total && (
-                    <tr class="total-row">
-                        <td>{t("projects.costs.total")}</td>
-                        <td class="amount">{total}</td>
+                    <tr class="bg-[rgba(255,170,0,0.1)]">
+                        <td class="p-[15px_20px] border border-[var(--component-border)] text-base text-[var(--component-text)] font-bold border-t-2 border-t-primary">
+                            {t("projects.costs.total")}
+                        </td>
+                        <td class="p-[15px_20px] border border-[var(--component-border)] text-base text-[var(--component-text)] font-bold border-t-2 border-t-primary text-right text-primary">
+                            {total}
+                        </td>
                     </tr>
                 )
             }
         </tbody>
     </table>
 </div>
-
-<style>
-    .project-financials {
-        margin-bottom: 60px;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-        text-transform: uppercase;
-        border-left: 4px solid var(--color-primary);
-        padding-left: 15px;
-        color: var(--component-text);
-    }
-
-    .data-table {
-        width: 100%;
-        border-collapse: collapse;
-        background: var(--component-bg);
-    }
-
-    .data-table td {
-        padding: 15px 20px;
-        border: 1px solid var(--component-border);
-        font-size: 1rem;
-        color: var(--component-text);
-    }
-
-    .amount {
-        font-weight: 700;
-        text-align: right;
-        color: var(--color-primary);
-    }
-
-    .total-row {
-        background: rgba(255, 170, 0, 0.1);
-    }
-
-    .total-row td {
-        font-weight: 700;
-        border-top: 2px solid var(--color-primary);
-    }
-</style>

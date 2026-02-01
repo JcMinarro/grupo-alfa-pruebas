@@ -25,3 +25,6 @@ The contact form seen in multiple pages SHALL be extracted into a `ContactForm.a
 #### Scenario: Form validation
 - **WHEN** the `ContactForm` is used
 - **THEN** it maintains required fields and existing submission behavior (or improves upon it).
+
+### Requirement: Implementation Standard
+Reusable components MUST be styled using Tailwind CSS utility classes to ensure consistency with the design system.

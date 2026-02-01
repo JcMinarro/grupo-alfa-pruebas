@@ -22,12 +22,13 @@ Links in the header must not include the `.html` extension.
 - **WHEN** the user clicks on "PROYECTOS"
 - **THEN** it should point to `/proyectos` instead of `proyectos.html`.
 
-### Requirement: Visual Style
-The header must match the design layout and styling standards.
-- Logo (cabeza) on the far left.
-- Navigation links on the right.
-- Links in ALL CAPS.
+### Requirement: Header Styling
+The header MUST be styled using Tailwind CSS utility classes instead of custom CSS.
 
-#### Scenario: Active item styling
-- **WHEN** a page is active (e.g., PROYECTOS)
-- **THEN** its link in the header must have a solid underline.
+#### Scenario: Visual Consistency
+- **WHEN** the header is rendered with Tailwind classes
+- **THEN** it visually matches the design across mobile and desktop, using Tailwind's responsive prefixes (`md:`, `lg:`).
+
+#### Scenario: Dynamic Behavior
+- **WHEN** the user scrolls or interacts with the "scrolled" state
+- **THEN** header style changes (e.g., background opacity) are applied using Tailwind utilities (e.g., `[.scrolled_&]:bg-white`).

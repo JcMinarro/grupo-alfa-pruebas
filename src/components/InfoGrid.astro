@@ -13,27 +13,8 @@ const style = {
 };
 ---
 
-<div class={`info-grid ${className}`} style={style}>
+<div
+    class={`grid w-full ${columns === 2 ? "grid-cols-1 md:grid-cols-2" : columns === 4 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} gap-10 ${className}`}
+>
     <slot />
 </div>
-
-<style>
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(var(--grid-cols), 1fr);
-        gap: var(--grid-gap);
-        width: 100%;
-    }
-
-    @media (max-width: 992px) {
-        .info-grid {
-            grid-template-columns: repeat(min(2, var(--grid-cols)), 1fr);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .info-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>

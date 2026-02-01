@@ -18,146 +18,80 @@ const t = useTranslations(lang);
         </div>
     </section>
 
-    <section class="project-details fade-in">
-        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
+    <section class="max-w-[1200px] mx-auto py-20 px-5 fade-in text-dark">
+        <a
+            href="/proyectos"
+            class="inline-block mb-10 text-primary font-semibold hover:translate-x-[-5px] transition-transform"
+            >← {t("projects.back")}</a
+        >
 
-        <div class="detail-section" style="margin-top: 40px;">
-            <h2>{t("projects.details.title")}</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h4>{t("projects.common.details.type")}</h4>
-                    <p>{t("projects.fliphouse.details.type")}</p>
-                </div>
-                <div class="info-card">
-                    <h4>{t("projects.common.details.location")}</h4>
-                    <p>{t("projects.fliphouse.details.location")}</p>
-                </div>
-                <div class="info-card">
-                    <h4>{t("projects.common.details.surface")}</h4>
-                    <p>90 m²</p>
-                </div>
-                <div class="info-card">
-                    <h4>
-                        {t("projects.common.details.strategy") || "Estrategia"}
-                    </h4>
-                    <p>{t("projects.fliphouse.details.strategy")}</p>
-                </div>
-            </div>
-        </div>
+        <h2 class="text-3xl font-bold mb-10 border-l-4 border-primary pl-5">
+            {t("projects.details.title")}
+        </h2>
+        <ProjectDetails
+            type={t("projects.fliphouse.details.type")}
+            location={t("projects.fliphouse.details.location")}
+            surface="90 m²"
+            strategy={t("projects.fliphouse.details.strategy")}
+        />
 
-        <div class="detail-section">
-            <h2>{t("projects.division.costs.title")}</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>{t("contact.form.message") || "Concepto"}</th>
-                        <th>{t("projects.costs.total") || "Importe"}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{t("projects.common.costs.compra")}</td>
-                        <td>105.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>{t("projects.common.costs.reforma")}</td>
-                        <td>30.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>{t("projects.common.costs.licencias")}</td>
-                        <td>5.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>{t("projects.common.costs.muebles")}</td>
-                        <td>5.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>{t("projects.chalet.costs.imprevistos")}</td>
-                        <td>5.000 €</td>
-                    </tr>
-                    <tr>
-                        <td
-                            ><strong
-                                >{
-                                    t("projects.costs.total") ||
-                                        "Inversión Total"
-                                }</strong
-                            ></td
-                        >
-                        <td><strong>150.000 €</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <ProjectFinancials
+            costs={[
+                {
+                    concept: t("projects.common.costs.compra"),
+                    amount: "105.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.reforma"),
+                    amount: "30.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.licencias"),
+                    amount: "5.000 €",
+                },
+                {
+                    concept: t("projects.common.costs.muebles"),
+                    amount: "5.000 €",
+                },
+                {
+                    concept: t("projects.chalet.costs.imprevistos"),
+                    amount: "5.000 €",
+                },
+            ]}
+            total="150.000 €"
+        />
 
-        <div class="detail-section">
-            <h2>{t("projects.division.roi.title")}</h2>
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;"
+        <ProjectROI
+            strategy="both"
+            saleData={{
+                price: "210.000 €",
+                profit: "60.000 €",
+                roi: "40,00 %",
+            }}
+            rentData={{
+                monthly: "-",
+                annual: "-",
+                roi: t("projects.fliphouse.roi.rent.description"),
+            }}
+        />
+
+        <div
+            class="bg-[var(--color-bg-dark)] text-white p-10 rounded-lg mt-15 text-center"
+        >
+            <h3 class="text-primary text-[1.5rem] mb-5 font-bold uppercase">
+                {t("projects.executiveSummary")}
+            </h3>
+            <p
+                class="text-[1.1rem] leading-relaxed max-w-[800px] mx-auto text-white"
             >
-                <!-- Rentabilidad por Venta -->
-                <div
-                    class="info-card"
-                    style="background: #fff; border: 1px solid #eee;"
-                >
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        {t("projects.division.roi.sale.label")}
-                    </h3>
-                    <ul
-                        style="list-style: none; padding: 0; margin-bottom: 20px;"
-                    >
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>{t("projects.fliphouse.roi.sale.price")}</span
-                            >
-                            <strong>210.000 €</strong>
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; justify-content: space-between;"
-                        >
-                            <span>{t("projects.division.roi.sale.profit")}</span
-                            >
-                            <strong>60.000 €</strong>
-                        </li>
-                    </ul>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px;"
-                    >
-                        <span>{t("projects.division.roi.net")}</span>
-                        <span class="roi-badge highlight">40,00 %</span>
-                    </div>
-                </div>
-
-                <!-- Rentabilidad por Alquiler -->
-                <div
-                    class="info-card"
-                    style="background: #fff; border: 1px solid #eee; opacity: 0.6;"
-                >
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">
-                        {t("projects.division.roi.rent.label")}
-                    </h3>
-                    <p
-                        style="font-style: italic; color: #666; margin-bottom: 20px;"
-                    >
-                        {t("projects.fliphouse.roi.rent.description")}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="executive-summary">
-            <h3>{t("projects.executiveSummary")}</h3>
-            <p>
                 {t("projects.fliphouse.summary")}
             </p>
         </div>
 
-        <div style="text-align: center; margin-top: 60px;">
+        <div class="text-center mt-15">
             <a
                 href="/#contacto"
-                class="btn-primary"
-                style="background-color: var(--flip-accent); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block shadow-lg"
                 >{t("projects.interested")}</a
             >
         </div>

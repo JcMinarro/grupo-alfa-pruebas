@@ -20,181 +20,255 @@ const t = useTranslations(lang);
         <img
             src="/assets/logo-alfa-black-text.png"
             alt={t("home.hero.logo.alt")}
-            class="section-logo"
-            style="width: 250px; margin-bottom: 2rem;"
+            class="w-[250px] mb-8 mx-auto"
         />
         <img
             src="/assets/logo-alfa-wolf.png"
             alt={t("home.hero.bg.alt")}
-            class="hero-logo"
-            style="width: 500px; margin-bottom: 1rem;"
+            class="w-[500px] mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] brightness-0 mx-auto"
         />
-        <h2 class="hero-subtitle">{t("hero.title")}</h2>
+        <h2
+            class="text-[1.5rem] tracking-[5px] font-medium text-white uppercase"
+        >
+            {t("hero.title")}
+        </h2>
     </Hero>
 
     <!-- Value Props (Steps) -->
-    <section class="steps-section">
-        <div class="container">
-            <div class="text-center fade-in" style="margin-bottom: 60px;">
-                <h2 class="section-main-title">
+    <section class="py-24 bg-white text-dark">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="text-center fade-in mb-16">
+                <h2
+                    class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                >
                     {t("home.steps.title.main")}
                 </h2>
-                <h2 class="section-secondary-title text-primary">
+                <h2
+                    class="text-[2.2rem] font-bold text-primary tracking-[2px] mb-5"
+                >
                     {t("home.steps.title.secondary")}
                 </h2>
-                <p class="section-context">{t("home.steps.context")}</p>
+                <p class="text-[1.1rem] text-[#666]">
+                    {t("home.steps.context")}
+                </p>
             </div>
 
-            <div class="steps-grid">
-                <div class="step-item fade-in">
-                    <div class="step-icon">
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-16 mt-12 mx-auto max-w-[800px]"
+            >
+                <div class="group text-center fade-in">
+                    <div
+                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
+                    >
                         <img
                             src="/assets/lupa-AE0r2VjNOpI4LRQ7.png"
                             alt={t("home.steps.localizamos")}
+                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
                         />
                     </div>
-                    <h3>{t("home.steps.localizamos")}</h3>
+                    <h3
+                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
+                    >
+                        {t("home.steps.localizamos")}
+                    </h3>
                 </div>
-                <div class="step-item fade-in">
-                    <div class="step-icon">
+                <div class="group text-center fade-in">
+                    <div
+                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
+                    >
                         <img
                             src="/assets/gestion-A3Q7anMajGcEW1Lx.png"
                             alt={t("home.steps.gestionamos")}
+                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
                         />
                     </div>
-                    <h3>{t("home.steps.gestionamos")}</h3>
+                    <h3
+                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
+                    >
+                        {t("home.steps.gestionamos")}
+                    </h3>
                 </div>
-                <div class="step-item fade-in">
-                    <div class="step-icon">
+                <div class="group text-center fade-in">
+                    <div
+                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
+                    >
                         <img
                             src="/assets/mrtillo-AR032ZKJrRh87JyG.png"
                             alt={t("home.steps.reformamos")}
+                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
                         />
                     </div>
-                    <h3>{t("home.steps.reformamos")}</h3>
+                    <h3
+                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
+                    >
+                        {t("home.steps.reformamos")}
+                    </h3>
                 </div>
-                <div class="step-item fade-in">
-                    <div class="step-icon">
+                <div class="group text-center fade-in">
+                    <div
+                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
+                    >
                         <img
                             src="/assets/euros-YD0w8Okj99HLq6az.png"
                             alt={t("home.steps.rentabilizamos")}
+                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
                         />
                     </div>
-                    <h3>{t("home.steps.rentabilizamos")}</h3>
+                    <h3
+                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
+                    >
+                        {t("home.steps.rentabilizamos")}
+                    </h3>
                 </div>
             </div>
 
-            <div class="process-flow fade-in">
-                <div class="flow-item">
-                    <p>{t("home.steps.financiar")}</p>
+            <div class="flex flex-col items-center gap-5 mt-16 fade-in">
+                <div class="flex flex-col items-center gap-4">
+                    <p class="text-[1.5rem] font-medium text-dark">
+                        {t("home.steps.financiar")}
+                    </p>
                 </div>
 
-                <div class="arrow-triangle-down"></div>
-
-                <div class="flow-item">
-                    <p>{t("home.steps.inversion")}</p>
+                <div
+                    class="w-5 h-5 border-r-[3px] border-b-[3px] border-text-dark rotate-45 my-2.5"
+                >
                 </div>
 
-                <div class="arrow-triangle-down"></div>
+                <div class="flex flex-col items-center gap-4">
+                    <p class="text-[1.5rem] font-medium text-dark">
+                        {t("home.steps.inversion")}
+                    </p>
+                </div>
 
-                <div class="flow-item">
-                    <div class="flow-icon">
+                <div
+                    class="w-5 h-5 border-r-[3px] border-b-[3px] border-text-dark rotate-45 my-2.5"
+                >
+                </div>
+
+                <div class="flex flex-col items-center gap-4">
+                    <div class="w-[60px] h-auto">
                         <img
                             src="/assets/casa-icon.png"
                             alt={t("home.steps.house.alt")}
+                            class="w-full h-auto"
                         />
                     </div>
-                    <p>{t("home.steps.cobras")}</p>
+                    <p class="text-[1.5rem] font-medium text-dark">
+                        {t("home.steps.cobras")}
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Libertad Financiera Section -->
-    <section class="libertad-section">
-        <div class="container text-center">
-            <h2 class="section-main-title">{t("home.libertad.title.main")}</h2>
-            <h2 class="section-secondary-title text-primary">
+    <section class="py-24 bg-white border-t border-[#f0f0f0] text-dark">
+        <div class="max-w-[1200px] mx-auto px-4 text-center">
+            <h2 class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark">
+                {t("home.libertad.title.main")}
+            </h2>
+            <h2
+                class="text-[2.2rem] font-bold text-primary tracking-[2px] mb-5"
+            >
                 {t("home.libertad.title.secondary")}
             </h2>
             <img
                 src="/assets/logo-alfa-wolf.png"
                 alt={t("home.hero.logo.alt")}
-                class="section-logo"
-                style="height: 60px; filter: brightness(0) invert(1);"
+                class="block w-[150px] mx-auto my-10 brightness-0"
             />
-            <p class="rentability">
+            <p class="text-[1.5rem] font-normal mb-5 text-dark">
                 {t("home.libertad.rentability")}
             </p>
-            <p class="description">
+            <p class="text-[#666] leading-[1.8] max-w-[600px] mx-auto mb-10">
                 {t("home.libertad.description")}
             </p>
         </div>
     </section>
 
     <!-- Quote/Bedroom Section -->
-    <section class="quote-section">
-        <div class="container text-center fade-in">
+    <section class="py-24 bg-white text-dark">
+        <div class="max-w-[1200px] mx-auto px-4 text-center fade-in">
             <img
                 src="/assets/logo-alfa-black-text.png"
                 alt={t("home.hero.logo.alt")}
-                class="section-logo-small"
+                class="block w-[150px] mx-auto mb-5"
             />
-            <p class="quote-text">
+            <p
+                class="text-[1.5rem] italic text-[#333] max-w-[800px] mx-auto mb-[60px] leading-[1.4]"
+            >
                 {t("home.quote.text")}
             </p>
-            <div class="bedroom-image">
+            <div
+                class="max-w-[1000px] mx-auto rounded overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.1)]"
+            >
                 <img
                     src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
                     alt="Bedroom"
+                    class="w-full h-auto rounded block shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
                 />
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="servicios" class="services-section">
-        <div class="text-center services-header">
-            <h2 class="section-secondary-title text-black">
+    <section id="servicios" class="p-0 bg-white text-dark">
+        <div class="pt-20 pb-5 text-center">
+            <h2
+                class="text-[2.2rem] font-bold text-primary tracking-[2px] mb-10 text-black"
+            >
                 {t("home.services.title")}
             </h2>
         </div>
 
         <ServiceList />
 
-        <div
-            class="text-center"
-            style="margin-top: 60px; padding-bottom: 80px; color: var(--color-text-dark);"
-        >
-            <p style="font-style: italic; margin-bottom: 20px;">
+        <div class="mt-[60px] pb-20 text-dark text-center">
+            <p class="italic mb-5">
                 {t("home.services.context")}
             </p>
-            <a href="/contacto" class="btn-primary">{t("home.services.cta")}</a>
+            <a
+                href="/contacto"
+                class="bg-primary text-black px-[30px] py-[15px] border-none rounded-[50px] font-bold uppercase cursor-pointer transition-all duration-300 no-underline inline-block text-[0.9rem] tracking-[1px] hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(255,170,0,0.4)]"
+                >{t("home.services.cta")}</a
+            >
         </div>
     </section>
 
     <!-- Submarcas Section -->
-    <section id="submarcas" class="submarcas-section fade-in">
-        <div class="container">
-            <div class="submarcas-grid">
-                <a href="/flip-art" class="submarca-tag"
+    <section id="submarcas" class="py-20 bg-white fade-in">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div
+                class="flex flex-wrap justify-center gap-[15px] max-w-[1000px] mx-auto"
+            >
+                <a
+                    href="/flip-art"
+                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none hover:bg-[#333] hover:-translate-y-[3px] hover:text-[#f9da78]"
                     >{t("submarcas.flipArt")}</a
                 >
-                <a href="/lujo-rent" class="submarca-tag"
+                <a
+                    href="/lujo-rent"
+                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none hover:bg-[#333] hover:-translate-y-[3px] hover:text-[#f9da78]"
                     >{t("submarcas.lujoRent")}</a
                 >
                 <a
                     href="/seguros"
-                    class="submarca-tag"
+                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none hover:bg-[#333] hover:-translate-y-[3px] hover:text-[#f9da78]"
                     set:html={t("submarcas.seguros")}
                 />
-                <a href="/alfa-clean" class="submarca-tag"
+                <a
+                    href="/alfa-clean"
+                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none hover:bg-[#333] hover:-translate-y-[3px] hover:text-[#f9da78]"
                     >{t("submarcas.alfaClean")}</a
                 >
-                <a href="/rey-subastos" class="submarca-tag"
+                <a
+                    href="/rey-subastos"
+                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none hover:bg-[#333] hover:-translate-y-[3px] hover:text-[#f9da78]"
                     >{t("submarcas.reySubastos")}</a
                 >
-                <a href="/alfa-lab" class="submarca-tag"
+                <a
+                    href="/alfa-lab"
+                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none hover:bg-[#333] hover:-translate-y-[3px] hover:text-[#f9da78]"
                     >{t("submarcas.alfaLab")}</a
                 >
             </div>
@@ -202,14 +276,18 @@ const t = useTranslations(lang);
     </section>
 
     <!-- Office and Contact Section -->
-    <section id="contacto" class="office-section">
-        <div class="container">
-            <div class="office-grid">
-                <div class="office-info fade-in">
-                    <h2 class="section-main-title">{t("home.office.title")}</h2>
+    <section id="contacto" class="py-[100px] bg-white text-dark">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div class="fade-in">
+                    <h2
+                        class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                    >
+                        {t("home.office.title")}
+                    </h2>
                     <p>{t("home.office.description")}</p>
-                    <div class="contact-details">
-                        <p>
+                    <div class="my-[30px] text-[1rem] text-[#555]">
+                        <p class="mb-[15px]">
                             {t("home.office.address.line1")}<br />{
                                 t("home.office.address.line2")
                             }
@@ -217,32 +295,41 @@ const t = useTranslations(lang);
                         <p>{t("home.office.address.city")}</p>
                     </div>
                 </div>
-                <div class="office-map fade-in">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.136343513689!2d-1.131464323455642!3d37.98561730006764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6382101cc25555%3A0x6b8a8670868a867!2sC.%20Conde%20del%20Valle%20de%20San%20Juan%2C%201%2C%2030004%20Murcia!5e0!3m2!1sen!2ses!4v1700000000000!5m2!1sen!2ses"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="fade-in">
+                    <div
+                        class="mt-10 rounded overflow-hidden h-[400px] w-full bg-[#eee]"
+                    >
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.136343513689!2d-1.131464323455642!3d37.98561730006764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6382101cc25555%3A0x6b8a8670868a867!2sC.%20Conde%20del%20Valle%20de%20San%20Juan%2C%201%2C%2030004%20Murcia!5e0!3m2!1sen!2ses!4v1700000000000!5m2!1sen!2ses"
+                            allowfullscreen=""
+                            loading="lazy"
+                            class="w-full h-full border-0"
+                            referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                    </div>
                 </div>
             </div>
 
-            <div class="home-contact-section">
-                <div class="office-grid">
+            <div class="mt-20 text-dark">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
                     <div class="fade-in">
-                        <h2 class="section-main-title">
+                        <h2
+                            class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                        >
                             {t("home.contact.title")}
                         </h2>
                         <p>
                             {t("home.contact.description")}
                         </p>
-                        <div class="contact-intro-logo">
+                        <div class="mt-10 flex justify-center">
                             <img
                                 src="/assets/logo-alfa-wolf.png"
                                 alt={t("home.hero.logo.alt")}
+                                class="w-[100px]"
                             />
                         </div>
                     </div>
-                    <div class="contact-form-home fade-in">
+                    <div class="fade-in">
                         <ContactForm theme="light" />
                     </div>
                 </div>

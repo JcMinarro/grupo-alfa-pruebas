@@ -35,26 +35,44 @@ const {
 } = Astro.props;
 ---
 
-<div class={`project-roi ${className}`}>
-    <h2>{title}</h2>
-    <div class="roi-grid">
+<div class={`mb-15 ${className}`}>
+    <h2
+        class="text-[1.5rem] mb-[25px] uppercase border-l-4 border-primary pl-[15px] text-[var(--component-text)]"
+    >
+        {title}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         {
             (strategy === "sale" || strategy === "both") && saleData && (
-                <div class="info-card">
-                    <h3>{t("projects.division.roi.sale.label")}</h3>
-                    <div class="roi-stats">
-                        <div class="stat">
-                            <span>{t("projects.common.roi.sale.price")}</span>
-                            <strong>{saleData.price}</strong>
+                <div class="p-[30px] bg-[var(--component-bg)] border border-[var(--component-border)] flex flex-col gap-[25px]">
+                    <h3 class="text-[1.2rem] m-0 uppercase text-[var(--component-text)]">
+                        {t("projects.division.roi.sale.label")}
+                    </h3>
+                    <div class="grid grid-cols-2 gap-5">
+                        <div class="flex flex-col gap-[5px]">
+                            <span class="text-[0.75rem] opacity-70 tracking-[1px] text-[var(--component-text-muted)]">
+                                {t("projects.common.roi.sale.price")}
+                            </span>
+                            <strong class="text-[1.1rem] text-primary">
+                                {saleData.price}
+                            </strong>
                         </div>
-                        <div class="stat">
-                            <span>{t("projects.common.roi.sale.profit")}</span>
-                            <strong>{saleData.profit}</strong>
+                        <div class="flex flex-col gap-[5px]">
+                            <span class="text-[0.75rem] opacity-70 tracking-[1px] text-[var(--component-text-muted)]">
+                                {t("projects.common.roi.sale.profit")}
+                            </span>
+                            <strong class="text-[1.1rem] text-primary">
+                                {saleData.profit}
+                            </strong>
                         </div>
                     </div>
-                    <div class="roi-highlight">
-                        <span>{t("projects.common.roi.label")}</span>
-                        <strong>{saleData.roi}</strong>
+                    <div class="mt-auto pt-5 border-t border-[var(--component-border)] flex justify-between items-center">
+                        <span class="font-bold tracking-[2px] text-[var(--component-text)]">
+                            {t("projects.common.roi.label")}
+                        </span>
+                        <strong class="text-[2rem] text-primary">
+                            {saleData.roi}
+                        </strong>
                     </div>
                 </div>
             )
@@ -62,105 +80,38 @@ const {
 
         {
             (strategy === "rent" || strategy === "both") && rentData && (
-                <div class="info-card">
-                    <h3>{t("projects.division.roi.rent.label")}</h3>
-                    <div class="roi-stats">
-                        <div class="stat">
-                            <span>{t("projects.common.roi.rent.monthly")}</span>
-                            <strong>{rentData.monthly}</strong>
+                <div class="p-[30px] bg-[var(--component-bg)] border border-[var(--component-border)] flex flex-col gap-[25px]">
+                    <h3 class="text-[1.2rem] m-0 uppercase text-[var(--component-text)]">
+                        {t("projects.division.roi.rent.label")}
+                    </h3>
+                    <div class="grid grid-cols-2 gap-5">
+                        <div class="flex flex-col gap-[5px]">
+                            <span class="text-[0.75rem] opacity-70 tracking-[1px] text-[var(--component-text-muted)]">
+                                {t("projects.common.roi.rent.monthly")}
+                            </span>
+                            <strong class="text-[1.1rem] text-primary">
+                                {rentData.monthly}
+                            </strong>
                         </div>
-                        <div class="stat">
-                            <span>{t("projects.common.roi.rent.annual")}</span>
-                            <strong>{rentData.annual}</strong>
+                        <div class="flex flex-col gap-[5px]">
+                            <span class="text-[0.75rem] opacity-70 tracking-[1px] text-[var(--component-text-muted)]">
+                                {t("projects.common.roi.rent.annual")}
+                            </span>
+                            <strong class="text-[1.1rem] text-primary">
+                                {rentData.annual}
+                            </strong>
                         </div>
                     </div>
-                    <div class="roi-highlight">
-                        <span>{t("projects.common.roi.label")}</span>
-                        <strong>{rentData.roi}</strong>
+                    <div class="mt-auto pt-5 border-t border-[var(--component-border)] flex justify-between items-center">
+                        <span class="font-bold tracking-[2px] text-[var(--component-text)]">
+                            {t("projects.common.roi.label")}
+                        </span>
+                        <strong class="text-[2rem] text-primary">
+                            {rentData.roi}
+                        </strong>
                     </div>
                 </div>
             )
         }
     </div>
 </div>
-
-<style>
-    .project-roi {
-        margin-bottom: 60px;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-        text-transform: uppercase;
-        border-left: 4px solid var(--color-primary);
-        padding-left: 15px;
-        color: var(--component-text);
-    }
-
-    .roi-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-    }
-
-    .info-card {
-        padding: 30px;
-        background: var(--component-bg);
-        border: 1px solid var(--component-border);
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .info-card h3 {
-        font-size: 1.2rem;
-        margin: 0;
-        text-transform: uppercase;
-        color: var(--component-text);
-    }
-
-    .roi-stats {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .stat {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .stat span {
-        font-size: 0.75rem;
-        opacity: 0.7;
-        letter-spacing: 1px;
-        color: var(--component-text-muted);
-    }
-
-    .stat strong {
-        font-size: 1.1rem;
-        color: var(--color-primary);
-    }
-
-    .roi-highlight {
-        margin-top: auto;
-        padding-top: 20px;
-        border-top: 1px solid var(--component-border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .roi-highlight span {
-        font-weight: 700;
-        letter-spacing: 2px;
-        color: var(--component-text);
-    }
-
-    .roi-highlight strong {
-        font-size: 2rem;
-        color: var(--color-primary);
-    }
-</style>

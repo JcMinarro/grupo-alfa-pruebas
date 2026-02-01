@@ -12,6 +12,7 @@ const {
     title = t("meta.title"),
     bodyClass = "",
     footerStyle = "",
+    activeNav = "inicio",
 } = Astro.props;
 ---
 
@@ -40,8 +41,10 @@ const {
         <ViewTransitions />
         <script src="../scripts/main.js"></script>
     </head>
-    <body class={bodyClass}>
-        <Header />
+    <body
+        class={`bg-bg-dark text-white font-main leading-[1.6] overflow-x-hidden ${bodyClass}`}
+    >
+        <Header activeNav={activeNav} />
 
         <main>
             <slot />

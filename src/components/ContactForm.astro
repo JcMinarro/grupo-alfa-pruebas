@@ -10,166 +10,107 @@ const {
     method = "POST",
     showPhone = false,
     showPrivacy = true,
-    buttonText = t('contact.form.submit'),
+    buttonText = t("contact.form.submit"),
     theme = "dark",
 } = Astro.props;
 ---
-
 
 <form
     id={id}
     action={action}
     method={method}
-    class={`contact-form theme-${theme}`}
+    class="flex flex-col gap-5 text-left"
 >
-    <div class="form-row">
-        <div class="form-group">
-            <label for="name">{t('contact.form.name')} *</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                class="form-control"
-                required
-            />
-        </div>
-        {
-            showPhone && (
-                <div class="form-group">
-                    <label for="phone">{t('contact.form.phone')}</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        class="form-control"
-                    />
-                </div>
-            )
-        }
+    <div class="flex flex-col gap-2">
+        <label
+            for="name"
+            class={`text-sm font-medium opacity-90 ${theme === "dark" ? "text-white" : "text-dark"}`}
+            >{t("contact.form.name")} *</label
+        >
+        <input
+            type="text"
+            id="name"
+            name="name"
+            class={`p-3 border transition-colors focus:outline-none focus:border-primary ${theme === "dark" ? "bg-white/5 border-white/20 text-white" : "bg-[#f8f9fa] border-[#ddd] text-dark"}`}
+            required
+        />
     </div>
 
-    <div class="form-group">
-        <label for="email">{t('contact.form.email')} *</label>
+    {
+        showPhone && (
+            <div class="flex flex-col gap-2">
+                <label
+                    for="phone"
+                    class={`text-sm font-medium opacity-90 ${theme === "dark" ? "text-white" : "text-dark"}`}
+                >
+                    {t("contact.form.phone")}
+                </label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class={`p-3 border transition-colors focus:outline-none focus:border-primary ${theme === "dark" ? "bg-white/5 border-white/20 text-white" : "bg-[#f8f9fa] border-[#ddd] text-dark"}`}
+                />
+            </div>
+        )
+    }
+
+    <div class="flex flex-col gap-2">
+        <label
+            for="email"
+            class={`text-sm font-medium opacity-90 ${theme === "dark" ? "text-white" : "text-dark"}`}
+            >{t("contact.form.email")} *</label
+        >
         <input
             type="email"
             id="email"
             name="email"
-            class="form-control"
-            placeholder={t('contact.form.email.placeholder')}
+            class={`p-3 border transition-colors focus:outline-none focus:border-primary ${theme === "dark" ? "bg-white/5 border-white/20 text-white" : "bg-[#f8f9fa] border-[#ddd] text-dark"}`}
+            placeholder={t("contact.form.email.placeholder")}
             required
         />
-
     </div>
 
-    <div class="form-group">
-        <label for="message">{t('contact.form.message')}</label>
-        <textarea id="message" name="message" class="form-control" rows="4"
-        ></textarea>
+    <div class="flex flex-col gap-2">
+        <label
+            for="message"
+            class={`text-sm font-medium opacity-90 ${theme === "dark" ? "text-white" : "text-dark"}`}
+            >{t("contact.form.message")}</label
+        >
+        <textarea
+            id="message"
+            name="message"
+            class={`p-3 border transition-colors focus:outline-none focus:border-primary ${theme === "dark" ? "bg-white/5 border-white/20 text-white" : "bg-[#f8f9fa] border-[#ddd] text-dark"}`}
+            rows="4"></textarea>
     </div>
 
     {
         showPrivacy && (
-            <div class="form-group privacy-group">
-                <input type="checkbox" id="privacy" name="privacy" required />
-                <label for="privacy">
-                    {t('contact.form.privacy.prefix')} <a href="/privacidad">{t('contact.form.privacy.link')}</a> {t('contact.form.privacy.suffix')}
+            <div class="flex flex-row items-start gap-2.5 mt-1.25 w-full text-left">
+                <input
+                    type="checkbox"
+                    id="privacy"
+                    name="privacy"
+                    class="mt-1 cursor-pointer shrink-0"
+                    required
+                />
+                <label
+                    for="privacy"
+                    class={`text-[0.85rem] font-normal leading-[1.4] cursor-pointer inline-block m-0 text-left ${theme === "dark" ? "text-white/80" : "text-[#666]"}`}
+                >
+                    {t("contact.form.privacy.prefix")}{" "}
+                    <a href="/privacidad" class="text-primary hover:underline">
+                        {t("contact.form.privacy.link")}
+                    </a>{" "}
+                    {t("contact.form.privacy.suffix")}
                 </label>
             </div>
         )
     }
 
-    <button type="submit" class="btn-submit">{buttonText}</button>
+    <button
+        type="submit"
+        class="p-4 bg-primary text-black border-none font-bold uppercase cursor-pointer transition-all hover:bg-[#ffc400] hover:-translate-y-0.5 mt-2.5"
+        >{buttonText}</button
+    >
 </form>
-
-<style>
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        text-align: left;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    @media (max-width: 600px) {
-        .form-row {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .form-group label {
-        font-size: 0.9rem;
-        font-weight: 500;
-        opacity: 0.9;
-    }
-
-    .form-control {
-        padding: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.05);
-        color: white;
-        font-family: inherit;
-        font-size: 1rem;
-        transition: border-color 0.3s;
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: var(--color-primary);
-    }
-
-    .theme-light .form-control {
-        background: #f8f9fa;
-        color: #333;
-        border-color: #ddd;
-    }
-
-    .theme-light .form-control:focus {
-        border-color: var(--color-primary);
-    }
-
-    .privacy-group {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .privacy-group input {
-        margin-top: 5px;
-    }
-
-    .privacy-group label {
-        font-size: 0.85rem;
-        font-weight: 400;
-        line-height: 1.4;
-    }
-
-    .btn-submit {
-        padding: 15px 30px;
-        background-color: var(--color-primary);
-        color: #000;
-        border: none;
-        font-weight: 700;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition:
-            transform 0.2s,
-            background-color 0.2s;
-        margin-top: 10px;
-    }
-
-    .btn-submit:hover {
-        background-color: #ffc400;
-        transform: translateY(-2px);
-    }
-</style>

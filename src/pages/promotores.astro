@@ -7,48 +7,66 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={`Promotores | ${t("brand.name")}`} bodyClass="promoter-page">
+<BaseLayout
+    title={`Promotores | ${t("brand.name")}`}
+    bodyClass="promoter-page bg-white text-dark"
+    activeNav="promotores"
+>
     <Hero
         title={t("promotores.hero.title")}
         subtitle={t("promotores.hero.subtitle")}
+        description={t("promotores.hero.description")}
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
         height="50vh"
-    >
-        <p
-            class="promoter-intro"
-            style="margin-top: 20px; font-size: 1.1rem; opacity: 0.9;"
-        >
-            {t("promotores.hero.description")}
-        </p>
-    </Hero>
+    />
 
-    <section class="promoter-container fade-in">
-        <h2 style="font-size: 2rem; margin-bottom: 40px; text-align: center;">
+    <section class="max-w-[1000px] mx-auto py-20 px-5 text-center fade-in">
+        <h2 class="text-[2rem] mb-10 text-dark">
             {t("promotores.intro.title")}
         </h2>
 
-        <div class="promoter-services-list">
-            <div class="service-item">
-                <h3>{t("promotores.service1")}</h3>
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] my-[60px] text-left"
+        >
+            <div
+                class="bg-white p-[30px] border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)]"
+            >
+                <h3 class="text-[1.3rem] mb-[10px] text-dark">
+                    {t("promotores.service1")}
+                </h3>
             </div>
-            <div class="service-item">
-                <h3>{t("promotores.service2")}</h3>
+            <div
+                class="bg-white p-[30px] border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)]"
+            >
+                <h3 class="text-[1.3rem] mb-[10px] text-dark">
+                    {t("promotores.service2")}
+                </h3>
             </div>
-            <div class="service-item">
-                <h3>{t("promotores.service3")}</h3>
+            <div
+                class="bg-white p-[30px] border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)]"
+            >
+                <h3 class="text-[1.3rem] mb-[10px] text-dark">
+                    {t("promotores.service3")}
+                </h3>
             </div>
-            <div class="service-item">
-                <h3>{t("promotores.service4")}</h3>
+            <div
+                class="bg-white p-[30px] border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)]"
+            >
+                <h3 class="text-[1.3rem] mb-[10px] text-dark">
+                    {t("promotores.service4")}
+                </h3>
             </div>
         </div>
     </section>
 
-    <section class="value-prop fade-in">
-        <div class="container" style="text-align: center;">
-            <h2>
+    <section class="bg-[#f8f8f8] text-dark py-20 mt-20 fade-in">
+        <div class="max-w-[1200px] mx-auto px-5 text-center">
+            <h2 class="text-3xl font-bold mb-10 max-w-3xl mx-auto">
                 {t("promotores.cta.text")}
             </h2>
-            <a href="/#contacto" class="btn-promoter"
+            <a
+                href="/#contacto"
+                class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block"
                 >{t("promotores.cta.button")}</a
             >
         </div>

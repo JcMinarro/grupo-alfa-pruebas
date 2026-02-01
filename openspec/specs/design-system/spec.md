@@ -41,5 +41,11 @@ Unified Design System to centralize tokens, utilities, and component styles for 
 
 ### 4. Architecture
 
--   **Source of Truth**: `src/styles/theme.css`.
--   **Strategy**: Remove global definitions from specific page CSS files and import the global theme.
+-   **Source of Truth**: `tailwind.config.mjs` (Tokens) and `src/styles/theme.css` (Base/Global styles).
+-   **Strategy**: Use Tailwind CSS utility-first approach. Custom CSS in `theme.css` should be limited to global resets, variable definitions, and complex animations that cannot be reasonably handled by Tailwind's arbitrary values.
+-   **Brand Colors**:
+    -   `primary`: #FFAA00
+    -   `bg-dark`: #1d1e20
+    -   `light`: #ffffff
+    -   `dark`: #1d1e20
+    -   `text-muted`: rgba(255, 255, 255, 0.7)

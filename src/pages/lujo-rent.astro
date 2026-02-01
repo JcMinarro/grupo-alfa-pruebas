@@ -11,71 +11,117 @@ const t = useTranslations(lang);
     bodyClass="lujo-page"
     footerStyle="border-top: 1px solid #333; background: #000;"
 >
-    <section class="lujo-hero fade-in">
-        <h1>LUJO <span>RENT</span></h1>
-        <p>{t("lujorent.subtitle")}</p>
+    <section
+        class="min-h-[60vh] flex flex-col items-center justify-center text-center bg-black text-white px-5 fade-in"
+    >
+        <h1
+            class="text-5xl md:text-7xl font-bold mb-5 tracking-[10px] uppercase italic"
+        >
+            LUJO <span class="text-primary not-italic"
+                >{t("lujorent.title.span")}</span
+            >
+        </h1>
+        <p
+            class="text-xl max-w-2xl mx-auto opacity-60 tracking-[2px] uppercase font-light"
+        >
+            {t("lujorent.subtitle")}
+        </p>
     </section>
 
-    <section class="services-section fade-in">
-        <h2 class="section-title">{t("lujorent.services.title")}</h2>
+    <section class="max-w-[1200px] mx-auto py-25 px-5 fade-in text-dark">
+        <h2
+            class="text-3xl font-bold text-center mb-15 relative pb-5 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-primary uppercase tracking-widest"
+        >
+            {t("lujorent.services.title")}
+        </h2>
 
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>{t("lujorent.services.vacation.title")}</h3>
-                <p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+            <div
+                class="bg-white p-10 shadow-2xl rounded-2xl border-t-4 border-primary transition-all hover:-translate-y-2"
+            >
+                <h3 class="text-xl font-bold mb-5 uppercase tracking-wide">
+                    {t("lujorent.services.vacation.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("lujorent.services.vacation.desc")}
                 </p>
             </div>
-            <div class="service-card">
-                <h3>{t("lujorent.services.rooms.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-10 shadow-2xl rounded-2xl border-t-4 border-primary transition-all hover:-translate-y-2"
+            >
+                <h3 class="text-xl font-bold mb-5 uppercase tracking-wide">
+                    {t("lujorent.services.rooms.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("lujorent.services.rooms.desc")}
                 </p>
             </div>
-            <div class="service-card">
-                <h3>{t("lujorent.services.traditional.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-10 shadow-2xl rounded-2xl border-t-4 border-primary transition-all hover:-translate-y-2"
+            >
+                <h3 class="text-xl font-bold mb-5 uppercase tracking-wide">
+                    {t("lujorent.services.traditional.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("lujorent.services.traditional.desc")}
                 </p>
             </div>
         </div>
 
-        <div class="features-list">
-            <div class="feature-item">
-                <span>★</span>
-                <p>{t("lujorent.features.maintenance")}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">★</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.maintenance")}
+                </p>
             </div>
-            <div class="feature-item">
-                <span>📅</span>
-                <p>{t("lujorent.features.reservations")}</p>
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">📅</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.reservations")}
+                </p>
             </div>
-            <div class="feature-item">
-                <span>✨</span>
-                <p>{t("lujorent.features.cleaning")}</p>
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">✨</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.cleaning")}
+                </p>
             </div>
-            <div class="feature-item">
-                <span>€</span>
-                <p>{t("lujorent.features.payments")}</p>
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">€</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.payments")}
+                </p>
             </div>
-            <div class="feature-item">
-                <span>📈</span>
-                <p>{t("lujorent.features.optimization")}</p>
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">📈</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.optimization")}
+                </p>
             </div>
-            <div class="feature-item">
-                <span>👥</span>
-                <p>{t("lujorent.features.attention")}</p>
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">👥</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.attention")}
+                </p>
             </div>
-            <div class="feature-item">
-                <span>🏠</span>
-                <p>{t("lujorent.features.control")}</p>
+            <div class="flex items-center gap-4 bg-[#f9f9f9] p-6 rounded-xl">
+                <span class="text-primary text-2xl">🏠</span>
+                <p class="font-bold text-sm uppercase tracking-tight">
+                    {t("lujorent.features.control")}
+                </p>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2 style="color: #fff; margin-bottom: 30px;">
+    <section class="bg-black text-white py-20 px-5 text-center">
+        <h2 class="text-3xl font-bold mb-10 tracking-widest uppercase">
             {t("lujorent.cta.title")}
         </h2>
-        <a href="/#contacto" class="btn-luxury">{t("lujorent.cta.button")}</a>
+        <a
+            href="/#contacto"
+            class="bg-primary text-black px-15 py-5 rounded-full font-bold uppercase tracking-widest transition-all hover:scale-110 hover:bg-[#ffc400] inline-block shadow-2xl"
+            >{t("lujorent.cta.button")}</a
+        >
     </section>
 </BaseLayout>

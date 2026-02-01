@@ -21,10 +21,16 @@ const t = useTranslations(lang);
         height="50vh"
     />
 
-    <section class="project-details container fade-in">
-        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
+    <section class="max-w-[1200px] mx-auto py-20 px-5 fade-in text-dark">
+        <a
+            href="/proyectos"
+            class="inline-block mb-10 text-primary font-semibold hover:translate-x-[-5px] transition-transform"
+            >← {t("projects.back")}</a
+        >
 
-        <h2>{t("projects.details.title")}</h2>
+        <h2 class="text-3xl font-bold mb-10 border-l-4 border-primary pl-5">
+            {t("projects.details.title")}
+        </h2>
         <ProjectDetails
             type={t("projects.local.details.type")}
             location={t("projects.local.details.location")}
@@ -32,7 +38,9 @@ const t = useTranslations(lang);
             distribution={t("projects.local.details.distribution")}
         />
 
-        <h2 style="margin-top: 60px;">
+        <h2
+            class="text-[2rem] font-bold mt-20 mb-10 border-l-4 border-primary pl-5"
+        >
             {t("projects.local.transformation.title")}
         </h2>
         <InfoGrid columns={3}>

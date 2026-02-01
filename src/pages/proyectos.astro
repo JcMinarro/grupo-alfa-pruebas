@@ -9,111 +9,166 @@ const t = useTranslations(lang);
 
 <ProjectLayout
     title={`Proyectos | ${t("brand.name")}`}
-    bodyClass="portfolio-page"
+    bodyClass="portfolio-page bg-white text-dark"
+    activeNav="proyectos"
 >
     <Hero
         title={t("projects.hero.title")}
         subtitle={t("projects.hero.subtitle")}
+        description={t("projects.hero.description")}
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
         height="50vh"
-    >
-        <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 20px;">
-            {t("projects.hero.description")}
-        </p>
-    </Hero>
+    />
 
-    <section class="portfolio-container project-details container">
-        <div class="projects-grid fade-in">
+    <section class="max-w-[1200px] mx-auto py-20 px-5">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] mt-[50px] fade-in"
+        >
             <!-- Project 1 -->
-            <a href="/local-comercial" class="project-card">
-                <div class="project-image-container">
+            <a
+                href="/local-comercial"
+                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
+            >
+                <div class="h-[250px] overflow-hidden">
                     <img
                         src="/assets/photo-1616046229478-9901c5536a456111.jpg"
                         alt={t("projects.project1.title")}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
-                <div class="project-info">
+                <div class="p-[25px] grow flex flex-col justify-between">
                     <div>
-                        <p class="project-location">MURCIA</p>
-                        <h3>{t("projects.project1.title")}</h3>
+                        <p
+                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
+                        >
+                            MURCIA
+                        </p>
+                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
+                            {t("projects.project1.title")}
+                        </h3>
                     </div>
-                    <span class="btn-view-project"
+                    <span
+                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
                         >{t("projects.viewMore")}</span
                     >
                 </div>
             </a>
 
             <!-- Project 2 -->
-            <a href="/alquiler-por-habitaciones" class="project-card">
-                <div class="project-image-container">
+            <a
+                href="/alquiler-por-habitaciones"
+                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
+            >
+                <div class="h-[250px] overflow-hidden">
                     <img
                         src="/assets/photo-1616046229478-9901c5536a456111.jpg"
                         alt={t("projects.project2.title")}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
-                <div class="project-info">
+                <div class="p-[25px] grow flex flex-col justify-between">
                     <div>
-                        <p class="project-location">MADRID</p>
-                        <h3>{t("projects.project2.title")}</h3>
+                        <p
+                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
+                        >
+                            MADRID
+                        </p>
+                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
+                            {t("projects.project2.title")}
+                        </h3>
                     </div>
-                    <span class="btn-view-project"
+                    <span
+                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
                         >{t("projects.viewMore")}</span
                     >
                 </div>
             </a>
 
             <!-- Project 5 -->
-            <a href="/vivienda-turistica" class="project-card">
-                <div class="project-image-container">
+            <a
+                href="/vivienda-turistica"
+                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
+            >
+                <div class="h-[250px] overflow-hidden">
                     <img
                         src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
                         alt={t("projects.project5.title")}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
-                <div class="project-info">
+                <div class="p-[25px] grow flex flex-col justify-between">
                     <div>
-                        <p class="project-location">ÁGUILAS, MURCIA</p>
-                        <h3>{t("projects.project5.title")}</h3>
+                        <p
+                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
+                        >
+                            ÁGUILAS, MURCIA
+                        </p>
+                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
+                            {t("projects.project5.title")}
+                        </h3>
                     </div>
-                    <span class="btn-view-project"
+                    <span
+                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
                         >{t("projects.viewMore")}</span
                     >
                 </div>
             </a>
 
             <!-- Project 7 -->
-            <a href="/chalet-dividido" class="project-card">
-                <div class="project-image-container">
+            <a
+                href="/chalet-dividido"
+                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
+            >
+                <div class="h-[250px] overflow-hidden">
                     <img
                         src="/assets/photo-1616046229478-9901c5536a456111.jpg"
                         alt={t("projects.project7.title")}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
-                <div class="project-info">
+                <div class="p-[25px] grow flex flex-col justify-between">
                     <div>
-                        <p class="project-location">ALICANTE</p>
-                        <h3>{t("projects.project7.title")}</h3>
+                        <p
+                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
+                        >
+                            ALICANTE
+                        </p>
+                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
+                            {t("projects.project7.title")}
+                        </h3>
                     </div>
-                    <span class="btn-view-project"
+                    <span
+                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
                         >{t("projects.viewMore")}</span
                     >
                 </div>
             </a>
 
             <!-- Project 8 -->
-            <a href="/duplex-turistico" class="project-card">
-                <div class="project-image-container">
+            <a
+                href="/duplex-turistico"
+                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
+            >
+                <div class="h-[250px] overflow-hidden">
                     <img
                         src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
                         alt={t("projects.project8.title")}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
-                <div class="project-info">
+                <div class="p-[25px] grow flex flex-col justify-between">
                     <div>
-                        <p class="project-location">MURCIA</p>
-                        <h3>{t("projects.project8.title")}</h3>
+                        <p
+                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
+                        >
+                            MURCIA
+                        </p>
+                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
+                            {t("projects.project8.title")}
+                        </h3>
                     </div>
-                    <span class="btn-view-project"
+                    <span
+                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
                         >{t("projects.viewMore")}</span
                     >
                 </div>
@@ -121,19 +176,17 @@ const t = useTranslations(lang);
         </div>
     </section>
 
-    <section
-        class="cta-portfolio fade-in"
-        style="background: var(--component-bg); padding: 80px 0; text-align: center;"
-    >
-        <div class="container">
-            <h2>{t("projects.cta.title")}</h2>
-            <p style="margin-bottom: 30px;">
+    <section class="bg-[var(--component-bg)] py-20 text-center fade-in">
+        <div class="max-w-[1200px] mx-auto px-5">
+            <h2 class="text-3xl font-bold mb-8 text-black">
+                {t("projects.cta.title")}
+            </h2>
+            <p class="mb-8 text-lg text-dark max-w-2xl mx-auto">
                 {t("projects.cta.description")}
             </p>
             <a
                 href="/#contacto"
-                class="btn-primary"
-                style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block"
                 >{t("projects.cta.button")}</a
             >
         </div>

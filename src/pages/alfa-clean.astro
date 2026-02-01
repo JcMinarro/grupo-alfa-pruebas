@@ -6,69 +6,85 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={`Alfa Clean | ${t("brand.name")}`} bodyClass="clean-page">
-    <style slot="head">
-        body {
-            font-family: "DM Sans", sans-serif;
-            background-color: #000;
-        }
-
-        .site-header {
-            background-color: #fff;
-        }
-    </style>
-
-    <main class="container" style="padding: 80px 0;">
-        <div class="clean-content-box fade-in">
-            <div
-                class="clean-logo-section"
-                style="text-align: center; margin-bottom: 40px;"
-            >
+<BaseLayout
+    title={`Alfa Clean | ${t("brand.name")}`}
+    bodyClass="clean-page bg-black"
+>
+    <main class="max-w-[1200px] mx-auto py-20 px-5">
+        <div
+            class="bg-[#121212] p-10 md:p-15 rounded-2xl border border-[rgba(255,255,255,0.05)] shadow-2xl fade-in max-w-[900px] mx-auto"
+        >
+            <div class="text-center mb-10">
                 <img
                     src="/assets/logo-alfa-wolf.png"
                     alt={t("clean.logo.white.alt")}
-                    style="height: 60px; filter: brightness(0) invert(1);"
+                    class="h-15 mx-auto brightness-0 invert"
                 />
             </div>
 
-            <div class="clean-text-section">
-                <h1>
+            <div class="text-center text-white">
+                <h1
+                    class="text-3xl md:text-5xl font-bold mb-10 overflow-hidden"
+                >
                     {t("clean.title.prefix")}
-                    <span>{t("clean.title.name")}</span>
+                    <span class="text-primary">{t("clean.title.name")}</span>
                 </h1>
 
-                <div class="clean-services-grid">
-                    <div class="clean-service-item">
-                        <img
-                            src="/assets/edificio-YX4x1WW477Irx3p5.png"
-                            alt={t("clean.service.communities")}
-                        />
-                        <p>{t("clean.service.communities")}</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div
+                            class="w-20 h-20 bg-[rgba(255,255,255,0.05)] rounded-full flex items-center justify-center group-hover:bg-primary transition-colors"
+                        >
+                            <img
+                                src="/assets/edificio-YX4x1WW477Irx3p5.png"
+                                alt={t("clean.service.communities")}
+                                class="w-10 h-10 object-contain group-hover:brightness-0"
+                            />
+                        </div>
+                        <p class="font-semibold text-lg">
+                            {t("clean.service.communities")}
+                        </p>
                     </div>
-                    <div class="clean-service-item">
-                        <img
-                            src="/assets/buscar-casa-YanJ6aBZVKc969wa.png"
-                            alt={t("clean.service.private")}
-                        />
-                        <p>{t("clean.service.private")}</p>
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div
+                            class="w-20 h-20 bg-[rgba(255,255,255,0.05)] rounded-full flex items-center justify-center group-hover:bg-primary transition-colors"
+                        >
+                            <img
+                                src="/assets/buscar-casa-YanJ6aBZVKc969wa.png"
+                                alt={t("clean.service.private")}
+                                class="w-10 h-10 object-contain group-hover:brightness-0"
+                            />
+                        </div>
+                        <p class="font-semibold text-lg">
+                            {t("clean.service.private")}
+                        </p>
                     </div>
-                    <div class="clean-service-item">
-                        <img
-                            src="/assets/flecha-abajo-AzGN41EZW0T39oZP.png"
-                            alt={t("clean.service.vacation")}
-                            style="transform: rotate(-90deg);"
-                        />
-                        <p>{t("clean.service.vacation")}</p>
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div
+                            class="w-20 h-20 bg-[rgba(255,255,255,0.05)] rounded-full flex items-center justify-center group-hover:bg-primary transition-colors"
+                        >
+                            <img
+                                src="/assets/flecha-abajo-AzGN41EZW0T39oZP.png"
+                                alt={t("clean.service.vacation")}
+                                class="w-10 h-10 object-contain -rotate-90 group-hover:brightness-0"
+                            />
+                        </div>
+                        <p class="font-semibold text-lg">
+                            {t("clean.service.vacation")}
+                        </p>
                     </div>
                 </div>
 
-                <div class="clean-description">
-                    <p>
+                <div class="max-w-[700px] mx-auto mb-10">
+                    <p class="text-[1.1rem] leading-relaxed text-[#bbb]">
                         {t("clean.description")}
                     </p>
                 </div>
 
-                <a href="/#servicios" class="clean-volver">{t("common.back")}</a
+                <a
+                    href="/#servicios"
+                    class="inline-block text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity"
+                    >← {t("common.back")}</a
                 >
             </div>
         </div>

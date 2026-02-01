@@ -11,61 +11,87 @@ const t = useTranslations(lang);
     bodyClass="rey-page"
     footerStyle="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/assets/lab/lab-footer-bg.jpg') no-repeat center center/cover;"
 >
-    <section class="rey-hero fade-in">
-        <h1>REY <span>SUBASTOS</span></h1>
-        <p>
+    <section
+        class="min-h-[60vh] flex flex-col items-center justify-center text-center bg-black text-white px-5 fade-in"
+    >
+        <h1 class="text-4xl md:text-6xl font-black mb-5 tracking-tighter">
+            REY <span class="text-primary">{t("reysubastos.title.span")}</span>
+        </h1>
+        <p class="text-xl max-w-2xl mx-auto opacity-80">
             {t("reysubastos.subtitle")}
         </p>
     </section>
 
-    <section class="expertise-section fade-in">
-        <div class="section-heading">
-            <h2>{t("reysubastos.expertise.title")}</h2>
-            <p>
+    <section class="max-w-[1200px] mx-auto py-25 px-5 fade-in text-dark">
+        <div class="text-center mb-15">
+            <h2 class="text-3xl font-bold mb-5">
+                {t("reysubastos.expertise.title")}
+            </h2>
+            <p class="text-lg text-[#666] max-w-3xl mx-auto">
                 {t("reysubastos.expertise.desc")}
             </p>
         </div>
 
-        <div class="process-grid">
-            <div class="process-card">
-                <div class="process-icon">📍</div>
-                <h3>{t("reysubastos.process.step1.title")}</h3>
-                <p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div
+                class="bg-white p-10 border border-[#eee] rounded-xl shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl"
+            >
+                <div class="text-4xl mb-5 opacity-80">📍</div>
+                <h3 class="text-xl font-bold mb-4">
+                    {t("reysubastos.process.step1.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("reysubastos.process.step1.desc")}
                 </p>
             </div>
-            <div class="process-card">
-                <div class="process-icon">⚖️</div>
-                <h3>{t("reysubastos.process.step2.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-10 border border-[#eee] rounded-xl shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl"
+            >
+                <div class="text-4xl mb-5 opacity-80">⚖️</div>
+                <h3 class="text-xl font-bold mb-4">
+                    {t("reysubastos.process.step2.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("reysubastos.process.step2.desc")}
                 </p>
             </div>
-            <div class="process-card">
-                <div class="process-icon">🤝</div>
-                <h3>{t("reysubastos.process.step3.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-10 border border-[#eee] rounded-xl shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl"
+            >
+                <div class="text-4xl mb-5 opacity-80">🤝</div>
+                <h3 class="text-xl font-bold mb-4">
+                    {t("reysubastos.process.step3.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("reysubastos.process.step3.desc")}
                 </p>
             </div>
-            <div class="process-card">
-                <div class="process-icon">🔑</div>
-                <h3>{t("reysubastos.process.step4.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-10 border border-[#eee] rounded-xl shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl"
+            >
+                <div class="text-4xl mb-5 opacity-80">🔑</div>
+                <h3 class="text-xl font-bold mb-4">
+                    {t("reysubastos.process.step4.title")}
+                </h3>
+                <p class="text-[#666] leading-relaxed">
                     {t("reysubastos.process.step4.desc")}
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="security-banner fade-in">
-        <div class="security-content">
-            <h2>{t("reysubastos.security.title")}</h2>
-            <p>
+    <section class="bg-black text-white py-20 px-5 text-center fade-in">
+        <div class="max-w-[800px] mx-auto mb-10">
+            <h2 class="text-3xl font-bold mb-5 tracking-tight">
+                {t("reysubastos.security.title")}
+            </h2>
+            <p class="text-lg opacity-70">
                 {t("reysubastos.security.desc")}
             </p>
         </div>
-        <a href="/#contacto" class="btn-rey"
+        <a
+            href="/#contacto"
+            class="bg-primary text-black px-12 py-5 rounded font-bold uppercase tracking-widest transition-all hover:scale-105 hover:bg-[#ffc400] inline-block"
             >{t("reysubastos.security.button")}</a
         >
     </section>

@@ -7,25 +7,66 @@ const t = useTranslations(lang);
 const { activeNav = "inicio" } = Astro.props;
 ---
 
-<header class="site-header" id="header">
-  <div class="container nav-container">
-    <a href="/" class="logo">
+<header
+  class="fixed top-0 left-0 w-full z-[1000] bg-transparent transition-all duration-300 py-5 [&.scrolled]:bg-[#1d1e20]/95 [&.scrolled]:py-2.5 [&.scrolled]:shadow-[0_2px_10px_rgba(0,0,0,0.3)]"
+  id="header"
+>
+  <div
+    class="max-w-[1200px] mx-auto px-4 w-full flex justify-between items-center"
+  >
+    <a href="/" class="block">
       <img
         src="/assets/logo-alfa-wolf.png"
         alt={t("brand.name")}
-        style="height: 40px; filter: brightness(0) invert(1);"
+        class="h-[40px] brightness-0 invert"
       />
     </a>
     <nav>
-      <ul class="nav-menu">
-        <li><a href="/">{t("nav.inicio")}</a></li>
-        <li><a href="/proyectos">{t("nav.proyectos")}</a></li>
-        <li><a href="/promotores">{t("nav.promotores")}</a></li>
-        <li><a href="/inversores">{t("nav.inversores")}</a></li>
-        <li><a href="/alfa-hunters">{t("nav.hunters")}</a></li>
-        <li><a href="/contacto">{t("nav.contacto")}</a></li>
+      <ul class="flex gap-[30px] list-none">
+        <li>
+          <a
+            href="/"
+            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "inicio" ? "text-primary" : "text-white"}`}
+            >{t("nav.inicio")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/proyectos"
+            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "proyectos" ? "text-primary" : "text-white"}`}
+            >{t("nav.proyectos")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/promotores"
+            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "promotores" ? "text-primary" : "text-white"}`}
+            >{t("nav.promotores")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/inversores"
+            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "inversores" ? "text-primary" : "text-white"}`}
+            >{t("nav.inversores")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/alfa-hunters"
+            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "hunters" ? "text-primary" : "text-white"}`}
+            >{t("nav.hunters")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/contacto"
+            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "contacto" ? "text-primary" : "text-white"}`}
+            >{t("nav.contacto")}</a
+          >
+        </li>
       </ul>
-      <div class="mobile-menu-toggle">
+      <div class="hidden">
         <span></span><span></span><span></span>
       </div>
     </nav>

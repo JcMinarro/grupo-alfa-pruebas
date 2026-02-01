@@ -11,7 +11,8 @@ const t = useTranslations(lang);
 
 <BaseLayout
     title={`ALFA HUNTERS | ${t("brand.name")}`}
-    bodyClass="hunters-page"
+    bodyClass="hunters-page bg-white text-dark"
+    activeNav="hunters"
 >
     <Hero
         title="ALFA HUNTERS"
@@ -22,18 +23,17 @@ const t = useTranslations(lang);
         overlayOpacity={0.4}
     />
     <section
-        class="team-expansion container fade-in"
-        style="padding: 100px 0; text-align: center;"
+        class="max-w-[1200px] mt-20 mx-auto  py-25 px-5 text-center fade-in text-dark"
     >
-        <h2 style="margin-bottom: 60px;">
+        <h2 class="text-3xl md:text-4xl font-bold mb-15 leading-tight">
             {t("hunters.team.title.prefix")}
-            <span class="highlight">{t("hunters.team.title.team")}</span>
+            <span class="text-primary">{t("hunters.team.title.team")}</span>
             {t("hunters.team.title.of")}
-            <br /><span class="highlight"
+            <br /><span class="text-primary"
                 >{t("hunters.team.title.hunters")}</span
             >
         </h2>
-        <InfoGrid columns={3}>
+        <InfoGrid class="mt-20" columns={3}>
             <GridItem
                 title={t("hunters.benefits.flexibility.title")}
                 description={t("hunters.benefits.flexibility.desc")}
@@ -48,78 +48,118 @@ const t = useTranslations(lang);
             />
         </InfoGrid>
     </section>
-    <!-- detailed
-Benefits Section -->
-    <section class="container" style="padding: 80px 20px;">
-        <h2 class="text-center fade-in" style="margin-bottom: 50px;">
+
+    <!-- detailed Benefits Section -->
+    <section class="max-w-[1200px] mx-auto py-20 px-5 text-dark">
+        <h2 class="text-3xl font-bold text-center mb-12 fade-in">
             {t("hunters.cta.title")}
         </h2>
-        <div class="steps-grid">
-            <div class="step-item fade-in">
-                <h3>{t("hunters.cta.work.title")}</h3>
-                <p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+                class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] fade-in"
+            >
+                <h3 class="text-xl font-bold mb-4">
+                    {t("hunters.cta.work.title")}
+                </h3>
+                <p class="text-[#444] leading-relaxed">
                     {t("hunters.cta.work.desc")}
                 </p>
             </div>
-            <div class="step-item fade-in">
-                <h3>{t("hunters.cta.training.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] fade-in"
+            >
+                <h3 class="text-xl font-bold mb-4">
+                    {t("hunters.cta.training.title")}
+                </h3>
+                <p class="text-[#444] leading-relaxed">
                     {t("hunters.cta.training.desc")}
                 </p>
             </div>
-            <div class="step-item fade-in">
-                <h3>{t("hunters.cta.hours.title")}</h3>
-                <p>{t("hunters.cta.hours.desc")}</p>
+            <div
+                class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] fade-in"
+            >
+                <h3 class="text-xl font-bold mb-4">
+                    {t("hunters.cta.hours.title")}
+                </h3>
+                <p class="text-[#444] leading-relaxed">
+                    {t("hunters.cta.hours.desc")}
+                </p>
             </div>
-            <div class="step-item fade-in">
-                <h3>{t("hunters.cta.growth.title")}</h3>
-                <p>
+            <div
+                class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] fade-in"
+            >
+                <h3 class="text-xl font-bold mb-4">
+                    {t("hunters.cta.growth.title")}
+                </h3>
+                <p class="text-[#444] leading-relaxed">
                     {t("hunters.cta.growth.desc")}
                 </p>
             </div>
         </div>
     </section>
+
     <!-- Form Section -->
-    <section class="form-section">
-        <div class="container">
-            <div class="form-container fade-in">
-                <h2>{t("hunters.form.title")}</h2>
-                <p class="text-center" style="margin-bottom: 30px;">
+    <section class="bg-[#f8f8f8] py-20 text-dark">
+        <div class="max-w-[1200px] mx-auto px-5">
+            <div
+                class="max-w-[600px] mx-auto bg-white p-10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] rounded-lg fade-in"
+            >
+                <h2 class="text-2xl font-bold text-center mb-5">
+                    {t("hunters.form.title")}
+                </h2>
+                <p class="text-center text-[#666] mb-8">
                     {t("hunters.form.subtitle")}
                 </p>
-                <form action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name">{t("hunters.form.name")}</label>
+                <form action="#" method="POST" class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-2">
+                        <label
+                            for="name"
+                            class="font-bold text-sm uppercase tracking-wide"
+                            >{t("hunters.form.name")}</label
+                        >
                         <input
                             type="text"
                             id="name"
                             name="name"
                             placeholder={t("hunters.form.name")}
+                            class="p-[15px] border border-[#ddd] focus:outline-none focus:border-primary"
                             required
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="phone">{t("hunters.form.phone")}</label>
+                    <div class="flex flex-col gap-2">
+                        <label
+                            for="phone"
+                            class="font-bold text-sm uppercase tracking-wide"
+                            >{t("hunters.form.phone")}</label
+                        >
                         <input
                             type="tel"
                             id="phone"
                             name="phone"
                             placeholder={t("hunters.form.phone")}
+                            class="p-[15px] border border-[#ddd] focus:outline-none focus:border-primary"
                             required
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="email">{t("hunters.form.email")}</label>
+                    <div class="flex flex-col gap-2">
+                        <label
+                            for="email"
+                            class="font-bold text-sm uppercase tracking-wide"
+                            >{t("hunters.form.email")}</label
+                        >
                         <input
                             type="email"
                             id="email"
                             name="email"
                             placeholder={t("contact.form.email.placeholder")}
+                            class="p-[15px] border border-[#ddd] focus:outline-none focus:border-primary"
                             required
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="location"
+                    <div class="flex flex-col gap-2">
+                        <label
+                            for="location"
+                            class="font-bold text-sm uppercase tracking-wide"
                             >{t("hunters.form.location")}</label
                         >
                         <input
@@ -127,15 +167,17 @@ Benefits Section -->
                             id="location"
                             name="location"
                             placeholder={t("hunters.form.location.placeholder")}
+                            class="p-[15px] border border-[#ddd] focus:outline-none focus:border-primary"
                             required
                         />
                     </div>
-                    <div class="form-group">
-                        <label>{t("hunters.form.experience.label")}</label>
-                        <div
-                            style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;"
+                    <div class="flex flex-col gap-2">
+                        <label class="font-bold text-sm uppercase tracking-wide"
+                            >{t("hunters.form.experience.label")}</label
                         >
-                            <label style="font-weight: 400;"
+                        <div class="flex gap-5 flex-wrap mt-2.5">
+                            <label
+                                class="font-normal flex items-center gap-2 cursor-pointer"
                                 ><input
                                     type="radio"
                                     name="experience"
@@ -143,7 +185,8 @@ Benefits Section -->
                                 />
                                 {t("hunters.form.experience.more2")}</label
                             >
-                            <label style="font-weight: 400;"
+                            <label
+                                class="font-normal flex items-center gap-2 cursor-pointer"
                                 ><input
                                     type="radio"
                                     name="experience"
@@ -151,7 +194,8 @@ Benefits Section -->
                                 />
                                 {t("hunters.form.experience.less2")}</label
                             >
-                            <label style="font-weight: 400;"
+                            <label
+                                class="font-normal flex items-center gap-2 cursor-pointer"
                                 ><input
                                     type="radio"
                                     name="experience"
@@ -161,13 +205,13 @@ Benefits Section -->
                             >
                         </div>
                     </div>
-                    <button type="submit" class="btn-submit"
+                    <button
+                        type="submit"
+                        class="w-full bg-primary text-black py-4 rounded font-bold uppercase cursor-pointer transition-all hover:bg-[#ffc400] mt-5"
                         >{t("contact.form.submit")}</button
                     >
                 </form>
-                <p
-                    style="font-size: 0.8rem; margin-top: 20px; color: #666; text-align: center;"
-                >
+                <p class="text-[0.8rem] mt-5 text-[#666] text-center">
                     {t("hunters.form.privacy")}
                 </p>
             </div>

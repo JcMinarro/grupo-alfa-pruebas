@@ -7,6 +7,7 @@ const t = useTranslations(lang);
 interface Props {
     title?: string;
     subtitle?: string;
+    description?: string;
     location?: string;
     backgroundImage?: string;
     backgroundVideo?: string;
@@ -20,6 +21,7 @@ interface Props {
 const {
     title,
     subtitle,
+    description,
     location,
     backgroundImage,
     backgroundVideo,
@@ -33,7 +35,7 @@ const {
 
 <section
     id={id}
-    class={`base-hero ${className}`}
+    class={`relative flex items-center justify-center text-center text-white overflow-hidden bg-bg-dark py-20 min-h-[400px] md:min-h-[var(--hero-height)] ${className}`}
     style={`--overlay-opacity: ${overlayOpacity}; --hero-height: ${height}; --bg-image: ${backgroundImage ? `url('${backgroundImage}')` : "none"};`}
 >
     {
@@ -44,23 +46,63 @@ const {
                 loop
                 playsinline
                 poster={videoPoster}
-                class="hero-video"
+                class="absolute top-0 left-0 w-full h-full object-cover z-0"
             >
                 <source src={backgroundVideo} type="video/mp4" />
             </video>
         )
     }
 
-    {!backgroundVideo && backgroundImage && <div class="hero-bg-image" />}
+    {
+        !backgroundVideo && backgroundImage && (
+            <div
+                class="absolute top-0 left-0 w-full h-full object-cover z-0 bg-no-repeat bg-center bg-cover"
+                style="background-image: var(--bg-image);"
+            />
+        )
+    }
 
-    <div class="hero-overlay"></div>
+    <div
+        class="absolute top-0 left-0 w-full h-full z-[1]"
+        style="background: rgba(0, 0, 0, var(--overlay-opacity));"
+    >
+    </div>
 
-    <div class="container hero-container">
-        <div class="hero-content">
-            <div class="fade-in-content">
-                {location && <p class="hero-location">{location}</p>}
-                {title && <h1>{title}</h1>}
-                {subtitle && <h2 class="hero-subtitle">{subtitle}</h2>}
+    <div
+        class="max-w-[1200px] mx-auto px-4 w-full relative z-[2] flex flex-col items-center justify-center text-white"
+    >
+        <div class="max-w-[800px]">
+            <div
+                class="fade-in-content opacity-0 translate-y-5 transition-all duration-1000 ease-out [&.visible]:opacity-100 [&.visible]:translate-y-0"
+            >
+                {
+                    location && (
+                        <p class="text-[0.85rem] tracking-[2px] uppercase mb-4 opacity-80 text-white">
+                            {location}
+                        </p>
+                    )
+                }
+                {
+                    title && (
+                        <h1 class="text-[2rem] md:text-[4rem] font-bold mb-4 uppercase text-white">
+                            {title}
+                        </h1>
+                    )
+                }
+                {
+                    subtitle && (
+                        <h2 class="text-[1rem] md:text-[1.5rem] font-normal tracking-[4px] opacity-90 text-white">
+                            {subtitle}
+                        </h2>
+                    )
+                }
+                {
+                    description && (
+                        <p class="text-[1.1rem] opacity-90 mt-5 max-w-[700px] mx-auto text-white leading-relaxed">
+                            {description}
+                        </p>
+                    )
+                }
                 <slot />
             </div>
         </div>
@@ -85,101 +127,3 @@ const {
     // On every page navigation (View Transitions)
     document.addEventListener("astro:page-load", animateHero);
 </script>
-
-<style>
-    .base-hero {
-        position: relative;
-        min-height: var(--hero-height);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: var(--color-text-light);
-        overflow: hidden;
-        background-color: var(--color-bg-dark);
-        padding: 80px 0;
-    }
-
-    .fade-in-content {
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-            opacity 1s ease-out,
-            transform 1s ease-out;
-    }
-
-    .fade-in-content.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .hero-video,
-    .hero-bg-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-    }
-
-    .hero-bg-image {
-        background-image: var(--bg-image);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
-
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, var(--overlay-opacity));
-        z-index: 1;
-    }
-
-    .hero-container {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hero-content {
-        max-width: 800px;
-    }
-
-    .hero-location {
-        font-size: 0.85rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-        opacity: 0.8;
-    }
-
-    h1 {
-        font-size: clamp(2rem, 5vw, 4rem);
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-    }
-
-    .hero-subtitle {
-        font-size: clamp(1rem, 2vw, 1.5rem);
-        font-weight: 400;
-        letter-spacing: 4px;
-        opacity: 0.9;
-    }
-
-    @media (max-width: 768px) {
-        .base-hero {
-            min-height: 400px;
-            padding: 60px 0;
-        }
-    }
-</style>

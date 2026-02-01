@@ -43,6 +43,6 @@ A sub-component or pattern for individual items within the grid.
 ```
 
 ### 4. Implementation Details
--   Extract common styles from `investor.css` (`.process-grid`, `.process-card`) and `hunters.css` (`.benefits-grid`, `.benefit-item`) into the component styles or Design System utilities.
--   Ensure responsiveness (stacking on mobile).
--   Support `fade-in` logic for items.
+-   Use Tailwind CSS utility classes for grid layouts, containers, and card styling.
+-   Ensure responsiveness (stacking on mobile) using Tailwind's `sm:`, `md:`, and `lg:` modifiers.
+-   Support `fade-in` logic for items via CSS classes synchronized with the global theme.

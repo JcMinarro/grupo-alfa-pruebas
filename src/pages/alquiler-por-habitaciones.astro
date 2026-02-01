@@ -21,10 +21,16 @@ const t = useTranslations(lang);
         height="50vh"
     />
 
-    <section class="project-details container fade-in">
-        <a href="/proyectos" class="back-link">{t("projects.back")}</a>
+    <section class="max-w-[1200px] mx-auto py-20 px-5 fade-in text-dark">
+        <a
+            href="/proyectos"
+            class="inline-block mb-10 text-primary font-semibold hover:translate-x-[-5px] transition-transform"
+            >← {t("projects.back")}</a
+        >
 
-        <h2>{t("projects.details.title")}</h2>
+        <h2 class="text-3xl font-bold mb-10 border-l-4 border-primary pl-5">
+            {t("projects.details.title")}
+        </h2>
         <ProjectDetails
             type={t("projects.rooms.details.type")}
             location={t("projects.rooms.details.location")}
@@ -67,18 +73,23 @@ const t = useTranslations(lang);
             }}
         />
 
-        <div class="executive-summary">
-            <h3>{t("projects.executiveSummary")}</h3>
-            <p>
+        <div
+            class="bg-[var(--color-bg-dark)] text-white p-10 rounded-lg mt-15 text-center"
+        >
+            <h3 class="text-primary text-[1.5rem] mb-5 font-bold uppercase">
+                {t("projects.executiveSummary")}
+            </h3>
+            <p
+                class="text-[1.1rem] leading-relaxed max-w-[800px] mx-auto text-white"
+            >
                 {t("projects.rooms.summary")}
             </p>
         </div>
 
-        <div style="text-align: center; margin-top: 60px;">
+        <div class="text-center mt-15">
             <a
                 href="/#contacto"
-                class="btn-primary"
-                style="background-color: var(--color-primary); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block;"
+                class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block shadow-lg"
                 >{t("projects.interested")}</a
             >
         </div>

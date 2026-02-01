@@ -1,10 +1,15 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 
-const { title, bodyClass, footerStyle } = Astro.props;
+const { title, bodyClass, footerStyle, activeNav } = Astro.props;
 ---
 
-<BaseLayout title={title} bodyClass={bodyClass} footerStyle={footerStyle}>
+<BaseLayout
+    title={title}
+    bodyClass={bodyClass}
+    footerStyle={footerStyle}
+    activeNav={activeNav}
+>
     <slot name="head" slot="head" />
     <slot />
 </BaseLayout>
