@@ -34,15 +34,28 @@ const nprogress = {
  * Page Initialization Logic
  */
 const initPageLogic = () => {
-    // 1. Mobile Menu
+    // 1. Mobile Menu Logic
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
 
     if (menuToggle && navMenu) {
-        menuToggle.onclick = () => {
-            navMenu.classList.toggle('active');
+        const toggleMenu = () => {
+            const isOpen = navMenu.classList.toggle('active');
             menuToggle.classList.toggle('active');
+            body.style.overflow = isOpen ? 'hidden' : '';
         };
+
+        menuToggle.onclick = toggleMenu;
+
+        // Close menu when clicking a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.onclick = () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+                body.style.overflow = '';
+            };
+        });
     }
 
     // 2. Intersection Observer (Fade-in)

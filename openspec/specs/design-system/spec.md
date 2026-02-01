@@ -17,9 +17,15 @@ Unified Design System to centralize tokens, utilities, and component styles for 
     -   Primary Font: `'Jost', sans-serif`
     -   Heading Font: `'DM Sans', sans-serif`
     -   Sizes: Define fluid scales for `h1` through `h6` and body text.
+    -   **Responsive Scaling**: Font sizes MUST scale according to the viewport size using Tailwind's responsive classes or fluid typography variables.
 -   **Spacing & Layout**:
     -   Container max-width (`1200px`).
     -   Standard spacing units (padding/margin).
+
+### 2. Layout Strategy
+
+-   **Mobile-First**: Enforce a mobile-first layout strategy for all components.
+-   **Requirement**: Components MUST be fully functional and visually correct on a 375px wide screen before any desktop-specific styles are added.
 
 ### 2. Utility Classes
 

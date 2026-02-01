@@ -20,15 +20,15 @@ const t = useTranslations(lang);
         <img
             src="/assets/logo-alfa-black-text.png"
             alt={t("home.hero.logo.alt")}
-            class="w-[250px] mb-8 mx-auto"
+            class="w-[180px] md:w-[250px] mb-8 mx-auto"
         />
         <img
             src="/assets/logo-alfa-wolf.png"
             alt={t("home.hero.bg.alt")}
-            class="w-[500px] mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] brightness-0 mx-auto"
+            class="w-full max-w-[300px] md:max-w-[500px] mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] brightness-0 mx-auto"
         />
         <h2
-            class="text-[1.5rem] tracking-[5px] font-medium text-white uppercase"
+            class="text-[1.2rem] md:text-[1.5rem] tracking-[3px] md:tracking-[5px] font-medium text-white uppercase"
         >
             {t("hero.title")}
         </h2>
@@ -39,22 +39,22 @@ const t = useTranslations(lang);
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center fade-in mb-16">
                 <h2
-                    class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                    class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
                 >
                     {t("home.steps.title.main")}
                 </h2>
                 <h2
-                    class="text-[2.2rem] font-bold text-primary tracking-[2px] mb-5"
+                    class="text-[1.8rem] md:text-[2.2rem] font-bold text-primary tracking-[2px] mb-5"
                 >
                     {t("home.steps.title.secondary")}
                 </h2>
-                <p class="text-[1.1rem] text-[#666]">
+                <p class="text-[1rem] md:text-[1.1rem] text-[#666]">
                     {t("home.steps.context")}
                 </p>
             </div>
 
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-16 mt-12 mx-auto max-w-[800px]"
+                class="grid grid-cols-2 gap-x-6 gap-y-12 md:gap-x-10 md:gap-y-16 mt-12 mx-auto max-w-[800px]"
             >
                 <div class="group text-center fade-in">
                     <div
@@ -164,20 +164,24 @@ const t = useTranslations(lang);
     <!-- Libertad Financiera Section -->
     <section class="py-24 bg-white border-t border-[#f0f0f0] text-dark">
         <div class="max-w-[1200px] mx-auto px-4 text-center">
-            <h2 class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark">
+            <h2
+                class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+            >
                 {t("home.libertad.title.main")}
             </h2>
             <h2
-                class="text-[2.2rem] font-bold text-primary tracking-[2px] mb-5"
+                class="text-[1.8rem] md:text-[2.2rem] font-bold text-primary tracking-[2px] mb-5"
             >
                 {t("home.libertad.title.secondary")}
             </h2>
             <img
                 src="/assets/logo-alfa-wolf.png"
                 alt={t("home.hero.logo.alt")}
-                class="block w-[150px] mx-auto my-10 brightness-0"
+                class="block w-[120px] md:w-[150px] mx-auto my-10 brightness-0"
             />
-            <p class="text-[1.5rem] font-normal mb-5 text-dark">
+            <p
+                class="text-[1.2rem] md:text-[1.5rem] font-normal mb-5 text-dark"
+            >
                 {t("home.libertad.rentability")}
             </p>
             <p class="text-[#666] leading-[1.8] max-w-[600px] mx-auto mb-10">
@@ -215,7 +219,7 @@ const t = useTranslations(lang);
     <section id="servicios" class="p-0 bg-white text-dark">
         <div class="pt-20 pb-5 text-center">
             <h2
-                class="text-[2.2rem] font-bold text-primary tracking-[2px] mb-10 text-black"
+                class="text-[1.8rem] md:text-[2.2rem] font-bold text-primary tracking-[2px] mb-10 text-black"
             >
                 {t("home.services.title")}
             </h2>
@@ -278,10 +282,10 @@ const t = useTranslations(lang);
     <!-- Office and Contact Section -->
     <section id="contacto" class="py-[100px] bg-white text-dark">
         <div class="max-w-[1200px] mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
                 <div class="fade-in">
                     <h2
-                        class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                        class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
                     >
                         {t("home.office.title")}
                     </h2>
@@ -311,10 +315,10 @@ const t = useTranslations(lang);
             </div>
 
             <div class="mt-20 text-dark">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
                     <div class="fade-in">
                         <h2
-                            class="text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                            class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
                         >
                             {t("home.contact.title")}
                         </h2>

@@ -5,6 +5,15 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { activeNav = "inicio" } = Astro.props;
+
+const navLinks = [
+  { id: "inicio", href: "/", label: t("nav.inicio") },
+  { id: "proyectos", href: "/proyectos", label: t("nav.proyectos") },
+  { id: "promotores", href: "/promotores", label: t("nav.promotores") },
+  { id: "inversores", href: "/inversores", label: t("nav.inversores") },
+  { id: "hunters", href: "/alfa-hunters", label: t("nav.hunters") },
+  { id: "contacto", href: "/contacto", label: t("nav.contacto") },
+];
 ---
 
 <header
@@ -14,61 +23,66 @@ const { activeNav = "inicio" } = Astro.props;
   <div
     class="max-w-[1200px] mx-auto px-4 w-full flex justify-between items-center"
   >
-    <a href="/" class="block">
+    <a href="/" class="block relative z-[1001]">
       <img
         src="/assets/logo-alfa-wolf.png"
         alt={t("brand.name")}
         class="h-[40px] brightness-0 invert"
       />
     </a>
-    <nav>
-      <ul class="flex gap-[30px] list-none">
-        <li>
-          <a
-            href="/"
-            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "inicio" ? "text-primary" : "text-white"}`}
-            >{t("nav.inicio")}</a
-          >
-        </li>
-        <li>
-          <a
-            href="/proyectos"
-            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "proyectos" ? "text-primary" : "text-white"}`}
-            >{t("nav.proyectos")}</a
-          >
-        </li>
-        <li>
-          <a
-            href="/promotores"
-            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "promotores" ? "text-primary" : "text-white"}`}
-            >{t("nav.promotores")}</a
-          >
-        </li>
-        <li>
-          <a
-            href="/inversores"
-            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "inversores" ? "text-primary" : "text-white"}`}
-            >{t("nav.inversores")}</a
-          >
-        </li>
-        <li>
-          <a
-            href="/alfa-hunters"
-            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "hunters" ? "text-primary" : "text-white"}`}
-            >{t("nav.hunters")}</a
-          >
-        </li>
-        <li>
-          <a
-            href="/contacto"
-            class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === "contacto" ? "text-primary" : "text-white"}`}
-            >{t("nav.contacto")}</a
-          >
-        </li>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      class="mobile-menu-toggle md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 z-[1001] bg-transparent border-none cursor-pointer group"
+      aria-label="Toggle Menu"
+    >
+      <span
+        class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:rotate-45 group-[.active]:translate-y-2"
+      ></span>
+      <span
+        class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:opacity-0"
+      ></span>
+      <span
+        class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:-rotate-45 group-[.active]:-translate-y-2"
+      ></span>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:block">
+      <ul class="flex gap-[30px] list-none m-0 p-0">
+        {
+          navLinks.map(({ id, href, label }) => (
+            <li>
+              <a
+                href={href}
+                class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === id ? "text-primary" : "text-white"}`}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
-      <div class="hidden">
-        <span></span><span></span><span></span>
-      </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div
+      class="nav-menu fixed top-0 right-0 w-full h-screen bg-[#1d1e20]/95 backdrop-blur-lg translate-x-full transition-transform duration-500 ease-in-out z-[1000] flex flex-col items-center justify-center gap-8 md:hidden [&.active]:translate-x-0"
+    >
+      <ul class="flex flex-col items-center gap-8 list-none m-0 p-0">
+        {
+          navLinks.map(({ id, href, label }) => (
+            <li>
+              <a
+                href={href}
+                class={`text-[1.5rem] font-medium tracking-[2px] uppercase transition-colors hover:text-primary ${activeNav === id ? "text-primary" : "text-white"}`}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </header>

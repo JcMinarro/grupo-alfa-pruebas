@@ -37,24 +37,24 @@ const services = [
     {
         services.map((service, index) => (
             <div
-                class={`py-15 ${index % 2 === 0 ? "bg-white" : "bg-[#f2f2f2]"}`}
+                class={`py-8 md:py-15 ${index % 2 === 0 ? "bg-white" : "bg-[#f2f2f2]"}`}
             >
                 <div
-                    class={`max-w-[1000px] mx-auto px-5 flex flex-col md:flex-row items-center gap-15 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+                    class={`max-w-[1000px] mx-auto px-5 flex flex-col md:flex-row items-center gap-8 md:gap-15 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
                 >
-                    <div class="flex-1 text-center md:text-left">
-                        <h3 class="text-[1.4rem] font-bold mb-5 uppercase bg-primary inline-block px-[15px] py-[5px] text-black italic tracking-wide">
+                    <div class="flex-1 text-center md:text-left order-2 md:order-none">
+                        <h3 class="text-[1.2rem] md:text-[1.4rem] font-bold mb-4 md:mb-5 uppercase bg-primary inline-block px-[15px] py-[5px] text-black italic tracking-wide">
                             {service.title}
                         </h3>
-                        <p class="text-[1.1rem] leading-relaxed text-[#333]">
+                        <p class="text-[1rem] md:text-[1.1rem] leading-relaxed text-[#333]">
                             {service.description}
                         </p>
                     </div>
-                    <div class="shrink-0 w-[150px] flex justify-center items-center">
+                    <div class="shrink-0 w-16 md:w-[150px] flex justify-center items-center order-1 md:order-none mb-6 md:mb-0">
                         <img
                             src={service.icon}
                             alt={t("services.icon.alt")}
-                            class="w-25 h-auto object-contain brightness-0 grayscale opacity-80"
+                            class="w-full h-auto object-contain brightness-0 grayscale opacity-80"
                         />
                     </div>
                 </div>

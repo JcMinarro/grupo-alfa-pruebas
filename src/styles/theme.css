@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Design System - theme.css */
 
 :root {
@@ -89,6 +93,41 @@ img {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Custom Spacing & Mobile-First Helpers */
+@layer utilities {
+    .py-15 {
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+    }
+
+    .py-25 {
+        padding-top: 6.25rem;
+        padding-bottom: 6.25rem;
+    }
+
+    .mb-15 {
+        margin-bottom: 3.75rem;
+    }
+
+    .mt-20 {
+        margin-top: 5rem;
+    }
+
+    .gap-15 {
+        gap: 3.75rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .h-screen {
+        height: 100dvh;
+    }
+
+    section {
+        overflow-x: hidden;
+    }
 }
 
 /* Compatibility/Legacy Helpers (to be removed once all pages are audited) */
