@@ -3,8 +3,62 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
 
+import ProjectGrid from "../components/ProjectGrid.astro";
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const projects = [
+    {
+        title: t("projects.rooms.title"),
+        location: "MADRID",
+        beforeImage: "/assets/proyectos/vivienda-alquiler-habitaciones-before.jpeg",
+        afterImage: "/assets/proyectos/vivienda-alquiler-habitaciones-after.jpeg",
+        href: "/alquiler-por-habitaciones",
+    },
+    {
+        title: t("projects.local.title"),
+        location: "MURCIA",
+        beforeImage: "/assets/proyectos/local-comercial-before.jpeg",
+        afterImage: "/assets/proyectos/local-comercial-after.jpg",
+        href: "/local-comercial",
+    },
+    {
+        title: t("projects.studios.title"),
+        location: "GRANADA",
+        beforeImage: "/assets/proyectos/mal-distribuida-before.jpeg",
+        afterImage: "/assets/proyectos/mal-distribuida-after.jpg",
+        href: "/studios-granada",
+    },
+    {
+        title: t("projects.tourism.title"),
+        location: "ÁGUILAS, MURCIA",
+        beforeImage: "/assets/proyectos/vivienda-turistica-before.jpeg",
+        afterImage: "/assets/proyectos/vivienda-turistica-after.jpg",
+        href: "/vivienda-turistica",
+    },
+    {
+        title: t("projects.division.title"),
+        location: "MURCIA",
+        beforeImage: "/assets/proyectos/dividir-apartamento-before.jpeg",
+        afterImage: "/assets/proyectos/dividir-apartamento-after.jpeg",
+        href: "/piso-dividido",
+    },
+    {
+        title: t("projects.chalet.title"),
+        location: "ALICANTE",
+        beforeImage: "/assets/proyectos/chalet-dividido-before.jpeg",
+        afterImage: "/assets/proyectos/chalet-dividido-after.jpeg",
+        href: "/chalet-dividido",
+    },
+    {
+        title: t("projects.duplex.title"),
+        location: "MURCIA",
+        beforeImage: "/assets/proyectos/buhardilla-before.jpeg",
+        afterImage: "/assets/proyectos/buhardilla-after.jpg",
+        href: "/duplex-turistico",
+    },
+];
 ---
 
 <ProjectLayout
@@ -20,160 +74,21 @@ const t = useTranslations(lang);
         height="50vh"
     />
 
-    <section class="max-w-[1200px] mx-auto py-20 px-5">
-        <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] mt-[50px] fade-in"
-        >
-            <!-- Project 1 -->
-            <a
-                href="/local-comercial"
-                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
-            >
-                <div class="h-[250px] overflow-hidden">
-                    <img
-                        src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                        alt={t("projects.project1.title")}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                </div>
-                <div class="p-[25px] grow flex flex-col justify-between">
-                    <div>
-                        <p
-                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
-                        >
-                            MURCIA
-                        </p>
-                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
-                            {t("projects.project1.title")}
-                        </h3>
-                    </div>
-                    <span
-                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
-                        >{t("projects.viewMore")}</span
-                    >
-                </div>
-            </a>
+    <section class="max-w-[1200px] mx-auto pt-20 pb-10 px-5 text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-dark mb-4">
+            {t("projects.hero.subtitle")}
+        </h2>
+        <p class="text-gray-500 max-w-2xl mx-auto text-lg">
+            {t("projects.hero.description")}
+        </p>
+    </section>
 
-            <!-- Project 2 -->
-            <a
-                href="/alquiler-por-habitaciones"
-                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
-            >
-                <div class="h-[250px] overflow-hidden">
-                    <img
-                        src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                        alt={t("projects.project2.title")}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                </div>
-                <div class="p-[25px] grow flex flex-col justify-between">
-                    <div>
-                        <p
-                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
-                        >
-                            MADRID
-                        </p>
-                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
-                            {t("projects.project2.title")}
-                        </h3>
-                    </div>
-                    <span
-                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
-                        >{t("projects.viewMore")}</span
-                    >
-                </div>
-            </a>
-
-            <!-- Project 5 -->
-            <a
-                href="/vivienda-turistica"
-                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
-            >
-                <div class="h-[250px] overflow-hidden">
-                    <img
-                        src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                        alt={t("projects.project5.title")}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                </div>
-                <div class="p-[25px] grow flex flex-col justify-between">
-                    <div>
-                        <p
-                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
-                        >
-                            ÁGUILAS, MURCIA
-                        </p>
-                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
-                            {t("projects.project5.title")}
-                        </h3>
-                    </div>
-                    <span
-                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
-                        >{t("projects.viewMore")}</span
-                    >
-                </div>
-            </a>
-
-            <!-- Project 7 -->
-            <a
-                href="/chalet-dividido"
-                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
-            >
-                <div class="h-[250px] overflow-hidden">
-                    <img
-                        src="/assets/photo-1616046229478-9901c5536a456111.jpg"
-                        alt={t("projects.project7.title")}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                </div>
-                <div class="p-[25px] grow flex flex-col justify-between">
-                    <div>
-                        <p
-                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
-                        >
-                            ALICANTE
-                        </p>
-                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
-                            {t("projects.project7.title")}
-                        </h3>
-                    </div>
-                    <span
-                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
-                        >{t("projects.viewMore")}</span
-                    >
-                </div>
-            </a>
-
-            <!-- Project 8 -->
-            <a
-                href="/duplex-turistico"
-                class="group bg-white rounded-lg overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] flex flex-col"
-            >
-                <div class="h-[250px] overflow-hidden">
-                    <img
-                        src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                        alt={t("projects.project8.title")}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                </div>
-                <div class="p-[25px] grow flex flex-col justify-between">
-                    <div>
-                        <p
-                            class="text-[0.85rem] text-[#888] uppercase font-semibold mb-[10px]"
-                        >
-                            MURCIA
-                        </p>
-                        <h3 class="text-[1.3rem] mb-5 leading-tight text-dark">
-                            {t("projects.project8.title")}
-                        </h3>
-                    </div>
-                    <span
-                        class="text-primary font-semibold uppercase text-[0.9rem] mt-auto"
-                        >{t("projects.viewMore")}</span
-                    >
-                </div>
-            </a>
-        </div>
+    <section class="max-w-[1200px] mx-auto pb-20 px-5">
+        <ProjectGrid
+            projects={projects}
+            viewMoreText={t("projects.viewMore")}
+            disabled={true}
+        />
     </section>
 
     <section class="bg-[var(--component-bg)] py-20 text-center fade-in">

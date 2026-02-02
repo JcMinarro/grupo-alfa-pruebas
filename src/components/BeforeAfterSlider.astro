@@ -1,0 +1,127 @@
+---
+interface Props {
+    beforeImage: string;
+    afterImage: string;
+    beforeLabel?: string;
+    afterLabel?: string;
+}
+
+const {
+    beforeImage,
+    afterImage,
+    beforeLabel = "Antes",
+    afterLabel = "Después",
+} = Astro.props;
+
+const id = `ba-slider-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+    class="ba-slider-container group relative w-full aspect-[4/3] overflow-hidden rounded-xl shadow-lg bg-gray-200"
+    id={id}
+>
+    <!-- After Image (Background - always visible) -->
+    <div class="absolute inset-0 w-full h-full">
+        <img
+            src={afterImage}
+            alt="Después"
+            class="w-full h-full object-cover pointer-events-none select-none"
+        />
+        <span
+            class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+        >
+            {afterLabel}
+        </span>
+    </div>
+
+    <!-- Before Image (Overlay - clipped) -->
+    <div
+        class="ba-slider-overlay absolute inset-0 w-full h-full overflow-hidden"
+        style="clip-path: inset(0 50% 0 0);"
+    >
+        <img
+            src={beforeImage}
+            alt="Antes"
+            class="w-full h-full object-cover pointer-events-none select-none"
+        />
+        <span
+            class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+        >
+            {beforeLabel}
+        </span>
+    </div>
+
+    <!-- Slider Handle -->
+    <div
+        class="ba-slider-handle absolute top-0 bottom-0 left-1/2 -ml-[1px] w-[2px] bg-[#f9da78] pointer-events-none group-hover:scale-y-105 transition-transform z-30"
+    >
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-black border-2 border-[#f9da78] rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#f9da78"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="m15 18-6-6 6-6"></path>
+                <path d="m9 18 6-6-6-6"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Interaction Input -->
+    <input
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-40 ba-slider-input"
+        aria-label="Deslizar para comparar antes y después"
+        oninput={`
+            const val = this.value;
+            const container = this.parentElement;
+            const overlay = container.querySelector('.ba-slider-overlay');
+            const handle = container.querySelector('.ba-slider-handle');
+            overlay.style.clipPath = 'inset(0 ' + (100 - val) + '% 0 0)';
+            handle.style.left = val + '%';
+        `}
+    />
+</div>
+
+<style>
+    .ba-slider-container {
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .ba-slider-input {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        margin: 0;
+    }
+
+    .ba-slider-input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 40px;
+        height: 100vh;
+        cursor: ew-resize;
+        background: transparent;
+        border: 0;
+    }
+
+    .ba-slider-input::-moz-range-thumb {
+        width: 40px;
+        height: 100vh;
+        cursor: ew-resize;
+        background: transparent;
+        border: 0;
+    }
+</style>

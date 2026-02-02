@@ -1,0 +1,37 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+
+interface Project {
+    title: string;
+    location: string;
+    beforeImage: string;
+    afterImage: string;
+    href: string;
+}
+
+interface Props {
+    projects: Project[];
+    viewMoreText: string;
+    disabled?: boolean;
+}
+
+const { projects, viewMoreText, disabled = true } = Astro.props;
+---
+
+<div
+    class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-12 mt-12 fade-in"
+>
+    {
+        projects.map((project) => (
+            <ProjectCard
+                title={project.title}
+                location={project.location}
+                beforeImage={project.beforeImage}
+                afterImage={project.afterImage}
+                href={project.href}
+                viewMoreText={viewMoreText}
+                disabled={disabled}
+            />
+        ))
+    }
+</div>
