@@ -116,9 +116,141 @@ const {
     >
 </form>
 
+<!-- Contact Modal -->
+<div
+    id="contact-modal"
+    class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300"
+    aria-labelledby="contact-modal-title"
+    role="dialog"
+    aria-modal="true"
+>
+    <div
+        class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+        id="contact-modal-backdrop"
+    >
+    </div>
+    <div
+        class="flex min-h-full items-center justify-center p-4 text-center sm:p-0"
+    >
+        <div
+            class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-md p-8"
+        >
+            <div
+                class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 mb-6"
+                id="contact-modal-icon-bg"
+            >
+                <svg
+                    class="h-8 w-8 text-green-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    id="contact-modal-icon-success"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"></path>
+                </svg>
+                <svg
+                    class="h-8 w-8 text-red-600 hidden"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    id="contact-modal-icon-error"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                    ></path>
+                </svg>
+            </div>
+            <div class="text-center">
+                <h3
+                    class="text-2xl font-bold leading-6 text-gray-900 mb-2"
+                    id="contact-modal-title"
+                >
+                    ¡Éxito!
+                </h3>
+                <div class="mt-2 text-center">
+                    <p class="text-md text-gray-500" id="contact-modal-message">
+                        Hemos recibido tu mensaje correctamente.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8">
+                <button
+                    type="button"
+                    class="inline-flex w-full justify-center rounded-md bg-primary px-3 py-3 text-sm font-bold uppercase text-black shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-[#ffc400] transition-all"
+                    id="contact-modal-close-btn"
+                >
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener("astro:page-load", () => {
         const forms = document.querySelectorAll("form[data-contact-form]");
+        const modal = document.getElementById("contact-modal");
+        const modalBackdrop = document.getElementById("contact-modal-backdrop");
+        const modalCloseBtn = document.getElementById(
+            "contact-modal-close-btn",
+        );
+        const modalTitle = document.getElementById("contact-modal-title");
+        const modalMessage = document.getElementById("contact-modal-message");
+        const modalIconSuccess = document.getElementById(
+            "contact-modal-icon-success",
+        );
+        const modalIconError = document.getElementById(
+            "contact-modal-icon-error",
+        );
+        const modalIconBg = document.getElementById("contact-modal-icon-bg");
+
+        const showModal = (isSuccess, title, message) => {
+            if (!modal) return;
+
+            // Content
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalMessage) modalMessage.textContent = message;
+
+            // Icons
+            if (isSuccess) {
+                modalIconSuccess?.classList.remove("hidden");
+                modalIconError?.classList.add("hidden");
+                modalIconBg?.classList.remove("bg-red-100");
+                modalIconBg?.classList.add("bg-green-100");
+            } else {
+                modalIconSuccess?.classList.add("hidden");
+                modalIconError?.classList.remove("hidden");
+                modalIconBg?.classList.remove("bg-green-100");
+                modalIconBg?.classList.add("bg-red-100");
+            }
+
+            // Show
+            modal.classList.remove("hidden");
+            // Small delay for transition
+            setTimeout(() => {
+                modal.classList.remove("opacity-0");
+            }, 10);
+        };
+
+        const closeModal = () => {
+            if (!modal) return;
+            modal.classList.add("opacity-0");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 300);
+        };
+
+        modalCloseBtn?.addEventListener("click", closeModal);
+        modalBackdrop?.addEventListener("click", closeModal);
 
         forms.forEach((form) => {
             form.addEventListener("submit", async (e) => {
@@ -133,13 +265,10 @@ const {
                     const formData = new FormData(form);
                     const data = Object.fromEntries(formData.entries());
 
-                    // Handle checkboxes separately if needed, but FormData handles them fine usually.
-                    // However, checkboxes not checked don't appear in FormData.
                     if (
                         form.querySelector('input[name="privacy"]') &&
                         !formData.get("privacy")
                     ) {
-                        // Should be caught by 'required' attribute, but just in case
                         throw new Error(
                             "Debe aceptar la política de privacidad",
                         );
@@ -154,8 +283,10 @@ const {
                     });
 
                     if (response.ok) {
-                        alert(
-                            "Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.",
+                        showModal(
+                            true,
+                            "¡Mensaje Enviado!",
+                            "Gracias por contactarnos. Te responderemos lo antes posible.",
                         );
                         form.reset();
                     } else {
@@ -163,9 +294,12 @@ const {
                     }
                 } catch (error) {
                     console.error("Error submitting form:", error);
-                    alert(
-                        "Hubo un error al enviar el mensaje. Por favor, inténtelo de nuevo.",
-                    );
+                    let errorMessage =
+                        "Hubo un error al enviar el mensaje. Por favor, inténtelo de nuevo.";
+                    if (error instanceof Error) {
+                        errorMessage = error.message;
+                    }
+                    showModal(false, "Error", errorMessage);
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerText = originalText;
