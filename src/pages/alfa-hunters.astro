@@ -110,7 +110,12 @@ const t = useTranslations(lang);
                 <p class="text-center text-[#666] mb-8">
                     {t("hunters.form.subtitle")}
                 </p>
-                <form action="#" method="POST" class="flex flex-col gap-5">
+                <form
+                    action="https://n8n.minarro.eu.org/webhook/alfa-hunter"
+                    method="POST"
+                    class="flex flex-col gap-5"
+                    id="hunters-form"
+                >
                     <div class="flex flex-col gap-2">
                         <label
                             for="name"
@@ -217,4 +222,52 @@ const t = useTranslations(lang);
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener("astro:page-load", () => {
+            const form = document.getElementById("hunters-form");
+            if (form) {
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const submitBtn = form.querySelector(
+                        'button[type="submit"]',
+                    );
+                    const originalText = submitBtn.innerText;
+
+                    try {
+                        submitBtn.disabled = true;
+                        submitBtn.innerText = "Enviando...";
+
+                        const formData = new FormData(form);
+                        const data = Object.fromEntries(formData.entries());
+
+                        const response = await fetch(form.action, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                        });
+
+                        if (response.ok) {
+                            alert(
+                                "Gracias por tu solicitud. Nos pondremos en contacto contigo pronto.",
+                            );
+                            form.reset();
+                        } else {
+                            throw new Error("Error en el envío");
+                        }
+                    } catch (error) {
+                        console.error("Error submitting form:", error);
+                        alert(
+                            "Hubo un error al enviar la solicitud. Por favor, inténtelo de nuevo.",
+                        );
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = originalText;
+                    }
+                });
+            }
+        });
+    </script>
 </BaseLayout>

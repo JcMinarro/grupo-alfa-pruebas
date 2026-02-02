@@ -85,7 +85,12 @@ const t = useTranslations(lang);
         <div
             class="bg-white p-10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] rounded-lg"
         >
-            <ContactForm showPhone={true} showPrivacy={true} theme="light" />
+            <ContactForm
+                showPhone={true}
+                showPrivacy={true}
+                theme="light"
+                action="https://n8n.minarro.eu.org/webhook/contact-us"
+            />
         </div>
     </section>
 
