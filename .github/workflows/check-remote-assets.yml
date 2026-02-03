@@ -26,7 +26,8 @@ jobs:
             echo "No URLs found in src/data/heros.js" >&2
             exit 1
           fi
-          echo "urls<<$(paste -sd, /tmp/hero-urls.txt)" >> $GITHUB_OUTPUT
+          urls=$(paste -sd, /tmp/hero-urls.txt)
+          echo "urls=$urls" >> $GITHUB_OUTPUT
 
       - name: Check URLs are reachable (with retries)
         run: |
