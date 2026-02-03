@@ -153,14 +153,31 @@ const {
             const container = video.closest('section');
             const control = container && container.querySelector('[data-hero-control]');
 
-            const loadVideoSources = () => {
+            const loadVideoSources = (force = false) => {
                 const sources = video.querySelectorAll('source[data-src]');
+                if (!sources || sources.length === 0) return;
+
+                // If sources are already set, no-op
+                if (sources[0].getAttribute('src')) return;
+
                 // Choose order based on connection.effectiveType if available
                 const conn = navigator.connection && navigator.connection.effectiveType ? navigator.connection.effectiveType : '4g';
-                // If poor connection, prefer first (assumed lower-bandwidth)
+
+                // If the connection is poor and not forced, *do not* set src attributes yet.
+                const poorConnection = (conn === '2g' || conn === 'slow-2g');
+                if (poorConnection && !force) {
+                    // Signal to the control that loading is deferred
+                    if (control) {
+                        control.textContent = 'Load background video';
+                        control.setAttribute('data-deferred', 'true');
+                        control.setAttribute('aria-pressed', 'false');
+                    }
+                    return;
+                }
+
                 // The editorial data should order variants from low->high bitrate
                 const ordered = Array.from(sources);
-                if (conn === '2g' || conn === 'slow-2g') {
+                if (poorConnection) {
                     // keep order (assumes low->high)
                 } else {
                     // reverse to prefer higher quality when connection is good
@@ -171,13 +188,21 @@ const {
                     const real = src.getAttribute('data-src');
                     if (real) src.setAttribute('src', real);
                 });
+
                 // start loading
                 try { video.load(); } catch (e) { /* ignore */ }
 
-                // Autoplay only on non-mobile/good connections
-                const shouldAutoplay = !(conn === '2g' || conn === 'slow-2g') && window.innerWidth > 640;
+                // Autoplay only on non-poor connections unless forced
+                const shouldAutoplay = (!poorConnection && window.innerWidth > 640) || force;
                 if (shouldAutoplay) {
                     video.play().catch(()=>{/* autoplay blocked */});
+                }
+
+                // Clear deferred flag on control
+                if (control) {
+                    control.removeAttribute('data-deferred');
+                    control.textContent = video.paused ? 'Play' : 'Pause';
+                    control.setAttribute('aria-pressed', video.paused ? 'true' : 'false');
                 }
             };
 
@@ -194,6 +219,27 @@ const {
 
             if (control) {
                 control.addEventListener('click', () => {
+                    const deferred = control.getAttribute('data-deferred') === 'true';
+                    if (deferred) {
+                        // User explicitly requested to load video on poor connection
+                        loadVideoSources(true);
+                        // try to play after loading
+                        setTimeout(() => {
+                            video.play().catch(()=>{});
+                        }, 50);
+                        return;
+                    }
+
+                    // If video sources weren't set yet (but not deferred), ensure they're loaded
+                    const firstSource = video.querySelector('source');
+                    if (firstSource && !firstSource.getAttribute('src')) {
+                        loadVideoSources(true);
+                        setTimeout(() => {
+                            video.play().catch(()=>{});
+                        }, 50);
+                        return;
+                    }
+
                     if (video.paused) {
                         video.play();
                         control.textContent = 'Pause';
