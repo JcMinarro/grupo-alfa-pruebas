@@ -4,7 +4,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ServiceList from "../components/ServiceList.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Hero from "../components/Hero.astro";
-import { heros } from "../data/heros.js";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,8 +14,6 @@ const t = useTranslations(lang);
     <Hero
         id="inicio"
         backgroundImage="/assets/hero-bg.jpg"
-        backgroundVideo={heros.proyectos}
-        videoPoster="/assets/hero-poster.jpg"
         overlayOpacity={0.4}
         height="100vh"
     >

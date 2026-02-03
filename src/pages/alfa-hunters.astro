@@ -2,6 +2,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import { heros } from "../data/heros.js";
 import InfoGrid from "../components/InfoGrid.astro";
 import GridItem from "../components/GridItem.astro";
 
@@ -17,7 +18,7 @@ const t = useTranslations(lang);
     <Hero
         title="ALFA HUNTERS"
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-        backgroundVideo={heros.alfaHunters}
+        backgroundVideo={heros['alfa-hunters'] || heros.alfaHunters}
         videoPoster="/assets/hunters/hero-poster.jpg"
         height="50vh"
         overlayOpacity={0.4}

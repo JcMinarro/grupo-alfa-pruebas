@@ -11,4 +11,9 @@ export const heros = {
   alfaHunters: [
     { url: 'https://videos.pexels.com/video-files/30339655/13005021_640_360_30fps.mp4', type: 'video/mp4' }
   ]
+  ,
+  // also expose hyphenated keys matching page slugs
+  "alfa-hunters": [
+    { url: 'https://videos.pexels.com/video-files/30339655/13005021_640_360_30fps.mp4', type: 'video/mp4' }
+  ]
 };
