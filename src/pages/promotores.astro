@@ -2,6 +2,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import { heros } from "../data/heros.js";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,6 +18,8 @@ const t = useTranslations(lang);
         subtitle={t("promotores.hero.subtitle")}
         description={t("promotores.hero.description")}
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+        backgroundVideo={heros.promotores}
+        videoPoster="/assets/hero-poster.jpg"
         height="50vh"
     />
 

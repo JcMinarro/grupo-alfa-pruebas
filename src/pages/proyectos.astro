@@ -2,6 +2,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
+import { heros } from "../data/heros.js";
 
 import ProjectGrid from "../components/ProjectGrid.astro";
 
@@ -71,6 +72,8 @@ const projects = [
         subtitle={t("projects.hero.subtitle")}
         description={t("projects.hero.description")}
         backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+        backgroundVideo={heros.proyectos}
+        videoPoster="/assets/hero-poster.jpg"
         height="50vh"
     />
 

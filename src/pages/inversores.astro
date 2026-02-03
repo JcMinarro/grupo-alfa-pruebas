@@ -2,6 +2,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import Hero from "../components/Hero.astro";
+import { heros } from "../data/heros.js";
 import InfoGrid from "../components/InfoGrid.astro";
 import GridItem from "../components/GridItem.astro";
 
@@ -18,6 +19,8 @@ const t = useTranslations(lang);
         title={t("inversores.hero.title")}
         subtitle={t("inversores.hero.subtitle")}
         backgroundImage="/assets/photo-1707903244219-8ed71537554d3d83.jpg"
+        backgroundVideo={heros.inversores}
+        videoPoster="/assets/hero-poster.jpg"
         height="50vh"
     />
 
