@@ -67,25 +67,15 @@ const projects = [
     bodyClass="portfolio-page bg-white text-dark"
     activeNav="proyectos"
 >
-    {import.meta.env.FEATURE_DYNAMIC_HERO === 'true' ? (
-      <Hero
-        title={t("projects.hero.title")}
-        subtitle={t("projects.hero.subtitle")}
-        description={t("projects.hero.description")}
-        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-        backgroundVideo={heros.proyectos}
-        videoPoster="/assets/heros/proyectos-poster.jpg"
-        height="50vh"
-      />
-    ) : (
-      <Hero
-        title={t("projects.hero.title")}
-        subtitle={t("projects.hero.subtitle")}
-        description={t("projects.hero.description")}
-        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-        height="50vh"
-      />
-    )}
+    <Hero
+      title={t("projects.hero.title")}
+      subtitle={t("projects.hero.subtitle")}
+      description={t("projects.hero.description")}
+      backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+      backgroundVideo={heros.proyectos}
+      videoPoster="/assets/heros/proyectos-poster.jpg"
+      height="50vh"
+    />
 
     <section class="max-w-[1200px] mx-auto pt-20 pb-10 px-5 text-center">
         <h2 class="text-3xl md:text-4xl font-heading font-bold text-dark mb-4">

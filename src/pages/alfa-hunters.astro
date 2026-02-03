@@ -15,23 +15,14 @@ const t = useTranslations(lang);
     bodyClass="hunters-page bg-white text-dark"
     activeNav="hunters"
 >
-    {import.meta.env.FEATURE_DYNAMIC_HERO === 'true' ? (
-      <Hero
-        title="ALFA HUNTERS"
-        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-        backgroundVideo={heros['alfa-hunters'] || heros.alfaHunters}
-        videoPoster="/assets/heros/alfa-hunters-poster.jpg"
-        height="50vh"
-        overlayOpacity={0.4}
-      />
-    ) : (
-      <Hero
-        title="ALFA HUNTERS"
-        backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-        height="50vh"
-        overlayOpacity={0.4}
-      />
-    )}
+    <Hero
+      title="ALFA HUNTERS"
+      backgroundImage="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
+      backgroundVideo={heros['alfa-hunters'] || heros.alfaHunters}
+      videoPoster="/assets/heros/alfa-hunters-poster.jpg"
+      height="50vh"
+      overlayOpacity={0.4}
+    />
     <section
         class="max-w-[1200px] mt-10 md:mt-20 mx-auto py-12 md:py-25 px-5 text-center fade-in text-dark"
     >
