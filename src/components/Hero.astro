@@ -52,7 +52,7 @@ const {
                     preload="none"
                 >
                     {
-                        Array.isArray(backgroundVideo)
+                    Array.isArray(backgroundVideo)
                         ? backgroundVideo.map(variant => (
                             <source data-src={variant.url} type={variant.type || "video/mp4"} />
                         ))
