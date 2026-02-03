@@ -1,0 +1,156 @@
+---
+// HeroVideo.astro
+// Reusable component that handles external hero video playback with lazy-loading,
+// connection-aware selection and poster fallback. Matches spec-driven requirements.
+interface Props {
+  sources?: string | Array<any>;
+  poster?: string;
+  title?: string;
+  attribution?: string;
+  license?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+}
+
+const {
+  sources,
+  poster,
+  title,
+  attribution,
+  license,
+  autoplay = true,
+  muted = true,
+} = Astro.props as Props;
+---
+
+{/** Render either a poster-only block (if sources absent) or the video element. */}
+<div class="hero-video-container absolute top-0 left-0 w-full h-full z-0">
+  {sources ? (
+    <video
+      aria-label={title || "Hero video"}
+      muted={muted}
+      loop
+      playsinline
+      webkit-playsinline
+      poster={poster ?? undefined}
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      preload="none"
+    >
+      {
+        Array.isArray(sources)
+          ? sources.map(variant => (
+              <source data-src={variant.url} type={variant.type || 'video/mp4'} />
+            ))
+          : <source data-src={sources} type="video/mp4" />
+      }
+    </video>
+  ) : (
+    poster && (
+      <img src={poster} alt={title ?? 'Hero poster'} class="absolute top-0 left-0 w-full h-full object-cover" />
+    )
+  )}
+  {/* visible metadata panel (accessible) */}
+  {(attribution || license || title) && (
+    <div class="absolute left-4 bottom-4 z-10 text-xs text-white bg-black/50 px-3 py-1 rounded">
+      {title && <div class="font-semibold">{title}</div>}
+      {attribution && <div>Source: {attribution}</div>}
+      {license && <div>License: {license}</div>}
+    </div>
+  )}
+
+  {/* play/pause control (keyboard accessible). Visible when video can be interacted with */}
+  <button
+    class="hero-play-pause absolute right-4 top-4 z-10 bg-black/50 text-white rounded px-3 py-1"
+    aria-pressed="false"
+    aria-label="Toggle hero playback"
+    style="display:none"
+  >
+    Pause
+  </button>
+</div>
+
+<script>
+  // Client-side behavior: lazy-load & connection-aware selection
+  const init = () => {
+    const videos = document.querySelectorAll('.hero-video-container video');
+    videos.forEach(video => {
+      const container = video.closest('.hero-video-container');
+
+      const loadSources = () => {
+        const sources = video.querySelectorAll('source[data-src]');
+        if (!sources || sources.length === 0) return;
+        if (sources[0].getAttribute('src')) return; // already loaded
+
+        const connType = (navigator.connection && navigator.connection.effectiveType) ? navigator.connection.effectiveType : '4g';
+        const poor = (connType === '2g' || connType === 'slow-2g');
+
+        const ordered = Array.from(sources);
+        if (!poor) ordered.reverse();
+
+        ordered.forEach(s => {
+          const real = s.getAttribute('data-src');
+          if (real) s.setAttribute('src', real);
+        });
+
+        try { video.load(); } catch (e) {}
+        setTimeout(()=>{ video.play().catch(()=>{}); }, 50);
+      };
+
+      const conn = navigator.connection || {};
+      const saveData = !!(conn.saveData || conn.metered);
+
+      if (!saveData) {
+        const obs = new IntersectionObserver((entries, obs) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              loadSources();
+              obs.unobserve(e.target);
+            }
+          });
+        }, { rootMargin: '200px' });
+        obs.observe(container || video);
+      }
+      // if saveData, do nothing — we keep poster only
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('astro:page-load', init);
+</script>
+
+<script>
+  // Enhance: wire play/pause control and make it visible when video is loaded
+  const wireControls = () => {
+    const containers = document.querySelectorAll('.hero-video-container');
+    containers.forEach(container => {
+      const video = container.querySelector('video');
+      const btn = container.querySelector('.hero-play-pause');
+      if (!video || !btn) return;
+
+      const showBtn = () => { btn.style.display = 'inline-block'; };
+      const hideBtn = () => { btn.style.display = 'none'; };
+
+      // show control when sources are loaded
+      const obs = new MutationObserver(() => {
+        const firstSrc = video.querySelector('source[src]');
+        if (firstSrc) showBtn();
+      });
+      obs.observe(video, { childList: true, subtree: true });
+
+      btn.addEventListener('click', () => {
+        if (video.paused) {
+          video.play().catch(()=>{});
+          btn.textContent = 'Pause';
+          btn.setAttribute('aria-pressed','true');
+        } else {
+          video.pause();
+          btn.textContent = 'Play';
+          btn.setAttribute('aria-pressed','false');
+        }
+      });
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', wireControls);
+  document.addEventListener('astro:page-load', wireControls);
+</script>

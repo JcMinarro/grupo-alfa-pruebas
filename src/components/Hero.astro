@@ -39,27 +39,14 @@ const {
     style={`--overlay-opacity: ${overlayOpacity}; --hero-height: ${height}; --bg-image: ${backgroundImage ? `url('${backgroundImage}')` : "none"};`}
 >
     {
-        /* Support: string URL or array of variants: [{url, width, bitrate}] */
+        /* Use new HeroVideo component for playback behavior */
         backgroundVideo && (
             <div class="absolute top-0 left-0 w-full h-full object-cover z-0">
-                <video
-                    aria-label={title || "Hero video"}
-                    muted
-                    loop
-                    playsinline
-                    webkit-playsinline
+                <HeroVideo
+                    sources={backgroundVideo}
                     poster={videoPoster}
-                    class="absolute top-0 left-0 w-full h-full object-cover"
-                    preload="none"
-                >
-                    {
-                    Array.isArray(backgroundVideo)
-                        ? backgroundVideo.map(variant => (
-                            <source data-src={variant.url} type={variant.type || "video/mp4"} />
-                        ))
-                        : <source data-src={backgroundVideo} type="video/mp4" />
-                    }
-                </video>
+                    title={title}
+                />
             </div>
         )
     }
@@ -121,7 +108,7 @@ const {
 </section>
 
 <script>
-    // Trigger fade-in animations on page load and during view transitions
+// Trigger fade-in animations on page load and during view transitions
     const animateHero = () => {
         const fadeElements = document.querySelectorAll(".fade-in-content");
         fadeElements.forEach((el) => {
@@ -137,101 +124,4 @@ const {
     document.addEventListener("DOMContentLoaded", animateHero);
     // On every page navigation (View Transitions)
     document.addEventListener("astro:page-load", animateHero);
-
-    // Lazy-load and connection-aware selection for hero videos
-    const initHeroVideos = () => {
-        const heroVideos = document.querySelectorAll('section video');
-        heroVideos.forEach((video) => {
-            const container = video.closest('section');
-
-                const loadVideoSources = (force = false) => {
-                    const sources = video.querySelectorAll('source[data-src]');
-                    if (!sources || sources.length === 0) return;
-
-                    // If sources are already set, no-op
-                    if (sources[0].getAttribute('src')) return;
-
-                    // Choose order based on connection.effectiveType if available
-                    const conn = navigator.connection && navigator.connection.effectiveType ? navigator.connection.effectiveType : '4g';
-
-                // Always load sources (autoplay required). If needed, editorial controls
-                // should provide lower-bitrate variants; we still order by connection.
-                const poorConnection = (conn === '2g' || conn === 'slow-2g');
-
-                // The editorial data should order variants from low->high bitrate
-                const ordered = Array.from(sources);
-                if (poorConnection) {
-                    // keep order (assumes low->high)
-                } else {
-                    // reverse to prefer higher quality when connection is good
-                    ordered.reverse();
-                }
-
-                ordered.forEach(src => {
-                    const real = src.getAttribute('data-src');
-                    if (real) src.setAttribute('src', real);
-                });
-
-                // start loading
-                try { video.load(); } catch (e) { /* ignore */ }
-
-                // Autoplay by default when sources are loaded
-                setTimeout(() => {
-                    video.play().catch(()=>{/* autoplay blocked */});
-                }, 50);
-
-                // no interactive control in autoplay mode
-            };
-
-            const obs = new IntersectionObserver((entries, obs) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        loadVideoSources();
-                        obs.unobserve(e.target);
-                    }
-                });
-            }, {rootMargin: '200px'});
-
-            // Observe the container; on intersection we will load and autoplay.
-            obs.observe(container || video);
-
-            if (control) {
-                control.addEventListener('click', () => {
-                    const deferred = control.getAttribute('data-deferred') === 'true';
-                    if (deferred) {
-                        // User explicitly requested to load video on poor connection
-                        loadVideoSources(true);
-                        // try to play after loading
-                        setTimeout(() => {
-                            video.play().catch(()=>{});
-                        }, 50);
-                        return;
-                    }
-
-                    // If video sources weren't set yet (but not deferred), ensure they're loaded
-                    const firstSource = video.querySelector('source');
-                    if (firstSource && !firstSource.getAttribute('src')) {
-                        loadVideoSources(true);
-                        setTimeout(() => {
-                            video.play().catch(()=>{});
-                        }, 50);
-                        return;
-                    }
-
-                    if (video.paused) {
-                        video.play();
-                        control.textContent = 'Pause';
-                        control.setAttribute('aria-pressed','false');
-                    } else {
-                        video.pause();
-                        control.textContent = 'Play';
-                        control.setAttribute('aria-pressed','true');
-                    }
-                });
-            }
-        });
-    };
-
-    document.addEventListener('DOMContentLoaded', initHeroVideos);
-    document.addEventListener('astro:page-load', initHeroVideos);
 </script>

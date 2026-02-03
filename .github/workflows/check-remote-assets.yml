@@ -1,0 +1,59 @@
+name: Check remote assets
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-hero-urls:
+    name: Validate hero video URLs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract video URLs from src/data/heros.js
+        id: extract
+        run: |
+          set -euo pipefail
+          if [ ! -f src/data/heros.js ]; then
+            echo "src/data/heros.js not found" >&2
+            exit 1
+          fi
+          # Extract http(s) URLs from the JS file. This is a simple textual extraction
+          # that looks for URL-like substrings. It avoids relying on a separate heros.txt.
+          grep -oE "https?://[^'\"[:space:]]+" src/data/heros.js | sort -u > /tmp/hero-urls.txt || true
+          if [ ! -s /tmp/hero-urls.txt ]; then
+            echo "No URLs found in src/data/heros.js" >&2
+            exit 1
+          fi
+          echo "urls<<$(paste -sd, /tmp/hero-urls.txt)" >> $GITHUB_OUTPUT
+
+      - name: Check URLs are reachable (with retries)
+        run: |
+          set -euo pipefail
+          urls="${{ steps.extract.outputs.urls }}"
+          IFS=',' read -r -a arr <<< "$urls"
+          failed_urls=()
+          for u in "${arr[@]}"; do
+            if [ -z "$u" ]; then continue; fi
+            echo "Checking $u"
+            ok=1
+            for i in 1 2 3; do
+              if curl -sSfI --max-time 10 "$u" >/dev/null 2>&1; then
+                ok=0
+                break
+              else
+                echo "Attempt $i failed for $u"
+                sleep $((i * 2))
+              fi
+            done
+            if [ "$ok" -ne 0 ]; then
+              echo "FAILED: $u"
+              failed_urls+=("$u")
+            fi
+          done
+          if [ ${#failed_urls[@]} -ne 0 ]; then
+            echo "One or more remote assets failed to respond:" >&2
+            for f in "${failed_urls[@]}"; do echo " - $f"; done
+            exit 1
+          fi

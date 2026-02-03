@@ -15,14 +15,23 @@ const t = useTranslations(lang);
     bodyClass="investor-page bg-white text-dark"
     activeNav="inversores"
 >
-    <Hero
+    {import.meta.env.FEATURE_DYNAMIC_HERO === 'true' ? (
+      <Hero
         title={t("inversores.hero.title")}
         subtitle={t("inversores.hero.subtitle")}
         backgroundImage="/assets/photo-1707903244219-8ed71537554d3d83.jpg"
         backgroundVideo={heros.inversores}
-        videoPoster="/assets/photo-1707903244219-8ed71537554d3d83.jpg"
+        videoPoster="/assets/heros/inversores-poster.jpg"
         height="50vh"
-    />
+      />
+    ) : (
+      <Hero
+        title={t("inversores.hero.title")}
+        subtitle={t("inversores.hero.subtitle")}
+        backgroundImage="/assets/photo-1707903244219-8ed71537554d3d83.jpg"
+        height="50vh"
+      />
+    )}
 
     <section class="max-w-[1200px] mx-auto py-20 px-5 fade-in">
         <h2 class="text-3xl font-bold mb-20 text-center text-dark">
