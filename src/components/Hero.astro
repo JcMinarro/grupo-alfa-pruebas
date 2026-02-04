@@ -11,12 +11,13 @@ interface Props {
     description?: string;
     location?: string;
     backgroundImage?: string;
-    backgroundVideo?: string;
+    backgroundVideo?: string | any[];
     videoPoster?: string;
     overlayOpacity?: number;
     height?: string;
     class?: string;
     id?: string;
+    contentAlignment?: "center" | "bottom";
 }
 
 const {
@@ -31,12 +32,15 @@ const {
     height = "60vh",
     class: className = "",
     id,
+    contentAlignment = "center",
 } = Astro.props;
+
+const alignmentClass = contentAlignment === "bottom" ? "items-end pb-20" : "items-center";
 ---
 
 <section
     id={id}
-    class={`relative flex items-center justify-center text-center text-white overflow-hidden bg-bg-dark py-20 min-h-[400px] md:min-h-[var(--hero-height)] ${className}`}
+    class={`relative flex ${alignmentClass} justify-center text-center text-white overflow-hidden bg-bg-dark py-20 min-h-[400px] md:min-h-[var(--hero-height)] ${className}`}
     style={`--overlay-opacity: ${overlayOpacity}; --hero-height: ${height}; --bg-image: ${backgroundImage ? `url('${backgroundImage}')` : "none"};`}
 >
     {
