@@ -26,7 +26,7 @@ The "SUBMARCAS DE GRUPO ALFA" section SHALL display the six sub-brand links as s
 
 #### Scenario: Verify Submarcas
 - **WHEN** viewing the submarcas section
-- **THEN** it SHALL show "FLIP ART", "LUJO RENT", "SEGUROS", "ALFA CLEAN", "REY SUBASTOS", and "ALFA LAB" as clickable elements.
+- **THEN** it SHALL show "FLIP ART", "LUJO RENT", "SEGUROS", "ALFA CLEAN", "SUBASTOS", and "ALFA LAB" as clickable elements.
 
 ### Requirement: Office and Contact Parity
 The footer and contact section SHALL include "Nuestra Oficina" details and a Google Maps integration that matches the original site's layout.

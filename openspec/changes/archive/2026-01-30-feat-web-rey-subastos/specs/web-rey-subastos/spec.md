@@ -1,6 +1,6 @@
 ## ADDED Requirements
 
-### Requirement: Rey Subastos Page Implementation
+### Requirement: Subastos Page Implementation
 The system SHALL implement the `/rey-subastos` page as a faithful clone.
 
 #### Scenario: Display auction info
