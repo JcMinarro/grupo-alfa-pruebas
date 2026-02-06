@@ -62,6 +62,119 @@
     --component-text-muted: var(--color-text-muted-dark);
 }
 
+#header .header-logo {
+    filter: brightness(0) invert(1);
+    transition: var(--transition-fast);
+}
+
+:is(
+    .home-page,
+    .promoter-page,
+    .investor-page,
+    .portfolio-page,
+    .contact-page,
+    .hunters-page,
+    .premises-page,
+    .rooms-page,
+    .chalet-page,
+    .tourism-page,
+    .duplex-page,
+    .division-page,
+    .studios-page,
+    .flip-house-page,
+    .rey-page,
+    .flip-art-page,
+    .lujo-page,
+    .clean-page
+) #header {
+    color: var(--color-text-dark);
+}
+
+:is(
+    .home-page,
+    .promoter-page,
+    .investor-page,
+    .portfolio-page,
+    .contact-page,
+    .hunters-page,
+    .premises-page,
+    .rooms-page,
+    .chalet-page,
+    .tourism-page,
+    .duplex-page,
+    .division-page,
+    .studios-page,
+    .flip-house-page,
+    .rey-page,
+    .flip-art-page,
+    .lujo-page,
+    .clean-page
+) #header .header-logo {
+    filter: none;
+}
+
+:is(
+    .home-page,
+    .promoter-page,
+    .investor-page,
+    .portfolio-page,
+    .contact-page,
+    .hunters-page,
+    .premises-page,
+    .rooms-page,
+    .chalet-page,
+    .tourism-page,
+    .duplex-page,
+    .division-page,
+    .studios-page,
+    .flip-house-page,
+    .rey-page,
+    .flip-art-page,
+    .lujo-page,
+    .clean-page
+) #header.scrolled {
+    color: var(--color-text-light);
+}
+
+:is(
+    .home-page,
+    .promoter-page,
+    .investor-page,
+    .portfolio-page,
+    .contact-page,
+    .hunters-page,
+    .premises-page,
+    .rooms-page,
+    .chalet-page,
+    .tourism-page,
+    .duplex-page,
+    .division-page,
+    .studios-page,
+    .flip-house-page,
+    .rey-page,
+    .flip-art-page,
+    .lujo-page,
+    .clean-page
+) #header.scrolled .header-logo {
+    filter: brightness(0) invert(1);
+}
+
+:is(
+    .portfolio-page,
+    .promoter-page,
+    .hunters-page
+) #header {
+    color: var(--color-text-light);
+}
+
+:is(
+    .portfolio-page,
+    .promoter-page,
+    .hunters-page
+) #header .header-logo {
+    filter: brightness(0) invert(1);
+}
+
 /* Base Styles */
 h1,
 h2,

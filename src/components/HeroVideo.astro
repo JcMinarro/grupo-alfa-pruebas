@@ -49,14 +49,6 @@ const {
       <img src={poster} alt={title ?? 'Hero poster'} class="absolute top-0 left-0 w-full h-full object-cover" />
     )
   )}
-  {/* visible metadata panel (accessible) */}
-  {(attribution || license || title) && (
-    <div class="absolute left-4 bottom-4 z-10 text-xs text-white bg-black/50 px-3 py-1 rounded">
-      {title && <div class="font-semibold">{title}</div>}
-      {attribution && <div>Source: {attribution}</div>}
-      {license && <div>License: {license}</div>}
-    </div>
-  )}
 
   {/* play/pause control (keyboard accessible). Visible when video can be interacted with */}
   <button
@@ -70,18 +62,21 @@ const {
 </div>
 
 <script>
+  // @ts-nocheck
   // Client-side behavior: lazy-load & connection-aware selection
   const init = () => {
-    const videos = document.querySelectorAll('.hero-video-container video');
+    const videos = document.querySelectorAll<HTMLVideoElement>('.hero-video-container video');
     videos.forEach(video => {
-      const container = video.closest('.hero-video-container');
+      const videoEl = video as HTMLVideoElement;
+      const container = videoEl.closest('.hero-video-container');
 
       const loadSources = () => {
-        const sources = video.querySelectorAll('source[data-src]');
+        const sources = videoEl.querySelectorAll('source[data-src]') as NodeListOf<HTMLSourceElement>;
         if (!sources || sources.length === 0) return;
         if (sources[0].getAttribute('src')) return; // already loaded
 
-        const connType = (navigator.connection && navigator.connection.effectiveType) ? navigator.connection.effectiveType : '4g';
+        const nav = navigator as Navigator & { connection?: { effectiveType?: string } };
+        const connType = (nav.connection && nav.connection.effectiveType) ? nav.connection.effectiveType : '4g';
         const poor = (connType === '2g' || connType === 'slow-2g');
 
         const ordered = Array.from(sources);
@@ -92,11 +87,12 @@ const {
           if (real) s.setAttribute('src', real);
         });
 
-        try { video.load(); } catch (e) {}
-        setTimeout(()=>{ video.play().catch(()=>{}); }, 50);
+        try { videoEl.load(); } catch (e) {}
+        setTimeout(()=>{ videoEl.play().catch(()=>{}); }, 50);
       };
 
-      const conn = navigator.connection || {};
+      const nav = navigator as Navigator & { connection?: { saveData?: boolean; metered?: boolean } };
+      const conn = nav.connection || {};
       const saveData = !!(conn.saveData || conn.metered);
 
       if (!saveData) {
@@ -108,7 +104,7 @@ const {
             }
           });
         }, { rootMargin: '200px' });
-        obs.observe(container || video);
+        obs.observe(container || videoEl);
       }
       // if saveData, do nothing — we keep poster only
     });
@@ -119,12 +115,13 @@ const {
 </script>
 
 <script>
+  // @ts-nocheck
   // Enhance: wire play/pause control and make it visible when video is loaded
   const wireControls = () => {
     const containers = document.querySelectorAll('.hero-video-container');
     containers.forEach(container => {
-      const video = container.querySelector('video');
-      const btn = container.querySelector('.hero-play-pause');
+      const video = container.querySelector('video') as HTMLVideoElement | null;
+      const btn = container.querySelector('.hero-play-pause') as HTMLButtonElement | null;
       if (!video || !btn) return;
 
       const showBtn = () => { btn.style.display = 'inline-block'; };

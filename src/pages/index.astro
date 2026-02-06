@@ -9,12 +9,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={t("meta.title")}>
+<BaseLayout title={t("meta.title")} bodyClass="home-page">
     <!-- Hero Section -->
     <Hero
         id="inicio"
         backgroundImage="/assets/hero-bg.jpg"
-        overlayOpacity={0.4}
+        overlayOpacity={0}
         height="100vh"
     >
         <img
@@ -28,7 +28,7 @@ const t = useTranslations(lang);
             class="w-full max-w-[300px] md:max-w-[500px] mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] brightness-0 mx-auto"
         />
         <h2
-            class="text-[1.2rem] md:text-[1.5rem] tracking-[3px] md:tracking-[5px] font-medium text-white uppercase"
+            class="text-[1.2rem] md:text-[1.5rem] tracking-[3px] md:tracking-[5px] font-medium text-black uppercase"
         >
             {t("hero.title")}
         </h2>

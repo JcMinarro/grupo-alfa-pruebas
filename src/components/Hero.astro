@@ -28,7 +28,7 @@ const {
     backgroundImage,
     backgroundVideo,
     videoPoster,
-    overlayOpacity = 0.5,
+    overlayOpacity = 0.3,
     height = "60vh",
     class: className = "",
     id,
@@ -71,6 +71,7 @@ const alignmentClass = contentAlignment === "bottom" ? "items-end pb-20" : "item
     >
     </div>
 
+
     <div
         class="max-w-[1200px] mx-auto px-4 w-full relative z-[2] flex flex-col items-center justify-center text-white"
     >
@@ -78,13 +79,6 @@ const alignmentClass = contentAlignment === "bottom" ? "items-end pb-20" : "item
             <div
                 class="fade-in-content opacity-0 translate-y-5 transition-all duration-1000 ease-out [&.visible]:opacity-100 [&.visible]:translate-y-0"
             >
-                {
-                    location && (
-                        <p class="text-[0.85rem] tracking-[2px] uppercase mb-4 opacity-80 text-white">
-                            {location}
-                        </p>
-                    )
-                }
                 {
                     title && (
                         <h1 class="text-[2rem] md:text-[4rem] font-bold mb-4 uppercase text-white">

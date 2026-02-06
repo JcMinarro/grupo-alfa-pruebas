@@ -15,7 +15,7 @@ The component should accept the following props:
 -   `backgroundImage` (string, optional): URL for the background image.
 -   `backgroundVideo` (string | Array<{url, type}>, optional): URL for the background video or array of video sources. Videos are loaded from `src/data/heros.js`.
 -   `videoPoster` (string, optional): Poster image for the video fallback. Stored in `public/assets/heros/`.
--   `overlayOpacity` (number, default: 0.5): Opacity of the dark overlay.
+-   `overlayOpacity` (number, default: 0.3): Opacity of the dark overlay.
 -   `height` (string, default: '60vh'): specific height preference (e.g. '100vh' for home, '50vh' for project pages).
 -   `location` (string, optional): Small location tag above the title (used in project pages like `/local-comercial`).
 -   `class` (string, optional): Additional CSS classes.
@@ -35,6 +35,7 @@ The component should accept the following props:
     ```
 -   **Animations**: The content container must trigger the standard `.fade-in` animation on load.
 -   **Responsive**: Ensure the background covers the area (`object-fit: cover`) and text is readable on mobile.
+-   **Label**: The Hero MUST NOT render a lower-left page-name label.
 
 ### 3. Usage Examples
 
@@ -43,6 +44,7 @@ The component should accept the following props:
 <Hero
   title="INVERSIÓN INTELIGENTE"
   subtitle="CONVIERTE TU DINERO EN UN ACTIVO"
+  overlayOpacity={0}
   height="100vh"
   class="home-hero"
 >

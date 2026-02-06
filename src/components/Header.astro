@@ -17,7 +17,7 @@ const navLinks = [
 ---
 
 <header
-  class="fixed top-0 left-0 w-full z-[1000] bg-transparent transition-all duration-300 py-5 [&.scrolled]:bg-[#1d1e20]/95 [&.scrolled]:py-2.5 [&.scrolled]:shadow-[0_2px_10px_rgba(0,0,0,0.3)]"
+  class="fixed top-0 left-0 w-full z-[1000] bg-transparent text-white transition-all duration-300 py-5 [&.scrolled]:bg-[#1d1e20]/95 [&.scrolled]:py-2.5 [&.scrolled]:shadow-[0_2px_10px_rgba(0,0,0,0.3)]"
   id="header"
 >
   <div
@@ -27,23 +27,23 @@ const navLinks = [
       <img
         src="/assets/logo-alfa-wolf.png"
         alt={t("brand.name")}
-        class="h-[40px] brightness-0 invert"
+        class="header-logo h-[40px]"
       />
     </a>
 
     <!-- Mobile Menu Toggle -->
     <button
-      class="mobile-menu-toggle md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 z-[1001] bg-transparent border-none cursor-pointer group"
+      class="mobile-menu-toggle md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 z-[1001] bg-transparent border-none cursor-pointer group text-current"
       aria-label="Toggle Menu"
     >
       <span
-        class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:rotate-45 group-[.active]:translate-y-2"
+        class="w-6 h-0.5 bg-current transition-all duration-300 group-[.active]:rotate-45 group-[.active]:translate-y-2"
       ></span>
       <span
-        class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:opacity-0"
+        class="w-6 h-0.5 bg-current transition-all duration-300 group-[.active]:opacity-0"
       ></span>
       <span
-        class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:-rotate-45 group-[.active]:-translate-y-2"
+        class="w-6 h-0.5 bg-current transition-all duration-300 group-[.active]:-rotate-45 group-[.active]:-translate-y-2"
       ></span>
     </button>
 
@@ -55,7 +55,7 @@ const navLinks = [
             <li>
               <a
                 href={href}
-                class={`text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === id ? "text-primary" : "text-white"}`}
+                class={`header-link text-[0.9rem] font-medium tracking-[1px] uppercase transition-colors hover:text-primary ${activeNav === id ? "text-primary" : "text-current"}`}
               >
                 {label}
               </a>
@@ -67,7 +67,7 @@ const navLinks = [
 
     <!-- Mobile Navigation Overlay -->
     <div
-      class="nav-menu fixed top-0 right-0 w-full h-screen bg-[#1d1e20]/95 backdrop-blur-lg translate-x-full transition-transform duration-500 ease-in-out z-[1000] flex flex-col items-center justify-center gap-8 md:hidden [&.active]:translate-x-0"
+      class="nav-menu fixed top-0 right-0 w-full h-screen bg-[#1d1e20]/95 text-white backdrop-blur-lg translate-x-full transition-transform duration-500 ease-in-out z-[1000] flex flex-col items-center justify-center gap-8 md:hidden [&.active]:translate-x-0"
     >
       <ul class="flex flex-col items-center gap-8 list-none m-0 p-0">
         {
@@ -75,7 +75,7 @@ const navLinks = [
             <li>
               <a
                 href={href}
-                class={`text-[1.5rem] font-medium tracking-[2px] uppercase transition-colors hover:text-primary ${activeNav === id ? "text-primary" : "text-white"}`}
+                class={`header-link text-[1.5rem] font-medium tracking-[2px] uppercase transition-colors hover:text-primary ${activeNav === id ? "text-primary" : "text-current"}`}
               >
                 {label}
               </a>
