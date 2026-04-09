@@ -39,6 +39,11 @@ const t = useTranslations(lang);
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center fade-in mb-16">
                 <h2
+                    class="text-[2rem] md:text-[3rem] font-bold tracking-[2px] uppercase text-primary mb-3"
+                >
+                    {t("home.club.title")}
+                </h2>
+                <h2
                     class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
                 >
                     {t("home.steps.title.main")}
@@ -313,13 +318,14 @@ const t = useTranslations(lang);
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
                     <div class="fade-in">
                         <h2
-                            class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-1 text-dark"
+                            class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-4 text-dark"
                         >
-                            {t("home.contact.title")}
-                        </h2>
-                        <p>
                             {t("home.contact.description")}
-                        </p>
+                        </h2>
+                        <ul class="list-disc pl-6 space-y-3 text-[1.1rem] md:text-[1.2rem] font-medium text-[#333]">
+                            <li>{t("home.contact.reason.services")}</li>
+                            <li>{t("home.contact.reason.club")}</li>
+                        </ul>
                         <div class="mt-10 flex justify-center">
                             <img
                                 src="/assets/logo-alfa-wolf.png"
