@@ -1,0 +1,124 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import InfoGrid from "../components/InfoGrid.astro";
+import GridItem from "../components/GridItem.astro";
+import { heros } from "../data/heros.js";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const benefitCardClass = "min-h-[280px] p-[40px] [&_h3]:text-[1.7rem] [&_h3]:leading-[1.15] [&_p]:text-[1.22rem] [&_p]:leading-[1.75]";
+---
+
+<BaseLayout
+    title={`${t("club.meta.title")} | ${t("brand.name")}`}
+    bodyClass="club-page bg-white text-dark"
+    activeNav="club"
+>
+    <Hero
+        title={t("club.hero.title")}
+        subtitle={t("club.hero.subtitle")}
+        description={t("club.hero.description")}
+        backgroundImage="/assets/hunters/hero-poster.jpg"
+        backgroundVideo={heros.club}
+        videoPoster="/assets/hunters/hero-poster.jpg"
+        overlayOpacity={0.45}
+        height="62vh"
+    />
+
+    <section class="max-w-[1000px] mx-auto py-20 px-5 text-center fade-in">
+        <p class="text-primary uppercase tracking-[8px] font-bold text-[1.4rem] md:text-[3.1rem] mb-5 leading-none">
+            {t("home.club.eyebrow")}
+        </p>
+        <h2 class="text-[2rem] md:text-[4rem] font-bold text-dark mb-8 leading-[1.05]">
+            {t("club.intro.title")}
+        </h2>
+        <p class="text-[1.2rem] md:text-[1.5rem] text-[#555] leading-[1.8] max-w-[1000px] mx-auto">
+            {t("club.intro.description")}
+        </p>
+    </section>
+
+    <section
+        class="max-w-[1200px] mx-auto py-10 px-5 text-dark fade-in"
+        style="--component-bg: rgba(0, 0, 0, 0.035); --component-border: rgba(0, 0, 0, 0.12); --component-text: var(--color-text-dark); --component-text-muted: var(--color-text-muted-dark);"
+    >
+        <h2 class="text-[2rem] md:text-[3.2rem] font-bold text-center mb-12 leading-tight">
+            {t("club.benefits.title")}
+        </h2>
+        <InfoGrid columns={3}>
+            <GridItem
+                class={benefitCardClass}
+                title={t("club.benefits.knowledge.title")}
+                description={t("club.benefits.knowledge.description")}
+            />
+            <GridItem
+                class={benefitCardClass}
+                title={t("club.benefits.training.title")}
+                description={t("club.benefits.training.description")}
+            />
+            <GridItem
+                class={benefitCardClass}
+                title={t("club.benefits.access.title")}
+                description={t("club.benefits.access.description")}
+            />
+            <GridItem
+                class={benefitCardClass}
+                title={t("club.benefits.exclusive.title")}
+                description={t("club.benefits.exclusive.description")}
+            />
+            <GridItem
+                class={benefitCardClass}
+                title={t("club.benefits.investments.title")}
+                description={t("club.benefits.investments.description")}
+            />
+            <GridItem
+                class={benefitCardClass}
+                title={t("club.benefits.bank.title")}
+                description={t("club.benefits.bank.description")}
+            />
+        </InfoGrid>
+    </section>
+
+    <section class="bg-[#f8f8f8] text-dark py-20 mt-16 fade-in">
+        <div class="max-w-[1200px] mx-auto px-5">
+            <h2 class="text-[2rem] md:text-[3.2rem] font-bold text-center mb-12 leading-tight">
+                {t("club.areas.title")}
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] min-h-[180px] flex items-center">
+                    <p class="text-[#444] text-[1.22rem] md:text-[1.35rem] leading-[1.75]">{t("club.areas.one")}</p>
+                </div>
+                <div class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] min-h-[180px] flex items-center">
+                    <p class="text-[#444] text-[1.22rem] md:text-[1.35rem] leading-[1.75]">{t("club.areas.two")}</p>
+                </div>
+                <div class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] min-h-[180px] flex items-center">
+                    <p class="text-[#444] text-[1.22rem] md:text-[1.35rem] leading-[1.75]">{t("club.areas.three")}</p>
+                </div>
+                <div class="bg-white p-8 border-l-4 border-primary shadow-[0_5px_20px_rgba(0,0,0,0.05)] min-h-[180px] flex items-center">
+                    <p class="text-[#444] text-[1.22rem] md:text-[1.35rem] leading-[1.75]">{t("club.areas.four")}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-[1000px] mx-auto py-20 px-5 text-center fade-in text-dark">
+        <p class="text-primary uppercase tracking-[8px] font-bold text-[1.35rem] md:text-[2.2rem] mb-5 leading-none">
+            {t("club.price.eyebrow")}
+        </p>
+        <h2 class="text-[2.6rem] md:text-[4rem] font-bold mb-4">
+            {t("club.price.title")}
+        </h2>
+        <p class="text-[#555] text-[1.2rem] md:text-[1.5rem] leading-[1.8] max-w-[900px] mx-auto mb-12">
+            {t("club.price.description")}
+        </p>
+        <h3 class="text-[2rem] md:text-[3.2rem] font-bold mb-6 leading-tight">{t("club.cta.title")}</h3>
+        <p class="text-[#555] text-[1.2rem] md:text-[1.5rem] leading-[1.8] max-w-[980px] mx-auto mb-12">
+            {t("club.cta.description")}
+        </p>
+        <a
+            href="/contacto"
+            class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block"
+        >{t("club.cta.button")}</a>
+    </section>
+</BaseLayout>

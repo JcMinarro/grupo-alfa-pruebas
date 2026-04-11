@@ -34,6 +34,30 @@ const t = useTranslations(lang);
         </h2>
     </Hero>
 
+    <section class="bg-[#1d1e20] text-white py-20 border-t border-white/10">
+        <div class="max-w-[1200px] mx-auto px-4 text-center fade-in">
+            <p class="text-primary uppercase tracking-[4px] font-semibold mb-4">
+                {t("home.club.eyebrow")}
+            </p>
+            <h2 class="text-[2.2rem] md:text-[3.5rem] font-bold uppercase leading-tight mb-6">
+                {t("home.club.promo.title")}
+            </h2>
+            <p class="max-w-[760px] mx-auto text-white/80 text-[1rem] md:text-[1.1rem] leading-[1.8] mb-10">
+                {t("home.club.promo.description")}
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a
+                    href="/club"
+                    class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block"
+                >{t("home.club.cta")}</a>
+                <a
+                    href="/contacto"
+                    class="border border-white/30 text-white px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:border-primary hover:text-primary inline-block"
+                >{t("home.club.secondaryCta")}</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Value Props (Steps) -->
     <section class="py-24 bg-white text-dark">
         <div class="max-w-[1200px] mx-auto px-4">
