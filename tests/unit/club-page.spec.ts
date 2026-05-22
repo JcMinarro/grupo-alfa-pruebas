@@ -18,7 +18,7 @@ describe("Club Alfa presence across the site", () => {
     expect(clubPageSource).toContain("<BaseLayout");
     expect(clubPageSource).toContain('activeNav="club"');
     expect(clubPageSource).toContain("backgroundVideo={heros.club}");
-    expect(clubPageSource).toContain('href="/contacto"');
+    expect(clubPageSource).toContain('href="/sign-up"');
   });
 
   it("adds Club to the shared header navigation", () => {
@@ -55,13 +55,14 @@ describe("Club Alfa presence across the site", () => {
     expect(uiSource).toContain('reducción de costes de intermediación');
   });
 
-  it("shows approved annual pricing and a contact CTA on the Club page", () => {
+  it("shows approved annual pricing and a membership signup CTA on the Club page", () => {
     const clubPageSource = readFile("src", "pages", "club.astro");
     const uiSource = readFile("src", "i18n", "ui.ts");
 
     expect(clubPageSource).toContain('t("club.price.title")');
     expect(clubPageSource).toContain('t("club.cta.button")');
-    expect(clubPageSource).toContain('href="/contacto"');
+    expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).not.toContain('href="/contacto"');
     expect(uiSource).toContain("'club.price.title': '99€/Año'");
     expect(uiSource).toContain("'club.price.title': '99€/Year'");
   });

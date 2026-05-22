@@ -1,10 +1,13 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import MembershipLink from "./MembershipLink.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { activeNav = "inicio" } = Astro.props;
+const authState = Astro.locals.auth?.();
+const isAuthenticated = authState?.isAuthenticated ?? false;
 
 const navLinks = [
   { id: "inicio", href: "/", label: t("nav.inicio") },
@@ -15,6 +18,10 @@ const navLinks = [
   { id: "hunters", href: "/alfa-hunters", label: t("nav.hunters") },
   { id: "contacto", href: "/contacto", label: t("nav.contacto") },
 ];
+
+const authLinks = isAuthenticated
+  ? [{ href: "/members", label: t("nav.members") }]
+  : [{ href: "/sign-in", label: t("nav.signIn") }];
 ---
 
 <header
@@ -50,7 +57,7 @@ const navLinks = [
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:block">
-      <ul class="flex gap-[30px] list-none m-0 p-0">
+      <ul class="flex gap-[30px] list-none m-0 p-0 items-center">
         {
           navLinks.map(({ id, href, label }) => (
             <li>
@@ -60,6 +67,17 @@ const navLinks = [
               >
                 {label}
               </a>
+            </li>
+          ))
+        }
+        {
+          authLinks.map(({ href, label }) => (
+            <li>
+              <MembershipLink
+                href={href}
+                label={label}
+                className="inline-flex items-center rounded-full border border-current/20 px-5 py-2 text-[0.82rem] font-bold tracking-[1px] uppercase transition-colors hover:border-primary hover:text-primary"
+              />
             </li>
           ))
         }
@@ -80,6 +98,17 @@ const navLinks = [
               >
                 {label}
               </a>
+            </li>
+          ))
+        }
+        {
+          authLinks.map(({ href, label }) => (
+            <li>
+              <MembershipLink
+                href={href}
+                label={label}
+                className="inline-flex items-center rounded-full border border-white/30 px-6 py-3 text-[1rem] font-bold tracking-[2px] uppercase transition-colors hover:border-primary hover:text-primary"
+              />
             </li>
           ))
         }

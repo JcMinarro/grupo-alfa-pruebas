@@ -1,0 +1,27 @@
+---
+const links = [
+    { href: '/members', label: 'Overview' },
+    { href: '/members/profile', label: 'Profile' },
+    { href: '/members/membership', label: 'Membership' },
+    { href: '/members/benefits', label: 'Benefits' },
+    { href: '/members/resources', label: 'Resources' },
+    { href: '/members/events', label: 'Events' },
+    { href: '/members/expert-sessions', label: 'Expert Sessions' },
+    { href: '/members/referrals', label: 'Referrals' }
+];
+
+const { activePath = '/members' } = Astro.props;
+---
+
+<nav class="border-b border-white/10 bg-[#141517]">
+    <div class="max-w-[1200px] mx-auto px-4 py-4 flex flex-wrap gap-3">
+        {links.map(({ href, label }) => (
+            <a
+                href={href}
+                class={`rounded-full px-4 py-2 text-sm uppercase tracking-[1px] ${activePath === href ? 'bg-primary text-black font-bold' : 'border border-white/15 text-white/75 hover:text-white hover:border-primary'}`}
+            >
+                {label}
+            </a>
+        ))}
+    </div>
+</nav>

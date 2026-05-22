@@ -1,0 +1,14 @@
+---
+import MemberLayout from '../../layouts/MemberLayout.astro';
+import { requireActiveMembership } from '../../lib/server/membership';
+
+const membership = await requireActiveMembership(Astro.locals);
+---
+
+<MemberLayout title="Profile" activePath="/members/profile">
+    <section class="rounded-[28px] border border-white/10 bg-white/5 p-8">
+        <h2 class="text-2xl font-bold mb-4">Your account</h2>
+        <p class="text-white/70 leading-[1.8] mb-3">Signed in as: {membership.user?.primaryEmailAddress?.emailAddress ?? 'Unknown member'}</p>
+        <p class="text-white/70 leading-[1.8]">Profile editing is handled by Clerk and can be expanded with richer member preferences later.</p>
+    </section>
+</MemberLayout>

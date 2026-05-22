@@ -12,6 +12,9 @@ dist
 dist-ssr
 .astro/
 *.local
+.env
+.env.*
+!.env.sample
 
 # Editor directories and files
 .vscode/*

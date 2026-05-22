@@ -63,6 +63,13 @@
     --component-text-muted: var(--color-text-muted-dark);
 }
 
+.members-page {
+    --component-bg: rgba(255, 255, 255, 0.04);
+    --component-border: rgba(255, 255, 255, 0.12);
+    --component-text: var(--color-text-light);
+    --component-text-muted: var(--color-text-muted);
+}
+
 #header .header-logo {
     filter: brightness(0) invert(1);
     transition: var(--transition-fast);
@@ -161,6 +168,61 @@
     .clean-page
 ) #header.scrolled .header-logo {
     filter: brightness(0) invert(1);
+}
+
+.members-page #header {
+    color: var(--color-text-light);
+}
+
+.members-page #header .header-logo,
+.members-page #header.scrolled .header-logo {
+    filter: brightness(0) invert(1);
+}
+
+.auth-card .cl-rootBox,
+.auth-card .cl-cardBox,
+.auth-card .cl-card {
+    width: 100%;
+}
+
+.auth-card .cl-card {
+    background: #ffffff;
+    color: #1d1e20;
+    border-radius: 22px;
+    box-shadow: none;
+}
+
+.auth-card .cl-formFieldInput,
+.auth-card .cl-otpCodeFieldInput {
+    min-height: 46px;
+    background: #ffffff;
+    color: #1d1e20;
+    border: 1px solid rgba(29, 30, 32, 0.2);
+    border-radius: 12px;
+    caret-color: #1d1e20;
+}
+
+.auth-card .cl-otpCodeField {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.auth-card .cl-otpCodeFieldInput {
+    width: 44px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.auth-card .cl-formButtonPrimary {
+    background: var(--color-primary);
+    color: #1d1e20;
+    font-weight: 700;
+}
+
+.auth-card .cl-formButtonPrimary:hover {
+    background: #ffc400;
 }
 
 :is(

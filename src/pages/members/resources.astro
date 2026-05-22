@@ -1,0 +1,13 @@
+---
+import MemberLayout from '../../layouts/MemberLayout.astro';
+import { requireActiveMembership } from '../../lib/server/membership';
+
+await requireActiveMembership(Astro.locals);
+---
+
+<MemberLayout title="Resources" activePath="/members/resources">
+    <section class="rounded-[28px] border border-dashed border-white/15 bg-white/5 p-8">
+        <h2 class="text-2xl font-bold mb-4">Resources are coming next</h2>
+        <p class="text-white/70 leading-[1.8]">This member-only space is already reserved for future playbooks, recordings, and premium documents.</p>
+    </section>
+</MemberLayout>
