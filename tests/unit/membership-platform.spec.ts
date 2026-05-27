@@ -2,6 +2,7 @@
 import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { getCheckoutDiscountParams, getCouponDiscountPreview, resolveDiscountCode } from "../../src/lib/server/billing";
 
 const resolveFromRoot = (...segments: string[]) =>
   path.resolve(process.cwd(), ...segments);
@@ -10,6 +11,184 @@ const readFile = (...segments: string[]) =>
   fs.readFileSync(resolveFromRoot(...segments), "utf-8");
 
 describe("Membership platform foundation", () => {
+  it("resolves a valid Stripe promotion code even when coupon metadata is missing", async () => {
+    const stripe = {
+      promotionCodes: {
+        list: async () => ({
+          data: [
+            {
+              id: "promo_test",
+              metadata: { sourceType: "referral" },
+              coupon: undefined,
+            },
+          ],
+        }),
+      },
+    };
+
+    await expect(resolveDiscountCode(stripe, "valid-code")).resolves.toMatchObject({
+      stripePromotionCodeId: "promo_test",
+      sourceType: "referral",
+    });
+  });
+
+  it("accepts a valid code when Stripe omits coupon discount details", () => {
+    expect(getCouponDiscountPreview(undefined)).toMatchObject({
+      hasPricePreview: false,
+      discountLabel: "Stripe discount",
+    });
+  });
+
+  it("requests expanded coupon details when validating a discount code", async () => {
+    let listParams;
+    const stripe = {
+      promotionCodes: {
+        list: async (params) => {
+          listParams = params;
+
+          return {
+            data: [
+              {
+                id: "promo_test",
+                metadata: {},
+                coupon: { percent_off: 10, metadata: {} },
+              },
+            ],
+          };
+        },
+      },
+    };
+
+    await resolveDiscountCode(stripe, "valid-code");
+
+    expect(listParams.expand).toEqual(expect.arrayContaining(["data.coupon", "data.promotion"]));
+  });
+
+  it("retrieves coupon details when Stripe returns only a coupon id", async () => {
+    let couponId;
+    const stripe = {
+      promotionCodes: {
+        list: async () => ({
+          data: [
+            {
+              id: "promo_test",
+              metadata: {},
+              coupon: "coupon_test",
+            },
+          ],
+        }),
+      },
+      coupons: {
+        retrieve: async (id) => {
+          couponId = id;
+
+          return { id, percent_off: 10, metadata: {} };
+        },
+      },
+    };
+
+    const resolved = await resolveDiscountCode(stripe, "valid-code");
+
+    expect(couponId).toBe("coupon_test");
+    expect(resolved.coupon).toMatchObject({ percent_off: 10 });
+  });
+
+  it("retrieves an expanded promotion code when coupon details are omitted", async () => {
+    let retrieveParams;
+    const stripe = {
+      promotionCodes: {
+        list: async () => ({
+          data: [
+            {
+              id: "promo_test",
+              metadata: {},
+              coupon: undefined,
+            },
+          ],
+        }),
+        retrieve: async (_id, params) => {
+          retrieveParams = params;
+
+          return {
+            id: "promo_test",
+            metadata: {},
+            coupon: { percent_off: 25, metadata: {} },
+          };
+        },
+      },
+    };
+
+    const resolved = await resolveDiscountCode(stripe, "valid-code");
+
+    expect(retrieveParams.expand).toEqual(expect.arrayContaining(["coupon", "promotion"]));
+    expect(resolved.coupon).toMatchObject({ percent_off: 25 });
+  });
+
+  it("retrieves coupon details when the expanded promotion still returns only a coupon id", async () => {
+    let couponId;
+    const stripe = {
+      promotionCodes: {
+        list: async () => ({
+          data: [{ id: "promo_test", metadata: {}, coupon: undefined }],
+        }),
+        retrieve: async () => ({ id: "promo_test", metadata: {}, coupon: "coupon_test" }),
+      },
+      coupons: {
+        retrieve: async (id) => {
+          couponId = id;
+
+          return { id, percent_off: 50, metadata: {} };
+        },
+      },
+    };
+
+    const resolved = await resolveDiscountCode(stripe, "valid-code");
+
+    expect(couponId).toBe("coupon_test");
+    expect(getCouponDiscountPreview(resolved.coupon)).toMatchObject({
+      hasPricePreview: true,
+      finalPrice: "49.50 EUR",
+    });
+  });
+
+  it("retrieves coupon details from Stripe's promotion field", async () => {
+    let couponId;
+    const stripe = {
+      promotionCodes: {
+        list: async () => ({
+          data: [
+            {
+              id: "promo_test",
+              metadata: {},
+              promotion: { type: "coupon", coupon: "coupon_test" },
+            },
+          ],
+        }),
+      },
+      coupons: {
+        retrieve: async (id) => {
+          couponId = id;
+
+          return { id, percent_off: 100, metadata: {} };
+        },
+      },
+    };
+
+    const resolved = await resolveDiscountCode(stripe, "valid-code");
+
+    expect(couponId).toBe("coupon_test");
+    expect(getCouponDiscountPreview(resolved.coupon)).toMatchObject({
+      hasPricePreview: true,
+      finalPrice: "0.00 EUR",
+    });
+  });
+
+  it("does not send allow_promotion_codes with explicit Checkout discounts", () => {
+    expect(getCheckoutDiscountParams({ stripePromotionCodeId: "promo_test" })).toEqual({
+      discounts: [{ promotion_code: "promo_test" }],
+    });
+  });
+
   it("switches Astro to portable SSR and registers Clerk", () => {
     const astroConfig = readFile("astro.config.mjs");
     const packageJson = readFile("package.json");
@@ -181,9 +360,13 @@ describe("Membership platform foundation", () => {
     expect(checkoutSource).toContain("checkout_error=invalid_code");
     expect(billingSource).toContain("resolveDiscountCode");
     expect(billingSource).toContain("previewDiscountCode");
-    expect(billingSource).toContain("allow_promotion_codes: false");
-    expect(billingSource).toContain("AGENCIA-");
-    expect(billingSource).toContain("REF-");
+    expect(billingSource).toContain("getCheckoutDiscountParams");
+    expect(billingSource).not.toContain("allow_promotion_codes: false");
+    expect(billingSource).toContain("const promotionMetadata = promotionCode.metadata ?? {}");
+    expect(billingSource).toContain("promotionMetadata.sourceType");
+    expect(billingSource).toContain("promotionMetadata.organizationCode");
+    expect(billingSource).not.toContain("startsWith('AGENCIA-')");
+    expect(billingSource).not.toContain("startsWith('REF-')");
     expect(billingSource).toContain("isInitialPurchase: 'true'");
   });
 

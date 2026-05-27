@@ -6,7 +6,7 @@ Grupo Alfa ya dispone de una landing publica para Club Alfa, pero aun no tiene u
 
 - Add a membership platform with public onboarding routes in English, private member routes under `/members`, and route guards based on authentication and membership state.
 - Add a first-purchase subscription flow using Clerk, Stripe Checkout, Stripe Billing Portal, and server-side synchronization through webhooks.
-- Add support for organization promo codes and member referral codes that apply only on the initial purchase, are not combinable, and can be locked when the user arrives from a campaign link.
+- Add support for one user-facing discount code field that validates Stripe promotion codes before Checkout, applies only on the initial purchase, and can be locked when the user arrives from a campaign link.
 - Add a minimal private member area focused on membership state, profile access, referrals, and placeholders for future premium content.
 - Update the public Club Alfa landing so it remains a commercial page while its primary CTA sends users into the new registration flow instead of the contact flow.
 - Move the runtime plan away from host-specific Astro adapters so the membership platform can run without a Vercel dependency.

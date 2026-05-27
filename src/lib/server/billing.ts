@@ -11,6 +11,42 @@ import {
 
 let stripeClient;
 
+async function getPromotionCodeCoupon(stripe, promotionCode) {
+    let coupon = promotionCode.coupon ?? promotionCode.promotion?.coupon;
+
+    if (coupon && typeof coupon === 'object') {
+        return coupon;
+    }
+
+    if (stripe.promotionCodes?.retrieve) {
+        const expandedPromotionCode = await stripe.promotionCodes.retrieve(promotionCode.id, {
+            expand: ['coupon', 'promotion']
+        });
+
+        coupon = expandedPromotionCode.coupon ?? expandedPromotionCode.promotion?.coupon ?? coupon;
+    }
+
+    if (coupon && typeof coupon === 'object') {
+        return coupon;
+    }
+
+    if (typeof coupon === 'string' && stripe.coupons?.retrieve) {
+        return stripe.coupons.retrieve(coupon);
+    }
+
+    return coupon;
+}
+
+export function getCheckoutDiscountParams(resolvedDiscount) {
+    if (!resolvedDiscount.stripePromotionCodeId) {
+        return {};
+    }
+
+    return {
+        discounts: [{ promotion_code: resolvedDiscount.stripePromotionCodeId }]
+    };
+}
+
 export function getStripe() {
     if (!stripeClient) {
         const env = getServerEnv();
@@ -36,7 +72,8 @@ export async function resolveDiscountCode(stripe, discountCode) {
     const promotionCodes = await stripe.promotionCodes.list({
         code: normalizedCode,
         active: true,
-        limit: 1
+        limit: 1,
+        expand: ['data.coupon', 'data.promotion']
     });
     const promotionCode = promotionCodes.data[0];
 
@@ -44,23 +81,36 @@ export async function resolveDiscountCode(stripe, discountCode) {
         throw new Error('The code entered is not valid or is no longer active.');
     }
 
-    const isAgencyCode = normalizedCode.startsWith('AGENCIA-');
-    const isReferralCode = normalizedCode.startsWith('REF-');
+    const coupon = await getPromotionCodeCoupon(stripe, promotionCode);
+    const couponMetadata = coupon && typeof coupon === 'object' && 'metadata' in coupon ? coupon.metadata ?? {} : {};
+    const promotionMetadata = promotionCode.metadata ?? {};
+    const metadata = {
+        ...couponMetadata,
+        ...promotionMetadata
+    };
+    const sourceType = promotionMetadata.sourceType ?? metadata.sourceType ?? 'direct';
 
     return {
         stripePromotionCodeId: promotionCode.id,
-        sourceType: isAgencyCode ? 'organization' : isReferralCode ? 'referral' : 'direct',
-        organizationCode: isAgencyCode ? normalizedCode : '',
-        referralCode: isReferralCode ? normalizedCode : ''
+        coupon,
+        sourceType,
+        organizationCode: promotionMetadata.organizationCode ?? metadata.organizationCode ?? '',
+        referralCode: promotionMetadata.referralCode ?? metadata.referralCode ?? ''
     };
 }
 
-export async function previewDiscountCode(discountCode) {
-    const stripe = getStripe();
-    const normalizedCode = `${discountCode ?? ''}`.trim().toUpperCase();
-    const resolvedDiscount = await resolveDiscountCode(stripe, normalizedCode);
-    const promotionCode = await stripe.promotionCodes.retrieve(resolvedDiscount.stripePromotionCodeId);
-    const coupon = promotionCode.coupon;
+export function getCouponDiscountPreview(coupon) {
+    if (!coupon || typeof coupon !== 'object') {
+        return {
+            hasPricePreview: false,
+            discountLabel: 'Stripe discount',
+            originalAmount: 9900,
+            finalAmount: undefined,
+            originalPrice: '99.00 EUR',
+            finalPrice: undefined
+        };
+    }
+
     const annualAmount = 9900;
     const discountAmount = coupon.percent_off
         ? Math.round((annualAmount * coupon.percent_off) / 100)
@@ -68,13 +118,25 @@ export async function previewDiscountCode(discountCode) {
     const finalAmount = Math.max(annualAmount - discountAmount, 0);
 
     return {
-        code: normalizedCode,
-        sourceType: resolvedDiscount.sourceType,
+        hasPricePreview: true,
         discountLabel: coupon.percent_off ? `${coupon.percent_off}%` : `${(discountAmount / 100).toFixed(2)} EUR`,
         originalAmount: annualAmount,
         finalAmount,
         originalPrice: `${(annualAmount / 100).toFixed(2)} EUR`,
         finalPrice: `${(finalAmount / 100).toFixed(2)} EUR`
+    };
+}
+
+export async function previewDiscountCode(discountCode) {
+    const stripe = getStripe();
+    const normalizedCode = `${discountCode ?? ''}`.trim().toUpperCase();
+    const resolvedDiscount = await resolveDiscountCode(stripe, normalizedCode);
+    const preview = getCouponDiscountPreview(resolvedDiscount.coupon);
+
+    return {
+        code: normalizedCode,
+        sourceType: resolvedDiscount.sourceType,
+        ...preview
     };
 }
 
@@ -99,10 +161,7 @@ export async function createCheckoutSession({ user, origin, discountCode }) {
         ],
         client_reference_id: user.id,
         customer_email: user.primaryEmailAddress?.emailAddress,
-        allow_promotion_codes: false,
-        discounts: resolvedDiscount.stripePromotionCodeId
-            ? [{ promotion_code: resolvedDiscount.stripePromotionCodeId }]
-            : undefined,
+        ...getCheckoutDiscountParams(resolvedDiscount),
         metadata: {
             clerkUserId: user.id,
             membershipType: 'annual',

@@ -10,8 +10,8 @@ This change also has a product split that needs to remain explicit: `/club` stay
 - Preserve `/club` as a public commercial destination while redirecting conversion into a new registration flow.
 - Introduce an English route model for onboarding and member-only pages.
 - Define a single annual paid plan for phase 1 at `99 EUR/year`.
-- Support organization promo codes and member referral codes only on the initial purchase, never combined.
-- Lock prefilled promo or referral codes when the user arrives through a campaign link.
+- Support a single user-facing discount code field for the initial purchase; Stripe determines the discount and optional metadata determines attribution.
+- Lock prefilled campaign codes when the user arrives through a campaign link.
 - Make Stripe webhooks the source of truth for membership activation and renewal state.
 - Provide a minimum private member area that can launch before premium content is fully populated.
 
@@ -92,21 +92,23 @@ Alternative considered:
 - Ship annual and monthly together: rejected because monthly is intentionally deferred.
 
 ### Promotion and referral model
-Use a single Stripe coupon or promotion code at initial checkout only.
+Use a single user-facing Stripe promotion code at initial checkout only. Codes may represent organization campaigns, referrals, or other future acquisition sources, but the visible code itself MUST NOT rely on technical prefixes such as `AGENCIA-` or `REF-`.
 
 Rules:
-- Organization codes and referral codes are mutually exclusive.
 - Only one code can be applied per initial checkout.
+- The application validates the code against Stripe before Checkout and sends the resolved Stripe promotion code id to Checkout.
+- Stripe Checkout does not expose a second promotion-code entry field.
 - Codes do not apply to renewals.
 - Codes do not apply automatically to future plan changes if new plans are introduced later.
-- If the user lands through a campaign link such as `?promo=` or `?ref=`, the corresponding field is prefilled and immutable in the onboarding UI.
+- If the user lands through a campaign link such as `?promo=` or `?ref=`, the single code field is prefilled and immutable in the onboarding UI.
+- Attribution such as `sourceType`, `organizationCode`, or a future referrer/member identifier comes from Stripe promotion-code or coupon metadata when present; otherwise the discount still applies and attribution defaults to direct.
 
 Rationale:
 - Keeps discount rules aligned with Stripe's own constraints.
 - Simplifies support, reporting, and abuse prevention.
 
 Alternatives considered:
-- Allow stacking discounts: rejected because it conflicts with the desired business rules and increases operational complexity.
+- Allow stacking discounts or a second code in Stripe Checkout: rejected because it conflicts with the desired business rules and increases operational complexity.
 - Allow editing prefilled campaign codes: rejected because campaign links should remain attributable and harder to tamper with.
 
 ### Organization entry model
@@ -129,7 +131,7 @@ Rationale:
 Phase 1 minimum:
 - Clerk public metadata: membership status, membership type, organization code when applicable, referral code used when applicable.
 - Clerk private metadata: Stripe customer id, Stripe subscription id.
-- Stripe metadata: Clerk user id, source type, organization code or referral code when applicable.
+- Stripe metadata: Clerk user id, source type, organization code, or future referrer/member identifier when applicable.
 
 Alternative considered:
 - Define a broad metadata contract from day one: rejected because the current goal is to keep phase 1 as simple as possible.

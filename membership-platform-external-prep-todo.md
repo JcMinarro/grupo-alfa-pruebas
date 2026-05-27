@@ -27,7 +27,7 @@ Notas confirmadas:
   - `membershipStatus`
   - `membershipType`
   - `organizationCode`
-  - `referralCodeUsed`
+  - `referrerMemberId` o equivalente, solo si se activa atribucion/recompensa de referrals
   - `stripeCustomerId`
   - `stripeSubscriptionId`
 
@@ -69,17 +69,17 @@ Notas para 3.6:
 - Queda diferido a fase 2/3 valorar un backoffice propio para gestionar codigos, agencias y referrals.
 
 Notas para 3.7:
-- Convencion de promo codes para agencias/organizaciones: `AGENCIA-<NOMBRE>-2026`.
-- Ejemplos: `AGENCIA-TECNOCASA-2026`, `AGENCIA-REMAX-2026`.
-- Los codigos deben ser legibles para que las agencias puedan compartirlos facilmente.
+- Los codigos visibles para agencias/organizaciones no usaran prefijos tecnicos obligatorios.
+- Pueden ser codigos legibles con el nombre de la agencia o codigos comerciales acordados con cada partner.
+- La atribucion de organizacion se guardara en metadata de Stripe (`sourceType=organization`, `organizationCode=<codigo interno>`), no en el formato visible del codigo.
 
 Notas para 3.8:
-- Fase 1: los referral codes se gestionaran en Stripe como promotion codes.
-- Convencion de referral codes: `REF-<CODIGO_CORTO>`.
-- Ejemplo: `REF-A7K9Q2`.
+- Fase 1: los referral codes se gestionaran en Stripe como promotion codes creados manualmente desde Stripe.
+- Los referral codes seran alfanumericos random, sin prefijos tecnicos visibles.
 - Descuento previsto: 10% solo en la primera compra.
-- No combinable con codigos de agencia/organizacion.
-- Fase futura: valorar una capa backend/backoffice propio para generar, asignar y controlar referrals desde la plataforma.
+- El usuario solo ve un campo generico de codigo; la plataforma valida el codigo contra Stripe y aplica el descuento configurado alli.
+- Para referrals, en fase 1 basta con `sourceType=referral`; no es necesario duplicar el codigo visible en metadata como `referralCode`.
+- Fase futura: valorar una capa backend/backoffice propio para generar, asignar y controlar referrals desde la plataforma creando cupones/promotion codes mediante la API de Stripe.
 
 Notas para 3.9:
 - Variables Stripe recogidas/configuradas para el entorno de pruebas inicial.

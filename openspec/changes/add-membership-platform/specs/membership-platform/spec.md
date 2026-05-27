@@ -41,33 +41,33 @@ The system SHALL offer a single phase 1 paid membership plan priced at `99 EUR/y
 - **THEN** the resulting Stripe subscription is created against the annual membership plan
 
 ### Requirement: Initial-purchase-only discount rules
-The system SHALL apply organization promo codes or member referral codes only on the initial membership purchase and SHALL never combine them.
+The system SHALL expose one user-facing discount code field, validate that code against Stripe before Checkout, and apply it only on the initial membership purchase.
 
-#### Scenario: User applies an organization code on first purchase
-- **WHEN** a first-time buyer enters a valid organization code during the initial checkout flow
-- **THEN** the system applies that single code to the checkout and does not allow a referral code to be combined with it
+#### Scenario: User applies a valid code on first purchase
+- **WHEN** a first-time buyer enters a valid discount code during the initial checkout flow
+- **THEN** the system applies that single Stripe promotion code to Checkout, updates the pre-checkout price display, and does not expose another code field in Stripe Checkout
 
-#### Scenario: User applies a referral code on first purchase
-- **WHEN** a first-time buyer enters a valid member referral code during the initial checkout flow
-- **THEN** the system applies that single code to the checkout and does not allow an organization code to be combined with it
+#### Scenario: Code metadata defines attribution
+- **WHEN** a valid Stripe promotion code has metadata such as `sourceType`, `organizationCode`, or a future referrer/member identifier
+- **THEN** the system stores that attribution metadata while keeping the visible code format free of required technical prefixes
 
 #### Scenario: Renewal ignores prior codes
 - **WHEN** an existing membership renews or a future membership plan change happens later
 - **THEN** the system does not reapply the initial promo or referral code automatically
 
 ### Requirement: Locked campaign-derived codes
-The system SHALL prefill and lock the promo or referral field when the user enters the onboarding flow from a campaign link.
+The system SHALL prefill and lock the single discount code field when the user enters the onboarding flow from a campaign link.
 
 #### Scenario: User arrives from organization link
 - **WHEN** a visitor opens a sign-up or join route with a valid `promo` campaign parameter
-- **THEN** the system pre-populates the organization promo code and renders it as immutable for that onboarding session
+- **THEN** the system pre-populates the single discount code field and renders it as immutable for that onboarding session
 
 #### Scenario: User arrives from referral link
 - **WHEN** a visitor opens a sign-up or join route with a valid `ref` campaign parameter
-- **THEN** the system pre-populates the referral code and renders it as immutable for that onboarding session
+- **THEN** the system pre-populates the single discount code field and renders it as immutable for that onboarding session
 
-#### Scenario: User enters organization code manually
-- **WHEN** a visitor does not arrive from a campaign link but has a valid organization code
+#### Scenario: User enters a code manually
+- **WHEN** a visitor does not arrive from a campaign link but has a valid code
 - **THEN** the onboarding flow still allows manual code entry before the initial checkout
 
 ### Requirement: Webhook-confirmed membership activation

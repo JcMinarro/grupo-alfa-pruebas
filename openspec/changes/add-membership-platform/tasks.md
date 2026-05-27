@@ -37,10 +37,10 @@
 
 ## 6. Promo and referral rules
 
-- [x] 6.1 Validate that organization promo codes and member referral codes are mutually exclusive during the initial checkout flow.
+- [x] 6.1 Validate a single user-facing discount code against Stripe during the initial checkout flow.
 - [x] 6.2 Prevent promo and referral discounts from being applied to renewals or reused automatically in future plan changes.
 - [x] 6.3 Track acquisition source as direct, organization, or referral for each initial membership purchase.
-- [x] 6.4 Support both organization entry paths: link-based `?promo=` attribution and manual organization code entry.
+- [x] 6.4 Support both campaign entry paths: link-based `?promo=` attribution and manual code entry.
 - [x] 6.5 Record organization and referral attribution from campaign links and checkout completion events.
 
 ## 7. Public Club Alfa integration

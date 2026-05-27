@@ -132,10 +132,16 @@ const checkoutError = Astro.url.searchParams.get('checkout_error');
 
                 input.value = result.code;
                 input.dataset.appliedCode = result.code;
-                originalPrice.classList.add('line-through', 'text-white/45');
-                discountedPrice.textContent = result.finalPrice;
-                discountedPrice.classList.remove('hidden');
-                discountSummary.textContent = `Code applied: ${result.discountLabel} discount. You will be charged ${result.finalPrice} today. No other code is needed in Stripe.`;
+                if (result.hasPricePreview && result.finalPrice) {
+                    originalPrice.classList.add('line-through', 'text-white/45');
+                    discountedPrice.textContent = result.finalPrice;
+                    discountedPrice.classList.remove('hidden');
+                    discountSummary.textContent = `Code applied: ${result.discountLabel} discount. You will be charged ${result.finalPrice} today. No other code is needed in Stripe.`;
+                } else {
+                    originalPrice.classList.remove('line-through', 'text-white/45');
+                    discountedPrice.classList.add('hidden');
+                    discountSummary.textContent = 'Code applied. Stripe will apply this discount in the secure checkout. No other code is needed in Stripe.';
+                }
                 discountSummary.classList.remove('hidden');
                 message.textContent = 'Code applied successfully.';
                 message.className = 'mt-2 min-h-[1.25rem] text-sm text-primary';
