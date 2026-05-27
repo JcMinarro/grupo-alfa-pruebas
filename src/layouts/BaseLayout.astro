@@ -15,6 +15,7 @@ const {
     footerStyle = "",
     activeNav = "inicio",
 } = Astro.props;
+const showVoiceflow = !bodyClass.includes('auth-page');
 ---
 
 <!doctype html>
@@ -54,24 +55,26 @@ const {
 
         <Footer customStyle={footerStyle} />
 
-        <script type="text/javascript" is:inline>
-            (function (d, t) {
-                var v = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                v.onload = function () {
-                    window.voiceflow.chat.load({
-                        verify: { projectID: "693b13be70471ab1f2a6eab6" },
-                        url: "https://general-runtime.voiceflow.com",
-                        versionID: "production",
-                        voice: {
-                            url: "https://runtime-api.voiceflow.com",
-                        },
-                    });
-                };
-                v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-                v.type = "text/javascript";
-                s.parentNode.insertBefore(v, s);
-            })(document, "script");
-        </script>
+        {showVoiceflow && (
+            <script type="text/javascript" is:inline>
+                (function (d, t) {
+                    var v = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                    v.onload = function () {
+                        window.voiceflow.chat.load({
+                            verify: { projectID: "693b13be70471ab1f2a6eab6" },
+                            url: "https://general-runtime.voiceflow.com",
+                            versionID: "production",
+                            voice: {
+                                url: "https://runtime-api.voiceflow.com",
+                            },
+                        });
+                    };
+                    v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+                    v.type = "text/javascript";
+                    s.parentNode.insertBefore(v, s);
+                })(document, "script");
+            </script>
+        )}
     </body>
 </html>

@@ -15,7 +15,28 @@ export default defineConfig({
     adapter: node({
         mode: 'standalone'
     }),
-    integrations: [clerk()],
+    integrations: [
+        clerk({
+            appearance: {
+                variables: {
+                    colorPrimary: '#ffaa00',
+                    colorBackground: '#ffffff',
+                    colorForeground: '#1d1e20',
+                    colorInputBackground: '#ffffff',
+                    colorInputText: '#1d1e20',
+                    borderRadius: '18px',
+                    fontFamily: 'Jost, sans-serif',
+                    fontFamilyButtons: 'Jost, sans-serif'
+                },
+                elements: {
+                    cardBox: 'club-auth-card-box',
+                    card: 'club-auth-card',
+                    formButtonPrimary: 'club-auth-primary-button',
+                    footer: 'club-auth-footer'
+                }
+            }
+        })
+    ],
     devToolbar: {
         enabled: true
     }

@@ -253,6 +253,27 @@ describe("Membership platform foundation", () => {
     expect(readFile("src", "styles", "theme.css")).toContain(".cl-otpCodeFieldInput");
   });
 
+  it("keeps Clerk auth screens visually contained and themed", () => {
+    const astroConfig = readFile("astro.config.mjs");
+    const signUpSource = readFile("src", "pages", "sign-up.astro");
+    const signInSource = readFile("src", "pages", "sign-in.astro");
+    const baseLayoutSource = readFile("src", "layouts", "BaseLayout.astro");
+    const themeSource = readFile("src", "styles", "theme.css");
+
+    expect(astroConfig).toContain("appearance:");
+    expect(astroConfig).toContain("colorPrimary: '#ffaa00'");
+    expect(signUpSource).toContain("auth-shell");
+    expect(signUpSource).toContain("auth-page");
+    expect(signInSource).toContain("auth-shell");
+    expect(signInSource).toContain("auth-page");
+    expect(baseLayoutSource).toContain("showVoiceflow");
+    expect(baseLayoutSource).toContain("!bodyClass.includes('auth-page')");
+    expect(themeSource).toContain(".auth-card .cl-cardBox");
+    expect(themeSource).toContain("overflow: hidden");
+    expect(themeSource).toContain(".auth-card .cl-footer");
+    expect(themeSource).toContain(".auth-card .cl-internal");
+  });
+
   it("updates Club Alfa conversion to point at the sign-up flow", () => {
     const clubPageSource = readFile("src", "pages", "club.astro");
 
