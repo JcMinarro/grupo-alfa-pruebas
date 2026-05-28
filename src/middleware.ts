@@ -2,7 +2,8 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/astro/server';
 
 const isProtectedRoute = createRouteMatcher([
     '/join(.*)',
-    '/members(.*)',
+    '/members',
+    '/members/(.*)',
     '/api/checkout',
     '/api/discount-code',
     '/api/billing-portal'

@@ -265,13 +265,18 @@ describe("Membership platform foundation", () => {
     const membershipServerSource = readFile("src", "lib", "server", "membership.ts");
     const billingSource = readFile("src", "lib", "server", "billing.ts");
     const successSource = readFile("src", "pages", "checkout", "success.astro");
+    const middlewareSource = readFile("src", "middleware.ts");
 
     expect(clubSource).toContain('href="/sign-up"');
     expect(clubSource).not.toContain('clerk.accounts.dev');
-    expect(membershipSource).toContain("Membership checkout starts after account creation");
+    expect(membershipSource).toContain("El pago de la membresía empieza después de crear la cuenta");
     expect(membershipSource).toContain("data-original-price");
+    expect(membershipSource).toContain("reviewed");
+    expect(membershipSource).toContain("Crear cuenta y continuar al pago");
     expect(membershipSource).not.toContain('name="discountCode"');
     expect(signUpSource).toContain("/api/checkout");
+    expect(signUpSource).toContain("Astro.redirect(`/membership?${campaignParams.toString()}`)");
+    expect(signUpSource).not.toContain("99 EUR");
     expect(signUpCatchAllSource).toContain("/api/checkout");
     expect(signInSource).toContain("/api/checkout");
     expect(signInCatchAllSource).toContain("/api/checkout");
@@ -281,10 +286,65 @@ describe("Membership platform foundation", () => {
     expect(membershipServerSource).toContain("/membership?payment_required=1");
     expect(billingSource).toContain("/membership?payment_required=1");
     expect(successSource).not.toContain('href="/join"');
+    expect(middlewareSource).toContain("'/members'");
+    expect(middlewareSource).toContain("'/members/(.*)'");
+    expect(middlewareSource).not.toContain("'/members(.*)'");
+  });
+
+  it("keeps newly added membership-facing copy in Spanish", () => {
+    const pageSources = [
+      readFile("src", "pages", "membership.astro"),
+      readFile("src", "pages", "sign-up.astro"),
+      readFile("src", "pages", "sign-up", "[...signUp].astro"),
+      readFile("src", "pages", "sign-in.astro"),
+      readFile("src", "pages", "sign-in", "[...signIn].astro"),
+      readFile("src", "pages", "checkout", "success.astro"),
+      readFile("src", "pages", "checkout", "cancel.astro"),
+      readFile("src", "layouts", "MemberLayout.astro"),
+      readFile("src", "components", "MemberNav.astro"),
+      readFile("src", "pages", "members", "index.astro"),
+      readFile("src", "pages", "members", "profile.astro"),
+      readFile("src", "pages", "members", "membership.astro"),
+      readFile("src", "pages", "members", "benefits.astro"),
+      readFile("src", "pages", "members", "resources.astro"),
+      readFile("src", "pages", "members", "events.astro"),
+      readFile("src", "pages", "members", "expert-sessions.astro"),
+      readFile("src", "pages", "members", "referrals.astro"),
+    ].join("\n");
+
+    [
+      "Annual membership before checkout",
+      "Create your membership account",
+      "Welcome back",
+      "Purchase confirmed",
+      "Go to members area",
+      "Membership details",
+      "Checkout cancelled",
+      "Return to join",
+      "Members Overview",
+      "Membership status",
+      "Acquisition source",
+      "Overview",
+      "Profile",
+      "Benefits",
+      "Resources",
+      "Events",
+      "Expert Sessions",
+      "Referrals",
+      "Open billing portal",
+      "Your referral code will appear here",
+    ].forEach((englishCopy) => {
+      expect(pageSources).not.toContain(englishCopy);
+    });
+
+    expect(pageSources).toContain("Membresía anual antes del pago");
+    expect(pageSources).toContain("Crear cuenta de miembro");
+    expect(pageSources).toContain("Ir al área de miembros");
   });
 
   it("keeps Clerk auth screens visually contained and themed", () => {
     const astroConfig = readFile("astro.config.mjs");
+    const packageSource = readFile("package.json");
     const signUpSource = readFile("src", "pages", "sign-up.astro");
     const signInSource = readFile("src", "pages", "sign-in.astro");
     const baseLayoutSource = readFile("src", "layouts", "BaseLayout.astro");
@@ -292,6 +352,10 @@ describe("Membership platform foundation", () => {
 
     expect(astroConfig).toContain("appearance:");
     expect(astroConfig).toContain("colorPrimary: '#ffaa00'");
+    expect(astroConfig).toContain("@clerk/localizations");
+    expect(astroConfig).toContain("esES");
+    expect(astroConfig).toContain("localization: esES");
+    expect(packageSource).toContain('"@clerk/localizations"');
     expect(signUpSource).toContain("auth-shell");
     expect(signUpSource).toContain("auth-page");
     expect(signInSource).toContain("auth-shell");
@@ -415,7 +479,7 @@ describe("Membership platform foundation", () => {
     const billingSource = readFile("src", "lib", "server", "billing.ts");
 
     expect(joinSource).toContain('name="discountCode"');
-    expect(joinSource).toContain("Apply code");
+    expect(joinSource).toContain("Aplicar código");
     expect(joinSource).toContain("data-discount-form");
     expect(joinSource).toContain("data-astro-reload");
     expect(joinSource).toContain("data-discounted-price");
@@ -462,10 +526,10 @@ describe("Membership platform foundation", () => {
     expect(schema).toContain("referral_membership_report");
     expect(schema).toContain("suspicious_activity_notes");
     expect(fs.existsSync(adminDocPath)).toBe(true);
-    expect(signUpSource).toContain("Membership terms");
-    expect(signUpSource).toContain("Privacy policy");
-    expect(joinSource).toContain("transactional membership emails");
-    expect(joinSource.toLowerCase()).toContain("optional marketing");
+    expect(signUpSource).toContain("condiciones de membresía");
+    expect(signUpSource).toContain("política de privacidad");
+    expect(joinSource).toContain("emails transaccionales");
+    expect(joinSource.toLowerCase()).toContain("comunicaciones comerciales opcionales");
     expect(joinSource).not.toContain("DNI");
   });
 });

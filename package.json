@@ -19,6 +19,7 @@
     "@astrojs/node": "^10.1.1",
     "@clerk/astro": "^3.2.6",
     "@clerk/backend": "^3.4.11",
+    "@clerk/localizations": "^4.7.0",
     "@supabase/supabase-js": "^2.106.0",
     "@vercel/analytics": "^2.0.1",
     "astro": "^6.3.5",
