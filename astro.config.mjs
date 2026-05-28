@@ -35,6 +35,11 @@ export default defineConfig({
                     card: 'club-auth-card',
                     formButtonPrimary: 'club-auth-primary-button',
                     footer: 'club-auth-footer'
+                },
+                captcha: {
+                    theme: 'dark',
+                    size: 'flexible',
+                    language: 'es-ES'
                 }
             }
         })

@@ -23,7 +23,7 @@ const fallbackRedirectUrl = redirectParam?.startsWith('/')
             <p class="text-primary uppercase tracking-[4px] text-sm font-bold mb-3">Club Alfa</p>
             <h1 class="text-4xl font-bold mb-4">Bienvenido de nuevo</h1>
             <p class="text-white/70 mb-6">Accede para gestionar tu membresía, referidos y acceso privado.</p>
-            <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" fallbackRedirectUrl={fallbackRedirectUrl} />
+            <SignIn routing="hash" signUpUrl="/sign-up" fallbackRedirectUrl={fallbackRedirectUrl} />
         </div>
     </section>
 </BaseLayout>

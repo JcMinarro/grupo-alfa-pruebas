@@ -362,13 +362,21 @@ describe("Membership platform foundation", () => {
     expect(astroConfig).toContain("@clerk/localizations");
     expect(astroConfig).toContain("esES");
     expect(astroConfig).toContain("localization: esES");
+    expect(astroConfig).toContain("captcha:");
+    expect(astroConfig).toContain("language: 'es-ES'");
     expect(packageSource).toContain('"@clerk/localizations"');
     expect(signUpSource).toContain("auth-shell");
     expect(signUpSource).toContain("auth-page");
     expect(signInSource).toContain("auth-shell");
     expect(signInSource).toContain("auth-page");
+    expect(signUpSource).toContain('routing="hash"');
+    expect(signInSource).toContain('routing="hash"');
+    expect(signUpSource).not.toContain('routing="path"');
+    expect(signInSource).not.toContain('routing="path"');
     expect(baseLayoutSource).toContain("showVoiceflow");
     expect(baseLayoutSource).toContain("!bodyClass.includes('auth-page')");
+    expect(baseLayoutSource).toContain("showClientRouter");
+    expect(baseLayoutSource).toContain("showClientRouter && <ClientRouter />");
     expect(themeSource).toContain(".auth-card .cl-cardBox");
     expect(themeSource).toContain("overflow: hidden");
     expect(themeSource).toContain(".auth-card .cl-footer");
@@ -520,7 +528,17 @@ describe("Membership platform foundation", () => {
     expect(emailSource).toContain("membership_renewal");
     expect(emailSource).toContain("payment_failed");
     expect(emailSource).toContain("membership_canceled");
+    expect(emailSource).toContain("Bienvenido a Club Alfa");
+    expect(emailSource).toContain("Membresía de Club Alfa renovada");
+    expect(emailSource).toContain("Acción necesaria en tu membresía de Club Alfa");
+    expect(emailSource).toContain("Estado de la membresía");
+    expect(emailSource).not.toContain("Welcome to Club Alfa");
+    expect(emailSource).not.toContain("Club Alfa membership renewed");
+    expect(emailSource).not.toContain("Membership status");
     expect(billingSource).toContain("sendMembershipEmail");
+    expect(billingSource).toContain("isRenewalInvoice");
+    expect(billingSource).toContain("invoice.billing_reason === 'subscription_cycle'");
+    expect(billingSource).toContain("if (isRenewalInvoice(invoice))");
   });
 
   it("defines reporting/admin readiness and legal onboarding disclosures", () => {

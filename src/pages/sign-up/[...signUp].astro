@@ -34,7 +34,7 @@ const redirectUrl = `/api/checkout${checkoutParams.toString() ? `?${checkoutPara
                     Código de campaña detectado. Lo mantendremos automáticamente durante el proceso.
                 </div>
             )}
-            <SignUp path="/sign-up" routing="path" signInUrl="/sign-in" fallbackRedirectUrl={redirectUrl} />
+            <SignUp routing="hash" signInUrl="/sign-in" fallbackRedirectUrl={redirectUrl} />
             <p class="mt-6 text-xs leading-[1.7] text-white/50">
                 Al crear una cuenta podrás revisar las <a href="/membership-terms" class="text-primary underline">condiciones de membresía</a> y la <a href="/privacy" class="text-primary underline">política de privacidad</a> antes de continuar con el pago.
             </p>

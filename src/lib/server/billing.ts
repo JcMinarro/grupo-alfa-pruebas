@@ -57,6 +57,10 @@ export function getStripe() {
     return stripeClient;
 }
 
+function isRenewalInvoice(invoice) {
+    return invoice.billing_reason === 'subscription_cycle';
+}
+
 export async function resolveDiscountCode(stripe, discountCode) {
     const normalizedCode = `${discountCode ?? ''}`.trim().toUpperCase();
 
@@ -284,11 +288,13 @@ export async function handleStripeWebhook({ payload, signature }) {
                     initialAcquisitionSource: membership.initial_acquisition_source
                 });
             }
-            await sendMembershipEmail({
-                type: 'membership_renewal',
-                to: invoice.customer_email,
-                attributes: { membershipStatus: 'active' }
-            });
+            if (isRenewalInvoice(invoice)) {
+                await sendMembershipEmail({
+                    type: 'membership_renewal',
+                    to: invoice.customer_email,
+                    attributes: { membershipStatus: 'active' }
+                });
+            }
             break;
         }
         case 'invoice.payment_failed': {

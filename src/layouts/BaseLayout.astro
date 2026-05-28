@@ -16,6 +16,7 @@ const {
     activeNav = "inicio",
 } = Astro.props;
 const showVoiceflow = !bodyClass.includes('auth-page');
+const showClientRouter = !bodyClass.includes('auth-page');
 ---
 
 <!doctype html>
@@ -41,7 +42,7 @@ const showVoiceflow = !bodyClass.includes('auth-page');
 
         <slot name="head" />
         <Analytics />
-        <ClientRouter />
+        {showClientRouter && <ClientRouter />}
         <script src="/src/scripts/main.js"></script>
     </head>
     <body

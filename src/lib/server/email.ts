@@ -3,20 +3,20 @@ import { getServerEnv } from './env';
 
 const templates = {
     membership_welcome: {
-        subject: 'Welcome to Club Alfa',
-        text: 'Your Club Alfa membership is active. You can now access the private member area.'
+        subject: 'Bienvenido a Club Alfa',
+        text: 'Tu membresía de Club Alfa está activa. Ya puedes acceder al área privada de miembros.'
     },
     membership_renewal: {
-        subject: 'Club Alfa membership renewed',
-        text: 'Your Club Alfa annual membership renewal has been confirmed.'
+        subject: 'Membresía de Club Alfa renovada',
+        text: 'La renovación anual de tu membresía de Club Alfa se ha confirmado correctamente.'
     },
     payment_failed: {
-        subject: 'Action needed for your Club Alfa membership',
-        text: 'We could not process your membership payment. Please update your billing details.'
+        subject: 'Acción necesaria en tu membresía de Club Alfa',
+        text: 'No hemos podido procesar el pago de tu membresía. Actualiza tus datos de facturación para mantener el acceso.'
     },
     membership_canceled: {
-        subject: 'Club Alfa membership canceled',
-        text: 'Your Club Alfa membership cancellation has been processed.'
+        subject: 'Membresía de Club Alfa cancelada',
+        text: 'La cancelación de tu membresía de Club Alfa se ha procesado correctamente.'
     }
 };
 
@@ -34,7 +34,7 @@ export async function sendMembershipEmail({ type, to, attributes = {} }) {
         from: env.resendFromEmail,
         to,
         subject: template.subject,
-        text: `${template.text}\n\nMembership status: ${attributes.membershipStatus ?? 'unknown'}\nAcquisition source: ${attributes.initialAcquisitionSource ?? 'direct'}`
+        text: `${template.text}\n\nEstado de la membresía: ${attributes.membershipStatus ?? 'desconocido'}\nOrigen de alta: ${attributes.initialAcquisitionSource ?? 'direct'}`
     });
 
     return { sent: true };
