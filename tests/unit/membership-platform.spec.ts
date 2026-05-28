@@ -3,6 +3,7 @@ import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { getCheckoutDiscountParams, getCouponDiscountPreview, resolveDiscountCode } from "../../src/lib/server/billing";
+import { isMembershipPeriodExpired, shouldRefreshMembershipFromStripe } from "../../src/lib/server/membership";
 
 const resolveFromRoot = (...segments: string[]) =>
   path.resolve(process.cwd(), ...segments);
@@ -285,8 +286,12 @@ describe("Membership platform foundation", () => {
     expect(signUpSource).toContain("Astro.redirect(`/membership?${campaignParams.toString()}`)");
     expect(signUpSource).not.toContain("99 EUR");
     expect(signUpCatchAllSource).toContain("/api/checkout");
-    expect(signInSource).toContain("/api/checkout");
-    expect(signInCatchAllSource).toContain("/api/checkout");
+    expect(signInSource).toContain("fallbackRedirectUrl = redirectParam?.startsWith('/')");
+    expect(signInSource).toContain(": '/members'");
+    expect(signInSource).toContain("Astro.redirect(redirectUrl?.startsWith('/') ? redirectUrl : '/members')");
+    expect(signInCatchAllSource).toContain(": '/members'");
+    expect(signInSource).not.toContain(": `/api/checkout");
+    expect(signInCatchAllSource).not.toContain(": `/api/checkout");
     expect(checkoutSource).toContain("export async function GET");
     expect(checkoutSource).toContain("getAuthRedirect");
     expect(checkoutSource).toContain("url.searchParams.get('ref')");
@@ -441,9 +446,39 @@ describe("Membership platform foundation", () => {
     expect(billingSource).toContain("status: 'past_due'");
     expect(billingSource).toContain("status: 'canceled'");
     expect(billingSource).toContain("membership.clerk_user_id");
+    expect(billingSource).toContain("current_period_end");
+    expect(billingSource).toContain("cancel_at_period_end");
+    expect(billingSource).toContain("currentPeriodEnd");
+    expect(billingSource).toContain("cancelAtPeriodEnd");
+    expect(billingSource).toContain("stripe.subscriptions.retrieve");
     expect(membershipSource).toContain("select('*')");
+    expect(membershipSource).toContain("refreshMembershipFromStripe");
+    expect(membershipSource).toContain("stripe.subscriptions.retrieve");
+    expect(membershipSource).toContain("isMembershipPeriodExpired");
     expect(successSource).toContain("activateMembershipFromCheckoutSession");
     expect(successSource).toContain("sessionId");
+  });
+
+  it("treats expired or missing subscription periods as needing Stripe verification", () => {
+    const now = new Date("2026-05-29T00:00:00.000Z");
+
+    expect(isMembershipPeriodExpired("2026-05-28T23:59:59.000Z", now)).toBe(true);
+    expect(isMembershipPeriodExpired("2026-05-29T00:00:01.000Z", now)).toBe(false);
+    expect(shouldRefreshMembershipFromStripe({
+      membershipStatus: "active",
+      stripeSubscriptionId: "sub_123",
+      currentPeriodEnd: "2026-05-28T23:59:59.000Z"
+    }, now)).toBe(true);
+    expect(shouldRefreshMembershipFromStripe({
+      membershipStatus: "active",
+      stripeSubscriptionId: "sub_123",
+      currentPeriodEnd: null
+    }, now)).toBe(true);
+    expect(shouldRefreshMembershipFromStripe({
+      membershipStatus: "active",
+      stripeSubscriptionId: "sub_123",
+      currentPeriodEnd: "2026-05-29T00:00:01.000Z"
+    }, now)).toBe(false);
   });
 
   it("defines the phase 1 membership persistence model", () => {
@@ -485,6 +520,8 @@ describe("Membership platform foundation", () => {
 
     expect(membershipSource).toContain("syncClerkMembershipMetadata");
     expect(membershipSource).toContain("updateUserMetadata");
+    expect(membershipSource).toContain("currentPeriodEnd: metadata.currentPeriodEnd");
+    expect(membershipSource).toContain("cancelAtPeriodEnd: metadata.cancelAtPeriodEnd");
     expect(billingSource).toContain("syncClerkMembershipMetadata");
   });
 

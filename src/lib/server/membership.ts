@@ -1,4 +1,5 @@
 import { createClerkClient } from '@clerk/backend';
+import Stripe from 'stripe';
 import { getSupabaseAdmin } from './supabase';
 import { getServerEnv } from './env';
 
@@ -9,6 +10,31 @@ export function getMembershipMetadata(user) {
         publicMetadata: user?.publicMetadata ?? {},
         privateMetadata: user?.privateMetadata ?? {}
     };
+}
+
+export function isMembershipPeriodExpired(currentPeriodEnd, now = new Date()) {
+    if (!currentPeriodEnd) {
+        return false;
+    }
+
+    const periodEnd = new Date(currentPeriodEnd);
+    return Number.isFinite(periodEnd.getTime()) && periodEnd <= now;
+}
+
+export function shouldRefreshMembershipFromStripe(membership, now = new Date()) {
+    return Boolean(
+        ACTIVE_MEMBERSHIP_STATUSES.includes(membership.membershipStatus) &&
+        membership.stripeSubscriptionId &&
+        (!membership.currentPeriodEnd || isMembershipPeriodExpired(membership.currentPeriodEnd, now))
+    );
+}
+
+function getStripeTimestampIso(timestamp) {
+    return timestamp ? new Date(timestamp * 1000).toISOString() : null;
+}
+
+function mapStripeSubscriptionStatus(status) {
+    return ACTIVE_MEMBERSHIP_STATUSES.includes(status) ? status : status ?? 'inactive';
 }
 
 export async function getMembershipContext(locals) {
@@ -25,14 +51,56 @@ export async function getMembershipContext(locals) {
         referralCodeUsed: metadata.publicMetadata.referralCodeUsed ?? null,
         stripeCustomerId: metadata.privateMetadata.stripeCustomerId ?? null,
         stripeSubscriptionId: metadata.privateMetadata.stripeSubscriptionId ?? null,
+        currentPeriodEnd: metadata.privateMetadata.currentPeriodEnd ?? null,
+        cancelAtPeriodEnd: metadata.privateMetadata.cancelAtPeriodEnd ?? false,
         initialAcquisitionSource: metadata.privateMetadata.initialAcquisitionSource ?? 'direct'
     };
 }
 
+async function refreshMembershipFromStripe(membership) {
+    const env = getServerEnv();
+
+    if (!membership.stripeSubscriptionId || !env.stripeSecretKey) {
+        return membership;
+    }
+
+    const stripe = new Stripe(env.stripeSecretKey);
+    const subscription = await stripe.subscriptions.retrieve(membership.stripeSubscriptionId);
+    const refreshedMembership = {
+        ...membership,
+        membershipStatus: mapStripeSubscriptionStatus(subscription.status),
+        stripeCustomerId: typeof subscription.customer === 'string' ? subscription.customer : subscription.customer?.id,
+        stripeSubscriptionId: subscription.id,
+        currentPeriodEnd: getStripeTimestampIso(subscription.current_period_end),
+        cancelAtPeriodEnd: subscription.cancel_at_period_end ?? false
+    };
+
+    await updateMembershipBySubscription(subscription.id, {
+        stripe_customer_id: refreshedMembership.stripeCustomerId,
+        status: refreshedMembership.membershipStatus,
+        current_period_end: refreshedMembership.currentPeriodEnd,
+        cancel_at_period_end: refreshedMembership.cancelAtPeriodEnd
+    });
+    await syncClerkMembershipMetadata(membership.user?.id, refreshedMembership);
+
+    return refreshedMembership;
+}
+
 export async function requireActiveMembership(locals) {
-    const membership = await getMembershipContext(locals);
+    let membership = await getMembershipContext(locals);
 
     if (!ACTIVE_MEMBERSHIP_STATUSES.includes(membership.membershipStatus)) {
+        throw new Error('/membership?payment_required=1');
+    }
+
+    if (shouldRefreshMembershipFromStripe(membership)) {
+        membership = await refreshMembershipFromStripe(membership);
+    }
+
+    if (
+        !ACTIVE_MEMBERSHIP_STATUSES.includes(membership.membershipStatus) ||
+        isMembershipPeriodExpired(membership.currentPeriodEnd)
+    ) {
         throw new Error('/membership?payment_required=1');
     }
 
@@ -115,6 +183,8 @@ export async function syncClerkMembershipMetadata(clerkUserId, metadata) {
         privateMetadata: {
             stripeCustomerId: metadata.stripeCustomerId ?? null,
             stripeSubscriptionId: metadata.stripeSubscriptionId ?? null,
+            currentPeriodEnd: metadata.currentPeriodEnd ?? null,
+            cancelAtPeriodEnd: metadata.cancelAtPeriodEnd ?? false,
             initialAcquisitionSource: metadata.initialAcquisitionSource ?? 'direct'
         }
     });

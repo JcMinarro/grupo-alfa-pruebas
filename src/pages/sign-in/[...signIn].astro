@@ -3,18 +3,14 @@ import { SignIn } from '@clerk/astro/components';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 if (Astro.locals.auth?.().isAuthenticated) {
-    return Astro.redirect('/api/checkout');
+    const redirectUrl = Astro.url.searchParams.get('redirect_url');
+    return Astro.redirect(redirectUrl?.startsWith('/') ? redirectUrl : '/members');
 }
 
-const promo = Astro.url.searchParams.get('promo');
-const ref = Astro.url.searchParams.get('ref');
 const redirectParam = Astro.url.searchParams.get('redirect_url');
-const checkoutParams = new URLSearchParams();
-if (promo) checkoutParams.set('promo', promo);
-if (ref) checkoutParams.set('ref', ref);
 const fallbackRedirectUrl = redirectParam?.startsWith('/')
     ? redirectParam
-    : `/api/checkout${checkoutParams.toString() ? `?${checkoutParams.toString()}` : ''}`;
+    : '/members';
 ---
 
 <BaseLayout title="Acceso | Club Alfa" bodyClass="members-page bg-[#0f1012] text-white">

@@ -61,6 +61,30 @@ function isRenewalInvoice(invoice) {
     return invoice.billing_reason === 'subscription_cycle';
 }
 
+function getSubscriptionId(subscription) {
+    return typeof subscription === 'object' ? subscription?.id : subscription;
+}
+
+function getCustomerId(customer) {
+    return typeof customer === 'object' ? customer?.id : customer;
+}
+
+function getStripeTimestampIso(timestamp) {
+    return timestamp ? new Date(timestamp * 1000).toISOString() : null;
+}
+
+async function getSubscriptionDetails(stripe, subscription) {
+    if (!subscription) {
+        return null;
+    }
+
+    if (typeof subscription === 'object') {
+        return subscription;
+    }
+
+    return stripe.subscriptions.retrieve(subscription);
+}
+
 export async function resolveDiscountCode(stripe, discountCode) {
     const normalizedCode = `${discountCode ?? ''}`.trim().toUpperCase();
 
@@ -192,6 +216,12 @@ export async function createBillingPortalSession({ customerId, origin }) {
 }
 
 async function persistCompletedCheckoutSession(session, { sendWelcomeEmail = false } = {}) {
+    const stripe = getStripe();
+    const subscription = await getSubscriptionDetails(stripe, session.subscription);
+    const stripeSubscriptionId = getSubscriptionId(subscription) ?? getSubscriptionId(session.subscription);
+    const currentPeriodEnd = getStripeTimestampIso(subscription?.current_period_end);
+    const cancelAtPeriodEnd = subscription?.cancel_at_period_end ?? false;
+
     await upsertMembershipUser({
         clerk_user_id: session.metadata?.clerkUserId,
         stripe_customer_id: session.customer,
@@ -200,12 +230,14 @@ async function persistCompletedCheckoutSession(session, { sendWelcomeEmail = fal
     await upsertMembershipRecord({
         clerk_user_id: session.metadata?.clerkUserId,
         stripe_customer_id: session.customer,
-        stripe_subscription_id: typeof session.subscription === 'object' ? session.subscription.id : session.subscription,
+        stripe_subscription_id: stripeSubscriptionId,
         plan_type: session.metadata?.membershipType ?? 'annual',
         status: 'active',
         initial_acquisition_source: session.metadata?.sourceType ?? 'direct',
         initial_promo_code: session.metadata?.organizationCode || null,
-        initial_referral_code: session.metadata?.referralCode || null
+        initial_referral_code: session.metadata?.referralCode || null,
+        current_period_end: currentPeriodEnd,
+        cancel_at_period_end: cancelAtPeriodEnd
     });
     await syncClerkMembershipMetadata(session.metadata?.clerkUserId, {
         membershipStatus: 'active',
@@ -213,7 +245,9 @@ async function persistCompletedCheckoutSession(session, { sendWelcomeEmail = fal
         organizationCode: session.metadata?.organizationCode || null,
         referralCodeUsed: session.metadata?.referralCode || null,
         stripeCustomerId: session.customer,
-        stripeSubscriptionId: typeof session.subscription === 'object' ? session.subscription.id : session.subscription,
+        stripeSubscriptionId,
+        currentPeriodEnd,
+        cancelAtPeriodEnd,
         initialAcquisitionSource: session.metadata?.sourceType ?? 'direct'
     });
 
@@ -273,9 +307,14 @@ export async function handleStripeWebhook({ payload, signature }) {
         }
         case 'invoice.paid': {
             const invoice = event.data.object;
-            const { membership } = await updateMembershipBySubscription(invoice.subscription, {
-                stripe_customer_id: invoice.customer,
-                status: 'active'
+            const subscription = await getSubscriptionDetails(stripe, invoice.subscription);
+            const currentPeriodEnd = getStripeTimestampIso(subscription?.current_period_end);
+            const cancelAtPeriodEnd = subscription?.cancel_at_period_end ?? false;
+            const { membership } = await updateMembershipBySubscription(getSubscriptionId(invoice.subscription), {
+                stripe_customer_id: getCustomerId(invoice.customer),
+                status: 'active',
+                current_period_end: currentPeriodEnd,
+                cancel_at_period_end: cancelAtPeriodEnd
             });
             if (membership?.clerk_user_id) {
                 await syncClerkMembershipMetadata(membership.clerk_user_id, {
@@ -285,6 +324,8 @@ export async function handleStripeWebhook({ payload, signature }) {
                     referralCodeUsed: membership.initial_referral_code,
                     stripeCustomerId: membership.stripe_customer_id,
                     stripeSubscriptionId: membership.stripe_subscription_id,
+                    currentPeriodEnd: membership.current_period_end,
+                    cancelAtPeriodEnd: membership.cancel_at_period_end,
                     initialAcquisitionSource: membership.initial_acquisition_source
                 });
             }
@@ -324,8 +365,10 @@ export async function handleStripeWebhook({ payload, signature }) {
         case 'customer.subscription.deleted': {
             const subscription = event.data.object;
             const { membership } = await updateMembershipBySubscription(subscription.id, {
-                stripe_customer_id: subscription.customer,
-                status: 'canceled'
+                stripe_customer_id: getCustomerId(subscription.customer),
+                status: 'canceled',
+                current_period_end: getStripeTimestampIso(subscription.current_period_end),
+                cancel_at_period_end: subscription.cancel_at_period_end ?? false
             });
             if (membership?.clerk_user_id) {
                 await syncClerkMembershipMetadata(membership.clerk_user_id, {
@@ -335,6 +378,8 @@ export async function handleStripeWebhook({ payload, signature }) {
                     referralCodeUsed: membership.initial_referral_code,
                     stripeCustomerId: membership.stripe_customer_id,
                     stripeSubscriptionId: membership.stripe_subscription_id,
+                    currentPeriodEnd: membership.current_period_end,
+                    cancelAtPeriodEnd: membership.cancel_at_period_end,
                     initialAcquisitionSource: membership.initial_acquisition_source
                 });
             }
