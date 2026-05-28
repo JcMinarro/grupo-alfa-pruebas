@@ -3,13 +3,15 @@ import { SignUp } from '@clerk/astro/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 if (Astro.locals.auth?.().isAuthenticated) {
-    return Astro.redirect('/join');
+    return Astro.redirect('/api/checkout');
 }
 
 const promo = Astro.url.searchParams.get('promo');
 const ref = Astro.url.searchParams.get('ref');
-const unsafeRedirectUrl = Astro.url.searchParams.toString();
-const redirectUrl = unsafeRedirectUrl ? `/join?${unsafeRedirectUrl}` : '/join';
+const checkoutParams = new URLSearchParams();
+if (promo) checkoutParams.set('promo', promo);
+if (ref) checkoutParams.set('ref', ref);
+const redirectUrl = `/api/checkout${checkoutParams.toString() ? `?${checkoutParams.toString()}` : ''}`;
 ---
 
 <BaseLayout title="Sign Up | Club Alfa" bodyClass="members-page auth-page bg-[#0f1012] text-white">

@@ -19,6 +19,7 @@ describe("Club Alfa presence across the site", () => {
     expect(clubPageSource).toContain('activeNav="club"');
     expect(clubPageSource).toContain("backgroundVideo={heros.club}");
     expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).not.toContain('clerk.accounts.dev');
   });
 
   it("adds Club to the shared header navigation", () => {
@@ -62,6 +63,7 @@ describe("Club Alfa presence across the site", () => {
     expect(clubPageSource).toContain('t("club.price.title")');
     expect(clubPageSource).toContain('t("club.cta.button")');
     expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).not.toContain('clerk.accounts.dev');
     expect(clubPageSource).not.toContain('href="/contacto"');
     expect(uiSource).toContain("'club.price.title': '99€/Año'");
     expect(uiSource).toContain("'club.price.title': '99€/Year'");

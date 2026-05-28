@@ -3,8 +3,19 @@ import { SignIn } from '@clerk/astro/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 if (Astro.locals.auth?.().isAuthenticated) {
-    return Astro.redirect('/join');
+    const redirectUrl = Astro.url.searchParams.get('redirect_url');
+    return Astro.redirect(redirectUrl?.startsWith('/') ? redirectUrl : '/membership?payment_required=1');
 }
+
+const promo = Astro.url.searchParams.get('promo');
+const ref = Astro.url.searchParams.get('ref');
+const redirectParam = Astro.url.searchParams.get('redirect_url');
+const checkoutParams = new URLSearchParams();
+if (promo) checkoutParams.set('promo', promo);
+if (ref) checkoutParams.set('ref', ref);
+const fallbackRedirectUrl = redirectParam?.startsWith('/')
+    ? redirectParam
+    : `/api/checkout${checkoutParams.toString() ? `?${checkoutParams.toString()}` : ''}`;
 ---
 
 <BaseLayout title="Sign In | Club Alfa" bodyClass="members-page auth-page bg-[#0f1012] text-white">
@@ -13,7 +24,7 @@ if (Astro.locals.auth?.().isAuthenticated) {
             <p class="text-primary uppercase tracking-[5px] text-sm font-bold mb-3">Club Alfa</p>
             <h1 class="text-[2.5rem] leading-[1.02] font-bold mb-4 md:text-5xl">Welcome back</h1>
             <p class="text-white/70 mb-6 text-lg leading-[1.65]">Sign in to manage your membership, referrals, and private access.</p>
-            <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+            <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" fallbackRedirectUrl={fallbackRedirectUrl} />
         </div>
     </section>
 </BaseLayout>

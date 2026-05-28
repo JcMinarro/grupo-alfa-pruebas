@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { activateMembershipFromCheckoutSession } from '../../lib/server/billing';
 
 const sessionId = Astro.url.searchParams.get('session_id');
+let activationConfirmed = false;
+
+if (sessionId) {
+    const authState = Astro.locals.auth?.();
+    const result = await activateMembershipFromCheckoutSession({
+        sessionId,
+        clerkUserId: authState?.userId
+    });
+    activationConfirmed = result.activated;
+}
 ---
 
 <BaseLayout title="Checkout Success | Club Alfa" bodyClass="members-page bg-[#0f1012] text-white">
@@ -9,11 +20,13 @@ const sessionId = Astro.url.searchParams.get('session_id');
         <div class="max-w-[760px] rounded-[30px] border border-white/10 bg-white/5 p-8 md:p-10 text-center">
             <p class="text-primary uppercase tracking-[4px] text-sm font-bold mb-3">Club Alfa</p>
             <h1 class="text-[2.8rem] font-bold mb-4">Purchase confirmed</h1>
-            <p class="text-white/70 text-lg leading-[1.8] mb-8">We are activating your membership now. Access is granted only after the Stripe webhook confirms your subscription state.</p>
+            <p class="text-white/70 text-lg leading-[1.8] mb-8">
+                {activationConfirmed ? 'Your membership is active. You can enter the members area now.' : 'We are activating your membership now. If access is not available yet, wait a moment and try again.'}
+            </p>
             {sessionId && <p class="text-white/45 text-sm break-all">Checkout session: {sessionId}</p>}
             <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
                 <a href="/members" class="rounded-full bg-primary px-8 py-3 text-sm font-bold uppercase tracking-[2px] text-black">Go to members area</a>
-                <a href="/join" class="rounded-full border border-white/15 px-8 py-3 text-sm font-bold uppercase tracking-[2px] text-white/80">Back to join</a>
+                <a href="/membership" class="rounded-full border border-white/15 px-8 py-3 text-sm font-bold uppercase tracking-[2px] text-white/80">Membership details</a>
             </div>
         </div>
     </section>

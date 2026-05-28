@@ -2,7 +2,12 @@
 import MemberLayout from '../../layouts/MemberLayout.astro';
 import { requireActiveMembership } from '../../lib/server/membership';
 
-const membership = await requireActiveMembership(Astro.locals);
+let membership;
+try {
+    membership = await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(error instanceof Error ? error.message : '/membership?payment_required=1');
+}
 ---
 
 <MemberLayout title="Referrals" activePath="/members/referrals">

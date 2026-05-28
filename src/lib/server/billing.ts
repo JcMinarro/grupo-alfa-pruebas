@@ -146,7 +146,7 @@ export async function createCheckoutSession({ user, origin, discountCode }) {
 
     const stripe = getStripe();
     const successUrl = `${origin ?? env.publicAppUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
-    const cancelUrl = `${origin ?? env.publicAppUrl}/checkout/cancel`;
+    const cancelUrl = `${origin ?? env.publicAppUrl}/membership?payment_required=1`;
     const resolvedDiscount = await resolveDiscountCode(stripe, discountCode);
 
     const session = await stripe.checkout.sessions.create({
@@ -187,6 +187,66 @@ export async function createBillingPortalSession({ customerId, origin }) {
     });
 }
 
+async function persistCompletedCheckoutSession(session, { sendWelcomeEmail = false } = {}) {
+    await upsertMembershipUser({
+        clerk_user_id: session.metadata?.clerkUserId,
+        stripe_customer_id: session.customer,
+        primary_email: session.customer_details?.email ?? session.customer_email
+    });
+    await upsertMembershipRecord({
+        clerk_user_id: session.metadata?.clerkUserId,
+        stripe_customer_id: session.customer,
+        stripe_subscription_id: typeof session.subscription === 'object' ? session.subscription.id : session.subscription,
+        plan_type: session.metadata?.membershipType ?? 'annual',
+        status: 'active',
+        initial_acquisition_source: session.metadata?.sourceType ?? 'direct',
+        initial_promo_code: session.metadata?.organizationCode || null,
+        initial_referral_code: session.metadata?.referralCode || null
+    });
+    await syncClerkMembershipMetadata(session.metadata?.clerkUserId, {
+        membershipStatus: 'active',
+        membershipType: session.metadata?.membershipType ?? 'annual',
+        organizationCode: session.metadata?.organizationCode || null,
+        referralCodeUsed: session.metadata?.referralCode || null,
+        stripeCustomerId: session.customer,
+        stripeSubscriptionId: typeof session.subscription === 'object' ? session.subscription.id : session.subscription,
+        initialAcquisitionSource: session.metadata?.sourceType ?? 'direct'
+    });
+
+    if (sendWelcomeEmail) {
+        await sendMembershipEmail({
+            type: 'membership_welcome',
+            to: session.customer_details?.email ?? session.customer_email,
+            attributes: {
+                membershipStatus: 'active',
+                initialAcquisitionSource: session.metadata?.sourceType ?? 'direct'
+            }
+        });
+    }
+}
+
+export async function activateMembershipFromCheckoutSession({ sessionId, clerkUserId }) {
+    if (!sessionId || !clerkUserId) {
+        return { activated: false };
+    }
+
+    const stripe = getStripe();
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ['subscription']
+    });
+
+    if (session.metadata?.clerkUserId !== clerkUserId) {
+        return { activated: false };
+    }
+
+    if (session.status !== 'complete') {
+        return { activated: false };
+    }
+
+    await persistCompletedCheckoutSession(session);
+    return { activated: true };
+}
+
 export async function handleStripeWebhook({ payload, signature }) {
     const env = getServerEnv();
     assertServerEnv(['STRIPE_SECRET_KEY', 'STRIPE_WEBHOOK_SECRET']);
@@ -204,38 +264,7 @@ export async function handleStripeWebhook({ payload, signature }) {
     switch (event.type) {
         case 'checkout.session.completed': {
             const session = event.data.object;
-            await upsertMembershipUser({
-                clerk_user_id: session.metadata?.clerkUserId,
-                stripe_customer_id: session.customer,
-                primary_email: session.customer_details?.email ?? session.customer_email
-            });
-            await upsertMembershipRecord({
-                clerk_user_id: session.metadata?.clerkUserId,
-                stripe_customer_id: session.customer,
-                stripe_subscription_id: session.subscription,
-                plan_type: session.metadata?.membershipType ?? 'annual',
-                status: 'active',
-                initial_acquisition_source: session.metadata?.sourceType ?? 'direct',
-                initial_promo_code: session.metadata?.organizationCode || null,
-                initial_referral_code: session.metadata?.referralCode || null
-            });
-            await syncClerkMembershipMetadata(session.metadata?.clerkUserId, {
-                membershipStatus: 'active',
-                membershipType: session.metadata?.membershipType ?? 'annual',
-                organizationCode: session.metadata?.organizationCode || null,
-                referralCodeUsed: session.metadata?.referralCode || null,
-                stripeCustomerId: session.customer,
-                stripeSubscriptionId: session.subscription,
-                initialAcquisitionSource: session.metadata?.sourceType ?? 'direct'
-            });
-            await sendMembershipEmail({
-                type: 'membership_welcome',
-                to: session.customer_details?.email ?? session.customer_email,
-                attributes: {
-                    membershipStatus: 'active',
-                    initialAcquisitionSource: session.metadata?.sourceType ?? 'direct'
-                }
-            });
+            await persistCompletedCheckoutSession(session, { sendWelcomeEmail: true });
             break;
         }
         case 'invoice.paid': {

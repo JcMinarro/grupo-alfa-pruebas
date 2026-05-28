@@ -230,6 +230,7 @@ describe("Membership platform foundation", () => {
       ["src", "pages", "sign-in", "[...signIn].astro"],
       ["src", "pages", "sign-up.astro"],
       ["src", "pages", "sign-up", "[...signUp].astro"],
+      ["src", "pages", "membership.astro"],
       ["src", "pages", "join.astro"],
       ["src", "pages", "checkout", "success.astro"],
       ["src", "pages", "checkout", "cancel.astro"],
@@ -253,6 +254,35 @@ describe("Membership platform foundation", () => {
     expect(readFile("src", "styles", "theme.css")).toContain(".cl-otpCodeFieldInput");
   });
 
+  it("routes paid onboarding through membership page and direct checkout after signup", () => {
+    const membershipSource = readFile("src", "pages", "membership.astro");
+    const signUpSource = readFile("src", "pages", "sign-up.astro");
+    const signUpCatchAllSource = readFile("src", "pages", "sign-up", "[...signUp].astro");
+    const signInSource = readFile("src", "pages", "sign-in.astro");
+    const signInCatchAllSource = readFile("src", "pages", "sign-in", "[...signIn].astro");
+    const checkoutSource = readFile("src", "pages", "api", "checkout.ts");
+    const clubSource = readFile("src", "pages", "club.astro");
+    const membershipServerSource = readFile("src", "lib", "server", "membership.ts");
+    const billingSource = readFile("src", "lib", "server", "billing.ts");
+    const successSource = readFile("src", "pages", "checkout", "success.astro");
+
+    expect(clubSource).toContain('href="/sign-up"');
+    expect(clubSource).not.toContain('clerk.accounts.dev');
+    expect(membershipSource).toContain("Membership checkout starts after account creation");
+    expect(membershipSource).toContain("data-original-price");
+    expect(membershipSource).not.toContain('name="discountCode"');
+    expect(signUpSource).toContain("/api/checkout");
+    expect(signUpCatchAllSource).toContain("/api/checkout");
+    expect(signInSource).toContain("/api/checkout");
+    expect(signInCatchAllSource).toContain("/api/checkout");
+    expect(checkoutSource).toContain("export async function GET");
+    expect(checkoutSource).toContain("getAuthRedirect");
+    expect(checkoutSource).toContain("url.searchParams.get('ref')");
+    expect(membershipServerSource).toContain("/membership?payment_required=1");
+    expect(billingSource).toContain("/membership?payment_required=1");
+    expect(successSource).not.toContain('href="/join"');
+  });
+
   it("keeps Clerk auth screens visually contained and themed", () => {
     const astroConfig = readFile("astro.config.mjs");
     const signUpSource = readFile("src", "pages", "sign-up.astro");
@@ -274,10 +304,11 @@ describe("Membership platform foundation", () => {
     expect(themeSource).toContain(".auth-card .cl-internal");
   });
 
-  it("updates Club Alfa conversion to point at the sign-up flow", () => {
+  it("updates Club Alfa conversion to point at the embedded sign-up flow", () => {
     const clubPageSource = readFile("src", "pages", "club.astro");
 
     expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).not.toContain('clerk.accounts.dev');
     expect(clubPageSource).not.toContain('href="/contacto"');
   });
 
@@ -285,8 +316,16 @@ describe("Membership platform foundation", () => {
     const headerSource = readFile("src", "components", "Header.astro");
 
     expect(headerSource).toContain('href: "/sign-in"');
-    expect(headerSource).toContain('href: "/members"');
+    expect(headerSource).toContain('"/members"');
     expect(headerSource).toContain("MembershipLink");
+  });
+
+  it("routes signed-in unpaid users from the header to payment-required membership messaging", () => {
+    const headerSource = readFile("src", "components", "Header.astro");
+
+    expect(headerSource).toContain("ACTIVE_MEMBERSHIP_STATUSES");
+    expect(headerSource).toContain("currentUser");
+    expect(headerSource).toContain("/membership?payment_required=1");
   });
 
   it("adds server routes for checkout, billing portal, and Stripe webhook handling", () => {
@@ -311,15 +350,21 @@ describe("Membership platform foundation", () => {
   it("handles billing lifecycle webhook states for membership access", () => {
     const billingSource = readFile("src", "lib", "server", "billing.ts");
     const membershipSource = readFile("src", "lib", "server", "membership.ts");
+    const successSource = readFile("src", "pages", "checkout", "success.astro");
 
     expect(billingSource).toContain("invoice.paid");
     expect(billingSource).toContain("invoice.payment_failed");
     expect(billingSource).toContain("customer.subscription.deleted");
+    expect(billingSource).toContain("activateMembershipFromCheckoutSession");
+    expect(billingSource).toContain("checkout.sessions.retrieve");
+    expect(billingSource).toContain("session.metadata?.clerkUserId !== clerkUserId");
     expect(billingSource).toContain("status: 'active'");
     expect(billingSource).toContain("status: 'past_due'");
     expect(billingSource).toContain("status: 'canceled'");
     expect(billingSource).toContain("membership.clerk_user_id");
     expect(membershipSource).toContain("select('*')");
+    expect(successSource).toContain("activateMembershipFromCheckoutSession");
+    expect(successSource).toContain("sessionId");
   });
 
   it("defines the phase 1 membership persistence model", () => {

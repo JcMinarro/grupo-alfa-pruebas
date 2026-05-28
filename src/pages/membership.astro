@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { previewDiscountCode } from '../lib/server/billing';
+
+const ref = Astro.url.searchParams.get('ref');
+const promo = Astro.url.searchParams.get('promo');
+const code = ref ?? promo ?? '';
+const paymentRequired = Astro.url.searchParams.get('payment_required') === '1';
+let discountPreview = null;
+
+if (code) {
+    try {
+        discountPreview = await previewDiscountCode(code);
+    } catch (_error) {
+        discountPreview = null;
+    }
+}
+
+const signUpParams = new URLSearchParams();
+if (ref) signUpParams.set('ref', ref);
+if (promo) signUpParams.set('promo', promo);
+const signUpHref = `/sign-up${signUpParams.toString() ? `?${signUpParams.toString()}` : ''}`;
+---
+
+<BaseLayout title="Membership | Club Alfa" bodyClass="members-page bg-[#0f1012] text-white">
+    <section class="pt-32 pb-20 px-4">
+        <div class="mx-auto grid max-w-[1100px] gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <div class="rounded-[34px] border border-white/10 bg-white/[0.06] p-8 shadow-[0_24px_90px_rgba(0,0,0,0.35)] md:p-10">
+                <p class="text-primary uppercase tracking-[5px] text-sm font-bold mb-4">Club Alfa</p>
+                <h1 class="text-[3rem] leading-[1] font-bold mb-6 md:text-[4.5rem]">Annual membership before checkout</h1>
+                <p class="text-white/70 text-lg leading-[1.8] mb-8">Review the membership before creating your account. Membership checkout starts after account creation, so your payment is linked to your Club Alfa identity.</p>
+                {paymentRequired && (
+                    <div class="mb-8 rounded-2xl border border-primary/40 bg-primary/10 px-5 py-4 text-primary">
+                        Your membership has not been paid yet, or it is no longer active. Continue below to complete payment.
+                    </div>
+                )}
+                <ul class="grid gap-4 text-white/75 md:grid-cols-2">
+                    <li class="rounded-2xl border border-white/10 bg-black/20 p-5">Private member area after payment confirmation.</li>
+                    <li class="rounded-2xl border border-white/10 bg-black/20 p-5">Annual billing managed securely by Stripe.</li>
+                    <li class="rounded-2xl border border-white/10 bg-black/20 p-5">Membership lifecycle confirmed by Stripe webhooks.</li>
+                    <li class="rounded-2xl border border-white/10 bg-black/20 p-5">Campaign discounts applied from your access link.</li>
+                </ul>
+            </div>
+
+            <aside class="rounded-[34px] border border-primary/25 bg-[#171411] p-8 shadow-[0_24px_90px_rgba(0,0,0,0.35)] md:p-10">
+                <p class="text-white/60 uppercase tracking-[4px] text-xs mb-3">Paid plan</p>
+                <h2 class="text-3xl font-bold mb-5">Club Alfa Annual</h2>
+                <div class="mb-6 flex flex-wrap items-end gap-3">
+                    <span data-original-price class={`text-5xl font-bold ${discountPreview?.hasPricePreview ? 'line-through text-white/45' : ''}`}>99 EUR</span>
+                    {discountPreview?.hasPricePreview && (
+                        <span data-discounted-price class="text-5xl font-bold text-primary">{discountPreview.finalPrice}</span>
+                    )}
+                    <span class="mb-1 text-white/60">/ year</span>
+                </div>
+                {discountPreview?.hasPricePreview && (
+                    <p class="mb-6 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-3 text-primary">Discount from your access link applied: {discountPreview.discountLabel}. The same discount will be sent to Stripe Checkout.</p>
+                )}
+                {code && !discountPreview?.hasPricePreview && (
+                    <p class="mb-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/70">Your access link will be checked again before Checkout. If valid, Stripe applies the configured discount.</p>
+                )}
+                <p class="mb-8 text-white/70 leading-[1.8]">Create your account first. Immediately after sign-up, we will open secure Stripe Checkout for the annual membership.</p>
+                <a href={signUpHref} class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Create account and continue to payment</a>
+                <p class="mt-5 text-xs leading-[1.7] text-white/50">Paid membership starts only after Stripe confirms the payment. Canceled or failed payments do not unlock member content.</p>
+            </aside>
+        </div>
+    </section>
+</BaseLayout>

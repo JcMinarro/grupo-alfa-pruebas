@@ -33,7 +33,7 @@ export async function requireActiveMembership(locals) {
     const membership = await getMembershipContext(locals);
 
     if (!ACTIVE_MEMBERSHIP_STATUSES.includes(membership.membershipStatus)) {
-        throw new Error('/join');
+        throw new Error('/membership?payment_required=1');
     }
 
     return membership;

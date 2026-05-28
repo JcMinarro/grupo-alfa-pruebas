@@ -2,7 +2,11 @@
 import MemberLayout from '../../layouts/MemberLayout.astro';
 import { requireActiveMembership } from '../../lib/server/membership';
 
-await requireActiveMembership(Astro.locals);
+try {
+    await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(error instanceof Error ? error.message : '/membership?payment_required=1');
+}
 ---
 
 <MemberLayout title="Expert Sessions" activePath="/members/expert-sessions">
