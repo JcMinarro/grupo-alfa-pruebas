@@ -271,6 +271,13 @@ describe("Membership platform foundation", () => {
     expect(clubSource).not.toContain('clerk.accounts.dev');
     expect(membershipSource).toContain("El pago de la membresía empieza después de crear la cuenta");
     expect(membershipSource).toContain("data-original-price");
+    expect(membershipSource).toContain("Seminarios mensuales");
+    expect(membershipSource).toContain("Acceso preferente a oportunidades");
+    expect(membershipSource).toContain("Acompañamiento para invertir con criterio");
+    expect(membershipSource).toContain("Oferta aplicada");
+    expect(membershipSource).toContain("data-discount-badge");
+    expect(membershipSource).not.toContain("webhooks");
+    expect(membershipSource).not.toContain("Stripe Checkout");
     expect(membershipSource).toContain("reviewed");
     expect(membershipSource).toContain("Crear cuenta y continuar al pago");
     expect(membershipSource).not.toContain('name="discountCode"');
@@ -337,7 +344,7 @@ describe("Membership platform foundation", () => {
       expect(pageSources).not.toContain(englishCopy);
     });
 
-    expect(pageSources).toContain("Membresía anual antes del pago");
+    expect(pageSources).toContain("Membresía anual Club Alfa");
     expect(pageSources).toContain("Crear cuenta de miembro");
     expect(pageSources).toContain("Ir al área de miembros");
   });
