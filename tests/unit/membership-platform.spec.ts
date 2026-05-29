@@ -207,6 +207,7 @@ describe("Membership platform foundation", () => {
     expect(packageJson).toContain('"@astrojs/node"');
     expect(packageJson).toContain('"@clerk/astro"');
     expect(packageJson).toContain('"@supabase/supabase-js"');
+    expect(packageJson).toContain('"tslib"');
     expect(packageJson).toContain('"stripe"');
     expect(baseLayout).toContain("ClientRouter");
     expect(baseLayout).not.toContain("ViewTransitions");
