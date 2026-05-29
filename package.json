@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@astrojs/node": "^10.1.1",
+    "@astrojs/vercel": "^10.0.8",
     "@clerk/astro": "^3.2.6",
     "@clerk/backend": "^3.4.11",
     "@clerk/localizations": "^4.7.0",

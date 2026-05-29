@@ -1,7 +1,10 @@
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 import clerk from '@clerk/astro';
 import { esES } from '@clerk/localizations';
+
+const useVercelAdapter = process.env.VERCEL === '1' || process.env.ASTRO_ADAPTER === 'vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,9 +16,7 @@ export default defineConfig({
             prefixDefaultLocale: false
         }
     },
-    adapter: node({
-        mode: 'standalone'
-    }),
+    adapter: useVercelAdapter ? vercel() : node({ mode: 'standalone' }),
     integrations: [
         clerk({
             localization: esES,

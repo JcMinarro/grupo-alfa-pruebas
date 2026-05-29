@@ -190,18 +190,21 @@ describe("Membership platform foundation", () => {
     });
   });
 
-  it("switches Astro to portable SSR and registers Clerk", () => {
+  it("configures Astro SSR for local Node and Vercel hosting", () => {
     const astroConfig = readFile("astro.config.mjs");
     const packageJson = readFile("package.json");
     const baseLayout = readFile("src", "layouts", "BaseLayout.astro");
 
+    expect(astroConfig).toContain("@astrojs/vercel");
     expect(astroConfig).toContain("@astrojs/node");
-    expect(astroConfig).not.toContain("@astrojs/vercel");
+    expect(astroConfig).toContain("useVercelAdapter");
+    expect(astroConfig).toContain("process.env.VERCEL === '1'");
+    expect(astroConfig).toContain("process.env.ASTRO_ADAPTER === 'vercel'");
     expect(astroConfig).toContain("@clerk/astro");
     expect(astroConfig).toContain("output: 'server'");
     expect(packageJson).toContain('"astro": "^6.');
+    expect(packageJson).toContain('"@astrojs/vercel"');
     expect(packageJson).toContain('"@astrojs/node"');
-    expect(packageJson).not.toContain('"@astrojs/vercel"');
     expect(packageJson).toContain('"@clerk/astro"');
     expect(packageJson).toContain('"@supabase/supabase-js"');
     expect(packageJson).toContain('"stripe"');
