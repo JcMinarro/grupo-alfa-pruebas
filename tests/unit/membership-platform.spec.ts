@@ -206,7 +206,7 @@ describe("Membership platform foundation", () => {
     expect(packageJson).toContain('"@astrojs/vercel"');
     expect(packageJson).toContain('"@astrojs/node"');
     expect(packageJson).toContain('"@clerk/astro"');
-    expect(packageJson).toContain('"@supabase/supabase-js"');
+    expect(packageJson).not.toContain('"@supabase/supabase-js"');
     expect(packageJson).toContain('"tslib"');
     expect(packageJson).toContain('"stripe"');
     expect(baseLayout).toContain("ClientRouter");
@@ -227,6 +227,8 @@ describe("Membership platform foundation", () => {
     expect(readFile("src", "middleware.ts")).toContain("clerkMiddleware");
     expect(readFile("src", "lib", "server", "auth.ts")).toContain("requireSignedInUser");
     expect(readFile("src", "lib", "server", "membership.ts")).toContain("requireActiveMembership");
+    expect(readFile("src", "lib", "server", "supabase.ts")).toContain("supabaseRequest");
+    expect(readFile("src", "lib", "server", "supabase.ts")).not.toContain("@supabase/supabase-js");
   });
 
   it("adds public onboarding routes and member-only routes in English", () => {
