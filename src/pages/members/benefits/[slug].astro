@@ -1,0 +1,94 @@
+---
+import MemberLayout from '../../../layouts/MemberLayout.astro';
+import { requireActiveMembership } from '../../../lib/server/membership';
+import ventajasClub from '../../../data/member-benefits';
+
+try {
+    await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(error instanceof Error ? error.message : '/membership?payment_required=1');
+}
+
+const benefit = ventajasClub.find((item) => item.slug === Astro.params.slug);
+
+if (!benefit) {
+    return Astro.redirect('/members/benefits');
+}
+
+const isExternalCta = benefit.cta.kind === 'external';
+---
+
+<MemberLayout title={benefit.title} activePath="/members/benefits">
+    <a href="/members/benefits" class="inline-flex items-center text-sm uppercase tracking-[2px] text-white/60 hover:text-primary mb-8">Volver a ventajas</a>
+
+    <section class="grid gap-8 lg:grid-cols-[1.5fr_0.8fr] mb-8">
+        <div class="rounded-[32px] border border-white/10 bg-white/[0.06] p-6 md:p-10 relative overflow-hidden">
+            <div class="absolute inset-x-0 top-0 h-1 bg-primary"></div>
+            <p class="text-primary uppercase tracking-[4px] text-sm font-bold mb-4">{benefit.category}</p>
+            <h2 class="text-4xl md:text-6xl font-bold leading-none mb-6">{benefit.title}</h2>
+            <p class="text-white/75 text-lg md:text-xl leading-[1.8]">{benefit.summary}</p>
+        </div>
+
+        <aside class="rounded-[32px] border border-primary/30 bg-primary/10 p-6 md:p-8 flex flex-col justify-between gap-8">
+            <div>
+                <p class="text-primary uppercase tracking-[3px] text-xs font-bold mb-4">Ventaja para socios</p>
+                <p class="text-white/80 leading-[1.8]">{benefit.memberValue}</p>
+            </div>
+            <a
+                href={benefit.cta.href}
+                target={isExternalCta ? '_blank' : undefined}
+                rel={isExternalCta ? 'noopener noreferrer' : undefined}
+                class="inline-flex justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-[1px] text-black transition-transform hover:scale-[1.02]"
+            >{benefit.cta.label}</a>
+        </aside>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-3">
+        <div class="rounded-[28px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <h3 class="text-2xl font-bold mb-5">Qué incluye</h3>
+            <ol class="space-y-4 text-white/70 leading-[1.7]">
+                {benefit.includes.map((item, index) => (
+                    <li class="flex gap-4">
+                        <span class="text-primary font-bold">{String(index + 1).padStart(2, '0')}</span>
+                        <span>{item}</span>
+                    </li>
+                ))}
+            </ol>
+        </div>
+
+        <div class="rounded-[28px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <h3 class="text-2xl font-bold mb-5">Para quién es</h3>
+            <ul class="space-y-4 text-white/70 leading-[1.7]">
+                {benefit.audience.map((item) => (
+                    <li class="flex gap-3">
+                        <span class="text-primary">✓</span>
+                        <span>{item}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <div class="rounded-[28px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <h3 class="text-2xl font-bold mb-5">Cómo activarlo</h3>
+            <ol class="space-y-4 text-white/70 leading-[1.7]">
+                {benefit.activation.map((item, index) => (
+                    <li class="flex gap-4">
+                        <span class="text-primary font-bold">{index + 1}</span>
+                        <span>{item}</span>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="mt-8 rounded-[28px] border border-white/10 bg-[#17191d] p-6 md:p-8 text-center">
+        <p class="text-white/60 uppercase tracking-[3px] text-xs font-bold mb-3">Siguiente paso</p>
+        <h3 class="text-2xl md:text-3xl font-bold mb-5">Activa esta ventaja con el equipo adecuado</h3>
+        <a
+            href={benefit.cta.href}
+            target={isExternalCta ? '_blank' : undefined}
+            rel={isExternalCta ? 'noopener noreferrer' : undefined}
+            class="inline-flex rounded-full bg-primary px-8 py-3 text-sm font-bold uppercase tracking-[1px] text-black transition-transform hover:scale-[1.03]"
+        >{benefit.cta.label}</a>
+    </section>
+</MemberLayout>
