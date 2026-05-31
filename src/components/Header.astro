@@ -12,7 +12,7 @@ const isAuthenticated = authState?.isAuthenticated ?? false;
 const currentUser = isAuthenticated && Astro.locals.currentUser ? await Astro.locals.currentUser() : null;
 const isActivePaidMember = ACTIVE_MEMBERSHIP_STATUSES.includes(currentUser?.publicMetadata?.membershipStatus);
 
-const navLinks = [
+const publicNavLinks = [
   { id: "inicio", href: "/", label: t("nav.inicio") },
   { id: "club", href: "/club", label: t("nav.club") },
   { id: "proyectos", href: "/proyectos", label: t("nav.proyectos") },
@@ -22,8 +22,12 @@ const navLinks = [
   { id: "contacto", href: "/contacto", label: t("nav.contacto") },
 ];
 
+const navLinks = isActivePaidMember
+  ? publicNavLinks.filter(({ id }) => id !== "club")
+  : publicNavLinks;
+
 const authLinks = isAuthenticated
-  ? [{ href: isActivePaidMember ? "/members" : "/membership?payment_required=1", label: t("nav.members") }]
+  ? [{ href: isActivePaidMember ? "/members/benefits" : "/membership?payment_required=1", label: t("nav.members") }]
   : [{ href: "/sign-in", label: t("nav.signIn") }];
 ---
 

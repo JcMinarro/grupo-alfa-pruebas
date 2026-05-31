@@ -46,7 +46,7 @@ export const memberBenefits: MemberBenefit[] = [
     ],
     cta: {
       label: "Solicitar acceso a oportunidades",
-      href: "/members/expert-sessions",
+      href: "/contacto",
       kind: "group",
     },
   },

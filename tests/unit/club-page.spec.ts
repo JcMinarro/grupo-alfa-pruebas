@@ -18,15 +18,18 @@ describe("Club Alfa presence across the site", () => {
     expect(clubPageSource).toContain("<BaseLayout");
     expect(clubPageSource).toContain('activeNav="club"');
     expect(clubPageSource).toContain("backgroundVideo={heros.club}");
-    expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).toContain("clubCtaHref");
     expect(clubPageSource).not.toContain('clerk.accounts.dev');
   });
 
-  it("adds Club to the shared header navigation", () => {
+  it("keeps Club in public navigation but hides it for active members", () => {
     const headerSource = readFile("src", "components", "Header.astro");
     const uiSource = readFile("src", "i18n", "ui.ts");
 
+    expect(headerSource).toContain("publicNavLinks");
+    expect(headerSource).toContain("isActivePaidMember");
     expect(headerSource).toContain('{ id: "club", href: "/club", label: t("nav.club") }');
+    expect(headerSource).toContain('id !== "club"');
     expect(headerSource).toContain('{ id: "inicio", href: "/", label: t("nav.inicio") }');
     expect(headerSource).toContain('{ id: "proyectos", href: "/proyectos", label: t("nav.proyectos") }');
     expect(headerSource).toContain('{ id: "promotores", href: "/promotores", label: t("nav.promotores") }');
@@ -62,7 +65,13 @@ describe("Club Alfa presence across the site", () => {
 
     expect(clubPageSource).toContain('t("club.price.title")');
     expect(clubPageSource).toContain('t("club.cta.button")');
-    expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).toContain("ACTIVE_MEMBERSHIP_STATUSES");
+    expect(clubPageSource).toContain("currentUser");
+    expect(clubPageSource).toContain("isActivePaidMember");
+    expect(clubPageSource).toContain("clubCtaHref");
+    expect(clubPageSource).toContain("clubCtaLabel");
+    expect(clubPageSource).toContain('isActivePaidMember ? "/members/benefits" : "/sign-up"');
+    expect(clubPageSource).toContain('isActivePaidMember ? "IR A MIS VENTAJAS" : t("club.cta.button")');
     expect(clubPageSource).not.toContain('clerk.accounts.dev');
     expect(clubPageSource).not.toContain('href="/contacto"');
     expect(uiSource).toContain("'club.price.title': '99€/Año'");

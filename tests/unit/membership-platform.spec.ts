@@ -242,13 +242,13 @@ describe("Membership platform foundation", () => {
       ["src", "pages", "checkout", "success.astro"],
       ["src", "pages", "checkout", "cancel.astro"],
       ["src", "pages", "members", "index.astro"],
-      ["src", "pages", "members", "profile.astro"],
-      ["src", "pages", "members", "membership.astro"],
       ["src", "pages", "members", "benefits.astro"],
-      ["src", "pages", "members", "resources.astro"],
-      ["src", "pages", "members", "events.astro"],
-      ["src", "pages", "members", "expert-sessions.astro"],
-      ["src", "pages", "members", "referrals.astro"],
+      ["src", "pages", "members", "_profile.astro"],
+      ["src", "pages", "members", "_membership.astro"],
+      ["src", "pages", "members", "_resources.astro"],
+      ["src", "pages", "members", "_events.astro"],
+      ["src", "pages", "members", "_expert-sessions.astro"],
+      ["src", "pages", "members", "_referrals.astro"],
     ];
 
     pagePaths.forEach((segments) => {
@@ -258,6 +258,12 @@ describe("Membership platform foundation", () => {
     expect(readFile("src", "pages", "join.astro")).toContain("discountCode");
     expect(readFile("src", "pages", "join.astro")).toContain("readonly");
     expect(readFile("src", "pages", "members", "index.astro")).toContain("requireActiveMembership");
+    expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "profile.astro"))).toBe(false);
+    expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "membership.astro"))).toBe(false);
+    expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "resources.astro"))).toBe(false);
+    expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "events.astro"))).toBe(false);
+    expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "expert-sessions.astro"))).toBe(false);
+    expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "referrals.astro"))).toBe(false);
     expect(readFile("src", "styles", "theme.css")).toContain(".cl-otpCodeFieldInput");
   });
 
@@ -274,7 +280,7 @@ describe("Membership platform foundation", () => {
     const successSource = readFile("src", "pages", "checkout", "success.astro");
     const middlewareSource = readFile("src", "middleware.ts");
 
-    expect(clubSource).toContain('href="/sign-up"');
+    expect(clubSource).toContain('isActivePaidMember ? "/members/benefits" : "/sign-up"');
     expect(clubSource).not.toContain('clerk.accounts.dev');
     expect(membershipSource).toContain("El pago de la membresía empieza después de crear la cuenta");
     expect(membershipSource).toContain("data-original-price");
@@ -319,15 +325,14 @@ describe("Membership platform foundation", () => {
       readFile("src", "pages", "checkout", "success.astro"),
       readFile("src", "pages", "checkout", "cancel.astro"),
       readFile("src", "layouts", "MemberLayout.astro"),
-      readFile("src", "components", "MemberNav.astro"),
       readFile("src", "pages", "members", "index.astro"),
-      readFile("src", "pages", "members", "profile.astro"),
-      readFile("src", "pages", "members", "membership.astro"),
+      readFile("src", "pages", "members", "_profile.astro"),
+      readFile("src", "pages", "members", "_membership.astro"),
       readFile("src", "pages", "members", "benefits.astro"),
-      readFile("src", "pages", "members", "resources.astro"),
-      readFile("src", "pages", "members", "events.astro"),
-      readFile("src", "pages", "members", "expert-sessions.astro"),
-      readFile("src", "pages", "members", "referrals.astro"),
+      readFile("src", "pages", "members", "_resources.astro"),
+      readFile("src", "pages", "members", "_events.astro"),
+      readFile("src", "pages", "members", "_expert-sessions.astro"),
+      readFile("src", "pages", "members", "_referrals.astro"),
     ].join("\n");
 
     [
@@ -397,7 +402,8 @@ describe("Membership platform foundation", () => {
   it("updates Club Alfa conversion to point at the embedded sign-up flow", () => {
     const clubPageSource = readFile("src", "pages", "club.astro");
 
-    expect(clubPageSource).toContain('href="/sign-up"');
+    expect(clubPageSource).toContain('isActivePaidMember ? "/members/benefits" : "/sign-up"');
+    expect(clubPageSource).toContain('isActivePaidMember ? "IR A MIS VENTAJAS" : t("club.cta.button")');
     expect(clubPageSource).not.toContain('clerk.accounts.dev');
     expect(clubPageSource).not.toContain('href="/contacto"');
   });
@@ -406,8 +412,21 @@ describe("Membership platform foundation", () => {
     const headerSource = readFile("src", "components", "Header.astro");
 
     expect(headerSource).toContain('href: "/sign-in"');
-    expect(headerSource).toContain('"/members"');
+    expect(headerSource).toContain('"/members/benefits"');
+    expect(headerSource).toContain('isActivePaidMember ? "/members/benefits" : "/membership?payment_required=1"');
     expect(headerSource).toContain("MembershipLink");
+  });
+
+  it("removes secondary member tabs and sends /members to benefits", () => {
+    const memberLayoutSource = readFile("src", "layouts", "MemberLayout.astro");
+    const membersIndexSource = readFile("src", "pages", "members", "index.astro");
+
+    expect(memberLayoutSource).not.toContain("MemberNav");
+    expect(memberLayoutSource).not.toContain("<MemberNav");
+    expect(membersIndexSource).toContain("requireActiveMembership");
+    expect(membersIndexSource).toContain("Astro.redirect('/members/benefits')");
+    expect(membersIndexSource).not.toContain("Resumen de miembros");
+    expect(membersIndexSource).not.toContain("Estado de la membresía");
   });
 
   it("routes signed-in unpaid users from the header to payment-required membership messaging", () => {
