@@ -12,14 +12,31 @@ Supabase puede pausar proyectos del plan gratuito cuando detecta inactividad. Pa
 
 Configurar estos valores en GitHub, dentro de `Settings > Secrets and variables > Actions`.
 
-Secrets:
+El job usa el GitHub Environment `Production`, por lo que los valores pueden configurarse como `Environment secrets` dentro de ese environment.
+
+Environment secrets en `Production`:
 
 - `SUPABASE_URL`: URL del proyecto de Supabase, por ejemplo `https://xxxxx.supabase.co`.
 - `SUPABASE_PUBLISHABLE_KEY`: publishable key del proyecto de Supabase, con formato `sb_publishable_...`.
-
-Repository variables:
-
 - `SUPABASE_KEEPALIVE_TABLE`: nombre de la tabla que se consulta, por ejemplo `keepalive`.
+
+Repository variables opcionales:
+
+- `SUPABASE_KEEPALIVE_TABLE`: también puede configurarse como variable de repositorio si no existe como secret de entorno.
+
+Si los secrets se mueven a otro Environment, actualizar `environment: Production` en `.github/workflows/supabase-keepalive.yml` para que apunte al nuevo nombre.
+
+## Troubleshooting
+
+Si el workflow falla con valores vacíos en el bloque `env`, por ejemplo:
+
+```text
+SUPABASE_URL:
+SUPABASE_PUBLISHABLE_KEY:
+SUPABASE_KEEPALIVE_TABLE:
+```
+
+significa que GitHub Actions no está encontrando esos valores. Revisar que estén creados en el Environment `Production`, o que el job tenga configurado el `environment` correcto si se han movido a otro entorno.
 
 ## Tabla recomendada
 
@@ -59,7 +76,7 @@ Cuando se migre a una base de datos de producción o a otro proyecto de Supabase
 1. Crear una tabla equivalente en el nuevo proyecto, o elegir una tabla existente que pueda exponerse públicamente para lectura.
 2. Confirmar que la tabla permite `SELECT` con rol `anon` mediante RLS y una policy adecuada.
 3. Actualizar el secret `SUPABASE_URL` con la URL del nuevo proyecto.
-4. Crear una publishable key en el nuevo proyecto de Supabase y actualizar el secret `SUPABASE_PUBLISHABLE_KEY`.
+4. Crear una publishable key en el nuevo proyecto de Supabase y actualizar el secret `SUPABASE_PUBLISHABLE_KEY` en el Environment `Production`.
 5. Actualizar la variable `SUPABASE_KEEPALIVE_TABLE` si cambia el nombre de la tabla.
 6. Ejecutar manualmente el workflow `Supabase keepalive` desde GitHub Actions y comprobar que termina correctamente.
 
