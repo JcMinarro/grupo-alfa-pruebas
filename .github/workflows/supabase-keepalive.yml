@@ -1,0 +1,48 @@
+name: Supabase keepalive
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs every Friday and Sunday at 09:00 UTC.
+    - cron: "0 9 * * 0,5"
+
+permissions:
+  contents: read
+
+jobs:
+  ping-database:
+    name: Query Supabase database
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Query configured table
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_KEEPALIVE_TABLE: ${{ vars.SUPABASE_KEEPALIVE_TABLE }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SUPABASE_URL:-}" ]; then
+            echo "SUPABASE_URL secret is required" >&2
+            exit 1
+          fi
+
+          if [ -z "${SUPABASE_PUBLISHABLE_KEY:-}" ]; then
+            echo "SUPABASE_PUBLISHABLE_KEY secret is required" >&2
+            exit 1
+          fi
+
+          if [ -z "${SUPABASE_KEEPALIVE_TABLE:-}" ]; then
+            echo "SUPABASE_KEEPALIVE_TABLE repository variable is required" >&2
+            exit 1
+          fi
+
+          endpoint="${SUPABASE_URL%/}/rest/v1/${SUPABASE_KEEPALIVE_TABLE}?select=*&limit=1"
+
+          curl --silent --show-error --fail --retry 3 --retry-all-errors \
+            --header "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
+            --header "Authorization: Bearer ${SUPABASE_PUBLISHABLE_KEY}" \
+            "$endpoint" >/dev/null
+
+          echo "Supabase keepalive query completed successfully"
