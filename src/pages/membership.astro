@@ -1,11 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { previewDiscountCode } from '../lib/server/billing';
+import { ACTIVE_MEMBERSHIP_STATUSES, getCurrentMembershipUser, isTransientProviderError } from '../lib/server/membership';
 
 const ref = Astro.url.searchParams.get('ref');
 const promo = Astro.url.searchParams.get('promo');
 const code = ref ?? promo ?? '';
 const paymentRequired = Astro.url.searchParams.get('payment_required') === '1';
+const accessCheckPending = Astro.url.searchParams.get('access_check') === 'pending';
+const authState = Astro.locals.auth?.();
+let membershipLookupPending = accessCheckPending;
+let currentUser = null;
+
+if (authState?.isAuthenticated) {
+    try {
+        currentUser = await getCurrentMembershipUser(Astro.locals);
+    } catch (error) {
+        membershipLookupPending = isTransientProviderError(error);
+        if (!membershipLookupPending) {
+            throw error;
+        }
+    }
+}
+const isActivePaidMember = ACTIVE_MEMBERSHIP_STATUSES.includes(currentUser?.publicMetadata?.membershipStatus);
 let discountPreview = null;
 
 if (code) {
@@ -37,9 +54,19 @@ const benefits = [
                 <p class="text-primary uppercase tracking-[5px] text-sm font-bold mb-4">Club Alfa</p>
                 <h1 class="text-[3rem] leading-[1] font-bold mb-6 md:text-[4.5rem]">Membresía anual Club Alfa</h1>
                 <p class="text-white/70 text-lg leading-[1.8] mb-8">Revisa todo lo que incluye tu entrada a la manada. El pago de la membresía empieza después de crear la cuenta, para que tu acceso quede preparado desde el primer momento.</p>
-                {paymentRequired && (
+                {paymentRequired && !isActivePaidMember && !membershipLookupPending && (
                     <div class="mb-8 rounded-2xl border border-primary/40 bg-primary/10 px-5 py-4 text-primary">
                         Tu membresía todavía no está pagada o ya no está activa. Continúa abajo para completar el pago.
+                    </div>
+                )}
+                {membershipLookupPending && !isActivePaidMember && (
+                    <div class="mb-8 rounded-2xl border border-sky-300/40 bg-sky-300/10 px-5 py-4 text-sky-100">
+                        Estamos verificando tu membresía. Si acabas de pagar, espera unos segundos y vuelve a intentar entrar al área privada.
+                    </div>
+                )}
+                {isActivePaidMember && (
+                    <div class="mb-8 rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-5 py-4 text-emerald-200">
+                        Tu membresía ya está activa. Puedes acceder directamente al área privada de miembros.
                     </div>
                 )}
                 <ul class="grid gap-4 text-white/75 md:grid-cols-2">
@@ -68,9 +95,25 @@ const benefits = [
                 {code && !discountPreview?.hasPricePreview && (
                     <p class="mb-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/70">Comprobaremos tu enlace de acceso antes del pago. Si tiene una oferta activa, se aplicará automáticamente.</p>
                 )}
-                <p class="mb-8 text-white/70 leading-[1.8]">Crea primero tu cuenta. Justo después del registro irás al pago seguro para activar tu membresía anual.</p>
-                <a href={signUpHref} class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Crear cuenta y continuar al pago</a>
-                <p class="mt-5 text-xs leading-[1.7] text-white/50">Tu acceso privado se activa solo cuando el pago queda confirmado. Si cancelas o el pago falla, podrás volver a intentarlo.</p>
+                {isActivePaidMember ? (
+                    <>
+                        <p class="mb-8 text-white/70 leading-[1.8]">Tu pago ya está confirmado. Desde aquí puedes entrar al área privada para consultar tus ventajas y gestionar tu membresía.</p>
+                        <a href="/members/benefits" class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Ir al área de miembros</a>
+                        <p class="mt-5 text-xs leading-[1.7] text-white/50">Si necesitas gestionar facturación o cancelación, entra en el área privada y abre la sección de membresía.</p>
+                    </>
+                ) : membershipLookupPending ? (
+                    <>
+                        <p class="mb-8 text-white/70 leading-[1.8]">No hemos podido confirmar el estado exacto de tu membresía porque uno de los proveedores externos ha limitado o retrasado la respuesta.</p>
+                        <a href="/members/benefits" class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Reintentar acceso al área de miembros</a>
+                        <p class="mt-5 text-xs leading-[1.7] text-white/50">Si el pago ya está confirmado, el acceso debería activarse en cuanto termine la sincronización.</p>
+                    </>
+                ) : (
+                    <>
+                        <p class="mb-8 text-white/70 leading-[1.8]">Crea primero tu cuenta. Justo después del registro irás al pago seguro para activar tu membresía anual.</p>
+                        <a href={signUpHref} class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Crear cuenta y continuar al pago</a>
+                        <p class="mt-5 text-xs leading-[1.7] text-white/50">Tu acceso privado se activa solo cuando el pago queda confirmado. Si cancelas o el pago falla, podrás volver a intentarlo.</p>
+                    </>
+                )}
             </aside>
         </div>
     </section>

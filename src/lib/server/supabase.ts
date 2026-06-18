@@ -16,15 +16,33 @@ async function supabaseRequest({ method, table, query = '', body, prefer }) {
         return { data: null, error: null, skipped: true };
     }
 
-    const response = await fetch(`${env.supabaseUrl}/rest/v1/${table}${query}`, {
-        method,
-        headers: getSupabaseHeaders(env.supabaseServiceRoleKey, prefer),
-        body: body === undefined ? undefined : JSON.stringify(body)
-    });
+    let response;
+
+    try {
+        response = await fetch(`${env.supabaseUrl}/rest/v1/${table}${query}`, {
+            method,
+            headers: getSupabaseHeaders(env.supabaseServiceRoleKey, prefer),
+            body: body === undefined ? undefined : JSON.stringify(body)
+        });
+    } catch (error) {
+        console.error('Supabase REST request failed', {
+            method,
+            table,
+            message: error instanceof Error ? error.message : `${error}`
+        });
+        throw error;
+    }
     const text = await response.text();
     const data = text ? JSON.parse(text) : null;
 
     if (!response.ok) {
+        console.error('Supabase REST request rejected', {
+            method,
+            table,
+            status: response.status,
+            statusText: response.statusText,
+            message: data?.message ?? null
+        });
         return { data: null, error: data ?? { message: response.statusText } };
     }
 

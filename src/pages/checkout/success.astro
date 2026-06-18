@@ -6,12 +6,16 @@ const sessionId = Astro.url.searchParams.get('session_id');
 let activationConfirmed = false;
 
 if (sessionId) {
-    const authState = Astro.locals.auth?.();
-    const result = await activateMembershipFromCheckoutSession({
-        sessionId,
-        clerkUserId: authState?.userId
-    });
-    activationConfirmed = result.activated;
+    try {
+        const authState = Astro.locals.auth?.();
+        const result = await activateMembershipFromCheckoutSession({
+            sessionId,
+            clerkUserId: authState?.userId
+        });
+        activationConfirmed = result.activated;
+    } catch (error) {
+        console.error('Checkout success activation failed', error);
+    }
 }
 ---
 
@@ -23,10 +27,8 @@ if (sessionId) {
             <p class="text-white/70 text-lg leading-[1.8] mb-8">
                 {activationConfirmed ? 'Tu membresía está activa. Ya puedes entrar al área de miembros.' : 'Estamos activando tu membresía. Si el acceso todavía no está disponible, espera un momento y vuelve a intentarlo.'}
             </p>
-            {sessionId && <p class="text-white/45 text-sm break-all">Sesión de pago: {sessionId}</p>}
-            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="/members" class="rounded-full bg-primary px-8 py-3 text-sm font-bold uppercase tracking-[2px] text-black">Ir al área de miembros</a>
-                <a href="/membership" class="rounded-full border border-white/15 px-8 py-3 text-sm font-bold uppercase tracking-[2px] text-white/80">Detalles de la membresía</a>
+            <div class="mt-8 flex justify-center">
+                <a href="/members/benefits" class="rounded-full bg-primary px-10 py-4 text-sm font-bold uppercase tracking-[2px] text-black">Ir al área de miembros</a>
             </div>
         </div>
     </section>

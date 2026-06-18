@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { ACTIVE_MEMBERSHIP_STATUSES } from "../lib/server/membership";
+import { ACTIVE_MEMBERSHIP_STATUSES, getCurrentMembershipUser } from "../lib/server/membership";
 import MembershipLink from "./MembershipLink.astro";
 
 const lang = getLangFromUrl(Astro.url);
@@ -9,7 +9,15 @@ const t = useTranslations(lang);
 const { activeNav = "inicio" } = Astro.props;
 const authState = Astro.locals.auth?.();
 const isAuthenticated = authState?.isAuthenticated ?? false;
-const currentUser = isAuthenticated && Astro.locals.currentUser ? await Astro.locals.currentUser() : null;
+let currentUser = null;
+
+if (isAuthenticated) {
+  try {
+    currentUser = await getCurrentMembershipUser(Astro.locals);
+  } catch (_error) {
+    currentUser = null;
+  }
+}
 const isActivePaidMember = ACTIVE_MEMBERSHIP_STATUSES.includes(currentUser?.publicMetadata?.membershipStatus);
 
 const publicNavLinks = [

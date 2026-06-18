@@ -1,12 +1,12 @@
 ---
 import MemberLayout from '../../layouts/MemberLayout.astro';
-import { requireActiveMembership } from '../../lib/server/membership';
+import { getMembershipRedirectTarget, requireActiveMembership } from '../../lib/server/membership';
 import ventajasClub from '../../data/member-benefits';
 
 try {
     await requireActiveMembership(Astro.locals);
 } catch (error) {
-    return Astro.redirect(error instanceof Error ? error.message : '/membership?payment_required=1');
+    return Astro.redirect(getMembershipRedirectTarget(error));
 }
 ---
 

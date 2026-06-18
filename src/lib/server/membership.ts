@@ -5,6 +5,51 @@ import { getServerEnv } from './env';
 
 export const ACTIVE_MEMBERSHIP_STATUSES = ['active', 'trialing'];
 
+function getErrorMessage(error) {
+    return error instanceof Error ? error.message : `${error}`;
+}
+
+export function isTransientProviderError(error) {
+    const message = getErrorMessage(error).toLowerCase();
+    const status = error?.status ?? error?.statusCode ?? error?.code;
+
+    return (
+        status === 429 ||
+        status === 503 ||
+        message.includes('too many requests') ||
+        message.includes('rate limit') ||
+        message.includes('fetch failed') ||
+        message.includes('service unavailable')
+    );
+}
+
+export function getMembershipRedirectTarget(error) {
+    if (error instanceof Error && error.message.startsWith('/')) {
+        return error.message;
+    }
+
+    if (isTransientProviderError(error)) {
+        return '/membership?access_check=pending';
+    }
+
+    return '/membership?payment_required=1';
+}
+
+export async function getCurrentMembershipUser(locals) {
+    if (!locals.currentUser) {
+        return null;
+    }
+
+    if (!locals.__currentMembershipUserPromise) {
+        locals.__currentMembershipUserPromise = locals.currentUser().catch((error) => {
+            console.error('Clerk currentUser lookup failed', { message: getErrorMessage(error) });
+            throw error;
+        });
+    }
+
+    return locals.__currentMembershipUserPromise;
+}
+
 export function getMembershipMetadata(user) {
     return {
         publicMetadata: user?.publicMetadata ?? {},
@@ -38,7 +83,7 @@ function mapStripeSubscriptionStatus(status) {
 }
 
 export async function getMembershipContext(locals) {
-    const user = locals.currentUser ? await locals.currentUser() : null;
+    const user = await getCurrentMembershipUser(locals);
     const metadata = getMembershipMetadata(user);
     const membershipStatus = metadata.publicMetadata.membershipStatus ?? 'inactive';
     const membershipType = metadata.publicMetadata.membershipType ?? 'annual';
@@ -65,7 +110,17 @@ async function refreshMembershipFromStripe(membership) {
     }
 
     const stripe = new Stripe(env.stripeSecretKey);
-    const subscription = await stripe.subscriptions.retrieve(membership.stripeSubscriptionId);
+    let subscription;
+
+    try {
+        subscription = await stripe.subscriptions.retrieve(membership.stripeSubscriptionId);
+    } catch (error) {
+        console.error('Stripe subscription refresh failed', {
+            subscriptionId: membership.stripeSubscriptionId,
+            message: getErrorMessage(error)
+        });
+        throw error;
+    }
     const refreshedMembership = {
         ...membership,
         membershipStatus: mapStripeSubscriptionStatus(subscription.status),
@@ -75,13 +130,30 @@ async function refreshMembershipFromStripe(membership) {
         cancelAtPeriodEnd: subscription.cancel_at_period_end ?? false
     };
 
-    await updateMembershipBySubscription(subscription.id, {
-        stripe_customer_id: refreshedMembership.stripeCustomerId,
-        status: refreshedMembership.membershipStatus,
-        current_period_end: refreshedMembership.currentPeriodEnd,
-        cancel_at_period_end: refreshedMembership.cancelAtPeriodEnd
-    });
-    await syncClerkMembershipMetadata(membership.user?.id, refreshedMembership);
+    try {
+        await updateMembershipBySubscription(subscription.id, {
+            stripe_customer_id: refreshedMembership.stripeCustomerId,
+            status: refreshedMembership.membershipStatus,
+            current_period_end: refreshedMembership.currentPeriodEnd,
+            cancel_at_period_end: refreshedMembership.cancelAtPeriodEnd
+        });
+    } catch (error) {
+        console.error('Supabase membership refresh persistence failed', {
+            subscriptionId: subscription.id,
+            message: getErrorMessage(error)
+        });
+        throw error;
+    }
+
+    try {
+        await syncClerkMembershipMetadata(membership.user?.id, refreshedMembership);
+    } catch (error) {
+        console.error('Clerk membership metadata sync failed', {
+            userId: membership.user?.id,
+            message: getErrorMessage(error)
+        });
+        throw error;
+    }
 
     return refreshedMembership;
 }
@@ -173,21 +245,26 @@ export async function syncClerkMembershipMetadata(clerkUserId, metadata) {
 
     const clerk = createClerkClient({ secretKey: env.clerkSecretKey });
 
-    await clerk.users.updateUserMetadata(clerkUserId, {
-        publicMetadata: {
-            membershipStatus: metadata.membershipStatus,
-            membershipType: metadata.membershipType ?? 'annual',
-            organizationCode: metadata.organizationCode ?? null,
-            referralCodeUsed: metadata.referralCodeUsed ?? null
-        },
-        privateMetadata: {
-            stripeCustomerId: metadata.stripeCustomerId ?? null,
-            stripeSubscriptionId: metadata.stripeSubscriptionId ?? null,
-            currentPeriodEnd: metadata.currentPeriodEnd ?? null,
-            cancelAtPeriodEnd: metadata.cancelAtPeriodEnd ?? false,
-            initialAcquisitionSource: metadata.initialAcquisitionSource ?? 'direct'
-        }
-    });
+    try {
+        await clerk.users.updateUserMetadata(clerkUserId, {
+            publicMetadata: {
+                membershipStatus: metadata.membershipStatus,
+                membershipType: metadata.membershipType ?? 'annual',
+                organizationCode: metadata.organizationCode ?? null,
+                referralCodeUsed: metadata.referralCodeUsed ?? null
+            },
+            privateMetadata: {
+                stripeCustomerId: metadata.stripeCustomerId ?? null,
+                stripeSubscriptionId: metadata.stripeSubscriptionId ?? null,
+                currentPeriodEnd: metadata.currentPeriodEnd ?? null,
+                cancelAtPeriodEnd: metadata.cancelAtPeriodEnd ?? false,
+                initialAcquisitionSource: metadata.initialAcquisitionSource ?? 'direct'
+            }
+        });
+    } catch (error) {
+        console.error('Clerk updateUserMetadata failed', { userId: clerkUserId, message: getErrorMessage(error) });
+        throw error;
+    }
 
     return { synced: true };
 }

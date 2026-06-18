@@ -257,7 +257,7 @@ describe("Membership platform foundation", () => {
 
     expect(readFile("src", "pages", "join.astro")).toContain("discountCode");
     expect(readFile("src", "pages", "join.astro")).toContain("readonly");
-    expect(readFile("src", "pages", "members", "index.astro")).toContain("requireActiveMembership");
+    expect(readFile("src", "pages", "members", "index.astro")).toContain("Astro.redirect('/members/benefits')");
     expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "profile.astro"))).toBe(false);
     expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "membership.astro"))).toBe(false);
     expect(fs.existsSync(resolveFromRoot("src", "pages", "members", "resources.astro"))).toBe(false);
@@ -310,6 +310,10 @@ describe("Membership platform foundation", () => {
     expect(membershipServerSource).toContain("/membership?payment_required=1");
     expect(billingSource).toContain("/membership?payment_required=1");
     expect(successSource).not.toContain('href="/join"');
+    expect(successSource).toContain('href="/members/benefits"');
+    expect(successSource).not.toContain("Sesión de pago");
+    expect(successSource).not.toContain("Detalles de la membresía");
+    expect(successSource).not.toContain('href="/membership"');
     expect(middlewareSource).toContain("'/members'");
     expect(middlewareSource).toContain("'/members/(.*)'");
     expect(middlewareSource).not.toContain("'/members(.*)'");
@@ -423,7 +427,6 @@ describe("Membership platform foundation", () => {
 
     expect(memberLayoutSource).not.toContain("MemberNav");
     expect(memberLayoutSource).not.toContain("<MemberNav");
-    expect(membersIndexSource).toContain("requireActiveMembership");
     expect(membersIndexSource).toContain("Astro.redirect('/members/benefits')");
     expect(membersIndexSource).not.toContain("Resumen de miembros");
     expect(membersIndexSource).not.toContain("Estado de la membresía");

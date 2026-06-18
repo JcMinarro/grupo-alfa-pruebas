@@ -9,11 +9,13 @@
 Notas confirmadas:
 - Dominio principal: `grupoalfa.net`.
 - Entorno local/development: `http://localhost:4321`.
+- Entorno demo cliente: `https://<nombre-del-proyecto>.vercel.app`, usando la URL de Production del nuevo proyecto Vercel sin dominio propio.
 - Entorno staging: `https://staging.grupoalfa.net`.
 - Entorno production: `https://grupoalfa.net`.
 - Dominio de email: `updates.grupoalfa.net`.
 - URLs de login: `/sign-in`, `/sign-up`, `/join`.
 - Endpoint de webhook Stripe por entorno: `/api/stripe-webhook`.
+- Rama recomendada para la demo cliente: `client-demo`, configurada como Production Branch del nuevo proyecto Vercel.
 
 ## 2. Clerk
 
@@ -33,6 +35,7 @@ Notas confirmadas:
 
 Notas para 2.5:
 - Local/development: `http://localhost:4321/sign-in`, `http://localhost:4321/sign-up`, `http://localhost:4321/join`, `http://localhost:4321/members`.
+- Demo cliente: `https://<nombre-del-proyecto>.vercel.app/sign-in`, `https://<nombre-del-proyecto>.vercel.app/sign-up`, `https://<nombre-del-proyecto>.vercel.app/join`, `https://<nombre-del-proyecto>.vercel.app/members`, `https://<nombre-del-proyecto>.vercel.app/api/checkout` si Clerk exige allowlist para redirects/return URLs.
 - Staging: `https://staging.grupoalfa.net/sign-in`, `https://staging.grupoalfa.net/sign-up`, `https://staging.grupoalfa.net/join`, `https://staging.grupoalfa.net/members`.
 - Production: `https://grupoalfa.net/sign-in`, `https://grupoalfa.net/sign-up`, `https://grupoalfa.net/join`, `https://grupoalfa.net/members`.
 
@@ -83,6 +86,7 @@ Notas para 3.8:
 
 Notas para 3.9:
 - Variables Stripe recogidas/configuradas para el entorno de pruebas inicial.
+- Endpoint webhook demo cliente: `https://<nombre-del-proyecto>.vercel.app/api/stripe-webhook`.
 - Endpoint webhook staging: `https://staging.grupoalfa.net/api/stripe-webhook`.
 - Endpoint webhook production previsto: `https://grupoalfa.net/api/stripe-webhook`.
 - Eventos Stripe suscritos:
@@ -152,6 +156,30 @@ Notas para 4.6:
 - [ ] 6.4 Reservar endpoint público para Stripe webhooks.
 - [ ] 6.5 Confirmar estrategia de logs y observabilidad mínima para errores de auth, checkout y webhooks.
 
+Notas para 6.3:
+- El proyecto demo cliente debe ser un nuevo proyecto Vercel conectado al mismo repositorio, si Vercel lo permite.
+- El proyecto demo cliente debe usar `client-demo` como Production Branch para no depender directamente de `main`.
+- La URL que se compartira con el cliente sera la Production URL de Vercel: `https://<nombre-del-proyecto>.vercel.app`.
+- No se compartiran Preview URLs con el cliente porque pueden quedar protegidas por Vercel Authentication en el plan Hobby.
+- Variables necesarias en Vercel Production para la demo cliente:
+  - `PUBLIC_APP_URL=https://<nombre-del-proyecto>.vercel.app`
+  - `PUBLIC_CLERK_PUBLISHABLE_KEY`
+  - `CLERK_SECRET_KEY`
+  - `STRIPE_SECRET_KEY`
+  - `STRIPE_WEBHOOK_SECRET`
+  - `STRIPE_ANNUAL_PRICE_ID`
+  - `SUPABASE_URL`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `RESEND_API_KEY`
+  - `RESEND_FROM_EMAIL`, recomendado aunque tenga fallback.
+- Despues de cambiar variables en Vercel, hacer redeploy manual porque no se aplican a deployments anteriores.
+
+Notas para 6.4:
+- Crear un webhook Stripe especifico para la demo cliente en test mode.
+- No reutilizar el `STRIPE_WEBHOOK_SECRET` de local, staging o production.
+- El webhook demo debe suscribirse a `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed` y `customer.subscription.deleted`.
+- Antes de compartir la URL, confirmar en Stripe Workbench que el endpoint demo responde HTTP 200.
+
 ## 7. Organizaciones y campañas
 
 - [ ] 7.1 Preparar listado inicial de organizaciones colaboradoras.
@@ -202,3 +230,95 @@ Notas para 4.6:
 - [ ] 11.2 Preparar documento compartido con responsables por proveedor.
 - [ ] 11.3 Confirmar quién del equipo puede crear, rotar y revocar claves.
 - [ ] 11.4 Entregar al equipo técnico el inventario completo de cuentas, claves y configuraciones aprobadas.
+
+## 12. Demo cliente en Vercel
+
+- [ ] 12.1 Crear rama `client-demo` desde el estado que se quiera enseñar al cliente.
+- [ ] 12.2 Crear nuevo proyecto Vercel conectado al mismo repositorio.
+- [ ] 12.3 Configurar `client-demo` como Production Branch del nuevo proyecto Vercel.
+- [ ] 12.4 Confirmar la Production URL asignada por Vercel: `https://<nombre-del-proyecto>.vercel.app`.
+- [ ] 12.5 Confirmar que la Production URL abre sin login de Vercel.
+- [ ] 12.6 Configurar todas las variables de entorno en Vercel Production.
+- [ ] 12.7 Configurar Clerk para la URL demo.
+- [ ] 12.8 Configurar Stripe test mode para la URL demo.
+- [ ] 12.9 Configurar Supabase demo/staging y aplicar `supabase/migrations/001_membership_platform.sql`.
+- [ ] 12.10 Decidir/configurar Resend para emails de prueba.
+- [ ] 12.11 Hacer redeploy despues de configurar variables.
+- [ ] 12.12 Completar prueba E2E antes de enviar la URL al cliente.
+- [ ] 12.13 Enviar al cliente solo `https://<nombre-del-proyecto>.vercel.app`, indicando que es una URL temporal de pruebas.
+
+Checklist de variables para 12.6:
+- [ ] `PUBLIC_APP_URL=https://<nombre-del-proyecto>.vercel.app`
+- [ ] `PUBLIC_CLERK_PUBLISHABLE_KEY=<clave Clerk demo>`
+- [ ] `CLERK_SECRET_KEY=<clave Clerk demo>`
+- [ ] `STRIPE_SECRET_KEY=<sk_test...>`
+- [ ] `STRIPE_WEBHOOK_SECRET=<whsec del webhook demo>`
+- [ ] `STRIPE_ANNUAL_PRICE_ID=<price_... test>`
+- [ ] `SUPABASE_URL=<Supabase demo/staging>`
+- [ ] `SUPABASE_SERVICE_ROLE_KEY=<service role demo/staging>`
+- [ ] `RESEND_API_KEY=<clave Resend>`
+- [ ] `RESEND_FROM_EMAIL=<remitente verificado>`
+
+Checklist Clerk para 12.7:
+- [ ] Decidir si se usa la instancia Clerk actual de development o una app/instancia separada para demo.
+- [ ] Recomendado: crear una app/instancia separada si el cliente va a crear usuarios de prueba.
+- [ ] Configurar `email + password` y `magic link` si sigue aprobado.
+- [ ] Mantener `Google login` fuera si sigue fuera de la primera release.
+- [ ] Añadir/validar `https://<nombre-del-proyecto>.vercel.app/sign-in`.
+- [ ] Añadir/validar `https://<nombre-del-proyecto>.vercel.app/sign-up`.
+- [ ] Añadir/validar `https://<nombre-del-proyecto>.vercel.app/join`.
+- [ ] Añadir/validar `https://<nombre-del-proyecto>.vercel.app/members`.
+- [ ] Añadir/validar `https://<nombre-del-proyecto>.vercel.app/api/checkout` si Clerk exige allowlist para redirects/return URLs.
+- [ ] Copiar las claves Clerk demo a Vercel Production.
+- [ ] Crear un usuario de prueba y confirmar login/logout.
+
+Checklist Stripe para 12.8:
+- [ ] Confirmar que se esta trabajando en Stripe test mode.
+- [ ] Crear o confirmar producto de membresia anual de test.
+- [ ] Copiar el `price_...` de test a `STRIPE_ANNUAL_PRICE_ID`.
+- [ ] Configurar Billing Portal en test mode.
+- [ ] Crear webhook endpoint demo: `https://<nombre-del-proyecto>.vercel.app/api/stripe-webhook`.
+- [ ] Suscribir `checkout.session.completed`.
+- [ ] Suscribir `invoice.paid`.
+- [ ] Suscribir `invoice.payment_failed`.
+- [ ] Suscribir `customer.subscription.deleted`.
+- [ ] Copiar el signing secret `whsec_...` del endpoint demo a `STRIPE_WEBHOOK_SECRET`.
+- [ ] Crear promotion codes de test si el cliente probara `promo` o `ref`.
+- [ ] Probar checkout con tarjetas de test.
+- [ ] Confirmar en Stripe Workbench que los webhooks llegan con HTTP 200.
+
+Checklist Supabase para 12.9:
+- [ ] Decidir si se usa Supabase actual o un proyecto Supabase demo.
+- [ ] Recomendado: crear proyecto Supabase demo para evitar contaminar datos reales.
+- [ ] Aplicar `supabase/migrations/001_membership_platform.sql` en el proyecto demo.
+- [ ] Configurar `SUPABASE_URL` en Vercel Production.
+- [ ] Configurar `SUPABASE_SERVICE_ROLE_KEY` en Vercel Production.
+- [ ] Confirmar que tras un checkout completado se crean/actualizan registros de membership.
+
+Checklist Resend para 12.10:
+- [ ] Decidir si la demo enviara emails reales.
+- [ ] Si enviara emails, confirmar dominio/remitente verificado.
+- [ ] Configurar `RESEND_API_KEY` en Vercel Production.
+- [ ] Configurar `RESEND_FROM_EMAIL` en Vercel Production.
+- [ ] Probar email de bienvenida tras `checkout.session.completed` si se activa envio real.
+
+Prueba E2E para 12.12:
+- [ ] Abrir `https://<nombre-del-proyecto>.vercel.app` sin estar logueado en Vercel.
+- [ ] Abrir `/membership`.
+- [ ] Crear cuenta desde `/sign-up`.
+- [ ] Confirmar redireccion a Stripe Checkout.
+- [ ] Completar pago con tarjeta de test.
+- [ ] Confirmar vuelta a `/checkout/success`.
+- [ ] Confirmar acceso a `/members`.
+- [ ] Confirmar acceso a `/members/membership`.
+- [ ] Abrir Billing Portal desde el formulario correspondiente.
+- [ ] Confirmar en Stripe que el webhook demo recibio `checkout.session.completed` con HTTP 200.
+- [ ] Confirmar en Supabase que se creo/actualizo la membresia.
+- [ ] Confirmar en Clerk que metadata/usuario quedan coherentes si aplica.
+- [ ] Confirmar email Resend si se activa envio real.
+
+Notas de entrega al cliente para 12.13:
+- Indicar que la URL es temporal y de pruebas.
+- Indicar que los pagos son de test y proporcionar tarjeta de prueba si procede.
+- Pedir feedback sobre registro, pago, area privada, billing portal, textos y diseno.
+- Registrar incidencias separando bugs tecnicos de feedback de producto/contenido.

@@ -1,11 +1,3 @@
 ---
-import { requireActiveMembership } from '../../lib/server/membership';
-
-try {
-    await requireActiveMembership(Astro.locals);
-} catch (error) {
-    return Astro.redirect(error instanceof Error ? error.message : '/membership?payment_required=1');
-}
-
 return Astro.redirect('/members/benefits');
 ---
