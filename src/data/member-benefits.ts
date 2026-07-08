@@ -56,15 +56,15 @@ export const memberBenefits: MemberBenefit[] = [
     shortTitle: "Subastos",
     category: "Subastas judiciales",
     summary:
-      "Estrategia profesional para invertir en subastas judiciales con análisis jurídico, cargas, valor de mercado, ocupación y plan de puja.",
+      "Servicio especializado para invertir en subastas judiciales con análisis profesional, estrategia de puja y acceso preferente para socios.",
     memberValue:
-      "El socio accede a una vía especializada para estudiar operaciones antes de pujar, reduciendo errores habituales del mercado de subastas.",
-    highlights: ["Análisis jurídico", "Estrategia de puja", "Gestión de adjudicación"],
+      "15% de descuento y acceso preferente a pujas en grupo.",
+    highlights: ["15% de descuento", "Pujas en grupo", "Acceso preferente"],
     includes: [
       "Estudio de expediente judicial, nota simple, cargas registrales y ocupación.",
       "Valoración real del inmueble y recomendación clara de viabilidad.",
       "Estrategia de puja y acompañamiento técnico durante el proceso.",
-      "Planes de servicio adaptados al nivel de implicación del inversor.",
+      "Acceso preferente a pujas en grupo para socios del Club Alfa.",
     ],
     audience: [
       "Inversores con una subasta concreta localizada.",
@@ -85,19 +85,19 @@ export const memberBenefits: MemberBenefit[] = [
   },
   {
     slug: "espacio-diseno",
-    title: "Espacio Diseño",
-    shortTitle: "E&D",
+    title: "Spazio Alfa",
+    shortTitle: "Spazio Alfa",
     category: "Interiorismo",
     summary:
       "Diseño, interiorismo y puesta en valor para transformar inmuebles en espacios atractivos, funcionales y mejor preparados para venta o alquiler.",
     memberValue:
-      "El socio puede activar una valoración enfocada en mejorar percepción, distribución, imagen y rentabilidad potencial del inmueble.",
-    highlights: ["Interiorismo", "Home staging", "Puesta en valor"],
+      "15% de descuento en tu proyecto de interiorismo, o hasta un 33% si contratas a nuestro equipo de expertos reformistas.",
+    highlights: ["15% interiorismo", "Hasta 33% con reforma", "Puesta en valor"],
     includes: [
       "Revisión del estado actual del inmueble y sus puntos de mejora.",
       "Propuesta de estilo, distribución y prioridades de intervención.",
       "Orientación para preparar el activo para alquiler, venta o explotación turística.",
-      "Coordinación con servicios de reforma cuando el proyecto lo requiere.",
+      "Descuento ampliado de hasta el 33% cuando el proyecto se contrata con nuestro equipo de expertos reformistas.",
     ],
     audience: [
       "Propietarios que quieren mejorar la presentación de su inmueble.",
@@ -117,19 +117,19 @@ export const memberBenefits: MemberBenefit[] = [
   },
   {
     slug: "broker-hipotecario",
-    title: "Broker Hipotecario",
-    shortTitle: "Broker H.",
+    title: "Broker Alfa",
+    shortTitle: "Broker Alfa",
     category: "Financiación",
     summary:
       "Comparación y negociación hipotecaria para conseguir condiciones competitivas sin visitar bancos uno a uno.",
     memberValue:
-      "El socio puede canalizar su estudio hipotecario con Broker Alfa, con análisis de perfil, viabilidad y acompañamiento hasta firma.",
-    highlights: ["Estudio gratuito", "Negociación bancaria", "Acompañamiento hasta notaría"],
+      "15% de descuento en nuestro servicio de bróker hipotecario.",
+    highlights: ["15% de descuento", "Negociación bancaria", "Acompañamiento hasta notaría"],
     includes: [
       "Análisis de ingresos, ahorros, situación laboral y capacidad real de financiación.",
       "Preparación del expediente y estrategia para presentarlo a entidades bancarias.",
       "Comparación de ofertas y explicación clara de condiciones.",
-      "Acompañamiento durante el proceso hasta la firma de la hipoteca.",
+      "Descuento del 15% en el servicio de bróker hipotecario para socios del Club Alfa.",
     ],
     audience: [
       "Compradores de primera vivienda o segunda vivienda.",
@@ -156,13 +156,13 @@ export const memberBenefits: MemberBenefit[] = [
     summary:
       "Formación y orientación para entender Bitcoin antes de tomar decisiones, separando conocimiento real de ruido, hype y promesas fáciles.",
     memberValue:
-      "El socio accede a una aproximación formativa para comprender Bitcoin como tecnología monetaria y reserva de valor a largo plazo.",
-    highlights: ["Bitcoin 101", "Reserva de valor", "Sin promesas de rentabilidad"],
+      "15% de descuento en nuestro servicio y formaciones.",
+    highlights: ["15% de descuento", "Formaciones Bitcoin", "Servicio especializado"],
     includes: [
       "Introducción clara a qué es Bitcoin y por qué existe.",
       "Explicación del dinero como tecnología y pérdida de poder adquisitivo.",
       "Diferencia entre invertir, especular y ahorrar.",
-      "Espacio de preguntas para resolver dudas básicas y avanzar con criterio.",
+      "Descuento del 15% en el servicio y en las formaciones disponibles para socios.",
     ],
     audience: [
       "Personas que han oído hablar de Bitcoin y quieren entenderlo antes de actuar.",
@@ -183,19 +183,19 @@ export const memberBenefits: MemberBenefit[] = [
   },
   {
     slug: "broker-asesor-financiero",
-    title: "Broker Asesor Financiero",
-    shortTitle: "Broker A.F.",
+    title: "Broker Finanzas",
+    shortTitle: "Broker Finanzas",
     category: "Planificación financiera",
     summary:
       "Orientación para ordenar objetivos, capacidad de inversión, financiación y estrategia patrimonial dentro del ecosistema Club Alfa.",
     memberValue:
-      "El socio puede solicitar una revisión inicial para enfocar decisiones financieras con más estructura y menos improvisación.",
-    highlights: ["Diagnóstico inicial", "Estrategia patrimonial", "Criterio financiero"],
+      "15% de descuento en nuestro servicio y formaciones.",
+    highlights: ["15% de descuento", "Formación financiera", "Criterio financiero"],
     includes: [
       "Revisión de objetivos financieros y horizonte temporal.",
       "Análisis de capacidad de ahorro, inversión y endeudamiento saludable.",
       "Orientación sobre opciones dentro del ecosistema Alfa.",
-      "Derivación a especialistas cuando el caso requiere asesoramiento específico.",
+      "Descuento del 15% en el servicio y en formaciones financieras para socios.",
     ],
     audience: [
       "Socios que quieren ordenar su estrategia antes de invertir.",
@@ -221,13 +221,13 @@ export const memberBenefits: MemberBenefit[] = [
     summary:
       "Comparativa y orientación en seguros para proteger inmuebles, propietarios, inquilinos y operaciones de inversión.",
     memberValue:
-      "El socio puede revisar coberturas clave con un enfoque práctico: protección real, claridad y soluciones adaptadas al inmueble.",
-    highlights: ["Seguros de hogar", "Impago de alquiler", "Coberturas claras"],
+      "Hasta un 30% de descuento en nuestros seguros.",
+    highlights: ["Hasta 30% descuento", "Seguros de hogar", "Coberturas claras"],
     includes: [
       "Revisión de necesidades aseguradoras según tipo de inmueble y uso.",
       "Orientación en seguros de hogar, propietario, inquilino e impago.",
       "Comparación de coberturas para evitar duplicidades o huecos de protección.",
-      "Acompañamiento para solicitar propuesta adaptada.",
+      "Aplicación de descuentos de hasta el 30% en seguros disponibles para socios.",
     ],
     audience: [
       "Propietarios que alquilan viviendas completas o por habitaciones.",
@@ -253,13 +253,13 @@ export const memberBenefits: MemberBenefit[] = [
     summary:
       "Información y acceso a oro y plata de inversión como alternativa patrimonial para diversificar con activos tangibles.",
     memberValue:
-      "El socio puede solicitar orientación sobre metales de inversión, formatos disponibles y criterios básicos antes de comprar.",
-    highlights: ["Oro de inversión", "Plata de inversión", "Activo tangible"],
+      "El socio puede solicitar orientación sobre metales de inversión, formatos disponibles y criterios básicos antes de comprar. 50% descuento en grabar texto en lingotes.",
+    highlights: ["Oro de inversión", "Plata de inversión", "50% grabado"],
     includes: [
       "Explicación de los formatos habituales de oro y plata de inversión.",
       "Orientación sobre custodia, liquidez y horizonte patrimonial.",
       "Información sobre criterios de compra y trazabilidad.",
-      "Derivación para solicitar disponibilidad y condiciones.",
+      "50% descuento en grabar texto en lingotes.",
     ],
     audience: [
       "Socios interesados en diversificación patrimonial.",
@@ -285,13 +285,13 @@ export const memberBenefits: MemberBenefit[] = [
     summary:
       "Transformación estética y funcional de inmuebles para elevar su valor de mercado mediante diseño, reforma y ejecución cuidada.",
     memberValue:
-      "El socio puede valorar si un inmueble tiene recorrido de mejora para venta, alquiler o reposicionamiento en el mercado.",
-    highlights: ["Reforma integral", "Diseño funcional", "Revalorización"],
+      "15% de descuento en reformas de todo tipo, o hasta un 33% si se contrata a nuestro equipo de interiorismo.",
+    highlights: ["15% reformas", "Hasta 33% con interiorismo", "Revalorización"],
     includes: [
       "Análisis inicial del potencial de transformación del inmueble.",
       "Propuesta de intervención priorizada según objetivo de rentabilidad.",
       "Coordinación de diseño, calidades y ejecución.",
-      "Enfoque práctico para preparar el activo para vender o explotar mejor.",
+      "Descuento ampliado de hasta el 33% si se contrata a nuestro equipo de interiorismo.",
     ],
     audience: [
       "Propietarios con inmuebles antiguos o deteriorados.",
@@ -315,15 +315,15 @@ export const memberBenefits: MemberBenefit[] = [
     shortTitle: "Lujo Rent",
     category: "Gestión de alquiler",
     summary:
-      "Gestión de alquiler, habitaciones y rent to rent premium para convertir inmuebles en activos explotados con criterio operativo.",
+      "Gestión de alquiler, habitaciones y rent to rent premium con inversión en adecuación para preparar la vivienda sin coste para el propietario.",
     memberValue:
-      "El socio puede solicitar un análisis de explotación para conocer qué modelo de alquiler encaja mejor con su activo.",
-    highlights: ["Rent to rent", "Habitaciones premium", "Gestión integral"],
+      "Inversión de 3000€ a 12000€ en la vivienda sin coste alguno para el propietario. Esta inversión en la adecuación variará según la duración del contrato de alquiler y las condiciones en las que se encuentre el inmueble.",
+    highlights: ["3000€ a 12000€", "Sin coste propietario", "Gestión integral"],
     includes: [
       "Análisis de demanda y modelo de explotación más adecuado.",
-      "Optimización de distribución, equipamiento y presentación del inmueble.",
+      "Inversión de 3000€ a 12000€ en la adecuación de la vivienda sin coste alguno para el propietario.",
       "Gestión operativa de captación, contratos, mantenimiento y atención.",
-      "Seguimiento para mejorar ocupación, ingresos y experiencia del inquilino.",
+      "La inversión variará según la duración del contrato de alquiler y las condiciones del inmueble.",
     ],
     audience: [
       "Propietarios que quieren rentabilizar mejor su inmueble.",
@@ -343,19 +343,19 @@ export const memberBenefits: MemberBenefit[] = [
   },
   {
     slug: "factura-movil-fibra-energia",
-    title: "Factura Móvil, Fibra y Energía",
-    shortTitle: "Factura M/E",
+    title: "Ahorro Alfa",
+    shortTitle: "Ahorro Alfa",
     category: "Ahorro operativo",
     summary:
-      "Revisión de facturas recurrentes de móvil, fibra y energía para detectar oportunidades de ahorro y simplificación.",
+      "Revisión anual de facturas de energía, fibra y móvil para mejorar cada anualidad sin que el socio tenga que ocuparse de gestiones tediosas.",
     memberValue:
-      "El socio puede revisar costes mensuales habituales y optimizar suministros personales, familiares o vinculados a inmuebles.",
-    highlights: ["Móvil y fibra", "Energía", "Optimización de costes"],
+      "Revisión anual a inicio de cada año de sus facturas en energia, fibra y móvil por parte del equipo especializado para poder mejorar cada anualidad sus facturas sin que el interesado tenga que preocuparse de realizar estas tediosas gestiones.",
+    highlights: ["Revisión anual", "Energía", "Fibra y móvil"],
     includes: [
-      "Revisión de consumo, tarifas y servicios contratados.",
+      "Revisión anual a inicio de cada año de facturas de energia, fibra y móvil.",
       "Identificación de posibles sobrecostes o servicios duplicados.",
       "Orientación para ajustar facturas a necesidades reales.",
-      "Derivación para recibir una propuesta de mejora cuando haya encaje.",
+      "Gestión por parte del equipo especializado para mejorar las facturas sin que el interesado tenga que preocuparse.",
     ],
     audience: [
       "Socios que quieren reducir gastos mensuales recurrentes.",
@@ -375,19 +375,19 @@ export const memberBenefits: MemberBenefit[] = [
   },
   {
     slug: "alarmas",
-    title: "Alarmas",
-    shortTitle: "Alarmas",
+    title: "Alarmas Alfa",
+    shortTitle: "Alarmas Alfa",
     category: "Seguridad",
     summary:
       "Soluciones de alarma y seguridad para viviendas, inmuebles en alquiler, activos vacíos o propiedades en proceso de explotación.",
     memberValue:
-      "El socio puede solicitar un presupuesto orientado a proteger el inmueble con dispositivos y servicios adaptados a su uso real.",
-    highlights: ["Protección del inmueble", "Dispositivos de seguridad", "Presupuesto personalizado"],
+      "Descuento del 15% en la contratación de tu sistema de alarma.",
+    highlights: ["15% de descuento", "Sistema de alarma", "Presupuesto personalizado"],
     includes: [
       "Revisión del tipo de inmueble, uso y nivel de riesgo.",
       "Orientación sobre sensores, cámaras, control de accesos y aviso conectado.",
       "Propuesta de configuración según vivienda habitual, alquiler o activo vacío.",
-      "Acompañamiento para comparar instalación, cuota y cobertura del servicio.",
+      "Descuento del 15% en la contratación del sistema de alarma para socios.",
     ],
     audience: [
       "Propietarios que quieren proteger viviendas o activos en alquiler.",

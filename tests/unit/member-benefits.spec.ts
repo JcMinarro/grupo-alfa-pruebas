@@ -44,6 +44,22 @@ describe("Member benefits catalog", () => {
     expect(source).not.toContain("próximamente");
   });
 
+  it("includes the current client-approved member advantage copy", () => {
+    const source = readFile("src", "data", "member-benefits.ts");
+
+    expect(source).toContain("15% de descuento y acceso preferente a pujas en grupo");
+    expect(source).toContain("Spazio Alfa");
+    expect(source).toContain("hasta un 33% si contratas a nuestro equipo de expertos reformistas");
+    expect(source).toContain("15% de descuento en nuestro servicio de bróker hipotecario");
+    expect(source).toContain("15% de descuento en nuestro servicio y formaciones");
+    expect(source).toContain("Hasta un 30% de descuento en nuestros seguros");
+    expect(source).toContain("50% descuento en grabar texto en lingotes");
+    expect(source).toContain("hasta un 33% si se contrata a nuestro equipo de interiorismo");
+    expect(source).toContain("Inversión de 3000€ a 12000€ en la vivienda sin coste alguno para el propietario");
+    expect(source).toContain("Revisión anual a inicio de cada año de sus facturas en energia, fibra y móvil");
+    expect(source).toContain("Descuento del 15% en la contratación de tu sistema de alarma");
+  });
+
   it("renders the private benefits page as a navigable grid", () => {
     const source = readFile("src", "pages", "members", "benefits.astro");
 
