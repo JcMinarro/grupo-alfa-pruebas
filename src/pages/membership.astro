@@ -40,7 +40,7 @@ if (code) signUpParams.set('reviewed', '1');
 const signUpHref = `/sign-up${signUpParams.toString() ? `?${signUpParams.toString()}` : ''}`;
 
 const benefits = [
-    'Seminarios mensuales sobre inversión, banca, libertad financiera, inmuebles y subastas.',
+    'Seminarios mensuales sobre inversión, banca, libertad financiera e inmuebles.',
     'Acceso preferente a oportunidades y operaciones reservadas dentro de Grupo Alfa.',
     'Acompañamiento para invertir con criterio y moverte con más seguridad.',
     'Ventajas exclusivas, reducción de costes de intermediación y acuerdos internos.',
@@ -110,7 +110,7 @@ const benefits = [
                 ) : (
                     <>
                         <p class="mb-8 text-white/70 leading-[1.8]">Crea primero tu cuenta. Justo después del registro irás al pago seguro para activar tu membresía anual.</p>
-                        <a href={signUpHref} class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Crear cuenta y continuar al pago</a>
+                        <a href={signUpHref} class="block rounded-full bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] hover:bg-[#ffc400]">Crear cuenta</a>
                         <p class="mt-5 text-xs leading-[1.7] text-white/50">Tu acceso privado se activa solo cuando el pago queda confirmado. Si cancelas o el pago falla, podrás volver a intentarlo.</p>
                     </>
                 )}

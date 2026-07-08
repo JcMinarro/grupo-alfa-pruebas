@@ -59,6 +59,15 @@ describe("Club Alfa presence across the site", () => {
     expect(uiSource).toContain('reducción de costes de intermediación');
   });
 
+  it("keeps Club accompaniment areas aligned with current member benefits", () => {
+    const uiSource = readFile("src", "i18n", "ui.ts");
+
+    expect(uiSource).toContain("Interiorismo, reformas y puesta en valor");
+    expect(uiSource).toContain("Seguros, ahorro en suministros y sistemas de alarma");
+    expect(uiSource).not.toContain("'club.areas.two': 'Subastas");
+    expect(uiSource).not.toContain("'club.areas.three': 'Criptomonedas");
+  });
+
   it("shows approved annual pricing and a membership signup CTA on the Club page", () => {
     const clubPageSource = readFile("src", "pages", "club.astro");
     const uiSource = readFile("src", "i18n", "ui.ts");
