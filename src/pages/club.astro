@@ -5,9 +5,16 @@ import Hero from "../components/Hero.astro";
 import InfoGrid from "../components/InfoGrid.astro";
 import GridItem from "../components/GridItem.astro";
 import { heros } from "../data/heros.js";
+import { ACTIVE_MEMBERSHIP_STATUSES } from "../lib/server/membership";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const authState = Astro.locals.auth?.();
+const isAuthenticated = authState?.isAuthenticated ?? false;
+const currentUser = isAuthenticated && Astro.locals.currentUser ? await Astro.locals.currentUser() : null;
+const isActivePaidMember = ACTIVE_MEMBERSHIP_STATUSES.includes(currentUser?.publicMetadata?.membershipStatus);
+const clubCtaHref = isActivePaidMember ? "/members/benefits" : "/sign-up";
+const clubCtaLabel = isActivePaidMember ? "IR A MIS VENTAJAS" : t("club.cta.button");
 const benefitCardClass = "min-h-[280px] p-[40px] [&_h3]:text-[1.7rem] [&_h3]:leading-[1.15] [&_p]:text-[1.22rem] [&_p]:leading-[1.75]";
 ---
 
@@ -117,8 +124,8 @@ const benefitCardClass = "min-h-[280px] p-[40px] [&_h3]:text-[1.7rem] [&_h3]:lea
             {t("club.cta.description")}
         </p>
         <a
-            href="/contacto"
+            href={clubCtaHref}
             class="bg-primary text-black px-10 py-[15px] rounded-full font-bold uppercase transition-all hover:scale-105 hover:bg-[#ffc400] inline-block"
-        >{t("club.cta.button")}</a>
+        >{clubCtaLabel}</a>
     </section>
 </BaseLayout>

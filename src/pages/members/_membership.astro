@@ -1,0 +1,22 @@
+---
+import MemberLayout from '../../layouts/MemberLayout.astro';
+import { getMembershipRedirectTarget, requireActiveMembership } from '../../lib/server/membership';
+
+let membership;
+try {
+    membership = await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(getMembershipRedirectTarget(error));
+}
+---
+
+<MemberLayout title="Membresía" activePath="/members/membership">
+    <section class="rounded-[28px] border border-white/10 bg-white/5 p-8">
+        <h2 class="text-2xl font-bold mb-4">Plan actual</h2>
+        <p class="text-white/70 leading-[1.8] mb-3">Tipo de plan: {membership.membershipType}</p>
+        <p class="text-white/70 leading-[1.8] mb-8">Stripe sigue siendo la fuente de verdad para facturación, renovaciones y gestión de cancelaciones al final del periodo.</p>
+        <form method="POST" action="/api/billing-portal">
+            <button type="submit" class="rounded-full bg-primary px-8 py-3 text-sm font-bold uppercase tracking-[2px] text-black">Abrir portal de facturación</button>
+        </form>
+    </section>
+</MemberLayout>

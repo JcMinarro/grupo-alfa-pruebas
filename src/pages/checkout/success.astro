@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { activateMembershipFromCheckoutSession } from '../../lib/server/billing';
+
+const sessionId = Astro.url.searchParams.get('session_id');
+let activationConfirmed = false;
+
+if (sessionId) {
+    try {
+        const authState = Astro.locals.auth?.();
+        const result = await activateMembershipFromCheckoutSession({
+            sessionId,
+            clerkUserId: authState?.userId
+        });
+        activationConfirmed = result.activated;
+    } catch (error) {
+        console.error('Checkout success activation failed', error);
+    }
+}
+---
+
+<BaseLayout title="Pago completado | Club Alfa" bodyClass="members-page bg-[#0f1012] text-white">
+    <section class="min-h-screen flex items-center justify-center px-4 py-28">
+        <div class="max-w-[760px] rounded-[30px] border border-white/10 bg-white/5 p-8 md:p-10 text-center">
+            <p class="text-primary uppercase tracking-[4px] text-sm font-bold mb-3">Club Alfa</p>
+            <h1 class="text-[2.8rem] font-bold mb-4">Pago confirmado</h1>
+            <p class="text-white/70 text-lg leading-[1.8] mb-8">
+                {activationConfirmed ? 'Tu membresía está activa. Ya puedes entrar al área de miembros.' : 'Estamos activando tu membresía. Si el acceso todavía no está disponible, espera un momento y vuelve a intentarlo.'}
+            </p>
+            <div class="mt-8 flex justify-center">
+                <a href="/members/benefits" class="rounded-full bg-primary px-10 py-4 text-sm font-bold uppercase tracking-[2px] text-black">Ir al área de miembros</a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

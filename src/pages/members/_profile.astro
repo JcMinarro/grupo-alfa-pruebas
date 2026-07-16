@@ -1,0 +1,19 @@
+---
+import MemberLayout from '../../layouts/MemberLayout.astro';
+import { getMembershipRedirectTarget, requireActiveMembership } from '../../lib/server/membership';
+
+let membership;
+try {
+    membership = await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(getMembershipRedirectTarget(error));
+}
+---
+
+<MemberLayout title="Perfil" activePath="/members/profile">
+    <section class="rounded-[28px] border border-white/10 bg-white/5 p-8">
+        <h2 class="text-2xl font-bold mb-4">Tu cuenta</h2>
+        <p class="text-white/70 leading-[1.8] mb-3">Sesión iniciada como: {membership.user?.primaryEmailAddress?.emailAddress ?? 'Miembro sin identificar'}</p>
+        <p class="text-white/70 leading-[1.8]">La edición del perfil se gestiona con Clerk y más adelante podrá ampliarse con preferencias avanzadas de miembro.</p>
+    </section>
+</MemberLayout>

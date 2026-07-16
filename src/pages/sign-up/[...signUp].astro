@@ -1,0 +1,43 @@
+---
+import { SignUp } from '@clerk/astro/components';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+if (Astro.locals.auth?.().isAuthenticated) {
+    return Astro.redirect('/api/checkout');
+}
+
+const promo = Astro.url.searchParams.get('promo');
+const ref = Astro.url.searchParams.get('ref');
+const reviewed = Astro.url.searchParams.get('reviewed') === '1';
+const campaignParams = new URLSearchParams();
+if (promo) campaignParams.set('promo', promo);
+if (ref) campaignParams.set('ref', ref);
+
+if ((promo || ref) && !reviewed) {
+    return Astro.redirect(`/membership?${campaignParams.toString()}`);
+}
+
+const checkoutParams = new URLSearchParams();
+if (promo) checkoutParams.set('promo', promo);
+if (ref) checkoutParams.set('ref', ref);
+const redirectUrl = `/api/checkout${checkoutParams.toString() ? `?${checkoutParams.toString()}` : ''}`;
+---
+
+<BaseLayout title="Registro | Club Alfa" bodyClass="members-page bg-[#0f1012] text-white">
+    <section class="min-h-screen flex items-center justify-center px-4 py-28">
+        <div class="auth-card w-full max-w-[560px] rounded-[28px] border border-white/10 bg-white/5 p-6 md:p-8 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
+            <p class="text-primary uppercase tracking-[4px] text-sm font-bold mb-3">Club Alfa</p>
+            <h1 class="text-4xl font-bold mb-4">Crear cuenta de miembro</h1>
+            <p class="text-white/70 mb-4">Necesitas una cuenta de Club Alfa antes del pago para activar tu acceso correctamente.</p>
+            {(promo || ref) && (
+                <div class="mb-6 rounded-2xl border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-white/80">
+                    Código de campaña detectado. Lo mantendremos automáticamente durante el proceso.
+                </div>
+            )}
+            <SignUp routing="hash" signInUrl="/sign-in" fallbackRedirectUrl={redirectUrl} />
+            <p class="mt-6 text-xs leading-[1.7] text-white/50">
+                Al crear una cuenta podrás revisar las <a href="/membership-terms" class="text-primary underline">condiciones de membresía</a> y la <a href="/privacy" class="text-primary underline">política de privacidad</a> antes de continuar con el pago.
+            </p>
+        </div>
+    </section>
+</BaseLayout>

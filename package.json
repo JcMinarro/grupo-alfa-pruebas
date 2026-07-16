@@ -16,9 +16,18 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/node": "^10.1.1",
+    "@astrojs/vercel": "^10.0.8",
+    "@clerk/astro": "^3.2.6",
+    "@clerk/backend": "^3.4.11",
+    "@clerk/localizations": "^4.7.0",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^5.17.1",
-    "tailwindcss": "^3.4.19"
+    "astro": "^6.3.5",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.14",
+    "resend": "^6.12.3",
+    "stripe": "^22.1.1",
+    "tailwindcss": "^3.4.19",
+    "tslib": "^2.8.1"
   }
 }

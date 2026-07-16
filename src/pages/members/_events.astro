@@ -1,0 +1,17 @@
+---
+import MemberLayout from '../../layouts/MemberLayout.astro';
+import { getMembershipRedirectTarget, requireActiveMembership } from '../../lib/server/membership';
+
+try {
+    await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(getMembershipRedirectTarget(error));
+}
+---
+
+<MemberLayout title="Eventos" activePath="/members/events">
+    <section class="rounded-[28px] border border-dashed border-white/15 bg-white/5 p-8">
+        <h2 class="text-2xl font-bold mb-4">Eventos y seminarios</h2>
+        <p class="text-white/70 leading-[1.8]">Los eventos para miembros aparecerán aquí cuando el calendario editorial esté listo. La ruta ya está protegida y disponible desde el primer día.</p>
+    </section>
+</MemberLayout>

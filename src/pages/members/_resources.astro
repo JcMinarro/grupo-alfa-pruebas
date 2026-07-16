@@ -1,0 +1,17 @@
+---
+import MemberLayout from '../../layouts/MemberLayout.astro';
+import { getMembershipRedirectTarget, requireActiveMembership } from '../../lib/server/membership';
+
+try {
+    await requireActiveMembership(Astro.locals);
+} catch (error) {
+    return Astro.redirect(getMembershipRedirectTarget(error));
+}
+---
+
+<MemberLayout title="Recursos" activePath="/members/resources">
+    <section class="rounded-[28px] border border-dashed border-white/15 bg-white/5 p-8">
+        <h2 class="text-2xl font-bold mb-4">Los recursos llegarán pronto</h2>
+        <p class="text-white/70 leading-[1.8]">Este espacio exclusivo para miembros queda reservado para futuras guías, grabaciones y documentos premium.</p>
+    </section>
+</MemberLayout>

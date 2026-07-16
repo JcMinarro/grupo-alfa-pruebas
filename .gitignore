@@ -11,7 +11,11 @@ node_modules
 dist
 dist-ssr
 .astro/
+.vercel/
 *.local
+.env
+.env.*
+!.env.sample
 
 # Editor directories and files
 .vscode/*

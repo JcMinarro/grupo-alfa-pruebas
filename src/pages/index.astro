@@ -78,114 +78,11 @@ const t = useTranslations(lang);
                     {t("home.steps.title.secondary")}
                 </h2>
                 <p class="text-[1rem] md:text-[1.1rem] text-[#666]">
-                    {t("home.steps.context")}
+                    {t("home.steps.context_01")}
                 </p>
-            </div>
-
-            <div
-                class="grid grid-cols-2 gap-x-6 gap-y-12 md:gap-x-10 md:gap-y-16 mt-12 mx-auto max-w-[800px]"
-            >
-                <div class="group text-center fade-in">
-                    <div
-                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
-                    >
-                        <img
-                            src="/assets/lupa-AE0r2VjNOpI4LRQ7.png"
-                            alt={t("home.steps.localizamos")}
-                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
-                        />
-                    </div>
-                    <h3
-                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
-                    >
-                        {t("home.steps.localizamos")}
-                    </h3>
-                </div>
-                <div class="group text-center fade-in">
-                    <div
-                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
-                    >
-                        <img
-                            src="/assets/gestion-A3Q7anMajGcEW1Lx.png"
-                            alt={t("home.steps.gestionamos")}
-                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
-                        />
-                    </div>
-                    <h3
-                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
-                    >
-                        {t("home.steps.gestionamos")}
-                    </h3>
-                </div>
-                <div class="group text-center fade-in">
-                    <div
-                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
-                    >
-                        <img
-                            src="/assets/mrtillo-AR032ZKJrRh87JyG.png"
-                            alt={t("home.steps.reformamos")}
-                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
-                        />
-                    </div>
-                    <h3
-                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
-                    >
-                        {t("home.steps.reformamos")}
-                    </h3>
-                </div>
-                <div class="group text-center fade-in">
-                    <div
-                        class="w-[120px] h-[120px] bg-[#fdfdfd] border-2 border-[#f7f7f7] rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_5px_20px_rgba(0,0,0,0.03)] group-hover:border-primary group-hover:-translate-y-2.5 group-hover:scale-105 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)]"
-                    >
-                        <img
-                            src="/assets/euros-YD0w8Okj99HLq6az.png"
-                            alt={t("home.steps.rentabilizamos")}
-                            class="h-[45px] w-auto grayscale opacity-80 transition-all duration-300 group-hover:filter-none group-hover:opacity-100"
-                        />
-                    </div>
-                    <h3
-                        class="text-[1.1rem] font-semibold uppercase tracking-[2px] text-[#333]"
-                    >
-                        {t("home.steps.rentabilizamos")}
-                    </h3>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center gap-5 mt-16 fade-in">
-                <div class="flex flex-col items-center gap-4">
-                    <p class="text-[1.5rem] font-medium text-dark">
-                        {t("home.steps.financiar.prefix")} <span class="text-primary font-bold">{t("home.steps.financiar")}</span>
-                    </p>
-                </div>
-
-                <div
-                    class="w-5 h-5 border-r-[3px] border-b-[3px] border-text-dark rotate-45 my-2.5"
-                >
-                </div>
-
-                <div class="flex flex-col items-center gap-4">
-                    <p class="text-[1.5rem] font-medium text-dark">
-                        {t("home.steps.inversion")}
-                    </p>
-                </div>
-
-                <div
-                    class="w-5 h-5 border-r-[3px] border-b-[3px] border-text-dark rotate-45 my-2.5"
-                >
-                </div>
-
-                <div class="flex flex-col items-center gap-4">
-                    <div class="w-[60px] h-auto">
-                        <img
-                            src="/assets/casa-icon.png"
-                            alt={t("home.steps.house.alt")}
-                            class="w-full h-auto"
-                        />
-                    </div>
-                    <p class="text-[1.5rem] font-medium text-dark">
-                        {t("home.steps.cobras.prefix")} <span class="text-primary font-bold">{t("home.steps.cobras")}</span>
-                    </p>
-                </div>
+                <p class="text-[1rem] md:text-[1.1rem] text-[#666]">
+                    {t("home.steps.context_02")}
+                </p>
             </div>
         </div>
     </section>
@@ -211,7 +108,7 @@ const t = useTranslations(lang);
             <p
                 class="text-[1.2rem] md:text-[1.5rem] font-normal mb-5 text-dark"
             >
-                {t("home.libertad.rentability.prefix")}<span class="text-primary font-bold">{t("home.libertad.rentability.highlight")}</span>{t("home.libertad.rentability.suffix")}
+                {t("home.libertad.rentability")}
             </p>
             <p class="text-[#666] leading-[1.8] max-w-[600px] mx-auto mb-10">
                 {t("home.libertad.description")}
@@ -232,17 +129,75 @@ const t = useTranslations(lang);
             >
                 {t("home.quote.text")}
             </p>
-            <div
-                class="max-w-[1000px] mx-auto rounded overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.1)]"
+            <p
+                class="text-[1.5rem] italic text-[#333] max-w-[800px] mx-auto mb-[60px] leading-[1.4]"
+            >
+                {t("home.quote.text2")}
+            </p>
+            <button
+                type="button"
+                id="promo-video-trigger"
+                class="group relative max-w-[1000px] mx-auto block w-full overflow-hidden rounded bg-black shadow-[0_20px_40px_rgba(0,0,0,0.1)] focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/70"
+                aria-label="Reproducir vídeo promocional"
             >
                 <img
-                    src="/assets/photo-1618773928121-c32242e63f39ad04.jpg"
-                    alt="Bedroom"
-                    class="w-full h-auto rounded block shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
+                    src="/assets/video-promo-poster.jpg"
+                    alt="Vista previa del vídeo promocional"
+                    class="block w-full h-auto rounded shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition duration-500 group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                    loading="lazy"
                 />
-            </div>
+                <span
+                    class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent transition duration-300 group-hover:from-black/55"
+                    aria-hidden="true"></span>
+                <span
+                    class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-black shadow-[0_14px_35px_rgba(0,0,0,0.35)] transition duration-300 group-hover:scale-110 md:h-24 md:w-24"
+                    aria-hidden="true"
+                >
+                    <span
+                        class="ml-1 block h-0 w-0 border-y-[14px] border-l-[22px] border-y-transparent border-l-black md:border-y-[17px] md:border-l-[27px]"
+                    ></span>
+                </span>
+            </button>
         </div>
     </section>
+
+    <div
+        id="promo-video-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 px-4 py-8 opacity-0 transition-opacity duration-200 md:px-8"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Vídeo promocional"
+    >
+        <button
+            type="button"
+            id="promo-video-backdrop"
+            class="absolute inset-0 cursor-default"
+            aria-label="Cerrar vídeo"
+        ></button>
+        <div
+            class="relative z-10 w-full max-w-[1100px] overflow-hidden rounded bg-black shadow-[0_30px_90px_rgba(0,0,0,0.7)]"
+        >
+            <button
+                type="button"
+                id="promo-video-close"
+                class="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition hover:bg-primary hover:text-black focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/70"
+                aria-label="Cerrar vídeo"
+            >
+                ×
+            </button>
+            <video
+                id="promo-video-player"
+                class="block aspect-video w-full bg-black"
+                controls
+                preload="metadata"
+                poster="/assets/video-promo-poster.jpg"
+                playsinline
+                webkit-playsinline
+            >
+                <source src="/assets/video-promo.mp4" type="video/mp4" />
+            </video>
+        </div>
+    </div>
 
     <!-- Services Section -->
     <section id="servicios" class="p-0 bg-white text-dark">
@@ -255,52 +210,6 @@ const t = useTranslations(lang);
         </div>
 
         <ServiceList />
-
-        <div class="mt-[60px] pb-20 text-dark text-center">
-            <p class="italic mb-5">
-                {t("home.services.context")}
-            </p>
-            <a
-                href="/contacto"
-                class="bg-primary text-black px-[30px] py-[15px] border-none rounded-[50px] font-bold uppercase cursor-pointer transition-all duration-300 no-underline inline-block text-[0.9rem] tracking-[1px] hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(255,170,0,0.4)]"
-                >{t("home.services.cta")}</a
-            >
-        </div>
-    </section>
-
-    <!-- Submarcas Section -->
-    <section id="submarcas" class="py-20 bg-white fade-in">
-        <div class="max-w-[1200px] mx-auto px-4">
-            <div
-                class="flex flex-wrap justify-center gap-[15px] max-w-[1000px] mx-auto"
-            >
-                <a
-                    href="/flip-art"
-                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none pointer-events-none opacity-80"
-                    >{t("submarcas.flipArt")}</a
-                >
-                <a
-                    href="/lujo-rent"
-                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none pointer-events-none opacity-80"
-                    >{t("submarcas.lujoRent")}</a
-                >
-                <a
-                    href="/seguros"
-                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none pointer-events-none opacity-80"
-                    set:html={t("submarcas.seguros")}
-                />
-                <a
-                    href="/rey-subastos"
-                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none pointer-events-none opacity-80"
-                    >{t("submarcas.reySubastos")}</a
-                >
-                <a
-                    href="/alfa-lab"
-                    class="bg-black px-[30px] py-[15px] text-white font-heading font-semibold text-[0.9rem] uppercase no-underline transition-all duration-300 text-center min-w-[140px] flex items-center justify-center rounded-none pointer-events-none opacity-80"
-                    >{t("submarcas.alfaLab")}</a
-                >
-            </div>
-        </div>
     </section>
 
     <!-- Office and Contact Section -->
@@ -344,12 +253,8 @@ const t = useTranslations(lang);
                         <h2
                             class="text-[1.8rem] md:text-[2.2rem] font-light tracking-[2px] mb-4 text-dark"
                         >
-                            {t("home.contact.description")}
+                            {t("home.contact.title")}
                         </h2>
-                        <ul class="list-disc pl-6 space-y-3 text-[1.1rem] md:text-[1.2rem] font-medium text-[#333]">
-                            <li>{t("home.contact.reason.services")}</li>
-                            <li>{t("home.contact.reason.club")}</li>
-                        </ul>
                         <div class="mt-10 flex justify-center">
                             <img
                                 src="/assets/logo-alfa-wolf.png"
@@ -369,3 +274,67 @@ const t = useTranslations(lang);
         </div>
     </section>
 </BaseLayout>
+
+<script>
+    const initPromoVideo = () => {
+        const trigger = document.getElementById("promo-video-trigger");
+        const modal = document.getElementById("promo-video-modal");
+        const closeButton = document.getElementById("promo-video-close");
+        const backdrop = document.getElementById("promo-video-backdrop");
+        const video = document.getElementById("promo-video-player") as HTMLVideoElement | null;
+
+        if (!trigger || !modal || !video) return;
+        if (trigger.dataset.promoVideoInitialized === "true") return;
+
+        trigger.dataset.promoVideoInitialized = "true";
+
+        const openModal = () => {
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            document.body.classList.add("overflow-hidden");
+
+            requestAnimationFrame(() => {
+                modal.classList.remove("opacity-0");
+                closeButton?.focus();
+                video.play().catch(() => undefined);
+
+                if (window.matchMedia("(max-width: 767px)").matches) {
+                    const mobileVideo = video as HTMLVideoElement & {
+                        webkitEnterFullscreen?: () => void;
+                    };
+
+                    if (mobileVideo.requestFullscreen) {
+                        mobileVideo.requestFullscreen().catch(() => undefined);
+                    } else if (mobileVideo.webkitEnterFullscreen) {
+                        mobileVideo.webkitEnterFullscreen();
+                    }
+                }
+            });
+        };
+
+        const closeModal = () => {
+            modal.classList.add("opacity-0");
+            video.pause();
+            video.currentTime = 0;
+            document.body.classList.remove("overflow-hidden");
+
+            window.setTimeout(() => {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+                trigger.focus();
+            }, 200);
+        };
+
+        trigger.addEventListener("click", openModal);
+        closeButton?.addEventListener("click", closeModal);
+        backdrop?.addEventListener("click", closeModal);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+                closeModal();
+            }
+        });
+    };
+
+    document.addEventListener("DOMContentLoaded", initPromoVideo);
+    document.addEventListener("astro:page-load", initPromoVideo);
+</script>

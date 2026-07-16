@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCurrentUser, requireSignedInUser } from '../lib/server/auth';
+
+requireSignedInUser(Astro.locals, { returnBackUrl: Astro.url.pathname });
+
+const user = await getCurrentUser(Astro.locals);
+const promo = Astro.url.searchParams.get('promo');
+const ref = Astro.url.searchParams.get('ref');
+const discountCode = promo ?? ref ?? '';
+const isLocked = Boolean(promo || ref);
+const checkoutError = Astro.url.searchParams.get('checkout_error');
+---
+
+<BaseLayout title="Unirse a Club Alfa" bodyClass="members-page bg-[#0f1012] text-white">
+    <section class="pt-32 pb-16 px-4">
+        <div class="max-w-[980px] mx-auto grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div class="rounded-[30px] border border-white/10 bg-white/5 p-8 md:p-10">
+                <p class="text-primary uppercase tracking-[4px] text-sm font-bold mb-3">Club Alfa</p>
+                <h1 class="text-[2.8rem] leading-[1] font-bold mb-4">Membresía anual</h1>
+                <p class="text-white/70 text-lg leading-[1.8] mb-10">Accede al área privada de miembros, soporte experto, eventos y futuros recursos premium con un único plan anual.</p>
+
+                <div class="rounded-[24px] border border-white/10 bg-black/20 p-6 mb-10">
+                    <p class="text-white/60 uppercase tracking-[3px] text-xs mb-2">Plan</p>
+                    <div class="flex flex-wrap items-end gap-3 mb-4">
+                        <span data-original-price class="text-5xl font-bold">99 EUR</span>
+                        <span data-discounted-price class="hidden text-5xl font-bold text-primary">99 EUR</span>
+                        <span class="text-white/60 mb-1">/ año</span>
+                    </div>
+                    <p data-discount-summary class="hidden mb-4 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm text-primary"></p>
+                    <ul class="space-y-3 text-white/75">
+                        <li>Membresía anual de pago única para la fase 1.</li>
+                        <li>Stripe Checkout para la compra inicial.</li>
+                        <li>Portal de facturación de Stripe para renovaciones y gestión de tarjeta.</li>
+                    </ul>
+                </div>
+
+                <form method="POST" action="/api/checkout" class="space-y-5" data-discount-form data-astro-reload>
+                    {checkoutError === 'invalid_code' && (
+                        <div class="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+                            El código introducido no es válido o ya no está activo. Puedes probar otro código o continuar sin descuento.
+                        </div>
+                    )}
+                    <div>
+                        <label class="block text-sm uppercase tracking-[2px] text-white/60 mb-2" for="memberEmail">Email de miembro</label>
+                        <input id="memberEmail" name="memberEmail" type="email" value={user?.primaryEmailAddress?.emailAddress ?? ''} readonly class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/80 outline-none" />
+                    </div>
+                    <div>
+                        <label class="block text-sm uppercase tracking-[2px] text-white/60 mb-2" for="discountCode">Código</label>
+                        <div class="flex flex-col gap-3 sm:flex-row">
+                            <input id="discountCode" name="discountCode" value={discountCode} readonly={isLocked} data-applied-code="" class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none" />
+                            <button type="button" data-apply-discount class="rounded-full border border-primary px-6 py-3 text-sm font-bold uppercase tracking-[2px] text-primary transition-colors hover:bg-primary hover:text-black">
+                                Aplicar código
+                            </button>
+                        </div>
+                        <p class="mt-2 text-sm text-white/55">
+                            {isLocked
+                                ? 'Este código viene de tu enlace de acceso y queda bloqueado durante esta sesión de alta.'
+                                : 'Si tienes un código, introdúcelo aquí y aplícalo antes del pago. Stripe no pedirá otro código más adelante.'}
+                        </p>
+                        <p data-discount-message class="mt-2 min-h-[1.25rem] text-sm text-white/60"></p>
+                    </div>
+                    <button type="submit" data-checkout-submit class="w-full rounded-full bg-primary px-8 py-4 text-sm font-bold uppercase tracking-[2px] text-black transition-transform hover:scale-[1.01] disabled:cursor-wait disabled:opacity-70">
+                        Continuar al pago seguro
+                    </button>
+                    <p class="text-xs leading-[1.7] text-white/50">
+                        El pago confirma las condiciones de la membresía anual y los avisos de privacidad. Los emails transaccionales necesarios se envían para acceso, facturación, renovación, fallo de pago y cancelación. Las comunicaciones comerciales opcionales quedan separadas del flujo de membresía de pago.
+                    </p>
+                </form>
+            </div>
+
+            <aside class="rounded-[30px] border border-white/10 bg-[#141517] p-8 md:p-10">
+                <p class="text-white/60 uppercase tracking-[3px] text-xs mb-2">Estado de miembro</p>
+                <h2 class="text-2xl font-bold mb-4">Tu alta está casi lista</h2>
+                <ul class="space-y-4 text-white/75 leading-[1.7]">
+                    <li>1. Tu cuenta ya está lista.</li>
+                    <li>2. Stripe crea la suscripción inicial.</li>
+                    <li>3. El webhook confirma la activación.</li>
+                    <li>4. Entras en `/members` con el estado de acceso correcto.</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+    <script is:inline>
+        (() => {
+        const form = document.querySelector('[data-discount-form]');
+        const input = document.querySelector('#discountCode');
+        const applyButton = document.querySelector('[data-apply-discount]');
+        const checkoutButton = document.querySelector('[data-checkout-submit]');
+        const message = document.querySelector('[data-discount-message]');
+        const originalPrice = document.querySelector('[data-original-price]');
+        const discountedPrice = document.querySelector('[data-discounted-price]');
+        const discountSummary = document.querySelector('[data-discount-summary]');
+
+        function resetDiscountPreview() {
+            if (!input || !originalPrice || !discountedPrice || !discountSummary) return;
+            input.dataset.appliedCode = '';
+            originalPrice.classList.remove('line-through', 'text-white/45');
+            discountedPrice.classList.add('hidden');
+            discountSummary.classList.add('hidden');
+            discountSummary.textContent = '';
+        }
+
+        input?.addEventListener('input', resetDiscountPreview);
+
+        applyButton?.addEventListener('click', async () => {
+            const discountCode = input.value.trim();
+
+            resetDiscountPreview();
+
+            if (!discountCode) {
+                message.textContent = 'No has introducido ningún código. Puedes continuar al pago sin descuento.';
+                message.className = 'mt-2 min-h-[1.25rem] text-sm text-white/60';
+                return;
+            }
+
+            applyButton.disabled = true;
+            message.textContent = 'Comprobando código...';
+            message.className = 'mt-2 min-h-[1.25rem] text-sm text-white/60';
+
+            try {
+                const response = await fetch('/api/discount-code', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify({ discountCode })
+                });
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'No se pudo aplicar el código.');
+                }
+
+                input.value = result.code;
+                input.dataset.appliedCode = result.code;
+                if (result.hasPricePreview && result.finalPrice) {
+                    originalPrice.classList.add('line-through', 'text-white/45');
+                    discountedPrice.textContent = result.finalPrice;
+                    discountedPrice.classList.remove('hidden');
+                    discountSummary.textContent = `Código aplicado: descuento ${result.discountLabel}. Hoy se te cobrará ${result.finalPrice}. No necesitas ningún otro código en Stripe.`;
+                } else {
+                    originalPrice.classList.remove('line-through', 'text-white/45');
+                    discountedPrice.classList.add('hidden');
+                    discountSummary.textContent = 'Código aplicado. Stripe aplicará este descuento en el pago seguro. No necesitas ningún otro código en Stripe.';
+                }
+                discountSummary.classList.remove('hidden');
+                message.textContent = 'Código aplicado correctamente.';
+                message.className = 'mt-2 min-h-[1.25rem] text-sm text-primary';
+            } catch (error) {
+                message.textContent = error instanceof Error ? error.message : 'No se pudo aplicar el código.';
+                message.className = 'mt-2 min-h-[1.25rem] text-sm text-red-200';
+            } finally {
+                applyButton.disabled = false;
+            }
+        });
+
+        form?.addEventListener('submit', (event) => {
+            const discountCode = input.value.trim().toUpperCase();
+
+            if (discountCode && input.dataset.appliedCode !== discountCode) {
+                event.preventDefault();
+                message.textContent = 'Aplica el código antes de continuar al pago o bórralo para seguir sin código.';
+                message.className = 'mt-2 min-h-[1.25rem] text-sm text-red-200';
+                return;
+            }
+
+            checkoutButton.disabled = true;
+            checkoutButton.textContent = 'Abriendo pago seguro...';
+            message.textContent = 'Abriendo Stripe Checkout...';
+            message.className = 'mt-2 min-h-[1.25rem] text-sm text-white/60';
+        });
+        })();
+    </script>
+</BaseLayout>
